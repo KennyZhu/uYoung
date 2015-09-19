@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+    <classPathEntry
+            location="/Users/yanlongzhu/.m2/repository/mysql/mysql-connector-java/5.1.31/mysql-connector-java-5.1.31.jar" />
+    <context id="context1" targetRuntime="MyBatis3">
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://182.92.237.31:3306/uyoung?useUnicode=true&amp;characterEncoding=UTF-8"
+                        userId="uyoung_test" password="1q2w3e4R$" />
+        <javaModelGenerator targetPackage="com.uyoung.core.api.model"
+                            targetProject="/Users/yanlongzhu/Program/java/uyoung/uYoung/core/src/main/java/" />
+        <sqlMapGenerator targetPackage="mybatis.api"
+                         targetProject="/Users/yanlongzhu/Program/java/uyoung/uYoung/core/src/main/resources/" />
+        <javaClientGenerator targetPackage="com.uyoung.core.api.dao"
+            targetProject="/Users/yanlongzhu/Program/java/uyoung/uYoung/core/src/main/java/" type="XMLMAPPER" />
+        <table domainObjectName="UserInfo" tableName="tb_user_info" />
+        <table domainObjectName="MobileInfo" tableName="tb_mobile_info" />
+        <table domainObjectName="ActivityInfo" tableName="tb_activity_info" />
+        <table domainObjectName="ActivitySignUp" tableName="tb_activity_signup" />
+        <table domainObjectName="AlbumInfo" tableName="tb_album_info"/>
+        <table domainObjectName="PhotoInfo" tableName="tb_photo_info"/>
+        <table domainObjectName="PhotoLike" tableName="tb_photo_like"/>
+    </context>
+</generatorConfiguration>
