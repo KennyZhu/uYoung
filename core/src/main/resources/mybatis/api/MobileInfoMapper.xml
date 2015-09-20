@@ -15,7 +15,7 @@
     <sql id="Base_Column_List">
     id, platform, version, token, imei, user_id, validate, create_time, update_time
   </sql>
-    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_List"/>
         from tb_mobile_info

@@ -8,7 +8,7 @@ public interface PhotoInfoDao {
 
     int insert(PhotoInfo record);
 
-    PhotoInfo selectByPrimaryKey(Integer id);
+    PhotoInfo getById(Integer id);
 
     int updateById(PhotoInfo record);
 }

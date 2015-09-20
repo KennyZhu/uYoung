@@ -8,7 +8,7 @@ public interface ActivitySignUpDao {
 
     int insert(ActivitySignUp record);
 
-    ActivitySignUp selectByPrimaryKey(Integer id);
+    ActivitySignUp getById(Integer id);
 
     int updateById(ActivitySignUp record);
 }

@@ -2,12 +2,14 @@ package com.uyoung.core.api.dao.impl;
 
 import com.uyoung.core.api.dao.UserInfoDao;
 import com.uyoung.core.api.model.UserInfo;
+import org.springframework.stereotype.Repository;
 
 /**
  * User: KennyZhu
  * Date: 15/9/20
  * Desc:
  */
+@Repository
 public class UserInfoDaoImpl implements UserInfoDao {
     @Override
     public int deleteByPrimaryKey(Integer id) {
@@ -20,7 +22,7 @@ public class UserInfoDaoImpl implements UserInfoDao {
     }
 
     @Override
-    public UserInfo selectByPrimaryKey(Integer id) {
+    public UserInfo getById(Integer id) {
         return null;
     }
 

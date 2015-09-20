@@ -9,7 +9,6 @@ public class ActivityInfo {
 
     private String title;
 
-
     private Integer oriUserId;
 
     private Date beginTime;

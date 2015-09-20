@@ -15,4 +15,6 @@ public interface AlbumInfoService {
      * @return
      */
     public int add(AlbumInfo albumInfo);
+
+    public AlbumInfo getById(int id);
 }

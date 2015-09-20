@@ -8,7 +8,7 @@ public interface AlbumInfoDao {
 
     int insert(AlbumInfo record);
 
-    AlbumInfo selectByPrimaryKey(Integer id);
+    AlbumInfo getById(Integer id);
 
     int updateById(AlbumInfo record);
 }

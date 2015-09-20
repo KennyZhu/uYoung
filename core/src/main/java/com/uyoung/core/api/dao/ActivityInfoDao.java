@@ -8,14 +8,11 @@ public interface ActivityInfoDao {
     int deleteByPrimaryKey(Integer id);
 
 
-    int insertSelective(ActivityInfo record);
+    int insert(ActivityInfo record);
 
 
     ActivityInfo selectByPrimaryKey(Integer id);
 
 
-    int updateByPrimaryKeySelective(ActivityInfo record);
-
-
-    int updateByPrimaryKey(ActivityInfo record);
+    int updateById(ActivityInfo record);
 }

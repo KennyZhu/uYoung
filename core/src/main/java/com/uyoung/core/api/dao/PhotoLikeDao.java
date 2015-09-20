@@ -8,7 +8,7 @@ public interface PhotoLikeDao {
 
     int insert(PhotoLike record);
 
-    PhotoLike selectByPrimaryKey(Integer id);
+    PhotoLike getById(Integer id);
 
     int updateById(PhotoLike record);
 }

@@ -2,12 +2,14 @@ package com.uyoung.core.api.dao.impl;
 
 import com.uyoung.core.api.dao.ActivitySignUpDao;
 import com.uyoung.core.api.model.ActivitySignUp;
+import org.springframework.stereotype.Repository;
 
 /**
  * User: KennyZhu
  * Date: 15/9/20
  * Desc:
  */
+@Repository
 public class ActivitySignUpDaoImpl implements ActivitySignUpDao {
     @Override
     public int deleteByPrimaryKey(Integer id) {
@@ -20,7 +22,7 @@ public class ActivitySignUpDaoImpl implements ActivitySignUpDao {
     }
 
     @Override
-    public ActivitySignUp selectByPrimaryKey(Integer id) {
+    public ActivitySignUp getById(Integer id) {
         return null;
     }
 

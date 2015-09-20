@@ -8,7 +8,7 @@ public interface MobileInfoDao {
 
     int insert(MobileInfo record);
 
-    MobileInfo selectByPrimaryKey(Integer id);
+    MobileInfo getById(Integer id);
 
     int updateById(MobileInfo record);
 }

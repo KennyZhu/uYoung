@@ -8,7 +8,7 @@ public interface UserInfoDao {
 
     int insert(UserInfo record);
 
-    UserInfo selectByPrimaryKey(Integer id);
+    UserInfo getById(Integer id);
 
     int updateById(UserInfo record);
 }
