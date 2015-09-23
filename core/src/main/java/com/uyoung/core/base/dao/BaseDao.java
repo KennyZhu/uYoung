@@ -3,6 +3,7 @@ package com.uyoung.core.base.dao;
 import com.uyoung.core.base.bean.Page;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.ibatis.session.RowBounds;
+import org.mybatis.spring.SqlSessionTemplate;
 
 import java.util.List;
 
@@ -13,6 +14,7 @@ import java.util.List;
  * Time: 11:55
  */
 public abstract class BaseDao<T> {
+    protected SqlSessionTemplate sqlSessionTemplate;
     private SqlSessionWrapper sqlSessionWrapper;
     //TODO 暂时写死 从公共配置文件中读取
     private static final String ENV = "sme";

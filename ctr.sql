@@ -40,7 +40,7 @@ create table tb_activity_info(
 	real_num     int not null comment '实际参与人数',
 	activity_type tinyint(2) not null comment '活动类型',
 	fee_type     tinyint(1) not null comment '费用类型',
-	descripition varchar(500) comment '描述',
+	description varchar(500) comment '描述',
 	status       tinyint(1) not null comment '活动状态',
 	create_time timestamp null comment '创建时间',
 	update_time timestamp null default current_timestamp on update current_timestamp comment '更新时间'
