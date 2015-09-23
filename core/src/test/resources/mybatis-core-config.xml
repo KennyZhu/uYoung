@@ -27,7 +27,6 @@
         <property name="Oracle" value="oracle"/>
         <property name="MySQL" value="mysql"/>
     </databaseIdProvider>
-
     <mappers>
         <mapper resource="mybatis/api/ActivityInfoMapper.xml"/>
     </mappers>

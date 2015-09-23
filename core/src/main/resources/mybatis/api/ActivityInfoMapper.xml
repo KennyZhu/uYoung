@@ -11,18 +11,18 @@
         <result column="need_num" property="needNum" jdbcType="INTEGER"/>
         <result column="real_num" property="realNum" jdbcType="INTEGER"/>
         <result column="activity_type" property="activityType" jdbcType="TINYINT"/>
-        <result column="fee_type" property="feeType" jdbcType="BIT"/>
-        <result column="descripition" property="descripition" jdbcType="VARCHAR"/>
-        <result column="status" property="status" jdbcType="BIT"/>
+        <result column="fee_type" property="feeType" jdbcType="TINYINT"/>
+        <result column="description" property="description" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="TINYINT"/>
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
     </resultMap>
     <sql id="Base_Column_List">
     id, title, ori_user_id, begin_time, end_time, address, need_num, real_num, activity_type, 
-    fee_type, descripition, status, create_time, update_time
+    fee_type, description, status, create_time, update_time
   </sql>
 
-    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_List"/>
         from tb_activity_info
@@ -65,8 +65,8 @@
             <if test="feeType != null">
                 fee_type,
             </if>
-            <if test="descripition != null">
-                descripition,
+            <if test="description != null">
+                description,
             </if>
             <if test="status != null">
                 status,
@@ -107,13 +107,13 @@
                 #{activityType,jdbcType=TINYINT},
             </if>
             <if test="feeType != null">
-                #{feeType,jdbcType=BIT},
+                #{feeType,jdbcType=TINYINT},
             </if>
-            <if test="descripition != null">
-                #{descripition,jdbcType=VARCHAR},
+            <if test="description != null">
+                #{description,jdbcType=VARCHAR},
             </if>
             <if test="status != null">
-                #{status,jdbcType=BIT},
+                #{status,jdbcType=TINYINT},
             </if>
             <if test="createTime != null">
                 #{createTime,jdbcType=TIMESTAMP},
@@ -151,13 +151,13 @@
                 activity_type = #{activityType,jdbcType=TINYINT},
             </if>
             <if test="feeType != null">
-                fee_type = #{feeType,jdbcType=BIT},
+                fee_type = #{feeType,jdbcType=TINYINT},
             </if>
-            <if test="descripition != null">
-                descripition = #{descripition,jdbcType=VARCHAR},
+            <if test="description != null">
+                description = #{description,jdbcType=VARCHAR},
             </if>
             <if test="status != null">
-                status = #{status,jdbcType=BIT},
+                status = #{status,jdbcType=TINYINT},
             </if>
             <if test="createTime != null">
                 create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -168,4 +168,9 @@
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
+    <select id="getPageByStatus" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/>
+        fromo tb_activity_info
+        where status = #{status,jdbcType=TINYINT}
+    </select>
 </mapper>

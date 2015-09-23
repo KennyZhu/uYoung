@@ -6,13 +6,11 @@ public class ActivityInfo {
 
     private Integer id;
 
-
     private String title;
 
     private Integer oriUserId;
 
     private Date beginTime;
-
 
     private Date endTime;
 
@@ -27,7 +25,7 @@ public class ActivityInfo {
 
     private Boolean feeType;
 
-    private String descripition;
+    private String description;
 
     private Boolean status;
 
@@ -126,13 +124,13 @@ public class ActivityInfo {
         this.feeType = feeType;
     }
 
-    public String getDescripition() {
-        return descripition;
+    public String getDescription() {
+        return description;
     }
 
 
-    public void setDescripition(String descripition) {
-        this.descripition = descripition;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
 

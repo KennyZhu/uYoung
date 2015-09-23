@@ -1,6 +1,8 @@
 package com.uyoung.core.api.service;
 
+import com.uyoung.core.api.enums.ActivityStatusEnum;
 import com.uyoung.core.api.model.ActivityInfo;
+import com.uyoung.core.base.bean.Page;
 
 /**
  * User: KennyZhu
@@ -8,6 +10,17 @@ import com.uyoung.core.api.model.ActivityInfo;
  * Desc:
  */
 public interface ActivityInfoService {
+
+    /**
+     * 分页获取活动信息
+     *
+     * @param pageNum    页码
+     * @param pageSize   每页数量
+     * @param statusEnum see {@link ActivityStatusEnum}
+     * @return
+     */
+    public Page<ActivityInfo> getListByStatus(int pageNum, int pageSize, ActivityStatusEnum statusEnum);
+
     /**
      * @param activityInfo
      * @return

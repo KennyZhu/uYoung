@@ -61,7 +61,7 @@ public class SqlSessionWrapper {
             return sqlSession.selectList(statement, parameter, rowBounds);
         } catch (Throwable t) {
             LOGGER.error("selectList(" + statement + ") error:" + t.getMessage());
-            throw new IbatisException("selectList error:" + statement);
+            throw new IbatisException("selectList error:" + statement + "  msg is :" + t.getMessage());
         } finally {
             if (sqlSession != null) {
                 sqlSession.close();

@@ -2,6 +2,9 @@ package com.uyoung.core.api.dao.impl;
 
 import com.uyoung.core.api.dao.ActivityInfoDao;
 import com.uyoung.core.api.model.ActivityInfo;
+import com.uyoung.core.base.bean.Page;
+import com.uyoung.core.base.dao.BaseDao;
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -10,7 +13,8 @@ import org.springframework.stereotype.Repository;
  * Desc:
  */
 @Repository
-public class ActivityInfoDaoImpl implements ActivityInfoDao {
+public class ActivityInfoDaoImpl extends BaseDao<ActivityInfo> implements ActivityInfoDao {
+
     @Override
     public int deleteByPrimaryKey(Integer id) {
         return 0;
@@ -22,12 +26,17 @@ public class ActivityInfoDaoImpl implements ActivityInfoDao {
     }
 
     @Override
-    public ActivityInfo selectByPrimaryKey(Integer id) {
+    public ActivityInfo getById(Integer id) {
         return null;
     }
-    
+
     @Override
     public int updateById(ActivityInfo record) {
         return 0;
+    }
+
+    @Override
+    public Page<ActivityInfo> getPageByStatus(int offset, int limit, int status) {
+        return selectPage("getPageByStatus", status, new RowBounds(offset, limit));
     }
 }
