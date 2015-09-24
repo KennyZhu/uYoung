@@ -4,6 +4,7 @@ import com.uyoung.core.base.bean.Page;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
@@ -14,22 +15,16 @@ import java.util.List;
  * Time: 11:55
  */
 public abstract class BaseDao<T> {
+    @Autowired
     protected SqlSessionTemplate sqlSessionTemplate;
-    private SqlSessionWrapper sqlSessionWrapper;
-    //TODO 暂时写死 从公共配置文件中读取
-    private static final String ENV = "sme";
 
-    protected String nameSpace = this.getClass().getName() + ".";
-
-    public BaseDao() {
-        sqlSessionWrapper = SqlSessionWrapper.getInstance(ENV);
+    private String getNameSpace() {
+        Class[] interfaces = this.getClass().getInterfaces();
+        System.out.println("#" + interfaces[0].getName());
+        return interfaces[0].getName() + ".";
     }
 
-    public SqlSessionWrapper getSessionWrapper() {
-        return sqlSessionWrapper;
-    }
-
-    protected Object selectOne(String statement) {
+    protected T selectOne(String statement) {
         return selectOne(statement, null);
     }
 
@@ -43,7 +38,7 @@ public abstract class BaseDao<T> {
                 return list.get(0);
             }
         } else {
-            return (T) sqlSessionWrapper.selectOne(nameSpace + statement, parameter);
+            return sqlSessionTemplate.selectOne(getNameSpace() + statement, parameter);
         }
     }
 
@@ -56,7 +51,7 @@ public abstract class BaseDao<T> {
     }
 
     protected List<T> selectList(String statement, Object parameter, RowBounds rowBounds) {
-        return (List) sqlSessionWrapper.selectList(nameSpace + statement, parameter, rowBounds);
+        return sqlSessionTemplate.selectList(getNameSpace() + statement, parameter, rowBounds);
     }
 
     protected Page<T> selectPage(String statement, Object parameter, RowBounds rowBounds) {
@@ -70,13 +65,12 @@ public abstract class BaseDao<T> {
         return page;
     }
 
-
     protected int insert(String statement) {
         return insert(statement, null);
     }
 
     protected int insert(String statement, Object parameter) {
-        return sqlSessionWrapper.insert(nameSpace + statement, parameter);
+        return sqlSessionTemplate.insert(getNameSpace() + statement, parameter);
     }
 
     protected int update(String statement) {
@@ -84,7 +78,7 @@ public abstract class BaseDao<T> {
     }
 
     protected int update(String statement, Object parameter) {
-        return sqlSessionWrapper.update(nameSpace + statement, parameter);
+        return sqlSessionTemplate.update(getNameSpace() + statement, parameter);
     }
 
     protected int delete(String statement) {
@@ -92,7 +86,7 @@ public abstract class BaseDao<T> {
     }
 
     protected int delete(String statement, Object parameter) {
-        return sqlSessionWrapper.delete(nameSpace + statement, parameter);
+        return sqlSessionTemplate.delete(getNameSpace() + statement, parameter);
     }
 
 }

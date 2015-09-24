@@ -19,7 +19,7 @@
     </resultMap>
     <sql id="Base_Column_List">
     id, title, ori_user_id, begin_time, end_time, address, need_num, real_num, activity_type, 
-    fee_type, description, status, create_time, update_time
+    fee_type, description, `status`, create_time, update_time
   </sql>
 
     <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
@@ -170,7 +170,7 @@
     </update>
     <select id="getPageByStatus" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select <include refid="Base_Column_List"/>
-        fromo tb_activity_info
+        from tb_activity_info
         where status = #{status,jdbcType=TINYINT}
     </select>
 </mapper>
