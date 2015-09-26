@@ -26,12 +26,11 @@
     </bean>
 
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="configLocation" value="classpath:mybatis-core-config.xml"></property>
         <property name="dataSource" ref="dataSource" />
+        <property name="mapperLocations" value="/mybatis/api/*Mapper.xml"/>
     </bean>
 
     <bean id="sqlSessionTemplate"  class="org.mybatis.spring.SqlSessionTemplate">
         <constructor-arg index="0" ref="sqlSessionFactory" />
     </bean>
-    <import resource="classpath:mybatis-core-config.xml"/>
 </beans>
