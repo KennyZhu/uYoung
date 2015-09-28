@@ -1,5 +1,7 @@
 package com.uyoung.core.api.enums;
 
+import java.util.stream.Stream;
+
 /**
  * User: KennyZhu
  * Date: 15/9/23
@@ -16,4 +18,10 @@ public enum ActivityStatusEnum {
     public int getStatus() {
         return status;
     }
+
+    public static ActivityStatusEnum getByStatus(int status) {
+        return Stream.of(ActivityStatusEnum.values()).filter(statusEnum -> statusEnum.getStatus() == status).findFirst().orElse(null);
+    }
+
+
 }

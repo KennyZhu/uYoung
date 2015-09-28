@@ -10,6 +10,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * Desc:
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath*:uyoung-core-spring.xml"})
+@ContextConfiguration(locations = {"classpath*:spring-core-test.xml"})
 public class BaseTest {
 }
