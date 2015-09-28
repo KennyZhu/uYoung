@@ -15,6 +15,7 @@
     </modules>
 
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.build.encode>UTF-8</project.build.encode>
         <file_encoding>UTF-8</file_encoding>
         <project.springversion>4.2.1.RELEASE</project.springversion>
