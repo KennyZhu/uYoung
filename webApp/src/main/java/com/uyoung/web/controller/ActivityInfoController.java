@@ -30,7 +30,7 @@ public class ActivityInfoController extends BaseController {
             return JsonUtil.getJsonString(new BaseResult(ResultCodeEnum.INVALID_PARAM.getCode(), ResultCodeEnum.INVALID_PARAM.getDesc()));
         }
         Page<ActivityInfo> infoPage = activityInfoService.getPageByStatus(pageNum, pageSize, ActivityStatusEnum.getByStatus(status));
-        BaseResult baseResult = new BaseResult(ResultCodeEnum.SUCCESS.getCode(),ResultCodeEnum.SUCCESS.getDesc());
+        BaseResult baseResult = new BaseResult(ResultCodeEnum.SUCCESS.getCode(), ResultCodeEnum.SUCCESS.getDesc());
         baseResult.setResultData(infoPage);
         return JsonUtil.getJsonString(baseResult);
     }
