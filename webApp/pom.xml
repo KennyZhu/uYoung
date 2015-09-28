@@ -10,8 +10,8 @@
     <packaging>war</packaging>
 
     <parent>
-        <groupId>com.zkenny</groupId>
-        <artifactId>javabase</artifactId>
+        <groupId>com.uyoung</groupId>
+        <artifactId>api</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
