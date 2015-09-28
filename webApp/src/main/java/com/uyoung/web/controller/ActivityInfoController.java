@@ -18,15 +18,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * Desc:
  */
 @Controller
-public class ActivityInfoController extends BaseController {
+public class ActivityInfoController {
 
     @Autowired
     private ActivityInfoService activityInfoService;
 
     @RequestMapping(value = "/activity/getPageByStatus")
     @ResponseBody
-    public String getPageByStatus(int pageNum, int pageSize, int status) {
-        if (pageNum <= 0 || pageSize <= 0 || ActivityStatusEnum.getByStatus(status) == null) {
+    public String getPageByStatus(Integer pageNum, Integer pageSize, Integer status) {
+        if (pageNum == null || pageSize == null || ActivityStatusEnum.getByStatus(status) == null) {
             return JsonUtil.getJsonString(new BaseResult(ResultCodeEnum.INVALID_PARAM.getCode(), ResultCodeEnum.INVALID_PARAM.getDesc()));
         }
         Page<ActivityInfo> infoPage = activityInfoService.getPageByStatus(pageNum, pageSize, ActivityStatusEnum.getByStatus(status));
