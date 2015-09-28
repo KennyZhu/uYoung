@@ -29,4 +29,9 @@ public class PhotoLikeServiceImpl implements PhotoLikeService {
     public PhotoLike getById(int id) {
         return photoLikeDao.getById(id);
     }
+
+    @Override
+    public int getCountByPhotoId(int photoId) {
+        return 0;
+    }
 }
