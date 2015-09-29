@@ -8,8 +8,8 @@ package com.uyoung.web.enums;
 public enum ResultCodeEnum {
 
     SUCCESS(100, "success"), EXCEPTION(-1, "exception"), INVALID_PARAM(101, "invalid param");
-    private int code;
-    private String desc;
+    private final int code;
+    private final String desc;
 
     ResultCodeEnum(int code, String desc) {
         this.code = code;

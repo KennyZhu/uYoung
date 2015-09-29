@@ -9,7 +9,7 @@ import java.util.stream.Stream;
  */
 public enum ActivityStatusEnum {
     ACTIVE(1);
-    private int status;
+    private final int status;
 
     ActivityStatusEnum(int status) {
         this.status = status;

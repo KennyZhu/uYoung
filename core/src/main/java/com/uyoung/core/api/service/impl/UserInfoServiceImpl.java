@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
  * Date: 15/9/20
  * Desc:
  */
-@Service
+@Service("userInfoService")
 public class UserInfoServiceImpl implements UserInfoService {
     @Autowired
     private UserInfoDao userInfoDao;

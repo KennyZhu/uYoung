@@ -19,7 +19,7 @@ public final class JsonUtil {
 
     private static final ObjectMapper MAPPER = new ObjectMapper();
 
-    public static ObjectMapper getObjectMapper() {
+    private static ObjectMapper getObjectMapper() {
         return MAPPER;
     }
 
