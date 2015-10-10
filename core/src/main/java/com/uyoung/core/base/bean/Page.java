@@ -10,6 +10,7 @@ import java.util.List;
 public class Page<T> {
     private int pageSize;
     private int totalPage;
+    private int totalSize;
     private List<T> dataList;
 
     public int getPageSize() {
@@ -34,5 +35,23 @@ public class Page<T> {
 
     public void setDataList(List<T> dataList) {
         this.dataList = dataList;
+    }
+
+    public int getTotalSize() {
+        return totalSize;
+    }
+
+    public void setTotalSize(int totalSize) {
+        this.totalSize = totalSize;
+    }
+
+    @Override
+    public String toString() {
+        return "Page{" +
+                "dataList=" + dataList +
+                ", pageSize=" + pageSize +
+                ", totalPage=" + totalPage +
+                ", totalSize=" + totalSize +
+                '}';
     }
 }

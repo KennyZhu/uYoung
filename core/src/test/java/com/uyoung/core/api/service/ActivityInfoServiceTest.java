@@ -2,8 +2,11 @@ package com.uyoung.core.api.service;
 
 import com.uyoung.core.api.BaseTest;
 import com.uyoung.core.api.enums.ActivityStatusEnum;
+import com.uyoung.core.api.model.ActivityInfo;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 /**
  * User: KennyZhu
@@ -17,6 +20,7 @@ public class ActivityInfoServiceTest extends BaseTest {
     @Test
     public void getPageByStatus() {
         ActivityStatusEnum statusEnum = ActivityStatusEnum.ACTIVE;
-        System.out.println(service.getPageByStatus(1, 10, statusEnum));
+        List<ActivityInfo> activityInfoList = service.getPageByStatus(1, 10, statusEnum).getDataList();
+        System.out.println("######" + activityInfoList.get(0).toString());
     }
 }

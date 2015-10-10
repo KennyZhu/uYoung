@@ -20,7 +20,6 @@ public abstract class BaseDao<T> {
 
     private String getNameSpace() {
         Class[] interfaces = this.getClass().getInterfaces();
-        System.out.println("#" + interfaces[0].getName());
         return interfaces[0].getName() + ".";
     }
 

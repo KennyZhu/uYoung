@@ -161,4 +161,24 @@ public class ActivityInfo {
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
+
+    @Override
+    public String toString() {
+        return "ActivityInfo{" +
+                "activityType=" + activityType +
+                ", id=" + id +
+                ", title='" + title + '\'' +
+                ", oriUserId=" + oriUserId +
+                ", beginTime=" + beginTime +
+                ", endTime=" + endTime +
+                ", address='" + address + '\'' +
+                ", needNum=" + needNum +
+                ", realNum=" + realNum +
+                ", feeType=" + feeType +
+                ", description='" + description + '\'' +
+                ", status=" + status +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                '}';
+    }
 }
