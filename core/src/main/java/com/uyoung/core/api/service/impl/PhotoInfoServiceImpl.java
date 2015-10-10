@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
  * Date: 15/9/20
  * Desc:
  */
-@Service
+@Service("photoInfoService")
 public class PhotoInfoServiceImpl implements PhotoInfoService {
 
     @Autowired

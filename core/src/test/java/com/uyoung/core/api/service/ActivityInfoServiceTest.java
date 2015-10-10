@@ -17,6 +17,6 @@ public class ActivityInfoServiceTest extends BaseTest {
     @Test
     public void getPageByStatus() {
         ActivityStatusEnum statusEnum = ActivityStatusEnum.ACTIVE;
-        System.out.println(service.getListByStatus(1, 10, statusEnum));
+        System.out.println(service.getPageByStatus(1, 10, statusEnum));
     }
 }

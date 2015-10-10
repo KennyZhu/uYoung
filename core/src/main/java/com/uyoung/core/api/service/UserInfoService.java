@@ -5,7 +5,7 @@ import com.uyoung.core.api.model.UserInfo;
 /**
  * User: KennyZhu
  * Date: 15/9/20
- * Desc:
+ * Desc:用户信息
  */
 public interface UserInfoService {
     /**

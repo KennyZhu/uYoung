@@ -13,14 +13,14 @@ import org.springframework.stereotype.Service;
  * Date: 15/9/20
  * Desc:
  */
-@Service
+@Service("activityInfoService")
 public class ActivityInfoServiceImpl implements ActivityInfoService {
     @Autowired
     private ActivityInfoDao activityInfoDao;
 
 
     @Override
-    public Page<ActivityInfo> getListByStatus(int pageNum, int pageSize, ActivityStatusEnum statusEnum) {
+    public Page<ActivityInfo> getPageByStatus(int pageNum, int pageSize, ActivityStatusEnum statusEnum) {
         if (statusEnum == null) {
             return new Page<>();
         }

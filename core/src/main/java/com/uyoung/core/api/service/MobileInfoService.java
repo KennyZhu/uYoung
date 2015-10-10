@@ -5,7 +5,7 @@ import com.uyoung.core.api.model.MobileInfo;
 /**
  * User: KennyZhu
  * Date: 15/9/20
- * Desc:
+ * Desc:设备信息
  */
 public interface MobileInfoService {
 

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
  * Date: 15/9/20
  * Desc:
  */
-@Service
+@Service("photoLikeService")
 public class PhotoLikeServiceImpl implements PhotoLikeService {
 
     @Autowired
@@ -28,5 +28,10 @@ public class PhotoLikeServiceImpl implements PhotoLikeService {
     @Override
     public PhotoLike getById(int id) {
         return photoLikeDao.getById(id);
+    }
+
+    @Override
+    public int getCountByPhotoId(int photoId) {
+        return 0;
     }
 }

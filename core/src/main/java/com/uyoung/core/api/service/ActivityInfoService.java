@@ -19,7 +19,7 @@ public interface ActivityInfoService {
      * @param statusEnum see {@link ActivityStatusEnum}
      * @return
      */
-    public Page<ActivityInfo> getListByStatus(int pageNum, int pageSize, ActivityStatusEnum statusEnum);
+    public Page<ActivityInfo> getPageByStatus(int pageNum, int pageSize, ActivityStatusEnum statusEnum);
 
     /**
      * @param activityInfo
