@@ -24,6 +24,8 @@
             <param-name>contextConfigLocation</param-name>
             <param-value>classpath*:spring-web.xml</param-value>
         </init-param>
+        <!-- 配置该Servlet随应用启动时候启动 -->
+        <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
         <servlet-name>dispatch</servlet-name>
@@ -32,8 +34,4 @@
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
-    <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>classpath*:spring-*.xml</param-value>
-    </context-param>
 </web-app>
