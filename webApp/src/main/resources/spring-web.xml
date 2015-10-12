@@ -11,6 +11,13 @@
         <mvc:message-converters register-defaults="true">
             <!-- 将StringHttpMessageConverter的默认编码设为UTF-8 -->
             <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>text/html;charset=UTF-8</value>
+                        <value>text/plain;charset=UTF-8</value>
+                        <value>application/json;charset=UTF-8</value>
+                    </list>
+                </property>
                 <constructor-arg value="UTF-8"/>
             </bean>
         </mvc:message-converters>
@@ -19,14 +26,14 @@
         <!--<property name="messageConverters">-->
             <!--<list>-->
                 <!--<bean-->
-                        <!--class="org.springframework.http.converter.StringHttpMessageConverter">-->
-                    <!--<property name="supportedMediaTypes">-->
-                        <!--<list>-->
-                            <!--<value>text/html;charset=UTF-8</value>-->
-                            <!--<value>text/plain;charset=UTF-8</value>-->
-                            <!--<value>application/json;charset=UTF-8</value>-->
-                         <!--</list>-->
-                    <!--</property>-->
+    <!--&lt;!&ndash;class="org.springframework.http.converter.StringHttpMessageConverter">&ndash;&gt;-->
+    <!--<property name="supportedMediaTypes">-->
+    <!--<list>-->
+    <!--<value>text/html;charset=UTF-8</value>-->
+    <!--<value>text/plain;charset=UTF-8</value>-->
+    <!--<value>application/json;charset=UTF-8</value>-->
+    <!--</list>-->
+    <!--</property>-->
                 <!--</bean>-->
             <!--</list>-->
         <!--</property>-->
