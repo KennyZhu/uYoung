@@ -17,10 +17,17 @@
     </filter-mapping>
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>
-            classpath*:spring-*.xml
-        </param-value>
+        <param-value>classpath*:spring-*.xml</param-value>
     </context-param>
+    <!-- Spring 刷新Introspector防止内存泄露 -->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <listener>
+        <listener-class>
+            org.springframework.web.util.IntrospectorCleanupListener
+        </listener-class>
+    </listener>
     <servlet>
         <servlet-name>dispatch</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -35,19 +42,5 @@
         <servlet-name>dispatch</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
-    <!-- Spring 刷新Introspector防止内存泄露 -->
-    <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
-    <listener>
-        <listener-class>
-            org.springframework.web.util.IntrospectorCleanupListener
-        </listener-class>
-    </listener>
-    <!-- 支持session scope的Spring bean -->
-    <listener>
-        <listener-class>
-            org.springframework.web.context.request.RequestContextListener
-        </listener-class>
-    </listener>
+
 </web-app>
