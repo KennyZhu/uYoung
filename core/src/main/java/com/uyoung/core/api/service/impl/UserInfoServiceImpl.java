@@ -3,8 +3,14 @@ package com.uyoung.core.api.service.impl;
 import com.uyoung.core.api.dao.UserInfoDao;
 import com.uyoung.core.api.model.UserInfo;
 import com.uyoung.core.api.service.UserInfoService;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * User: KennyZhu
@@ -27,5 +33,30 @@ public class UserInfoServiceImpl implements UserInfoService {
     @Override
     public UserInfo getById(int userId) {
         return userInfoDao.getById(userId);
+    }
+
+    @Override
+    public List<UserInfo> getAvatarByIdList(List<Integer> userIds) {
+        if (CollectionUtils.isEmpty(userIds)) {
+            return Collections.EMPTY_LIST;
+        }
+        return userInfoDao.getAvatarListByUserIdList(userIds);
+    }
+
+    @Override
+    public Map<Integer, UserInfo> getAvatarMapByIdList(List<Integer> userIds) {
+        if (CollectionUtils.isEmpty(userIds)) {
+            return Collections.EMPTY_MAP;
+        }
+        List<UserInfo> userInfoList = getAvatarByIdList(userIds);
+        if (CollectionUtils.isEmpty(userInfoList)) {
+            return Collections.EMPTY_MAP;
+        }
+        Map<Integer, UserInfo> result = new HashMap<>(userInfoList.size());
+        for (UserInfo userInfo : userInfoList) {
+            result.put(userInfo.getId(), userInfo);
+        }
+        return result;
+
     }
 }

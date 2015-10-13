@@ -4,6 +4,8 @@ import com.uyoung.core.api.dao.UserInfoDao;
 import com.uyoung.core.api.model.UserInfo;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * User: KennyZhu
  * Date: 15/9/20
@@ -29,5 +31,10 @@ public class UserInfoDaoImpl implements UserInfoDao {
     @Override
     public int updateById(UserInfo record) {
         return 0;
+    }
+
+    @Override
+    public List<UserInfo> getAvatarListByUserIdList(List<Integer> userIds) {
+        return null;
     }
 }

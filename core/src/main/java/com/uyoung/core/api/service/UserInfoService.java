@@ -2,6 +2,9 @@ package com.uyoung.core.api.service;
 
 import com.uyoung.core.api.model.UserInfo;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * User: KennyZhu
  * Date: 15/9/20
@@ -19,4 +22,8 @@ public interface UserInfoService {
      * @return
      */
     public UserInfo getById(int userId);
+
+    List<UserInfo> getAvatarByIdList(List<Integer> userIds);
+
+    Map<Integer, UserInfo> getAvatarMapByIdList(List<Integer> userIds);
 }

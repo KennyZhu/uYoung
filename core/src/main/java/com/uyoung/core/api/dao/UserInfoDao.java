@@ -2,6 +2,8 @@ package com.uyoung.core.api.dao;
 
 import com.uyoung.core.api.model.UserInfo;
 
+import java.util.List;
+
 public interface UserInfoDao {
 
     int deleteByPrimaryKey(Integer id);
@@ -11,4 +13,6 @@ public interface UserInfoDao {
     UserInfo getById(Integer id);
 
     int updateById(UserInfo record);
+
+    List<UserInfo> getAvatarListByUserIdList(List<Integer> userIds);
 }
