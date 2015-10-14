@@ -59,10 +59,19 @@ public class ActivityInfoListServiceImpl implements ActivityInfoListService {
     }
 
     private ActivityInfoVo buildActivityInfoVo(ActivityInfo activityInfo, Map<Integer, UserInfo> userInfoMap) {
-        ActivityInfoVo infoVo = (ActivityInfoVo) activityInfo;
-        infoVo.setDay(DataUtil.getDay(infoVo.getBeginTime()));
-        infoVo.setMon(DataUtil.getMonth(infoVo.getBeginTime()));
-        infoVo.setWeekDesc(WeekEnum.getByWeek(DataUtil.getWeek(infoVo.getBeginTime())).getWeekCnDesc());
+        ActivityInfoVo infoVo = new ActivityInfoVo();
+
+        infoVo.setFeeType(activityInfo.getFeeType());
+        infoVo.setActivityType(activityInfo.getActivityType());
+        infoVo.setAddress(activityInfo.getAddress());
+        infoVo.setId(activityInfo.getId());
+        infoVo.setTitle(activityInfo.getTitle());
+        infoVo.setNeedNum(activityInfo.getNeedNum());
+        infoVo.setStatus(ActivityStatusEnum.getByStatus(activityInfo.getStatus()).getDesc());
+
+        infoVo.setDay(DataUtil.getDay(activityInfo.getBeginTime()));
+        infoVo.setMon(DataUtil.getMonth(activityInfo.getBeginTime()));
+        infoVo.setWeekDesc(WeekEnum.getByWeek(DataUtil.getWeek(activityInfo.getBeginTime())).getWeekCnDesc());
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm");
         infoVo.setFromTime(simpleDateFormat.format(activityInfo.getBeginTime()));

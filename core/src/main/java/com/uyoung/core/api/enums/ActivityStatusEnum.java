@@ -8,15 +8,21 @@ import java.util.stream.Stream;
  * Desc:
  */
 public enum ActivityStatusEnum {
-    ACTIVE(1);
+    ACTIVE(1, "进行中");
     private final int status;
+    private final String desc;
 
-    ActivityStatusEnum(int status) {
+    ActivityStatusEnum(int status, String desc) {
         this.status = status;
+        this.desc = desc;
     }
 
     public int getStatus() {
         return status;
+    }
+
+    public String getDesc() {
+        return desc;
     }
 
     public static ActivityStatusEnum getByStatus(int status) {

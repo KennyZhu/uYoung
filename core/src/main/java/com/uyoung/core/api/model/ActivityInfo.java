@@ -22,11 +22,11 @@ public class ActivityInfo {
 
     private Byte activityType;
 
-    private Boolean feeType;
+    private int feeType;
 
     private String description;
 
-    private Boolean status;
+    private int status;
 
     private Date createTime;
 
@@ -108,32 +108,29 @@ public class ActivityInfo {
     }
 
 
-    public Boolean getFeeType() {
-        return feeType;
-    }
-
-
-    public void setFeeType(Boolean feeType) {
-        this.feeType = feeType;
-    }
-
     public String getDescription() {
         return description;
     }
-
 
     public void setDescription(String description) {
         this.description = description;
     }
 
-    public Boolean getStatus() {
+    public int getFeeType() {
+        return feeType;
+    }
+
+    public void setFeeType(int feeType) {
+        this.feeType = feeType;
+    }
+
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(Boolean status) {
+    public void setStatus(int status) {
         this.status = status;
     }
-
 
     public Date getCreateTime() {
         return createTime;

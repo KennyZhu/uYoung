@@ -1,13 +1,19 @@
 package com.uyoung.web.vo;
 
-import com.uyoung.core.api.model.ActivityInfo;
-
 /**
  * User: KennyZhu
  * Date: 15/10/12
  * Desc:
  */
-public class ActivityInfoVo extends ActivityInfo {
+public class ActivityInfoVo {
+    private int id;
+    private String title;
+    private String address;
+    private Byte activityType;
+    private String status;
+    private int needNum;
+    private int feeType;
+
     private int day;
     private int mon;
     private String weekDesc;
@@ -72,4 +78,80 @@ public class ActivityInfoVo extends ActivityInfo {
         this.local = local;
     }
 
+    public Byte getActivityType() {
+        return activityType;
+    }
+
+    public void setActivityType(Byte activityType) {
+        this.activityType = activityType;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public int getFeeType() {
+        return feeType;
+    }
+
+    public void setFeeType(int feeType) {
+        this.feeType = feeType;
+    }
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getNeedNum() {
+        return needNum;
+    }
+
+    public void setNeedNum(int needNum) {
+        this.needNum = needNum;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    @Override
+    public String toString() {
+        return "ActivityInfoVo{" +
+                "activityType=" + activityType +
+                ", id=" + id +
+                ", title='" + title + '\'' +
+                ", address='" + address + '\'' +
+                ", status=" + status +
+                ", needNum=" + needNum +
+                ", feeType=" + feeType +
+                ", day=" + day +
+                ", mon=" + mon +
+                ", weekDesc='" + weekDesc + '\'' +
+                ", fromTime='" + fromTime + '\'' +
+                ", toTime='" + toTime + '\'' +
+                ", oriUserAvatarUrl='" + oriUserAvatarUrl + '\'' +
+                ", local='" + local + '\'' +
+                '}';
+    }
 }
