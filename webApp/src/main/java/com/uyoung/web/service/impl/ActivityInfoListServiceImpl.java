@@ -70,6 +70,7 @@ public class ActivityInfoListServiceImpl implements ActivityInfoListService {
         infoVo.setId(activityInfo.getId());
         infoVo.setTitle(activityInfo.getTitle());
         infoVo.setNeedNum(activityInfo.getNeedNum());
+        infoVo.setLocal(activityInfo.getAddress());
         ActivityTypeEnum activityTypeEnum = ActivityTypeEnum.getByType(activityInfo.getActivityType());
         if (activityTypeEnum != null) {
             infoVo.setActivityType(activityTypeEnum.getDesc());
