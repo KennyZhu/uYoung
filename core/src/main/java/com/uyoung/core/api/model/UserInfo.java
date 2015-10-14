@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class UserInfo {
 
-    private Integer id;
+    private int id;
 
 
     private String realName;
@@ -36,11 +36,13 @@ public class UserInfo {
 
     private String position;
 
-
+    /**
+     * 使用器材
+     */
     private String equipment;
 
 
-    private Byte style;
+    private int style;
 
 
     private Date createTime;
@@ -168,16 +170,17 @@ public class UserInfo {
         this.equipment = equipment;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
 
-    public Byte getStyle() {
+    public int getStyle() {
         return style;
     }
 
-
-    public void setStyle(Byte style) {
+    public void setStyle(int style) {
         this.style = style;
     }
-
 
     public Date getCreateTime() {
         return createTime;
