@@ -8,6 +8,7 @@ import java.util.List;
  * Desc:
  */
 public class Page<T> {
+    private int pageNum;
     private int pageSize;
     private int totalPage;
     private int totalSize;
@@ -45,10 +46,19 @@ public class Page<T> {
         this.totalSize = totalSize;
     }
 
+    public int getPageNum() {
+        return pageNum;
+    }
+
+    public void setPageNum(int pageNum) {
+        this.pageNum = pageNum;
+    }
+
     @Override
     public String toString() {
         return "Page{" +
                 "dataList=" + dataList +
+                ", pageNum=" + pageNum +
                 ", pageSize=" + pageSize +
                 ", totalPage=" + totalPage +
                 ", totalSize=" + totalSize +

@@ -18,7 +18,6 @@ public class ActivityInfo {
 
     private Integer needNum;
 
-
     private Integer realNum;
 
     private Byte activityType;
@@ -31,9 +30,7 @@ public class ActivityInfo {
 
     private Date createTime;
 
-
     private Date updateTime;
-
 
     public Integer getId() {
         return id;
@@ -43,7 +40,6 @@ public class ActivityInfo {
         this.id = id;
     }
 
-
     public String getTitle() {
         return title;
     }
@@ -52,11 +48,9 @@ public class ActivityInfo {
         this.title = title;
     }
 
-
     public Integer getOriUserId() {
         return oriUserId;
     }
-
 
     public void setOriUserId(Integer oriUserId) {
         this.oriUserId = oriUserId;
@@ -65,7 +59,6 @@ public class ActivityInfo {
     public Date getBeginTime() {
         return beginTime;
     }
-
 
     public void setBeginTime(Date beginTime) {
         this.beginTime = beginTime;
@@ -132,7 +125,6 @@ public class ActivityInfo {
     public void setDescription(String description) {
         this.description = description;
     }
-
 
     public Boolean getStatus() {
         return status;

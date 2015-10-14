@@ -1,57 +1,20 @@
 package com.uyoung.web.vo;
 
+import com.uyoung.core.api.model.ActivityInfo;
+
 /**
  * User: KennyZhu
  * Date: 15/10/12
  * Desc:
  */
-public class ActivityInfoVo {
-    private int activityId;
-    private String title;
-    private int activityType;
-    private int needNum;
+public class ActivityInfoVo extends ActivityInfo {
     private int day;
     private int mon;
     private String weekDesc;
     private String fromTime;
     private String toTime;
-    private String address;
     private String oriUserAvatarUrl;
     private String local;
-    private int priceType;
-    private int status;
-
-    public int getActivityId() {
-        return activityId;
-    }
-
-    public void setActivityId(int activityId) {
-        this.activityId = activityId;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public int getActivityType() {
-        return activityType;
-    }
-
-    public void setActivityType(int activityType) {
-        this.activityType = activityType;
-    }
-
-    public int getNeedNum() {
-        return needNum;
-    }
-
-    public void setNeedNum(int needNum) {
-        this.needNum = needNum;
-    }
 
     public int getDay() {
         return day;
@@ -93,14 +56,6 @@ public class ActivityInfoVo {
         this.toTime = toTime;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
     public String getOriUserAvatarUrl() {
         return oriUserAvatarUrl;
     }
@@ -117,19 +72,4 @@ public class ActivityInfoVo {
         this.local = local;
     }
 
-    public int getPriceType() {
-        return priceType;
-    }
-
-    public void setPriceType(int priceType) {
-        this.priceType = priceType;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
 }

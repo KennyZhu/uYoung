@@ -10,5 +10,5 @@ import com.uyoung.web.vo.ActivityInfoVo;
  * Desc:
  */
 public interface ActivityInfoListService {
-    Page<ActivityInfoVo> getPageByStatus(ActivityStatusEnum statusEnum, int page, int pageSize);
+    Page<ActivityInfoVo> getPageByStatus(int page, int pageSize, ActivityStatusEnum statusEnum);
 }

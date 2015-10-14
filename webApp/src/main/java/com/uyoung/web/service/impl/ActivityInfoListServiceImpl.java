@@ -1,17 +1,21 @@
 package com.uyoung.web.service.impl;
 
+import com.uyoung.core.api.constant.CommonConstant;
 import com.uyoung.core.api.enums.ActivityStatusEnum;
+import com.uyoung.core.api.enums.WeekEnum;
 import com.uyoung.core.api.model.ActivityInfo;
 import com.uyoung.core.api.model.UserInfo;
 import com.uyoung.core.api.service.ActivityInfoService;
 import com.uyoung.core.api.service.UserInfoService;
 import com.uyoung.core.base.bean.Page;
 import com.uyoung.web.service.ActivityInfoListService;
+import com.uyoung.web.util.DataUtil;
 import com.uyoung.web.vo.ActivityInfoVo;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -31,7 +35,7 @@ public class ActivityInfoListServiceImpl implements ActivityInfoListService {
     private UserInfoService userInfoService;
 
     @Override
-    public Page<ActivityInfoVo> getPageByStatus(ActivityStatusEnum statusEnum, int page, int pageSize) {
+    public Page<ActivityInfoVo> getPageByStatus(int page, int pageSize, ActivityStatusEnum statusEnum) {
         Page<ActivityInfo> activityInfoPage = activityInfoService.getPageByStatus(page, pageSize, statusEnum);
         if (activityInfoPage == null || CollectionUtils.isEmpty(activityInfoPage.getDataList())) {
 
@@ -43,11 +47,31 @@ public class ActivityInfoListServiceImpl implements ActivityInfoListService {
             oriUserIds.add(activityInfo.getOriUserId());
         }
         Map<Integer, UserInfo> userInfoMap = userInfoService.getAvatarMapByIdList(oriUserIds);
-        for(ActivityInfo activityInfo:activityInfoList){
-
-
+        for (ActivityInfo activityInfo : activityInfoList) {
+            ActivityInfoVo infoVo = buildActivityInfoVo(activityInfo, userInfoMap);
+            activityInfoVos.add(infoVo);
         }
+        Page<ActivityInfoVo> result = new Page<>();
+        result.setDataList(activityInfoVos);
+        result.setPageSize(pageSize);
+        result.setPageNum(page);
+        return result;
+    }
 
-        return null;
+    private ActivityInfoVo buildActivityInfoVo(ActivityInfo activityInfo, Map<Integer, UserInfo> userInfoMap) {
+        ActivityInfoVo infoVo = (ActivityInfoVo) activityInfo;
+        infoVo.setDay(DataUtil.getDay(infoVo.getBeginTime()));
+        infoVo.setMon(DataUtil.getMonth(infoVo.getBeginTime()));
+        infoVo.setWeekDesc(WeekEnum.getByWeek(DataUtil.getWeek(infoVo.getBeginTime())).getWeekCnDesc());
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm");
+        infoVo.setFromTime(simpleDateFormat.format(activityInfo.getBeginTime()));
+        infoVo.setToTime(simpleDateFormat.format(activityInfo.getEndTime()));
+
+        infoVo.setOriUserAvatarUrl(CommonConstant.DEFAULT_AVATAR_URL);
+        if (userInfoMap.get(activityInfo.getId()) != null) {
+            infoVo.setOriUserAvatarUrl(userInfoMap.get(activityInfo.getId()).getAvatarUrl());
+        }
+        return infoVo;
     }
 }
