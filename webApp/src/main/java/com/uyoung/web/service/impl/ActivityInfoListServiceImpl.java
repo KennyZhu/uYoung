@@ -3,6 +3,7 @@ package com.uyoung.web.service.impl;
 import com.uyoung.core.api.constant.CommonConstant;
 import com.uyoung.core.api.enums.ActivityStatusEnum;
 import com.uyoung.core.api.enums.ActivityTypeEnum;
+import com.uyoung.core.api.enums.FeeTypeEnum;
 import com.uyoung.core.api.enums.WeekEnum;
 import com.uyoung.core.api.model.ActivityInfo;
 import com.uyoung.core.api.model.UserInfo;
@@ -64,7 +65,12 @@ public class ActivityInfoListServiceImpl implements ActivityInfoListService {
     private ActivityInfoVo buildActivityInfoVo(ActivityInfo activityInfo, Map<Integer, UserInfo> userInfoMap) {
         ActivityInfoVo infoVo = new ActivityInfoVo();
 
-        infoVo.setFeeType(activityInfo.getFeeType());
+        FeeTypeEnum feeTypeEnum = FeeTypeEnum.getByCode(activityInfo.getFeeType());
+        if (feeTypeEnum != null) {
+            infoVo.setFeeType(feeTypeEnum.getDesc());
+        } else {
+            LOGGER.warn("#Can not found fee type:", activityInfo.getFeeType());
+        }
 
         infoVo.setAddress(activityInfo.getAddress());
         infoVo.setId(activityInfo.getId());

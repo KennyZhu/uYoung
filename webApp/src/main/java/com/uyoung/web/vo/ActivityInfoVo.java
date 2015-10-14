@@ -12,7 +12,7 @@ public class ActivityInfoVo {
     private String activityType;
     private String status;
     private int needNum;
-    private int feeType;
+    private String feeType;
 
     private int day;
     private int mon;
@@ -95,14 +95,13 @@ public class ActivityInfoVo {
         this.address = address;
     }
 
-    public int getFeeType() {
+    public String getFeeType() {
         return feeType;
     }
 
-    public void setFeeType(int feeType) {
+    public void setFeeType(String feeType) {
         this.feeType = feeType;
     }
-
 
     public int getId() {
         return id;
