@@ -9,7 +9,7 @@ public class ActivityInfoVo {
     private int id;
     private String title;
     private String address;
-    private Byte activityType;
+    private String activityType;
     private String status;
     private int needNum;
     private int feeType;
@@ -78,11 +78,12 @@ public class ActivityInfoVo {
         this.local = local;
     }
 
-    public Byte getActivityType() {
+
+    public String getActivityType() {
         return activityType;
     }
 
-    public void setActivityType(Byte activityType) {
+    public void setActivityType(String activityType) {
         this.activityType = activityType;
     }
 

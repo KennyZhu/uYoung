@@ -20,7 +20,7 @@ public class ActivityInfo {
 
     private Integer realNum;
 
-    private Byte activityType;
+    private int activityType;
 
     private int feeType;
 
@@ -99,14 +99,13 @@ public class ActivityInfo {
     }
 
 
-    public Byte getActivityType() {
+    public int getActivityType() {
         return activityType;
     }
 
-    public void setActivityType(Byte activityType) {
+    public void setActivityType(int activityType) {
         this.activityType = activityType;
     }
-
 
     public String getDescription() {
         return description;

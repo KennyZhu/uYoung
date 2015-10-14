@@ -17,6 +17,7 @@ public enum WeekEnum {
 
     WeekEnum(int week, String weekCnDesc) {
         this.week = week;
+        this.weekCnDesc = weekCnDesc;
     }
 
     public int getWeek() {

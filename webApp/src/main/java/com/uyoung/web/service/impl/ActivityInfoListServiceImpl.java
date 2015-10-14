@@ -2,6 +2,7 @@ package com.uyoung.web.service.impl;
 
 import com.uyoung.core.api.constant.CommonConstant;
 import com.uyoung.core.api.enums.ActivityStatusEnum;
+import com.uyoung.core.api.enums.ActivityTypeEnum;
 import com.uyoung.core.api.enums.WeekEnum;
 import com.uyoung.core.api.model.ActivityInfo;
 import com.uyoung.core.api.model.UserInfo;
@@ -12,6 +13,7 @@ import com.uyoung.web.service.ActivityInfoListService;
 import com.uyoung.web.util.DataUtil;
 import com.uyoung.web.vo.ActivityInfoVo;
 import org.apache.commons.collections.CollectionUtils;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +30,7 @@ import java.util.Map;
 @Service("activityInfoListService")
 public class ActivityInfoListServiceImpl implements ActivityInfoListService {
 
+    private static final Logger LOGGER = org.slf4j.LoggerFactory.getLogger(ActivityInfoListService.class);
     @Autowired
     private ActivityInfoService activityInfoService;
 
@@ -62,16 +65,32 @@ public class ActivityInfoListServiceImpl implements ActivityInfoListService {
         ActivityInfoVo infoVo = new ActivityInfoVo();
 
         infoVo.setFeeType(activityInfo.getFeeType());
-        infoVo.setActivityType(activityInfo.getActivityType());
+
         infoVo.setAddress(activityInfo.getAddress());
         infoVo.setId(activityInfo.getId());
         infoVo.setTitle(activityInfo.getTitle());
         infoVo.setNeedNum(activityInfo.getNeedNum());
-        infoVo.setStatus(ActivityStatusEnum.getByStatus(activityInfo.getStatus()).getDesc());
+        ActivityTypeEnum activityTypeEnum = ActivityTypeEnum.getByType(activityInfo.getActivityType());
+        if (activityTypeEnum != null) {
+            infoVo.setActivityType(activityTypeEnum.getDesc());
+        } else {
+            LOGGER.warn("#Can not found activity type:", activityInfo.getActivityType());
+        }
+        ActivityStatusEnum statusEnum = ActivityStatusEnum.getByStatus(activityInfo.getStatus());
+        if (statusEnum != null) {
+            infoVo.setStatus(statusEnum.getDesc());
+        } else {
+            LOGGER.warn("#Can not found activity status:", activityInfo.getStatus());
+        }
 
         infoVo.setDay(DataUtil.getDay(activityInfo.getBeginTime()));
         infoVo.setMon(DataUtil.getMonth(activityInfo.getBeginTime()));
-        infoVo.setWeekDesc(WeekEnum.getByWeek(DataUtil.getWeek(activityInfo.getBeginTime())).getWeekCnDesc());
+        WeekEnum weekEnum = WeekEnum.getByWeek(DataUtil.getWeek(activityInfo.getBeginTime()));
+        if (weekEnum != null) {
+            infoVo.setWeekDesc(weekEnum.getWeekCnDesc());
+        } else {
+            LOGGER.warn("#Can not found week :", activityInfo.getBeginTime());
+        }
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm");
         infoVo.setFromTime(simpleDateFormat.format(activityInfo.getBeginTime()));
