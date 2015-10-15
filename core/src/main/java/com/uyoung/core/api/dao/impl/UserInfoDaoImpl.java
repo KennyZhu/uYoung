@@ -2,6 +2,7 @@ package com.uyoung.core.api.dao.impl;
 
 import com.uyoung.core.api.dao.UserInfoDao;
 import com.uyoung.core.api.model.UserInfo;
+import com.uyoung.core.base.dao.BaseDao;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.List;
  * Desc:
  */
 @Repository
-public class UserInfoDaoImpl implements UserInfoDao {
+public class UserInfoDaoImpl extends BaseDao<UserInfo> implements UserInfoDao {
     @Override
     public int deleteByPrimaryKey(Integer id) {
         return 0;
@@ -25,7 +26,7 @@ public class UserInfoDaoImpl implements UserInfoDao {
 
     @Override
     public UserInfo getById(Integer id) {
-        return null;
+        return selectOne("getById", id);
     }
 
     @Override
