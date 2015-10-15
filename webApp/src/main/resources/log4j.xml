@@ -19,7 +19,7 @@
     </appender>
 
     <appender name="logFile" class="org.apache.log4j.DailyRollingFileAppender">
-        <param name="File" value="./log/uyoung.log"/><!-- 设置日志输出文件名 -->
+        <param name="File" value="uyoung.log"/><!-- 设置日志输出文件名 -->
         <param name="DatePattern" value="'.'yyyy-MM-dd"/>
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern" value="%d - %c [%t] %-5p %c %x %l - %m%n"/>
