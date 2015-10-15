@@ -28,7 +28,10 @@
         </layout>
     </appender>
 
-    <!-- 指定logger的设置，additivity指示是否遵循缺省的继承机制-->
+    <logger name="com.uyoung" additivity="false">
+        <level value="DEBUG"/>
+        <appender-ref ref="logFile"/>
+    </logger>
 
     <!-- 根logger的设置-->
     <root>

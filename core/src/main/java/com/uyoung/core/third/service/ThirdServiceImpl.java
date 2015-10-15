@@ -7,5 +7,8 @@ package com.uyoung.core.third.service;
  * <br/>User: ylzhu
  */
 public class ThirdServiceImpl implements ThirdService {
-
+    @Override
+    public String getAccessToken() {
+        return null;
+    }
 }
