@@ -27,7 +27,7 @@ public class ActivityInfoDaoImpl extends BaseDao<ActivityInfo> implements Activi
 
     @Override
     public ActivityInfo getById(Integer id) {
-        return selectOne("getById");
+        return selectOne("getById", id);
     }
 
     @Override
