@@ -8,7 +8,13 @@ import java.util.stream.Stream;
  * Desc:
  */
 public enum ActivityStatusEnum {
-    ACTIVE(1, "进行中");
+
+
+    ACTIVE(1, "进行中"),
+    COMPLETE(2, "已完成"),
+    CANCEL(3, "已取消");
+
+
     private final int status;
     private final String desc;
 
