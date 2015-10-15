@@ -29,8 +29,17 @@ public class UserInfoController {
             return JsonUtil.getJsonString(new BaseResult(ResultCodeEnum.INVALID_PARAM.getCode(), ResultCodeEnum.INVALID_PARAM.getDesc()));
         }
 
-        UserInfo userInfo = userInfoService.getById(uid);
-        return JsonUtil.getJsonString(userInfo);
+        BaseResult baseResult = new BaseResult(ResultCodeEnum.SUCCESS.getCode(), ResultCodeEnum.SUCCESS.getDesc());
+
+        try {
+            UserInfo userInfo = userInfoService.getById(uid);
+            baseResult.setResultData(userInfo);
+        } catch (Exception e) {
+            baseResult.setResult(ResultCodeEnum.EXCEPTION.getCode());
+            baseResult.setResultDesc(ResultCodeEnum.EXCEPTION.getDesc());
+        }
+
+        return JsonUtil.getJsonString(baseResult);
     }
 
 
