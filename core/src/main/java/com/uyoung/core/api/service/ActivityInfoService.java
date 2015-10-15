@@ -22,6 +22,14 @@ public interface ActivityInfoService {
     public Page<ActivityInfo> getPageByStatus(int pageNum, int pageSize, ActivityStatusEnum statusEnum);
 
     /**
+     * 获取详情
+     *
+     * @param id
+     * @return
+     */
+    public ActivityInfo getById(int id);
+
+    /**
      * @param activityInfo
      * @return
      */

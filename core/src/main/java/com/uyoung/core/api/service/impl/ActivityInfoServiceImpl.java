@@ -38,6 +38,11 @@ public class ActivityInfoServiceImpl implements ActivityInfoService {
     }
 
     @Override
+    public ActivityInfo getById(int id) {
+        return activityInfoDao.getById(id);
+    }
+
+    @Override
     public int updateById(ActivityInfo activityInfo) {
         return activityInfoDao.updateById(activityInfo);
     }
