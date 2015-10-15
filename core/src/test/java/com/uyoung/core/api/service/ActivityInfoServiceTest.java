@@ -23,4 +23,10 @@ public class ActivityInfoServiceTest extends BaseTest {
         List<ActivityInfo> activityInfoList = service.getPageByStatus(1, 10, statusEnum).getDataList();
         System.out.println("######" + activityInfoList.get(0).toString());
     }
+
+    @Test
+    public void getById() {
+        int id = 1;
+        LOGGER.info("##" + service.getById(id));
+    }
 }
