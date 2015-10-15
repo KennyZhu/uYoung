@@ -5,7 +5,7 @@
                      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                      xsi:schemaLocation="http://jakarta.apache.org/log4j/ ">
 
-    <appender name="logConsole" class="org.apache.log4j.ConsoleAppender">
+    <appender name="stdout" class="org.apache.log4j.ConsoleAppender">
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern"
                    value="[%d{dd HH:mm:ss,SSS\} %-5p] [%t] %c{2\} - %m%n"/>
@@ -18,27 +18,19 @@
         </filter>
     </appender>
 
-    <appender name="logFile" class="org.apache.log4j.DailyRollingFileAppender">
-        <param name="File" value="uyoung.log"/><!-- 设置日志输出文件名 -->
-        <param name="DatePattern" value="'.'yyyy-MM-dd"/>
+    <appender name="rootAppender" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="log/uyoung.log"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd-HH"/>
+        <param name="threshold" value="DEBUG"/>
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern" value="%d - %c [%t] %-5p %c %x %l - %m%n"/>
         </layout>
-        <filter class="org.apache.log4j.varia.LevelRangeFilter">
-            <param name="LevelMin" value="INFO"/>
-            <param name="LevelMax" value="FATAL"/>
-        </filter>
     </appender>
 
-    <logger name="com.uyoung" additivity="false">
-        <level value="DEBUG"/>
-        <appender-ref ref="logFile"/>
-    </logger>
-
-    <!-- 根logger的设置-->
     <root>
-        <priority value="info"/>
-        <appender-ref ref="logConsole"/>
-        <appender-ref ref="logFile"/>
+        <level value="INFO"/>
+        <appender-ref ref="rootAppender"/>
+        <appender-ref ref="stdout"/>
     </root>
+
 </log4j:configuration>
