@@ -35,6 +35,7 @@ public class ActivityInfoVoBuilder {
 
         }
         this.activityInfo = activityInfo;
+        this.infoVo = new ActivityInfoVo();
     }
 
     public ActivityInfoVoBuilder buildBase() {
