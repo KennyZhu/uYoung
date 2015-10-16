@@ -5,7 +5,9 @@ import com.uyoung.core.api.model.UserInfo;
 import com.uyoung.core.base.dao.BaseDao;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * User: KennyZhu
@@ -36,6 +38,8 @@ public class UserInfoDaoImpl extends BaseDao<UserInfo> implements UserInfoDao {
 
     @Override
     public List<UserInfo> getAvatarListByUserIdList(List<Integer> userIds) {
-        return null;
+        Map<String, Object> params = new HashMap<>();
+        params.put("userIds", userIds);
+        return selectList("getAvatarListByUserIdList", params);
     }
 }

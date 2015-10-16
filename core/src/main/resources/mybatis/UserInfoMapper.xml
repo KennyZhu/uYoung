@@ -19,7 +19,7 @@
         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, real_name, nick_name, password, email, gender, avatar_url, phone, address, company, 
+    id, real_name, nick_name, password, email, gender, avatar_url, phone, address, company,
     position, equipment, style, create_time, update_time
   </sql>
     <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
@@ -27,6 +27,16 @@
         <include refid="Base_Column_List"/>
         from tb_user_info
         where id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="getAvatarListByUserIdList" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_user_info
+        where id in
+        <foreach item="uid" index="index" collection="userIds"
+                 open="(" separator="," close=")">
+            #{uid}
+        </foreach>
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from tb_user_info

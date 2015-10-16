@@ -38,7 +38,7 @@ public class UserInfoServiceImpl implements UserInfoService {
     @Override
     public List<UserInfo> getAvatarByIdList(List<Integer> userIds) {
         if (CollectionUtils.isEmpty(userIds)) {
-            return Collections.EMPTY_LIST;
+            return Collections.emptyList();
         }
         return userInfoDao.getAvatarListByUserIdList(userIds);
     }
@@ -46,11 +46,11 @@ public class UserInfoServiceImpl implements UserInfoService {
     @Override
     public Map<Integer, UserInfo> getAvatarMapByIdList(List<Integer> userIds) {
         if (CollectionUtils.isEmpty(userIds)) {
-            return Collections.EMPTY_MAP;
+            return Collections.emptyMap();
         }
         List<UserInfo> userInfoList = getAvatarByIdList(userIds);
         if (CollectionUtils.isEmpty(userInfoList)) {
-            return Collections.EMPTY_MAP;
+            return Collections.emptyMap();
         }
         Map<Integer, UserInfo> result = new HashMap<>(userInfoList.size());
         for (UserInfo userInfo : userInfoList) {

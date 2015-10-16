@@ -9,7 +9,14 @@ import java.util.stream.Stream;
  * <br/>User: ylzhu
  */
 public enum ActivityTypeEnum {
-    SCENERY(1, "风景");
+    SCENERY(1, "风景"),
+
+    PERSON(2, "人像"),
+
+    WEDDING(3, "婚礼"),
+
+    FAMILY(4, "家庭");
+
     private int type;
     private String desc;
 

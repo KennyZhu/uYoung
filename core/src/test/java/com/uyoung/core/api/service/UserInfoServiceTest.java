@@ -4,6 +4,9 @@ import com.uyoung.core.api.BaseTest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Desc:
  * <p/>Date: 2015-10-15
@@ -18,5 +21,11 @@ public class UserInfoServiceTest extends BaseTest {
     public void getById() {
         int id = 1;
         LOGGER.info("##" + userInfoService.getById(id));
+    }
+
+    @Test
+    public void getByIdList() {
+        List<Integer> ids = Arrays.asList(new Integer[]{1, 2});
+        LOGGER.info("##" + userInfoService.getAvatarByIdList(ids));
     }
 }
