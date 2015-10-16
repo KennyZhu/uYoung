@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * Desc:
@@ -24,12 +25,14 @@ public class ThirdBaseController {
     private HttpService httpService;
 
     @RequestMapping(value = "/getCode")
+    @ResponseBody
     public String getAuthCode(String thirdType, HttpRequest request, HttpResponse response) {
         httpService.sendGetRequest(DouBanConstant.getAuthUrl("/getToken", "http://www.baidu.com"));
         return null;
     }
 
     @RequestMapping(value = "/getToken")
+    @ResponseBody
     public String getAccessToken(String code, String redirectUrl) {
         String tokenUrl = DouBanConstant.getTokenUrl(redirectUrl, code);
         String accessTokeResult = httpService.sendPostRequest(tokenUrl);
