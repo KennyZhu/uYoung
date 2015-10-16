@@ -29,7 +29,7 @@ public class DouBanConstant {
      * @return
      */
     public static String getAuthUrl(String redirectUrl, String tokenUrl) {
-        return AUTH_BASE_URL + "client_id=" + APP_KEY + "&redirect_uri=" + tokenUrl + "&response_type=" + AUTH_RESPONSE_TYPE + "&state=" + redirectUrl;
+        return AUTH_BASE_URL + "client_id=" + APP_KEY + "&response_type=" + AUTH_RESPONSE_TYPE + "&state=" + redirectUrl + "&redirect_uri=" + tokenUrl;
 
     }
 
@@ -41,7 +41,7 @@ public class DouBanConstant {
      * @return
      */
     public static String getTokenUrl(String redirectUrl, String authCode) {
-        return TOKEN_BASE_URL + "client_id=" + APP_KEY + "&client_secret=" + APP_SECRET + "&redirect_uri=" + redirectUrl + "&grant_type=" + TOKEN_GRANT_TYPE + "&code=" + authCode;
+        return TOKEN_BASE_URL + "client_id=" + APP_KEY + "&client_secret=" + APP_SECRET + "&grant_type=" + TOKEN_GRANT_TYPE + "&code=" + authCode + "&redirect_uri=" + redirectUrl;
 
     }
 }
