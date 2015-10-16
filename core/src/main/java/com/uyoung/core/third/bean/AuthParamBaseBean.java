@@ -7,6 +7,10 @@ package com.uyoung.core.third.bean;
  * <br/>User: ylzhu
  */
 public class AuthParamBaseBean {
+    /**
+     * 授权链接
+     */
+    private String authUrl;
     private String clientId;
     private String redirectUri;
 
