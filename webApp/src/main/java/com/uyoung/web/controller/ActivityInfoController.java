@@ -6,7 +6,6 @@ import com.uyoung.web.bean.BaseResult;
 import com.uyoung.web.enums.ResultCodeEnum;
 import com.uyoung.web.handler.ActivityInfoHandler;
 import com.uyoung.web.util.JsonUtil;
-import com.uyoung.web.vo.ActivityInfoDetailVo;
 import com.uyoung.web.vo.ActivityInfoVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -43,9 +42,9 @@ public class ActivityInfoController {
             return JsonUtil.getJsonString(new BaseResult(ResultCodeEnum.INVALID_PARAM.getCode(), ResultCodeEnum.INVALID_PARAM.getDesc()));
 
         }
-        ActivityInfoDetailVo detailVo = activityInfoHandler.getActivityInfoDetailById(id);
+        ActivityInfoVo infoVo = activityInfoHandler.getActivityInfoById(id);
         BaseResult baseResult = new BaseResult(ResultCodeEnum.SUCCESS.getCode(), ResultCodeEnum.SUCCESS.getDesc());
-        baseResult.setResultData(detailVo);
+        baseResult.setResultData(infoVo);
         return JsonUtil.getJsonString(baseResult);
     }
 }

@@ -1,18 +1,17 @@
 package com.uyoung.web.vo;
 
+import com.uyoung.core.api.model.ActivityInfo;
+
 /**
  * User: KennyZhu
  * Date: 15/10/12
  * Desc:
  */
-public class ActivityInfoVo {
-    private int id;
-    private String title;
+public class ActivityInfoVo extends ActivityInfo {
     private String address;
-    private String activityType;
-    private String status;
-    private int needNum;
-    private String feeType;
+    private String activityTypeDesc;
+    private String statusDesc;
+    private String feeTypeDesc;
 
     private int day;
     private int mon;
@@ -79,79 +78,38 @@ public class ActivityInfoVo {
     }
 
 
-    public String getActivityType() {
-        return activityType;
+    public String getActivityTypeDesc() {
+        return activityTypeDesc;
     }
 
-    public void setActivityType(String activityType) {
-        this.activityType = activityType;
+    public void setActivityTypeDesc(String activityTypeDesc) {
+        this.activityTypeDesc = activityTypeDesc;
     }
 
+    @Override
     public String getAddress() {
         return address;
     }
 
+    @Override
     public void setAddress(String address) {
         this.address = address;
     }
 
-    public String getFeeType() {
-        return feeType;
+    public String getFeeTypeDesc() {
+        return feeTypeDesc;
     }
 
-    public void setFeeType(String feeType) {
-        this.feeType = feeType;
+    public void setFeeTypeDesc(String feeTypeDesc) {
+        this.feeTypeDesc = feeTypeDesc;
     }
 
-    public int getId() {
-        return id;
+
+    public String getStatusDesc() {
+        return statusDesc;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getNeedNum() {
-        return needNum;
-    }
-
-    public void setNeedNum(int needNum) {
-        this.needNum = needNum;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    @Override
-    public String toString() {
-        return "ActivityInfoVo{" +
-                "activityType=" + activityType +
-                ", id=" + id +
-                ", title='" + title + '\'' +
-                ", address='" + address + '\'' +
-                ", status=" + status +
-                ", needNum=" + needNum +
-                ", feeType=" + feeType +
-                ", day=" + day +
-                ", mon=" + mon +
-                ", weekDesc='" + weekDesc + '\'' +
-                ", fromTime='" + fromTime + '\'' +
-                ", toTime='" + toTime + '\'' +
-                ", oriUserAvatarUrl='" + oriUserAvatarUrl + '\'' +
-                ", local='" + local + '\'' +
-                '}';
+    public void setStatusDesc(String statusDesc) {
+        this.statusDesc = statusDesc;
     }
 }
