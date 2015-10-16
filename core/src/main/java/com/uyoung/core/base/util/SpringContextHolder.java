@@ -5,9 +5,9 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
-@Repository
+@Service("springContextHolder")
 public class SpringContextHolder implements ApplicationContextAware, ApplicationListener {
     private static ApplicationContext applicationContext;
     private static boolean hasLoaded = false;
@@ -16,7 +16,7 @@ public class SpringContextHolder implements ApplicationContextAware, Application
     }
 
     public void setApplicationContext(ApplicationContext applicationContext) {
-        applicationContext = applicationContext;
+        this.applicationContext = applicationContext;
     }
 
     public static ApplicationContext getApplicationContext() {
