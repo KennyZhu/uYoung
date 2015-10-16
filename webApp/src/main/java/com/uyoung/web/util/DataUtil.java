@@ -1,5 +1,6 @@
 package com.uyoung.web.util;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -10,7 +11,7 @@ import java.util.Date;
  * Desc:
  */
 public final class DataUtil {
-    public static final String YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd hh:mm:ss";
+    public static final String YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd HH:mm:ss";
 
     private DataUtil() {
     }
@@ -81,6 +82,9 @@ public final class DataUtil {
     }
 
     public static void main(String[] args) {
-        System.out.println(DataUtil.getWeek(new Date()));
+        Date date = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat(YYYY_MM_DD_HH_MM_SS);
+        formatter.format(date);
+        System.out.println(formatter.format(date));
     }
 }

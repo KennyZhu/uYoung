@@ -1,25 +1,30 @@
 package com.uyoung.web.vo;
 
-import com.uyoung.core.api.model.ActivityInfo;
-
 /**
  * User: KennyZhu
  * Date: 15/10/12
  * Desc:
  */
-public class ActivityInfoVo extends ActivityInfo {
-    private String address;
+public class ActivityInfoVo {
+    private int id;
+    private int oriUserId;
+    private String title;
     private String activityTypeDesc;
-    private String statusDesc;
-    private String feeTypeDesc;
-
+    private int needNum;
     private int day;
     private int mon;
     private String weekDesc;
     private String fromTime;
     private String toTime;
+    private String address;
     private String oriUserAvatarUrl;
     private String local;
+    private String statusDesc;
+    private int feeType;
+
+
+    private String description;
+    private int realNum;
 
     public int getDay() {
         return day;
@@ -86,24 +91,21 @@ public class ActivityInfoVo extends ActivityInfo {
         this.activityTypeDesc = activityTypeDesc;
     }
 
-    @Override
     public String getAddress() {
         return address;
     }
 
-    @Override
     public void setAddress(String address) {
         this.address = address;
     }
 
-    public String getFeeTypeDesc() {
-        return feeTypeDesc;
+    public int getFeeType() {
+        return feeType;
     }
 
-    public void setFeeTypeDesc(String feeTypeDesc) {
-        this.feeTypeDesc = feeTypeDesc;
+    public void setFeeType(int feeType) {
+        this.feeType = feeType;
     }
-
 
     public String getStatusDesc() {
         return statusDesc;
@@ -111,5 +113,53 @@ public class ActivityInfoVo extends ActivityInfo {
 
     public void setStatusDesc(String statusDesc) {
         this.statusDesc = statusDesc;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getNeedNum() {
+        return needNum;
+    }
+
+    public void setNeedNum(int needNum) {
+        this.needNum = needNum;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public int getOriUserId() {
+        return oriUserId;
+    }
+
+    public void setOriUserId(int oriUserId) {
+        this.oriUserId = oriUserId;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getRealNum() {
+        return realNum;
+    }
+
+    public void setRealNum(int realNum) {
+        this.realNum = realNum;
     }
 }

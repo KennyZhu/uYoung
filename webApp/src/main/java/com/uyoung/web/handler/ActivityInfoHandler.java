@@ -9,6 +9,7 @@ import com.uyoung.core.base.bean.Page;
 import com.uyoung.web.vo.ActivityInfoVo;
 import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +25,7 @@ import java.util.Map;
 @Service("activityInfoHandler")
 public class ActivityInfoHandler {
 
-    private static final Logger LOGGER = org.slf4j.LoggerFactory.getLogger(ActivityInfoHandler.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ActivityInfoHandler.class);
     @Autowired
     private ActivityInfoService activityInfoService;
 
@@ -66,6 +67,8 @@ public class ActivityInfoHandler {
     private void buildAvatarUrl(ActivityInfoVo activityInfoVo, Map<Integer, UserInfo> userInfoMap) {
         if (userInfoMap.get(activityInfoVo.getOriUserId()) != null) {
             activityInfoVo.setOriUserAvatarUrl(userInfoMap.get(activityInfoVo.getOriUserId()).getAvatarUrl());
+        } else {
+            LOGGER.warn("#Can not found userInfo by userId:" + activityInfoVo.getOriUserId());
         }
     }
 

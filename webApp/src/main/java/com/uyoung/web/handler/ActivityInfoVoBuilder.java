@@ -3,7 +3,6 @@ package com.uyoung.web.handler;
 import com.uyoung.core.api.constant.CommonConstant;
 import com.uyoung.core.api.enums.ActivityStatusEnum;
 import com.uyoung.core.api.enums.ActivityTypeEnum;
-import com.uyoung.core.api.enums.FeeTypeEnum;
 import com.uyoung.core.api.enums.WeekEnum;
 import com.uyoung.core.api.model.ActivityInfo;
 import com.uyoung.core.api.model.UserInfo;
@@ -31,21 +30,15 @@ public class ActivityInfoVoBuilder {
 
 
     public ActivityInfoVoBuilder(ActivityInfo activityInfo) {
+        this.infoVo = new ActivityInfoVo();
         if (activityInfo == null) {
-
         }
         this.activityInfo = activityInfo;
-        this.infoVo = new ActivityInfoVo();
+
     }
 
     public ActivityInfoVoBuilder buildBase() {
-        FeeTypeEnum feeTypeEnum = FeeTypeEnum.getByCode(activityInfo.getFeeType());
-        if (feeTypeEnum != null) {
-            infoVo.setFeeTypeDesc(feeTypeEnum.getDesc());
-        } else {
-            LOGGER.warn("#Can not found fee type:", activityInfo.getFeeType());
-        }
-
+        infoVo.setFeeType(activityInfo.getFeeType());
         infoVo.setAddress(activityInfo.getAddress());
         infoVo.setOriUserId(activityInfo.getOriUserId());
         infoVo.setId(activityInfo.getId());
@@ -74,10 +67,9 @@ public class ActivityInfoVoBuilder {
             LOGGER.warn("#Can not found week :", activityInfo.getBeginTime());
         }
 
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm");
         infoVo.setFromTime(simpleDateFormat.format(activityInfo.getBeginTime()));
         infoVo.setToTime(simpleDateFormat.format(activityInfo.getEndTime()));
-        infoVo.setOriUserAvatarUrl(CommonConstant.DEFAULT_AVATAR_URL);
         return this;
     }
 
