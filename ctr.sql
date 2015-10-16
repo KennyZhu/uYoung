@@ -20,6 +20,7 @@ CREATE TABLE tb_user_info (
   position    VARCHAR(20) COMMENT '职位',
   equipment   VARCHAR(20) COMMENT '设备/器材',
   style       TINYINT(2) COMMENT '风格',
+  user_type   TINYINT(2) COMMENT '用户类型:0:uyoung用户 1:豆瓣用户 2:微信用户 3:微博用户',
   create_time TIMESTAMP          NULL
   COMMENT '创建时间',
   update_time TIMESTAMP          NULL     DEFAULT current_timestamp ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间'
@@ -175,6 +176,36 @@ CREATE TABLE tb_photo_info (
   COMMENT '用户ID',
   exif_camera    VARCHAR(32) COMMENT '相机',
   update_time    TIMESTAMP NULL DEFAULT current_timestamp ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间'
+)
+  ENGINE = MyISAM
+  AUTO_INCREMENT = 0
+  DEFAULT CHARSET = UTF8;
+
+DROP TABLE tb_third_user_info;
+CREATE TABLE tb_third_user_info (
+  id            INT(4) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  uid           INT(4)             NOT NULL
+  COMMENT '用户ID',
+  third_uid     VARCHAR(100)       NOT NULL
+  COMMENT '第三方平台用户UID',
+  access_token  VARCHAR(100)       NOT NULL
+  COMMENT 'Token',
+  refresh_token VARCHAR(100)                DEFAULT NULL
+  COMMENT 'refresh token',
+
+  expire_in     LONG COMMENT '过期时间',
+  nick_name     VARCHAR(10)        NOT NULL
+  COMMENT '昵称',
+  gender        TINYINT(1)                  DEFAULT 1
+  COMMENT '性别',
+  avatar_url    VARCHAR(250)                DEFAULT NULL
+  COMMENT '头像',
+
+  refresh_time  TIMESTAMP          NULL
+  COMMENT 'Token 刷新时间',
+  create_time   TIMESTAMP          NULL
+  COMMENT '创建时间',
+  update_time   TIMESTAMP          NULL     DEFAULT current_timestamp ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间'
 )
   ENGINE = MyISAM
   AUTO_INCREMENT = 0
