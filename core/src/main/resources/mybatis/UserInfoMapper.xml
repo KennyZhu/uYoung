@@ -15,12 +15,13 @@
         <result column="position" property="position" jdbcType="VARCHAR"/>
         <result column="equipment" property="equipment" jdbcType="VARCHAR"/>
         <result column="style" property="style" jdbcType="TINYINT"/>
+        <result column="user_type" property="userType" jdbcType="TINYINT"/>
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
     </resultMap>
     <sql id="Base_Column_List">
     id, real_name, nick_name, password, email, gender, avatar_url, phone, address, company,
-    position, equipment, style, create_time, update_time
+    position, equipment, style,user_type, create_time, update_time
   </sql>
     <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
@@ -38,10 +39,6 @@
             #{uid}
         </foreach>
     </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from tb_user_info
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
     <insert id="insert" parameterType="com.uyoung.core.api.model.UserInfo">
         insert into tb_user_info
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -83,6 +80,9 @@
             </if>
             <if test="style != null">
                 style,
+            </if>
+            <if test="userType != null">
+                user_type,
             </if>
             <if test="createTime != null">
                 create_time,
@@ -131,6 +131,9 @@
             <if test="style != null">
                 #{style,jdbcType=TINYINT},
             </if>
+            <if test="userType != null">
+                #{userType,jdbcType=TINYINT},
+            </if>
             <if test="createTime != null">
                 #{createTime,jdbcType=TIMESTAMP},
             </if>
@@ -177,6 +180,9 @@
             </if>
             <if test="style != null">
                 style = #{style,jdbcType=TINYINT},
+            </if>
+            <if test="userType != null">
+                user_type = #{userType,jdbcType=TINYINT},
             </if>
             <if test="createTime != null">
                 create_time = #{createTime,jdbcType=TIMESTAMP},

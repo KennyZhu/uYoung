@@ -60,6 +60,7 @@ public class ThirdBaseController {
             LOGGER.info("#GetAccessToken code is " + code + " redirectUrl is " + redirectUrl);
             String tokenUrl = DouBanConstant.getTokenUrl(redirectUrl, code);
             String accessTokeResult = httpService.sendPostRequest(tokenUrl);
+            //TODO 登录之后的操作
             LOGGER.info("#AccessTokenResult is " + accessTokeResult);
             response.sendRedirect(redirectUrl);
         } catch (Exception e) {

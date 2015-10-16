@@ -43,6 +43,10 @@ public class UserInfo {
 
 
     private int style;
+    /**
+     * 用户类型：0：uyoung用户 1：豆瓣用户 2：微信用户 3：微博用户
+     */
+    private int userType;
 
 
     private Date createTime;
@@ -180,6 +184,14 @@ public class UserInfo {
 
     public void setStyle(int style) {
         this.style = style;
+    }
+
+    public int getUserType() {
+        return userType;
+    }
+
+    public void setUserType(int userType) {
+        this.userType = userType;
     }
 
     public Date getCreateTime() {
