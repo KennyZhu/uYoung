@@ -3,6 +3,10 @@ package com.uyoung.web.third;
 import com.uyoung.core.base.service.HttpService;
 import com.uyoung.core.base.util.UrlEncodeUtil;
 import com.uyoung.core.third.douban.constant.DouBanConstant;
+import com.uyoung.core.third.enums.ThirdPlatformEnum;
+import com.uyoung.web.bean.BaseResult;
+import com.uyoung.web.enums.ResultCodeEnum;
+import com.uyoung.web.util.JsonUtil;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +33,10 @@ public class ThirdBaseController {
 
     @RequestMapping(value = "/getCode")
     @ResponseBody
-    public String getAuthCode(String thirdType, String redirectUrl, String stat, HttpServletRequest request, HttpServletResponse response) {
+    public String getAuthCode(int thirdType, String redirectUrl, String stat, HttpServletRequest request, HttpServletResponse response) {
+        if (ThirdPlatformEnum.getByCode(thirdType) == null || StringUtils.isBlank(redirectUrl)) {
+            return JsonUtil.getJsonString(new BaseResult(ResultCodeEnum.INVALID_PARAM.getCode(), ResultCodeEnum.INVALID_PARAM.getDesc()));
+        }
         try {
             String getTokenUrl = "http://182.92.237.31/getToken?";
             if (StringUtils.isNotBlank(redirectUrl)) {
