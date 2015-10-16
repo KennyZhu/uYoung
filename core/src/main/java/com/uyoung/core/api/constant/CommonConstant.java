@@ -8,5 +8,6 @@ package com.uyoung.core.api.constant;
  */
 public final class CommonConstant {
     public static final String DEFAULT_AVATAR_URL = "";
+    public static final String DEFAULT_ENCODE = "UTF-8";
 
 }

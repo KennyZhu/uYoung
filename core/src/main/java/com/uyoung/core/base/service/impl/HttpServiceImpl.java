@@ -68,7 +68,7 @@ public class HttpServiceImpl implements HttpService {
         if (StringUtils.isBlank(url)) {
             return null;
         }
-        if (url.contains("\\?")) {
+        if (url.contains("?")) {
             String[] urls = url.split("\\?");
             return sendPostRequest(urls[0], urls[1]);
         } else {

@@ -1,5 +1,9 @@
 package com.uyoung.core.third.douban.constant;
 
+import com.uyoung.core.api.constant.CommonConstant;
+import com.uyoung.core.base.util.UrlEncodeUtil;
+import org.apache.commons.lang.StringUtils;
+
 /**
  * Desc:
  * <p/>Date: 2015-10-15
@@ -25,11 +29,15 @@ public class DouBanConstant {
     /**
      * 授权链接
      *
-     * @param redirectUrl 回调链接
+     * @param state
      * @return
      */
-    public static String getAuthUrl(String redirectUrl, String tokenUrl) {
-        return AUTH_BASE_URL + "client_id=" + APP_KEY + "&response_type=" + AUTH_RESPONSE_TYPE + "&state=" + redirectUrl + "&redirect_uri=" + tokenUrl;
+    public static String getAuthUrl(String state, String tokenUrl) {
+        String url = AUTH_BASE_URL + "client_id=" + APP_KEY + "&response_type=" + AUTH_RESPONSE_TYPE + "&redirect_uri=" + UrlEncodeUtil.encodeUrl(tokenUrl, "UTF-8");
+        if (StringUtils.isNotBlank(state)) {
+            url = url + "&stat=" + UrlEncodeUtil.encodeUrl(state, CommonConstant.DEFAULT_ENCODE);
+        }
+        return url;
 
     }
 
@@ -41,7 +49,10 @@ public class DouBanConstant {
      * @return
      */
     public static String getTokenUrl(String redirectUrl, String authCode) {
-        return TOKEN_BASE_URL + "client_id=" + APP_KEY + "&client_secret=" + APP_SECRET + "&grant_type=" + TOKEN_GRANT_TYPE + "&code=" + authCode + "&redirect_uri=" + redirectUrl;
-
+        String url = TOKEN_BASE_URL + "client_id=" + APP_KEY + "&client_secret=" + APP_SECRET + "&grant_type=" + TOKEN_GRANT_TYPE + "&code=" + authCode;
+        if (StringUtils.isNotBlank(redirectUrl)) {
+            url = url + "&redirect_uri=" + UrlEncodeUtil.encodeUrl(redirectUrl, "UTF-8");
+        }
+        return url;
     }
 }
