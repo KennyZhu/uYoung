@@ -1,5 +1,7 @@
 package com.uyoung.core.third.bean;
 
+import com.uyoung.core.third.enums.ThirdPlatformEnum;
+
 /**
  * Desc:微博登录授权接口参数Bean
  * <p/>http://open.weibo.com/wiki/Oauth2/authorize
@@ -32,6 +34,11 @@ public class WeiBoAuthParamBean extends AuthParamBaseBean {
     @Override
     public String getAppSecret() {
         return APP_SECRET;
+    }
+
+    @Override
+    public ThirdPlatformEnum getThirdPlatform() {
+        return ThirdPlatformEnum.WEIBO;
     }
 
     /**

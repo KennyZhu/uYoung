@@ -1,5 +1,7 @@
 package com.uyoung.core.third.bean;
 
+import com.uyoung.core.third.enums.ThirdPlatformEnum;
+
 /**
  * Desc:豆瓣授权接口参数Bean
  * <p/>Date: 2015-10-16
@@ -31,5 +33,10 @@ public class DouBanAuthParamBean extends AuthParamBaseBean {
     @Override
     public String getTokenBaseUrl() {
         return TOKEN_BASE_URL;
+    }
+
+    @Override
+    public ThirdPlatformEnum getThirdPlatform() {
+        return ThirdPlatformEnum.DOUBAN;
     }
 }

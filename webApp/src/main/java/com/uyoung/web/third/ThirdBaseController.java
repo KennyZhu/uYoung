@@ -1,8 +1,9 @@
 package com.uyoung.web.third;
 
 import com.uyoung.core.base.service.HttpService;
-import com.uyoung.core.base.util.UrlEncodeUtil;
-import com.uyoung.core.third.douban.constant.DouBanConstant;
+import com.uyoung.core.third.bean.AuthParamBaseBean;
+import com.uyoung.core.third.bean.DouBanAuthParamBean;
+import com.uyoung.core.third.bean.WeiBoAuthParamBean;
 import com.uyoung.core.third.enums.ThirdPlatformEnum;
 import com.uyoung.web.bean.BaseResult;
 import com.uyoung.web.enums.ResultCodeEnum;
@@ -38,15 +39,8 @@ public class ThirdBaseController {
             return JsonUtil.getJsonString(new BaseResult(ResultCodeEnum.INVALID_PARAM.getCode(), ResultCodeEnum.INVALID_PARAM.getDesc()));
         }
         try {
-            String getTokenUrl = "http://182.92.237.31/getToken?";
-            if (StringUtils.isNotBlank(redirectUrl)) {
-                getTokenUrl = getTokenUrl + "redirectUrl=" + UrlEncodeUtil.encodeUrl(redirectUrl, "UTF-8");
-            }
-            if (StringUtils.isNotBlank(stat)) {
-                response.sendRedirect(DouBanConstant.getAuthUrl(stat, getTokenUrl));
-            } else {
-                response.sendRedirect(DouBanConstant.getAuthUrl(null, getTokenUrl));
-            }
+            AuthParamBaseBean authParamBaseBean = getAuthBeanByThirdType(thirdType);
+            response.sendRedirect(authParamBaseBean.getThirdAuthUrl(redirectUrl));
         } catch (Exception e) {
             LOGGER.error("#", e);
         }
@@ -55,10 +49,11 @@ public class ThirdBaseController {
 
     @RequestMapping(value = "/getToken")
     @ResponseBody
-    public String getAccessToken(String code, String redirectUrl, HttpServletResponse response) {
+    public String getAccessToken(String code, int thirdType, String redirectUrl, HttpServletResponse response) {
         try {
             LOGGER.info("#GetAccessToken code is " + code + " redirectUrl is " + redirectUrl);
-            String tokenUrl = DouBanConstant.getTokenUrl(redirectUrl, code);
+            AuthParamBaseBean authParamBaseBean = getAuthBeanByThirdType(thirdType);
+            String tokenUrl = authParamBaseBean.getThirdTokenUrl(redirectUrl, code);
             String accessTokeResult = httpService.sendPostRequest(tokenUrl);
             //TODO 登录之后的操作
             LOGGER.info("#AccessTokenResult is " + accessTokeResult);
@@ -67,5 +62,22 @@ public class ThirdBaseController {
             LOGGER.error("#", e);
         }
         return null;
+    }
+
+    private AuthParamBaseBean getAuthBeanByThirdType(int thirdType) {
+
+        ThirdPlatformEnum thirdPlatform = ThirdPlatformEnum.getByCode(thirdType);
+
+        if (thirdPlatform == null) {
+            throw new IllegalArgumentException("Not sport thirdType.");
+        }
+        switch (thirdPlatform) {
+            case DOUBAN:
+                return new DouBanAuthParamBean();
+            case WEIBO:
+                return new WeiBoAuthParamBean();
+            default:
+                throw new IllegalArgumentException("Not sport thirdType.");
+        }
     }
 }

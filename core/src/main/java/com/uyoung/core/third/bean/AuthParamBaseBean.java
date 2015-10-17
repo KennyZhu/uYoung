@@ -1,6 +1,7 @@
 package com.uyoung.core.third.bean;
 
 import com.uyoung.core.base.util.UrlEncodeUtil;
+import com.uyoung.core.third.enums.ThirdPlatformEnum;
 import org.apache.commons.lang.StringUtils;
 
 /**
@@ -28,6 +29,8 @@ public abstract class AuthParamBaseBean {
 
     public abstract String getTokenBaseUrl();
 
+    public abstract ThirdPlatformEnum getThirdPlatform();
+
     /**
      * 获取第三方AuthCode URL
      *
@@ -35,7 +38,7 @@ public abstract class AuthParamBaseBean {
      * @return
      */
     public String getThirdAuthUrl(String redirectUrl) {
-        return getAuthBaseUrl() + "client_id=" + getAppKey() + "&response_type=" + AUTH_RESPONSE_TYPE + "&redirect_uri=" + UrlEncodeUtil.encodeUrl(getTokenUrl(redirectUrl), "UTF-8");
+        return getAuthBaseUrl() + "client_id=" + getAppKey() + "&response_type=" + AUTH_RESPONSE_TYPE + "&redirect_uri=" + UrlEncodeUtil.encodeUrl(getTokenUrl(redirectUrl, getThirdPlatform()), "UTF-8");
     }
 
     /**
@@ -59,10 +62,10 @@ public abstract class AuthParamBaseBean {
      * @param redirectUrl
      * @return
      */
-    public String getTokenUrl(String redirectUrl) {
+    public String getTokenUrl(String redirectUrl, ThirdPlatformEnum thirdPlatform) {
         String getTokenUrl = "http://182.92.237.31/getToken?";
         if (StringUtils.isNotBlank(redirectUrl)) {
-            getTokenUrl = getTokenUrl + "redirectUrl=" + UrlEncodeUtil.encodeUrl(redirectUrl, "UTF-8");
+            getTokenUrl = getTokenUrl + "thirdType=" + thirdPlatform.getCode() + "&redirectUrl=" + UrlEncodeUtil.encodeUrl(redirectUrl, "UTF-8");
         }
         return getTokenUrl;
     }
