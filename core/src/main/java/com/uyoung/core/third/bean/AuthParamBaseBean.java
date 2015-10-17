@@ -63,9 +63,9 @@ public abstract class AuthParamBaseBean {
      * @return
      */
     public String getTokenUrl(String redirectUrl, ThirdPlatformEnum thirdPlatform) {
-        String getTokenUrl = "http://182.92.237.31/getToken?";
+        String getTokenUrl = "http://182.92.237.31/getToken?thirdType=" + thirdPlatform.getCode();
         if (StringUtils.isNotBlank(redirectUrl)) {
-            getTokenUrl = getTokenUrl + "thirdType=" + thirdPlatform.getCode() + "&redirectUrl=" + UrlEncodeUtil.encodeUrl(redirectUrl, "UTF-8");
+            getTokenUrl = getTokenUrl + "&redirectUrl=" + UrlEncodeUtil.encodeUrl(redirectUrl, "UTF-8");
         }
         return getTokenUrl;
     }
