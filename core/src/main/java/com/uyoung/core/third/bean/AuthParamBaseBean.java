@@ -6,21 +6,18 @@ package com.uyoung.core.third.bean;
  * <br/>Time: 18:45
  * <br/>User: ylzhu
  */
-public class AuthParamBaseBean {
+public abstract class AuthParamBaseBean {
     /**
      * 授权链接
      */
     private String authUrl;
     private String clientId;
+    private String appSecret;
     private String redirectUri;
 
-    public String getClientId() {
-        return clientId;
-    }
+    public abstract String getClientId();
 
-    public void setClientId(String clientId) {
-        this.clientId = clientId;
-    }
+    public abstract String getAppSecret();
 
     public String getRedirectUri() {
         return redirectUri;

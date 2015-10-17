@@ -8,6 +8,8 @@ package com.uyoung.core.third.bean;
  * <br/>User: ylzhu
  */
 public class WeiBoAuthParamBean extends AuthParamBaseBean {
+    private static final String APP_KEY = "1375588776";
+    private static final String APP_SECRET = "07f14d91a5289cc5b7e586f4e88458b6";
     /**
      * 授权页面终端类型
      */
@@ -19,6 +21,16 @@ public class WeiBoAuthParamBean extends AuthParamBaseBean {
 
     public void setDisplay(DisplayEnum display) {
         this.display = display;
+    }
+
+    @Override
+    public String getClientId() {
+        return APP_KEY;
+    }
+
+    @Override
+    public String getAppSecret() {
+        return APP_SECRET;
     }
 
     enum DisplayEnum {
