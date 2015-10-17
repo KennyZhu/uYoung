@@ -40,6 +40,7 @@ public class ThirdBaseController {
         }
         try {
             AuthParamBaseBean authParamBaseBean = getAuthBeanByThirdType(thirdType);
+            request.getSession().setAttribute("redirectUrl", redirectUrl);
             response.sendRedirect(authParamBaseBean.getThirdAuthUrl(redirectUrl));
         } catch (Exception e) {
             LOGGER.error("#", e);
@@ -49,8 +50,9 @@ public class ThirdBaseController {
 
     @RequestMapping(value = "/getToken")
     @ResponseBody
-    public String getAccessToken(String code, int thirdType, String redirectUrl, HttpServletResponse response) {
+    public String getAccessToken(String code, int thirdType, HttpServletRequest request, HttpServletResponse response) {
         try {
+            String redirectUrl = (String) request.getSession().getAttribute("redirectUrl");
             LOGGER.info("#GetAccessToken code is " + code + " redirectUrl is " + redirectUrl);
             AuthParamBaseBean authParamBaseBean = getAuthBeanByThirdType(thirdType);
             String tokenUrl = authParamBaseBean.getThirdTokenUrl(redirectUrl, code);
