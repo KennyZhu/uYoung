@@ -8,6 +8,32 @@ package com.uyoung.core.third.bean;
  * <br/>User: ylzhu
  */
 public class WeiBoAuthParamBean extends AuthParamBaseBean {
+
+    private static final String APP_KEY = "1375588776";
+    private static final String APP_SECRET = "07f14d91a5289cc5b7e586f4e88458b6";
+    private static final String AUTH_BASE_URL = "https://api.weibo.com/oauth2/authorize?";
+    private static final String TOKEN_BASE_URL = "https://api.weibo.com/oauth2/access_token?";
+
+    @Override
+    public String getAuthBaseUrl() {
+        return AUTH_BASE_URL;
+    }
+
+    @Override
+    public String getTokenBaseUrl() {
+        return TOKEN_BASE_URL;
+    }
+
+    @Override
+    public String getAppKey() {
+        return APP_KEY;
+    }
+
+    @Override
+    public String getAppSecret() {
+        return APP_SECRET;
+    }
+
     /**
      * 授权页面终端类型
      */

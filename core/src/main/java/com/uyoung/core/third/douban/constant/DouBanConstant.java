@@ -14,7 +14,6 @@ public class DouBanConstant {
     public static final String APP_KEY = "09cfe41f642337ee1d6fac5e2c69a7ca";
     public static final String APP_SECRET = "a0065d0702fdafef";
     public static final String AUTH_BASE_URL = "https://www.douban.com/service/auth2/auth?";
-
     public static final String TOKEN_BASE_URL = "https://www.douban.com/service/auth2/token?";
 
     /**
