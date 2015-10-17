@@ -37,8 +37,8 @@ public abstract class AuthParamBaseBean {
      * @param redirectUrl
      * @return
      */
-    public String getThirdAuthUrl(String redirectUrl) {
-        return getAuthBaseUrl() + "client_id=" + getAppKey() + "&response_type=" + AUTH_RESPONSE_TYPE + "&redirect_uri=" + UrlEncodeUtil.encodeUrl(getTokenUrl(redirectUrl, getThirdPlatform()), "UTF-8");
+    public String getThirdAuthUrl() {
+        return getAuthBaseUrl() + "client_id=" + getAppKey() + "&response_type=" + AUTH_RESPONSE_TYPE + "&redirect_uri=" + UrlEncodeUtil.encodeUrl(getTokenUrl(getThirdPlatform()), "UTF-8");
     }
 
     /**
@@ -59,14 +59,10 @@ public abstract class AuthParamBaseBean {
     /**
      * 获取TokenUrl
      *
-     * @param redirectUrl
      * @return
      */
-    public String getTokenUrl(String redirectUrl, ThirdPlatformEnum thirdPlatform) {
-        String getTokenUrl = "http://182.92.237.31/getToken?thirdType=" + thirdPlatform.getCode();
-        if (StringUtils.isNotBlank(redirectUrl)) {
-            getTokenUrl = getTokenUrl + "&redirectUrl=" + UrlEncodeUtil.encodeUrl(redirectUrl, "UTF-8");
-        }
-        return getTokenUrl;
+    public String getTokenUrl(ThirdPlatformEnum thirdPlatform) {
+        return "http://182.92.237.31/getToken?thirdType=" + thirdPlatform.getCode();
+
     }
 }

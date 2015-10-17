@@ -41,7 +41,7 @@ public class ThirdBaseController {
         try {
             AuthParamBaseBean authParamBaseBean = getAuthBeanByThirdType(thirdType);
             request.getSession().setAttribute("redirectUrl", redirectUrl);
-            response.sendRedirect(authParamBaseBean.getThirdAuthUrl(redirectUrl));
+            response.sendRedirect(authParamBaseBean.getThirdAuthUrl());
         } catch (Exception e) {
             LOGGER.error("#", e);
         }
