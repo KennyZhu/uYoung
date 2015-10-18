@@ -27,6 +27,6 @@ public class ActivityInfoControllerTest extends BaseControllerTest {
         int page = 1;
         int pageSize = 10;
         ActivityStatusEnum statusEnum = ActivityStatusEnum.ACTIVE;
-        LOGGER.info("##" + controller.getPageByStatus(page, pageSize, statusEnum.getStatus()));
+        LOGGER.info("##" + controller.getPageByStatus(page, pageSize, statusEnum.getStatus(), null));
     }
 }

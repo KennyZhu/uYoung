@@ -20,7 +20,7 @@ public class ActivityInfoServiceImpl implements ActivityInfoService {
 
 
     @Override
-    public Page<ActivityInfo> getPageByStatus(int pageNum, int pageSize, ActivityStatusEnum statusEnum, int oriUid) {
+    public Page<ActivityInfo> getPageByStatus(int pageNum, int pageSize, ActivityStatusEnum statusEnum, Integer oriUid) {
         if (statusEnum == null) {
             Page<ActivityInfo> result = new Page<>();
             result.setPageNum(pageNum);

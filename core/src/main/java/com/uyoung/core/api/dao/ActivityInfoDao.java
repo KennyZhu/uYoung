@@ -13,5 +13,5 @@ public interface ActivityInfoDao {
 
     int updateById(ActivityInfo record);
 
-    Page<ActivityInfo> getPageByStatus(int offset, int limit, int status, int oriUid);
+    Page<ActivityInfo> getPageByStatus(int offset, int limit, int status, Integer oriUid);
 }

@@ -20,7 +20,7 @@ public interface ActivityInfoService {
      * @param oriUid     可为空
      * @return
      */
-    public Page<ActivityInfo> getPageByStatus(int pageNum, int pageSize, ActivityStatusEnum statusEnum, int oriUid);
+    public Page<ActivityInfo> getPageByStatus(int pageNum, int pageSize, ActivityStatusEnum statusEnum, Integer oriUid);
 
     /**
      * 获取详情

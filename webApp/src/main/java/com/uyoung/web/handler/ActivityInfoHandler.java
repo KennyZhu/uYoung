@@ -41,7 +41,7 @@ public class ActivityInfoHandler {
      * @param uid
      * @return
      */
-    public Page<ActivityInfoVo> getPageByStatus(int page, int pageSize, ActivityStatusEnum statusEnum, int uid) {
+    public Page<ActivityInfoVo> getPageByStatus(int page, int pageSize, ActivityStatusEnum statusEnum, Integer uid) {
         Page<ActivityInfoVo> result = new Page<>();
         result.setPageSize(pageSize);
         result.setPageNum(page);

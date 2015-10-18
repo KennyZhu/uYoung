@@ -20,7 +20,7 @@ public class ActivityInfoServiceTest extends BaseTest {
     @Test
     public void getPageByStatus() {
         ActivityStatusEnum statusEnum = ActivityStatusEnum.ACTIVE;
-        List<ActivityInfo> activityInfoList = service.getPageByStatus(1, 10, statusEnum, ).getDataList();
+        List<ActivityInfo> activityInfoList = service.getPageByStatus(1, 10, statusEnum, null).getDataList();
         System.out.println("######" + activityInfoList.get(0).toString());
     }
 
