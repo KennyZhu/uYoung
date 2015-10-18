@@ -68,6 +68,7 @@ public class ActivityInfoHandler {
 
     private void buildAvatarUrl(ActivityInfoVo activityInfoVo, Map<Integer, UserInfo> userInfoMap) {
         if (userInfoMap.get(activityInfoVo.getOriUserId()) != null) {
+            activityInfoVo.setOriUserNickName(userInfoMap.get(activityInfoVo.getOriUserId()).getNickName());
             activityInfoVo.setOriUserAvatarUrl(userInfoMap.get(activityInfoVo.getOriUserId()).getAvatarUrl());
         } else {
             LOGGER.warn("#Can not found userInfo by userId:" + activityInfoVo.getOriUserId());
