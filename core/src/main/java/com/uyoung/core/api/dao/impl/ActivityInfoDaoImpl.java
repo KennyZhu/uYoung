@@ -7,6 +7,9 @@ import com.uyoung.core.base.dao.BaseDao;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * User: KennyZhu
  * Date: 15/9/20
@@ -36,7 +39,10 @@ public class ActivityInfoDaoImpl extends BaseDao<ActivityInfo> implements Activi
     }
 
     @Override
-    public Page<ActivityInfo> getPageByStatus(int offset, int limit, int status) {
-        return selectPage("getPageByStatus", status, new RowBounds(offset, limit));
+    public Page<ActivityInfo> getPageByStatus(int offset, int limit, int status, int oriUid) {
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("status", status);
+        paramMap.put("oriUid", oriUid);
+        return selectPage("getPageByStatus", paramMap, new RowBounds(offset, limit));
     }
 }

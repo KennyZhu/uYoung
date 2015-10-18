@@ -25,11 +25,11 @@ public class ActivityInfoController {
 
     @RequestMapping(value = "/activity/getPageByStatus")
     @ResponseBody
-    public String getPageByStatus(Integer pageNum, Integer pageSize, Integer status) {
+    public String getPageByStatus(Integer pageNum, Integer pageSize, Integer status, Integer uid) {
         if (pageNum == null || pageSize == null || ActivityStatusEnum.getByStatus(status) == null) {
             return JsonUtil.getJsonString(new BaseResult(ResultCodeEnum.INVALID_PARAM.getCode(), ResultCodeEnum.INVALID_PARAM.getDesc()));
         }
-        Page<ActivityInfoVo> infoPage = activityInfoHandler.getPageByStatus(pageNum, pageSize, ActivityStatusEnum.getByStatus(status));
+        Page<ActivityInfoVo> infoPage = activityInfoHandler.getPageByStatus(pageNum, pageSize, ActivityStatusEnum.getByStatus(status), );
         BaseResult baseResult = new BaseResult(ResultCodeEnum.SUCCESS.getCode(), ResultCodeEnum.SUCCESS.getDesc());
         baseResult.setResultData(infoPage);
         return JsonUtil.getJsonString(baseResult);

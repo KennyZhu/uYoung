@@ -172,5 +172,8 @@
         select <include refid="Base_Column_List"/>
         from tb_activity_info
         where status = #{status,jdbcType=TINYINT}
+        <if test="oriUid != null">
+            and ori_user_id = #{oriUserId,jdbcType=INTEGER}
+        </if>
     </select>
 </mapper>

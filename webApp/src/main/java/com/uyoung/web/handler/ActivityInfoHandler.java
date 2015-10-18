@@ -38,12 +38,16 @@ public class ActivityInfoHandler {
      * @param page
      * @param pageSize
      * @param statusEnum
+     * @param uid
      * @return
      */
-    public Page<ActivityInfoVo> getPageByStatus(int page, int pageSize, ActivityStatusEnum statusEnum) {
-        Page<ActivityInfo> activityInfoPage = activityInfoService.getPageByStatus(page, pageSize, statusEnum);
+    public Page<ActivityInfoVo> getPageByStatus(int page, int pageSize, ActivityStatusEnum statusEnum, int uid) {
+        Page<ActivityInfoVo> result = new Page<>();
+        result.setPageSize(pageSize);
+        result.setPageNum(page);
+        Page<ActivityInfo> activityInfoPage = activityInfoService.getPageByStatus(page, pageSize, statusEnum, );
         if (activityInfoPage == null || CollectionUtils.isEmpty(activityInfoPage.getDataList())) {
-
+            return result;
         }
         List<ActivityInfo> activityInfoList = activityInfoPage.getDataList();
         List<ActivityInfoVo> activityInfoVos = new ArrayList<>(activityInfoList.size());
@@ -57,10 +61,8 @@ public class ActivityInfoHandler {
             buildAvatarUrl(infoVo, userInfoMap);
             activityInfoVos.add(infoVo);
         }
-        Page<ActivityInfoVo> result = new Page<>();
+
         result.setDataList(activityInfoVos);
-        result.setPageSize(pageSize);
-        result.setPageNum(page);
         return result;
     }
 
@@ -77,6 +79,6 @@ public class ActivityInfoHandler {
         if (info == null) {
             return null;
         }
-        return new ActivityInfoVoBuilder(info).buildBase().buildDetail().buildAvatarUrl().getInfoVo();
+        return new ActivityInfoVoBuilder(info).buildBase().buildDetail().buildOriUserInfo().getInfoVo();
     }
 }

@@ -8,6 +8,7 @@ package com.uyoung.web.vo;
 public class ActivityInfoVo {
     private int id;
     private int oriUserId;
+    private String oriUserNickName;
     private String title;
     private String activityTypeDesc;
     private int needNum;
@@ -161,5 +162,13 @@ public class ActivityInfoVo {
 
     public void setRealNum(int realNum) {
         this.realNum = realNum;
+    }
+
+    public String getOriUserNickName() {
+        return oriUserNickName;
+    }
+
+    public void setOriUserNickName(String oriUserNickName) {
+        this.oriUserNickName = oriUserNickName;
     }
 }

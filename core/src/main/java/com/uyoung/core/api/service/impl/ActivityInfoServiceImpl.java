@@ -20,12 +20,15 @@ public class ActivityInfoServiceImpl implements ActivityInfoService {
 
 
     @Override
-    public Page<ActivityInfo> getPageByStatus(int pageNum, int pageSize, ActivityStatusEnum statusEnum) {
+    public Page<ActivityInfo> getPageByStatus(int pageNum, int pageSize, ActivityStatusEnum statusEnum, int oriUid) {
         if (statusEnum == null) {
-            return new Page<>();
+            Page<ActivityInfo> result = new Page<>();
+            result.setPageNum(pageNum);
+            result.setPageSize(pageSize);
+            return result;
         }
         int offset = pageSize * (pageNum - 1) + 1;
-        return activityInfoDao.getPageByStatus(offset, pageSize, statusEnum.getStatus());
+        return activityInfoDao.getPageByStatus(offset, pageSize, statusEnum.getStatus(), oriUid);
     }
 
 

@@ -80,16 +80,17 @@ public class ActivityInfoVoBuilder {
     }
 
     /**
-     * 获取头像
+     * 获取用户信息
      *
      * @return
      */
-    public ActivityInfoVoBuilder buildAvatarUrl() {
+    public ActivityInfoVoBuilder buildOriUserInfo() {
         UserInfoService userInfoService = SpringContextHolder.getBean("userInfoService");
         UserInfo userInfo = userInfoService.getById(activityInfo.getOriUserId());
         infoVo.setOriUserAvatarUrl(CommonConstant.DEFAULT_AVATAR_URL);
         if (userInfo != null && StringUtils.isNotBlank(userInfo.getAvatarUrl())) {
             infoVo.setOriUserAvatarUrl(userInfo.getAvatarUrl());
+            infoVo.setOriUserNickName(userInfo.getNickName());
         }
         return this;
     }

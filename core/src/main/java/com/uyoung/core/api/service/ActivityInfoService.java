@@ -17,9 +17,10 @@ public interface ActivityInfoService {
      * @param pageNum    页码
      * @param pageSize   每页数量
      * @param statusEnum see {@link ActivityStatusEnum}
+     * @param oriUid     可为空
      * @return
      */
-    public Page<ActivityInfo> getPageByStatus(int pageNum, int pageSize, ActivityStatusEnum statusEnum);
+    public Page<ActivityInfo> getPageByStatus(int pageNum, int pageSize, ActivityStatusEnum statusEnum, int oriUid);
 
     /**
      * 获取详情
