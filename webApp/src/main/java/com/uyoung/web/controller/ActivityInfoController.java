@@ -29,7 +29,7 @@ public class ActivityInfoController {
         if (pageNum == null || pageSize == null || ActivityStatusEnum.getByStatus(status) == null) {
             return JsonUtil.getJsonString(new BaseResult(ResultCodeEnum.INVALID_PARAM.getCode(), ResultCodeEnum.INVALID_PARAM.getDesc()));
         }
-        Page<ActivityInfoVo> infoPage = activityInfoHandler.getPageByStatus(pageNum, pageSize, ActivityStatusEnum.getByStatus(status), );
+        Page<ActivityInfoVo> infoPage = activityInfoHandler.getPageByStatus(pageNum, pageSize, ActivityStatusEnum.getByStatus(status), uid);
         BaseResult baseResult = new BaseResult(ResultCodeEnum.SUCCESS.getCode(), ResultCodeEnum.SUCCESS.getDesc());
         baseResult.setResultData(infoPage);
         return JsonUtil.getJsonString(baseResult);

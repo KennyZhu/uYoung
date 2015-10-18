@@ -45,7 +45,7 @@ public class ActivityInfoHandler {
         Page<ActivityInfoVo> result = new Page<>();
         result.setPageSize(pageSize);
         result.setPageNum(page);
-        Page<ActivityInfo> activityInfoPage = activityInfoService.getPageByStatus(page, pageSize, statusEnum, );
+        Page<ActivityInfo> activityInfoPage = activityInfoService.getPageByStatus(page, pageSize, statusEnum, uid);
         if (activityInfoPage == null || CollectionUtils.isEmpty(activityInfoPage.getDataList())) {
             return result;
         }
