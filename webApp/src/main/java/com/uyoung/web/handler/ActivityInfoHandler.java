@@ -2,11 +2,14 @@ package com.uyoung.web.handler;
 
 import com.uyoung.core.api.enums.ActivityStatusEnum;
 import com.uyoung.core.api.model.ActivityInfo;
+import com.uyoung.core.api.model.ActivitySignUp;
 import com.uyoung.core.api.model.UserInfo;
 import com.uyoung.core.api.service.ActivityInfoService;
+import com.uyoung.core.api.service.ActivitySignUpService;
 import com.uyoung.core.api.service.UserInfoService;
 import com.uyoung.core.base.bean.Page;
 import com.uyoung.web.vo.ActivityInfoVo;
+import com.uyoung.web.vo.SignUpUserVo;
 import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -31,6 +35,9 @@ public class ActivityInfoHandler {
 
     @Autowired
     private UserInfoService userInfoService;
+
+    @Autowired
+    private ActivitySignUpService signUpService;
 
     /**
      * 批量获取活动信息
@@ -55,7 +62,7 @@ public class ActivityInfoHandler {
         for (ActivityInfo activityInfo : activityInfoList) {
             oriUserIds.add(activityInfo.getOriUserId());
         }
-        Map<Integer, UserInfo> userInfoMap = userInfoService.getAvatarMapByIdList(oriUserIds);
+        Map<Integer, UserInfo> userInfoMap = userInfoService.getMapByIdList(oriUserIds);
         for (ActivityInfo activityInfo : activityInfoList) {
             ActivityInfoVo infoVo = new ActivityInfoVoBuilder(activityInfo).buildBase().getInfoVo();
             buildAvatarUrl(infoVo, userInfoMap);
@@ -80,6 +87,32 @@ public class ActivityInfoHandler {
         if (info == null) {
             return null;
         }
-        return new ActivityInfoVoBuilder(info).buildBase().buildDetail().buildOriUserInfo().getInfoVo();
+        ActivityInfoVo result = new ActivityInfoVoBuilder(info).buildBase().buildDetail().buildOriUserInfo().getInfoVo();
+        result.setSignUpUserList(buildSignUpUserVosByActivityId(id));
+        return result;
+    }
+
+    public List<SignUpUserVo> buildSignUpUserVosByActivityId(Integer activityId) {
+        List<ActivitySignUp> signUps = signUpService.getListByActivityId(activityId);
+        if (CollectionUtils.isEmpty(signUps)) {
+            Collections.emptyList();
+        }
+        List<SignUpUserVo> result = new ArrayList<>(signUps.size());
+        List<Integer> uidList = new ArrayList<>(signUps.size());
+        for (ActivitySignUp signUp : signUps) {
+            uidList.add(signUp.getId());
+        }
+        Map<Integer, UserInfo> userInfoMap = userInfoService.getMapByIdList(uidList);
+        for (ActivitySignUp signUp : signUps) {
+            UserInfo userInfo = userInfoMap.get(signUp.getUserId());
+            if (userInfo != null) {
+                SignUpUserVo signUpUserVo = new SignUpUserVo();
+                signUpUserVo.setAvatar(userInfoMap.get(signUp.getUserId()).getAvatarUrl());
+                signUpUserVo.setNickName(userInfo.getNickName());
+                signUpUserVo.setUid(userInfo.getId());
+                result.add(signUpUserVo);
+            }
+        }
+        return result;
     }
 }

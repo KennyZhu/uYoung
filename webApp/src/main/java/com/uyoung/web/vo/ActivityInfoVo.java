@@ -1,5 +1,7 @@
 package com.uyoung.web.vo;
 
+import java.util.List;
+
 /**
  * User: KennyZhu
  * Date: 15/10/12
@@ -22,6 +24,7 @@ public class ActivityInfoVo {
     private String local;
     private String statusDesc;
     private int feeType;
+    private List<SignUpUserVo> signUpUserList;
 
 
     private String description;
@@ -170,5 +173,13 @@ public class ActivityInfoVo {
 
     public void setOriUserNickName(String oriUserNickName) {
         this.oriUserNickName = oriUserNickName;
+    }
+
+    public List<SignUpUserVo> getSignUpUserList() {
+        return signUpUserList;
+    }
+
+    public void setSignUpUserList(List<SignUpUserVo> signUpUserList) {
+        this.signUpUserList = signUpUserList;
     }
 }

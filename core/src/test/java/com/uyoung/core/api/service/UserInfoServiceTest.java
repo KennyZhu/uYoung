@@ -26,6 +26,6 @@ public class UserInfoServiceTest extends BaseTest {
     @Test
     public void getByIdList() {
         List<Integer> ids = Arrays.asList(new Integer[]{1, 2});
-        LOGGER.info("##" + userInfoService.getAvatarByIdList(ids));
+        LOGGER.info("##" + userInfoService.getListByIdList(ids));
     }
 }

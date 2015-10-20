@@ -23,7 +23,7 @@ public interface UserInfoService {
      */
     public UserInfo getById(int userId);
 
-    List<UserInfo> getAvatarByIdList(List<Integer> userIds);
+    List<UserInfo> getListByIdList(List<Integer> userIds);
 
-    Map<Integer, UserInfo> getAvatarMapByIdList(List<Integer> userIds);
+    Map<Integer, UserInfo> getMapByIdList(List<Integer> userIds);
 }
