@@ -3,6 +3,7 @@ package com.uyoung.core.api.service.impl;
 import com.uyoung.core.api.dao.AlbumInfoDao;
 import com.uyoung.core.api.model.AlbumInfo;
 import com.uyoung.core.api.service.AlbumInfoService;
+import com.uyoung.core.base.bean.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,5 +29,14 @@ public class AlbumInfoServiceImpl implements AlbumInfoService {
     @Override
     public AlbumInfo getById(int id) {
         return albumInfoDao.getById(id);
+    }
+
+    @Override
+    public Page<AlbumInfo> getPageByCreateUserId(Integer createUserId, Integer page, Integer pageNum) {
+        Page<AlbumInfo> result = new Page<>();
+        if (createUserId == null) {
+            return result;
+        }
+        return albumInfoDao.getPageByCreateUserId(createUserId, page, pageNum);
     }
 }

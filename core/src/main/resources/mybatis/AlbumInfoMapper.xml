@@ -9,7 +9,7 @@
         <result column="album_url" property="albumUrl" jdbcType="VARCHAR"/>
         <result column="first_photo_url" property="firstPhotoUrl" jdbcType="VARCHAR"/>
         <result column="activity_id" property="activityId" jdbcType="INTEGER"/>
-        <result column="total_like_count" property="totalLikeCount" jdbcType="LONG"/>
+        <result column="total_like_count" property="totalLikeCount" jdbcType="INTEGER"/>
         <result column="total_photo_count" property="totalPhotoCount" jdbcType="INTEGER"/>
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
@@ -22,6 +22,12 @@
         <include refid="Base_Column_List"/>
         from tb_album_info
         where id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="getPageByCreateUserId" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_album_info
+        where create_user_id = #{cuid,jdbcType=INTEGER}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
         DELETE FROM tb_album_info
@@ -87,7 +93,7 @@
                 #{activityId,jdbcType=INTEGER},
             </if>
             <if test="totalLikeCount != null">
-                #{totalLikeCount,jdbcType=LONG},
+                #{totalLikeCount,jdbcType=INTEGER},
             </if>
             <if test="totalPhotoCount != null">
                 #{totalPhotoCount,jdbcType=INTEGER},
@@ -128,7 +134,7 @@
                 activity_id = #{activityId,jdbcType=INTEGER},
             </if>
             <if test="totalLikeCount != null">
-                total_like_count = #{totalLikeCount,jdbcType=LONG},
+                total_like_count = #{totalLikeCount,jdbcType=INTEGER},
             </if>
             <if test="totalPhotoCount != null">
                 total_photo_count = #{totalPhotoCount,jdbcType=INTEGER},

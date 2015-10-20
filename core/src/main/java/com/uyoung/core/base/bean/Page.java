@@ -14,6 +14,13 @@ public class Page<T> {
     private int totalSize;
     private List<T> dataList;
 
+    public Page() {
+        this.pageNum = 0;
+        this.pageSize = 0;
+        this.totalPage = 0;
+        this.totalSize = 0;
+    }
+
     public int getPageSize() {
         return pageSize;
     }

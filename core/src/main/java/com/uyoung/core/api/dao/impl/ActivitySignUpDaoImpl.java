@@ -2,7 +2,10 @@ package com.uyoung.core.api.dao.impl;
 
 import com.uyoung.core.api.dao.ActivitySignUpDao;
 import com.uyoung.core.api.model.ActivitySignUp;
+import com.uyoung.core.base.dao.BaseDao;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * User: KennyZhu
@@ -10,7 +13,7 @@ import org.springframework.stereotype.Repository;
  * Desc:
  */
 @Repository
-public class ActivitySignUpDaoImpl implements ActivitySignUpDao {
+public class ActivitySignUpDaoImpl extends BaseDao<ActivitySignUp> implements ActivitySignUpDao {
     @Override
     public int deleteByPrimaryKey(Integer id) {
         return 0;
@@ -18,7 +21,7 @@ public class ActivitySignUpDaoImpl implements ActivitySignUpDao {
 
     @Override
     public int insert(ActivitySignUp record) {
-        return 0;
+        return insert("insert", record);
     }
 
     @Override
@@ -29,5 +32,10 @@ public class ActivitySignUpDaoImpl implements ActivitySignUpDao {
     @Override
     public int updateById(ActivitySignUp record) {
         return 0;
+    }
+
+    @Override
+    public List<ActivitySignUp> getListByActivityId(Integer aid) {
+        return selectList("getListByActivityId", aid);
     }
 }

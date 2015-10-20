@@ -59,7 +59,9 @@ public abstract class BaseDao<T> {
         if (CollectionUtils.isEmpty(list)) {
             page.setTotalPage(0);
         }
-        page.setPageSize(rowBounds.getLimit());
+        if (RowBounds.DEFAULT != rowBounds) {
+            page.setPageSize(rowBounds.getLimit());
+        }
         page.setDataList(list);
         return page;
     }
