@@ -6,18 +6,13 @@ public class PhotoLike {
 
     private Integer id;
 
-
     private Integer photoId;
-
 
     private Integer userId;
 
-
     private Date createTime;
 
-
     private Date updateTime;
-
 
     public Integer getId() {
         return id;

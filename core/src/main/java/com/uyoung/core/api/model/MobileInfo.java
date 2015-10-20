@@ -6,7 +6,6 @@ public class MobileInfo {
 
     private Integer id;
 
-
     private Boolean platform;
 
 

@@ -6,56 +6,51 @@ public class PhotoInfo {
 
     private Integer id;
 
-
     private String photoName;
-
 
     private String photoDesc;
 
-
     private String photoUrl;
 
-
     private Integer createUserId;
-
+    /**
+     * 相册ID
+     */
+    private Integer albumId;
 
     private String exifCamera;
 
-
     private String exifAperture;
-
 
     private String exifFacus;
 
-
     private String exifShutter;
-
 
     private String exifIso;
 
-
     private String exifOther;
-
 
     private Integer viewCount;
 
-
     private Integer likeCount;
-
 
     private Integer commentCount;
 
-
     private Date createTime;
-
 
     private Date updateTime;
 
+    public Integer getAlbumId() {
+        return albumId;
+    }
+
+    public void setAlbumId(Integer albumId) {
+        this.albumId = albumId;
+    }
 
     public Integer getId() {
         return id;
     }
-
 
     public void setId(Integer id) {
         this.id = id;

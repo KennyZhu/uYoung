@@ -105,20 +105,25 @@ CREATE TABLE tb_activity_signup (
 /*- 相册表-*/
 DROP TABLE tb_album_info;
 CREATE TABLE tb_album_info (
-  id              INT(4) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  title           VARCHAR(20)        NOT NULL
+  id                INT(4) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  title             VARCHAR(20)        NOT NULL
   COMMENT '相册主题',
-  create_user_id  INT                NOT NULL
+  create_user_id    INT                NOT NULL
   COMMENT '创建者ID',
-  album_name      VARCHAR(10)        NOT NULL
+  album_name        VARCHAR(10)        NOT NULL
   COMMENT '相册名称',
-  album_url       VARCHAR(250)       NOT NULL
+  album_url         VARCHAR(250)       NOT NULL
   COMMENT '相册地址',
-  first_photo_url VARCHAR(250)       NOT NULL
+  first_photo_url   VARCHAR(250)       NOT NULL
   COMMENT '封面图片地址',
-  create_time     TIMESTAMP          NULL
+  total_like_count  INT                NOT NULL DEFAULT '0'
+  COMMENT '总的点赞数',
+  total_photo_count INT                NOT NULL DEFAULT '0'
+  COMMENT '照片数量',
+  activity_id       INT COMMENT '活动ID',
+  create_time       TIMESTAMP          NULL
   COMMENT '创建时间',
-  update_time     TIMESTAMP          NULL     DEFAULT current_timestamp ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间'
+  update_time       TIMESTAMP          NULL     DEFAULT current_timestamp ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间'
 )
   ENGINE = MyISAM
   AUTO_INCREMENT = 0
@@ -134,6 +139,8 @@ CREATE TABLE tb_photo_info (
   photo_url      VARCHAR(250) COMMENT '地址',
   create_user_id INT                NOT NULL
   COMMENT '用户ID',
+  album_id       INT(11)            NOT NULL
+  COMMENT '相册ID',
   exif_camera    VARCHAR(32) COMMENT '相机',
   exif_aperture  VARCHAR(10) COMMENT '光圈',
   exif_facus     VARCHAR(10) COMMENT '焦距',

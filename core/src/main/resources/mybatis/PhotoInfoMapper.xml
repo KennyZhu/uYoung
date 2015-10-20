@@ -7,6 +7,7 @@
     <result column="photo_desc" property="photoDesc" jdbcType="VARCHAR" />
     <result column="photo_url" property="photoUrl" jdbcType="VARCHAR" />
     <result column="create_user_id" property="createUserId" jdbcType="INTEGER" />
+    <result column="album_id" property="albumId" jdbcType="INTEGER" />
     <result column="exif_camera" property="exifCamera" jdbcType="VARCHAR" />
     <result column="exif_aperture" property="exifAperture" jdbcType="VARCHAR" />
     <result column="exif_facus" property="exifFacus" jdbcType="VARCHAR" />
@@ -20,7 +21,7 @@
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, photo_name, photo_desc, photo_url, create_user_id, exif_camera, exif_aperture, 
+    id, photo_name, photo_desc, photo_url, create_user_id,album_id, exif_camera, exif_aperture,
     exif_facus, exif_shutter, exif_iso, exif_other, view_count, like_count, comment_count, 
     create_time, update_time
   </sql>
@@ -52,6 +53,10 @@
       <if test="createUserId != null" >
         create_user_id,
       </if>
+      <if test="albumId != null" >
+          album_id,
+      </if>
+
       <if test="exifCamera != null" >
         exif_camera,
       </if>
@@ -102,6 +107,9 @@
       <if test="createUserId != null" >
         #{createUserId,jdbcType=INTEGER},
       </if>
+      <if test="albumId != null" >
+          #{albumId,jdbcType=INTEGER},
+      </if>
       <if test="exifCamera != null" >
         #{exifCamera,jdbcType=VARCHAR},
       </if>
@@ -151,6 +159,9 @@
       </if>
       <if test="createUserId != null" >
         create_user_id = #{createUserId,jdbcType=INTEGER},
+      </if>
+      <if test="albumId != null" >
+          album_id = #{albumId,jdbcType=INTEGER},
       </if>
       <if test="exifCamera != null" >
         exif_camera = #{exifCamera,jdbcType=VARCHAR},
