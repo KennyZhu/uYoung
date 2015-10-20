@@ -122,4 +122,21 @@ public class AlbumInfo {
     public void setTotalPhotoCount(Integer totalPhotoCount) {
         this.totalPhotoCount = totalPhotoCount;
     }
+
+    @Override
+    public String toString() {
+        return "AlbumInfo{" +
+                "activityId=" + activityId +
+                ", id=" + id +
+                ", title='" + title + '\'' +
+                ", createUserId=" + createUserId +
+                ", albumName='" + albumName + '\'' +
+                ", albumUrl='" + albumUrl + '\'' +
+                ", firstPhotoUrl='" + firstPhotoUrl + '\'' +
+                ", totalLikeCount=" + totalLikeCount +
+                ", totalPhotoCount=" + totalPhotoCount +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                '}';
+    }
 }

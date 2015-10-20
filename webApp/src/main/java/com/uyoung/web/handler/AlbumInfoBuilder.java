@@ -45,7 +45,7 @@ public class AlbumInfoBuilder {
      * @return
      */
     public AlbumInfoBuilder builderAlbumInfoVoPage() {
-        if (CollectionUtils.isNotEmpty(albumInfoPage.getDataList())) {
+        if (CollectionUtils.isEmpty(albumInfoPage.getDataList())) {
             return this;
         }
         List<AlbumInfoVo> albumInfoVos = new ArrayList<>(albumInfoPage.getDataList().size());

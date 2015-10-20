@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * Desc:
  */
 @Controller
-public class ActivityInfoController {
+public class ActivityInfoController extends BaseController {
 
     @Autowired
     private ActivityInfoHandler activityInfoHandler;
@@ -27,7 +27,7 @@ public class ActivityInfoController {
     @ResponseBody
     public String getPageByStatus(Integer pageNum, Integer pageSize, Integer status, Integer uid) {
         if (pageNum == null || pageSize == null || ActivityStatusEnum.getByStatus(status) == null) {
-            return JsonUtil.getJsonString(new BaseResult(ResultCodeEnum.INVALID_PARAM.getCode(), ResultCodeEnum.INVALID_PARAM.getDesc()));
+            return buildInvalidParamJson();
         }
         Page<ActivityInfoVo> infoPage = activityInfoHandler.getPageByStatus(pageNum, pageSize, ActivityStatusEnum.getByStatus(status), uid);
         BaseResult baseResult = new BaseResult(ResultCodeEnum.SUCCESS.getCode(), ResultCodeEnum.SUCCESS.getDesc());

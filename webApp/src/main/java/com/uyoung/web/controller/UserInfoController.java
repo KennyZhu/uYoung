@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * <br/>User: ylzhu
  */
 @Controller
-public class UserInfoController {
+public class UserInfoController extends BaseController {
 
     @Autowired
     private UserInfoService userInfoService;
@@ -26,7 +26,7 @@ public class UserInfoController {
     @ResponseBody
     public String getUserInfoById(Integer uid) {
         if (uid == null) {
-            return JsonUtil.getJsonString(new BaseResult(ResultCodeEnum.INVALID_PARAM.getCode(), ResultCodeEnum.INVALID_PARAM.getDesc()));
+            return buildInvalidParamJson();
         }
 
         BaseResult baseResult = new BaseResult(ResultCodeEnum.SUCCESS.getCode(), ResultCodeEnum.SUCCESS.getDesc());
