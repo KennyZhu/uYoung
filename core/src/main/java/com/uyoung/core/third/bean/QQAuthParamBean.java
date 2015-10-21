@@ -11,29 +11,41 @@ import com.uyoung.core.third.enums.ThirdPlatformEnum;
 public class QQAuthParamBean extends AuthParamBaseBean {
     private static final String APP_KEY = "1104920700";
     private static final String APP_SECRET = "KNuxx0WvgGddPBq6";
+    private static final String AUTH_BASE_URL = "https://graph.z.qq.com/moc2/authorize?";
+    private static final String TOKEN_BASE_URL = "https://graph.z.qq.com/moc2/token?";
+
+    private String stat;
 
     @Override
     public String getAppKey() {
-        return null;
+        return APP_KEY;
     }
 
     @Override
     public String getAppSecret() {
-        return null;
+        return APP_SECRET;
     }
 
     @Override
     public String getAuthBaseUrl() {
-        return null;
+        return AUTH_BASE_URL;
     }
 
     @Override
     public String getTokenBaseUrl() {
-        return null;
+        return TOKEN_BASE_URL;
     }
 
     @Override
     public ThirdPlatformEnum getThirdPlatform() {
-        return null;
+        return ThirdPlatformEnum.QQ;
+    }
+
+    public String getStat() {
+        return stat;
+    }
+
+    public void setStat(String stat) {
+        this.stat = stat;
     }
 }

@@ -10,7 +10,7 @@ import java.util.stream.Stream;
  */
 public enum ThirdPlatformEnum {
 
-    DOUBAN(1, "douban"), WEIXIN(2, "weixin"), WEIBO(3, "weibo");
+    DOUBAN(1, "douban"), QQ(2, "qq"), WEIBO(3, "weibo");
     private int code;
     private String desc;
 

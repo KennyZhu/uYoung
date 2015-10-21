@@ -34,7 +34,6 @@ public abstract class AuthParamBaseBean {
     /**
      * 获取第三方AuthCode URL
      *
-     * @param redirectUrl
      * @return
      */
     public String getThirdAuthUrl() {
