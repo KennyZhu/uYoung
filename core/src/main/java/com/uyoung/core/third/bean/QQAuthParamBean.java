@@ -14,7 +14,9 @@ public class QQAuthParamBean extends AuthParamBaseBean {
     private static final String AUTH_BASE_URL = "https://graph.z.qq.com/moc2/authorize?";
     private static final String TOKEN_BASE_URL = "https://graph.z.qq.com/moc2/token?";
 
-    private String stat;
+    public QQAuthParamBean() {
+        this.stat = "";
+    }
 
     @Override
     public String getAppKey() {
@@ -39,13 +41,5 @@ public class QQAuthParamBean extends AuthParamBaseBean {
     @Override
     public ThirdPlatformEnum getThirdPlatform() {
         return ThirdPlatformEnum.QQ;
-    }
-
-    public String getStat() {
-        return stat;
-    }
-
-    public void setStat(String stat) {
-        this.stat = stat;
     }
 }

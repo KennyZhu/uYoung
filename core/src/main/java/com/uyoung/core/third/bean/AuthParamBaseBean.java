@@ -12,6 +12,8 @@ import org.apache.commons.lang.StringUtils;
  */
 public abstract class AuthParamBaseBean {
 
+    protected String stat;
+
     /**
      * 授权链接中必填参数
      */
@@ -37,7 +39,11 @@ public abstract class AuthParamBaseBean {
      * @return
      */
     public String getThirdAuthUrl() {
-        return getAuthBaseUrl() + "client_id=" + getAppKey() + "&response_type=" + AUTH_RESPONSE_TYPE + "&redirect_uri=" + UrlEncodeUtil.encodeUrl(getTokenUrl(getThirdPlatform()), "UTF-8");
+        String result = getAuthBaseUrl() + "client_id=" + getAppKey() + "&response_type=" + AUTH_RESPONSE_TYPE + "&redirect_uri=" + UrlEncodeUtil.encodeUrl(getTokenUrl(getThirdPlatform()), "UTF-8");
+        if (StringUtils.isNotBlank(stat)) {
+            result = result + "&stat=" + stat;
+        }
+        return result;
     }
 
     /**
@@ -62,6 +68,13 @@ public abstract class AuthParamBaseBean {
      */
     public String getTokenUrl(ThirdPlatformEnum thirdPlatform) {
         return "http://182.92.237.31/getToken?thirdType=" + thirdPlatform.getCode();
+    }
 
+    public String getStat() {
+        return stat;
+    }
+
+    public void setStat(String stat) {
+        this.stat = stat;
     }
 }

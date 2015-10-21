@@ -3,6 +3,7 @@ package com.uyoung.web.third;
 import com.uyoung.core.base.service.HttpService;
 import com.uyoung.core.third.bean.AuthParamBaseBean;
 import com.uyoung.core.third.bean.DouBanAuthParamBean;
+import com.uyoung.core.third.bean.QQAuthParamBean;
 import com.uyoung.core.third.bean.WeiBoAuthParamBean;
 import com.uyoung.core.third.enums.ThirdPlatformEnum;
 import com.uyoung.web.bean.BaseResult;
@@ -78,6 +79,8 @@ public class ThirdBaseController {
                 return new DouBanAuthParamBean();
             case WEIBO:
                 return new WeiBoAuthParamBean();
+            case QQ:
+                return new QQAuthParamBean();
             default:
                 throw new IllegalArgumentException("Not sport thirdType.");
         }
