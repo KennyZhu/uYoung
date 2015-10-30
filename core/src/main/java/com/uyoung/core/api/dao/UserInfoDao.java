@@ -6,8 +6,6 @@ import java.util.List;
 
 public interface UserInfoDao {
 
-    int deleteByPrimaryKey(Integer id);
-
     int insert(UserInfo record);
 
     UserInfo getById(Integer id);

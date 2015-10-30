@@ -6,33 +6,23 @@ public class UserInfo {
 
     private int id;
 
-
     private String realName;
-
 
     private String nickName;
 
-
     private String password;
-
 
     private String email;
 
-
     private Boolean gender;
-
 
     private String avatarUrl;
 
-
     private String phone;
-
 
     private Integer address;
 
-
     private String company;
-
 
     private String position;
 

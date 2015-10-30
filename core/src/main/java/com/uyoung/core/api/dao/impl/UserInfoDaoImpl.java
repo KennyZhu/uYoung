@@ -17,11 +17,6 @@ import java.util.Map;
 @Repository
 public class UserInfoDaoImpl extends BaseDao<UserInfo> implements UserInfoDao {
     @Override
-    public int deleteByPrimaryKey(Integer id) {
-        return 0;
-    }
-
-    @Override
     public int insert(UserInfo record) {
         return 0;
     }
