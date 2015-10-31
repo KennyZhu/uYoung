@@ -13,6 +13,21 @@ import com.uyoung.web.util.JsonUtil;
  */
 public class BaseController {
     /**
+     * @param resultData
+     * @return
+     */
+    protected String buildSuccessJson(Object resultData) {
+        return JsonUtil.getJsonString(new BaseResult(resultData));
+    }
+
+    /**
+     * @return
+     */
+    protected String buildSuccessJson() {
+        return buildSuccessJson(null);
+    }
+
+    /**
      * 参数错误
      *
      * @return

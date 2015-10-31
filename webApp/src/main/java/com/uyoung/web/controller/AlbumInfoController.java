@@ -4,7 +4,6 @@ import com.uyoung.core.api.model.AlbumInfo;
 import com.uyoung.core.api.service.AlbumInfoService;
 import com.uyoung.core.base.bean.Page;
 import com.uyoung.web.handler.AlbumInfoBuilder;
-import com.uyoung.web.util.JsonUtil;
 import com.uyoung.web.vo.AlbumInfoVo;
 import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
@@ -39,7 +38,7 @@ public class AlbumInfoController extends BaseController {
             if (albumInfoPage != null && CollectionUtils.isNotEmpty(albumInfoPage.getDataList())) {
                 AlbumInfoBuilder albumInfoBuilder = new AlbumInfoBuilder(albumInfoPage);
                 Page<AlbumInfoVo> result = albumInfoBuilder.builderAlbumInfoVoPage().getAlbumInfoVoPage();
-                return JsonUtil.getJsonString(result);
+                return buildSuccessJson(result);
             }
         } catch (Exception e) {
             LOGGER.error("#Get Album List by uid :" + uid + " error.Cause:", e);
