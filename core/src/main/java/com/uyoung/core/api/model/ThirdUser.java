@@ -16,7 +16,9 @@ public class ThirdUser {
 
     private String nickName;
 
-    private Boolean gender;
+    private int gender;
+
+    private int userType;
 
     private String avatarUrl;
 
@@ -29,7 +31,7 @@ public class ThirdUser {
     private Date updateTime;
 
 
-    private String expireIn;
+    private long expireIn;
 
 
     public Integer getId() {
@@ -89,12 +91,20 @@ public class ThirdUser {
         this.nickName = nickName;
     }
 
-    public Boolean getGender() {
+    public int getGender() {
         return gender;
     }
 
-    public void setGender(Boolean gender) {
+    public void setGender(int gender) {
         this.gender = gender;
+    }
+
+    public int getUserType() {
+        return userType;
+    }
+
+    public void setUserType(int userType) {
+        this.userType = userType;
     }
 
     public String getAvatarUrl() {
@@ -137,12 +147,11 @@ public class ThirdUser {
     }
 
 
-    public String getExpireIn() {
+    public long getExpireIn() {
         return expireIn;
     }
 
-
-    public void setExpireIn(String expireIn) {
+    public void setExpireIn(long expireIn) {
         this.expireIn = expireIn;
     }
 }

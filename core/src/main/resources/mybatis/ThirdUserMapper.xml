@@ -26,7 +26,7 @@
         where id = #{id,jdbcType=INTEGER}
     </select>
     <insert id="insert" parameterType="com.uyoung.core.api.model.UserInfo">
-        insert into tb_user_info
+        insert into tb_third_user
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
                 id,

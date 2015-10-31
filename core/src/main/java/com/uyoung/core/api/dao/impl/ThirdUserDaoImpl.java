@@ -3,6 +3,7 @@ package com.uyoung.core.api.dao.impl;
 import com.uyoung.core.api.dao.ThirdUserDao;
 import com.uyoung.core.api.model.ThirdUser;
 import com.uyoung.core.base.dao.BaseDao;
+import org.springframework.stereotype.Repository;
 
 /**
  * Desc:
@@ -10,6 +11,7 @@ import com.uyoung.core.base.dao.BaseDao;
  * <br/>Time: 18:27
  * <br/>User: ylzhu
  */
+@Repository
 public class ThirdUserDaoImpl extends BaseDao<ThirdUser> implements ThirdUserDao {
 
     @Override
