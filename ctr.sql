@@ -189,7 +189,7 @@ CREATE TABLE tb_photo_info (
   DEFAULT CHARSET = UTF8;
 
 DROP TABLE tb_third_user_info;
-CREATE TABLE tb_third_user_info (
+CREATE TABLE tb_third_user (
   id            INT(4) PRIMARY KEY NOT NULL AUTO_INCREMENT,
   uid           INT(4)             NOT NULL
   COMMENT '用户ID',
@@ -200,14 +200,14 @@ CREATE TABLE tb_third_user_info (
   refresh_token VARCHAR(100)                DEFAULT NULL
   COMMENT 'refresh token',
 
-  expire_in     LONG COMMENT '过期时间',
+  expire_in     INT COMMENT '过期时间',
   nick_name     VARCHAR(10)        NOT NULL
   COMMENT '昵称',
   gender        TINYINT(1)                  DEFAULT 1
   COMMENT '性别',
   avatar_url    VARCHAR(250)                DEFAULT NULL
   COMMENT '头像',
-
+  user_type TINYINT(1) NOT NULL COMMENT '第三方用户类型',
   refresh_time  TIMESTAMP          NULL
   COMMENT 'Token 刷新时间',
   create_time   TIMESTAMP          NULL
