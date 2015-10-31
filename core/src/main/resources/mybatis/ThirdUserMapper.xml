@@ -17,9 +17,15 @@
         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, uid,third_uid,access_token,refresh_token,expire_id, nick_name, gender, avatar_url, user_type,refresh_time,create_time, update_time
+        id, uid,third_uid,access_token,refresh_token,expire_in, nick_name, gender, avatar_url, user_type,refresh_time,create_time, update_time
     </sql>
-    <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    <select id="getByThirdUidUserType" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_third_user
+        where third_uid = #{thirdUid,jdbcType=VARCHAR} and user_type = #{userType,jdbcType=INTEGER}
+    </select>
+    <select id="getByUid" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_List"/>
         from tb_third_user

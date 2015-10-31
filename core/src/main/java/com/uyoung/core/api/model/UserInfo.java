@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class UserInfo {
 
-    private int id;
+    private Integer id;
 
     private String realName;
 
@@ -14,7 +14,7 @@ public class UserInfo {
 
     private String email;
 
-    private Boolean gender;
+    private Integer gender;
 
     private String avatarUrl;
 
@@ -95,15 +95,13 @@ public class UserInfo {
     }
 
 
-    public Boolean getGender() {
+    public Integer getGender() {
         return gender;
     }
 
-
-    public void setGender(Boolean gender) {
+    public void setGender(Integer gender) {
         this.gender = gender;
     }
-
 
     public String getAvatarUrl() {
         return avatarUrl;
@@ -162,10 +160,6 @@ public class UserInfo {
 
     public void setEquipment(String equipment) {
         this.equipment = equipment;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public int getStyle() {

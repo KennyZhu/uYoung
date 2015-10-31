@@ -18,7 +18,7 @@ import java.util.Map;
 public class UserInfoDaoImpl extends BaseDao<UserInfo> implements UserInfoDao {
     @Override
     public int insert(UserInfo record) {
-        return 0;
+        return insert("insert", record);
     }
 
     @Override

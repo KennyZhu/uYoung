@@ -3,6 +3,10 @@ package com.uyoung.core.api.service.impl;
 import com.uyoung.core.api.dao.ThirdUserDao;
 import com.uyoung.core.api.model.ThirdUser;
 import com.uyoung.core.api.service.ThirdUserService;
+import com.uyoung.core.third.enums.ThirdPlatformEnum;
+import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +17,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ThirdUserServiceImpl implements ThirdUserService {
+    private static final Logger LOGGER = LoggerFactory.getLogger(ThirdUserServiceImpl.class);
     @Autowired
     private ThirdUserDao thirdUserDao;
 
@@ -30,5 +35,14 @@ public class ThirdUserServiceImpl implements ThirdUserService {
             return null;
         }
         return thirdUserDao.getByUid(id);
+    }
+
+    @Override
+    public ThirdUser getByThirdUid(String thirdUid, ThirdPlatformEnum thirdPlatform) {
+        if (StringUtils.isBlank(thirdUid) || thirdPlatform == null) {
+            LOGGER.error("#Invalid param thirdUid.");
+            return null;
+        }
+        return thirdUserDao.getByThirdUidUserType(thirdUid, thirdPlatform.getCode());
     }
 }

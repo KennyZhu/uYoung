@@ -21,7 +21,7 @@ public interface UserInfoService {
      * @param userId
      * @return
      */
-    public UserInfo getById(int userId);
+    public UserInfo getById(Integer userId);
 
     List<UserInfo> getListByIdList(List<Integer> userIds);
 

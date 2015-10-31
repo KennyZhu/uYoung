@@ -8,6 +8,8 @@ public interface ThirdUserDao {
 
     ThirdUser getByUid(Integer id);
 
+    ThirdUser getByThirdUidUserType(String thirdUid, int userType);
+
     int updateByPrimaryKeySelective(ThirdUser record);
 
 }

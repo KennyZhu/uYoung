@@ -18,12 +18,13 @@ public class ThirdUser {
 
     private int gender;
 
+    private String city;
+
     private int userType;
 
     private String avatarUrl;
 
     private Date refreshTime;
-
 
     private Date createTime;
 
@@ -58,6 +59,13 @@ public class ThirdUser {
         return thirdUid;
     }
 
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
 
     public void setThirdUid(String thirdUid) {
         this.thirdUid = thirdUid;
@@ -153,5 +161,25 @@ public class ThirdUser {
 
     public void setExpireIn(long expireIn) {
         this.expireIn = expireIn;
+    }
+
+    @Override
+    public String toString() {
+        return "ThirdUser{" +
+                "id=" + id +
+                ", uid=" + uid +
+                ", thirdUid='" + thirdUid + '\'' +
+                ", accessToken='" + accessToken + '\'' +
+                ", refreshToken='" + refreshToken + '\'' +
+                ", nickName='" + nickName + '\'' +
+                ", gender=" + gender +
+                ", city='" + city + '\'' +
+                ", userType=" + userType +
+                ", avatarUrl='" + avatarUrl + '\'' +
+                ", refreshTime=" + refreshTime +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                ", expireIn=" + expireIn +
+                '}';
     }
 }

@@ -1,5 +1,7 @@
 package com.uyoung.web.bean;
 
+import com.uyoung.web.enums.ResultCodeEnum;
+
 /**
  * User: KennyZhu
  * Date: 15/9/28
@@ -13,6 +15,12 @@ public class BaseResult {
     public BaseResult(int result, String resultDesc) {
         this.result = result;
         this.resultDesc = resultDesc;
+    }
+
+    public BaseResult(Object resultData) {
+        this.result = ResultCodeEnum.SUCCESS.getCode();
+        this.resultDesc = ResultCodeEnum.SUCCESS.getDesc();
+        this.resultData = resultData;
     }
 
     public BaseResult() {
