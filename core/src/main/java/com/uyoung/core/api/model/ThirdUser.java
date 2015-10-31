@@ -2,7 +2,7 @@ package com.uyoung.core.api.model;
 
 import java.util.Date;
 
-public class ThirdUserInfo {
+public class ThirdUser {
 
     private Integer id;
 
