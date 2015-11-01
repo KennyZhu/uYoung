@@ -8,6 +8,7 @@ import com.uyoung.web.util.JsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -42,5 +43,17 @@ public class UserInfoController extends BaseController {
         return JsonUtil.getJsonString(baseResult);
     }
 
-
+    @RequestMapping(value = "/userInfo/updateById", method = RequestMethod.POST)
+    @ResponseBody
+    public String updateById(UserInfo userInfo) {
+        if (userInfo == null) {
+            return buildInvalidParamJson();
+        }
+        try {
+            userInfoService.updateById(userInfo);
+            return buildSuccessJson();
+        } catch (Exception e) {
+            return buildExceptionJson();
+        }
+    }
 }

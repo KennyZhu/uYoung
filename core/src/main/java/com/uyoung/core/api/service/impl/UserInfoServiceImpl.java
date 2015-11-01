@@ -39,6 +39,14 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
+    public int updateById(UserInfo userInfo) {
+        if (userInfo == null || userInfo.getId() == null) {
+            return 0;
+        }
+        return userInfoDao.updateById(userInfo);
+    }
+
+    @Override
     public List<UserInfo> getListByIdList(List<Integer> userIds) {
         if (CollectionUtils.isEmpty(userIds)) {
             return Collections.emptyList();

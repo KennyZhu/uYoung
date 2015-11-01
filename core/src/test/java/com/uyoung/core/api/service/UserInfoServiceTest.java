@@ -1,6 +1,7 @@
 package com.uyoung.core.api.service;
 
 import com.uyoung.core.api.BaseTest;
+import com.uyoung.core.api.model.UserInfo;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -27,5 +28,14 @@ public class UserInfoServiceTest extends BaseTest {
     public void getByIdList() {
         List<Integer> ids = Arrays.asList(new Integer[]{1, 2});
         LOGGER.info("##" + userInfoService.getListByIdList(ids));
+    }
+
+    @Test
+    public void updateById() {
+        UserInfo userInfo = new UserInfo();
+        userInfo.setId(5);
+        userInfo.setNickName("update");
+        userInfo.setAvatarUrl("http://www.163.com");
+        LOGGER.info("####" + userInfoService.updateById(userInfo));
     }
 }

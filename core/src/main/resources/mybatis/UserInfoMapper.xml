@@ -7,7 +7,7 @@
         <result column="nick_name" property="nickName" jdbcType="VARCHAR"/>
         <result column="password" property="password" jdbcType="VARCHAR"/>
         <result column="email" property="email" jdbcType="VARCHAR"/>
-        <result column="gender" property="gender" jdbcType="BIT"/>
+        <result column="gender" property="gender" jdbcType="TINYINT"/>
         <result column="avatar_url" property="avatarUrl" jdbcType="VARCHAR"/>
         <result column="phone" property="phone" jdbcType="VARCHAR"/>
         <result column="address" property="address" jdbcType="INTEGER"/>
@@ -86,12 +86,9 @@
             <if test="userType != null">
                 user_type,
             </if>
-            <if test="createTime != null">
-                create_time,
-            </if>
-            <if test="updateTime != null">
-                update_time,
-            </if>
+            create_time,
+            update_time,
+
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -136,12 +133,8 @@
             <if test="userType != null">
                 #{userType,jdbcType=TINYINT},
             </if>
-            <if test="createTime != null">
-                #{createTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="updateTime != null">
-                #{updateTime,jdbcType=TIMESTAMP},
-            </if>
+            now(),
+            now(),
         </trim>
     </insert>
     <update id="updateById" parameterType="com.uyoung.core.api.model.UserInfo">

@@ -18,12 +18,26 @@ public interface UserInfoService {
     public int add(UserInfo userInfo);
 
     /**
-     * @param userId
+     * @param uid
      * @return
      */
-    public UserInfo getById(Integer userId);
+    public UserInfo getById(Integer uid);
 
+    /**
+     * @param userInfo
+     * @return
+     */
+    public int updateById(UserInfo userInfo);
+
+    /**
+     * @param userIds
+     * @return
+     */
     List<UserInfo> getListByIdList(List<Integer> userIds);
 
+    /**
+     * @param userIds
+     * @return
+     */
     Map<Integer, UserInfo> getMapByIdList(List<Integer> userIds);
 }
