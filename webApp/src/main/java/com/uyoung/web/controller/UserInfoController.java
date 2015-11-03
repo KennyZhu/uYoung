@@ -23,7 +23,7 @@ public class UserInfoController extends BaseController {
     @Autowired
     private UserInfoService userInfoService;
 
-    @RequestMapping(value = "/userInfo/getUserInfoById")
+    @RequestMapping(value = "/userInfo/getByUid")
     @ResponseBody
     public String getUserInfoById(Integer uid) {
         if (uid == null) {
