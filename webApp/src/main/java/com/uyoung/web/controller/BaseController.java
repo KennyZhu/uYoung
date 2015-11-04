@@ -60,6 +60,9 @@ public class BaseController {
         if (page != null) {
             result.setPageNum(page);
         }
-        return JsonUtil.getJsonString(result);
+        BaseResult
+                baeResult = new BaseResult(ResultCodeEnum.SUCCESS.getCode(), ResultCodeEnum.SUCCESS.getDesc());
+        baeResult.setResultData(result);
+        return JsonUtil.getJsonString(baeResult);
     }
 }
