@@ -54,8 +54,12 @@ public class BaseController {
      */
     protected String buildEmptyPageJson(Integer page, Integer pageSize) {
         Page result = new Page();
-        result.setPageSize(pageSize);
-        result.setPageNum(page);
+        if (pageSize != null) {
+            result.setPageSize(pageSize);
+        }
+        if (page != null) {
+            result.setPageNum(page);
+        }
         return JsonUtil.getJsonString(result);
     }
 }
