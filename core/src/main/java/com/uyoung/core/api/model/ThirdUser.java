@@ -1,5 +1,6 @@
 package com.uyoung.core.api.model;
 
+import java.lang.reflect.Field;
 import java.util.Date;
 
 public class ThirdUser {
@@ -181,5 +182,20 @@ public class ThirdUser {
                 ", updateTime=" + updateTime +
                 ", expireIn=" + expireIn +
                 '}';
+    }
+
+    public static void main(String[] args) {
+        ThirdUser thirdUser = new ThirdUser();
+        thirdUser.setCity("beijing");
+        thirdUser.setNickName("nickName");
+        Field[] fields = thirdUser.getClass().getDeclaredFields();
+        try {
+            for (Field field : fields) {
+                System.out.println("key:" + field.getName() + " value:" + field.get(thirdUser));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 }
