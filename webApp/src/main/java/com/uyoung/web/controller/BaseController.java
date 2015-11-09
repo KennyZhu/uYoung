@@ -1,5 +1,6 @@
 package com.uyoung.web.controller;
 
+import com.uyoung.core.api.model.UserInfo;
 import com.uyoung.core.base.bean.Page;
 import com.uyoung.web.bean.BaseResult;
 import com.uyoung.web.enums.ResultCodeEnum;
@@ -64,5 +65,23 @@ public class BaseController {
                 baeResult = new BaseResult(ResultCodeEnum.SUCCESS.getCode(), ResultCodeEnum.SUCCESS.getDesc());
         baeResult.setResultData(result);
         return JsonUtil.getJsonString(baeResult);
+    }
+
+    /**
+     * 获取当前登录用户
+     *
+     * @return
+     */
+    protected UserInfo getCurrentLoginUser() {
+        return null;
+    }
+
+    /**
+     * 检查用户是否登录
+     *
+     * @return
+     */
+    protected boolean checkLogin() {
+        return true;
     }
 }
