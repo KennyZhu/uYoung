@@ -17,7 +17,7 @@
         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, uid,third_uid,access_token,refresh_token,expire_in, nick_name, gender, avatar_url, user_type,refresh_time,create_time, update_time
+        id, uid, third_uid, access_token, refresh_token, expire_in, nick_name, gender, avatar_url, user_type, refresh_time, create_time, update_time
     </sql>
     <select id="getByThirdUidUserType" resultMap="BaseResultMap" parameterType="java.util.Map">
         select
@@ -67,12 +67,8 @@
             <if test="refreshTime != null">
                 refresh_time,
             </if>
-            <if test="createTime != null">
-                create_time,
-            </if>
-            <if test="updateTime != null">
-                update_time,
-            </if>
+            create_time,
+            update_time,
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -108,12 +104,7 @@
             <if test="refreshTime != null">
                 #{refreshTime,jdbcType=TIMESTAMP},
             </if>
-            <if test="createTime != null">
-                #{createTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="updateTime != null">
-                #{updateTime,jdbcType=TIMESTAMP},
-            </if>
+            now(),now()
         </trim>
     </insert>
 </mapper>

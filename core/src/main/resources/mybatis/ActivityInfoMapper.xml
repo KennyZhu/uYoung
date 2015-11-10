@@ -18,9 +18,9 @@
         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, title, ori_user_id, begin_time, end_time, address, need_num, real_num, activity_type, 
-    fee_type, description, `status`, create_time, update_time
-  </sql>
+        id, title, ori_user_id, begin_time, end_time, address, need_num, real_num, activity_type,
+        fee_type, description, `status`, create_time, update_time
+    </sql>
 
     <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
@@ -29,9 +29,9 @@
         where id = #{id,jdbcType=INTEGER}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from tb_activity_info
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
+        DELETE FROM tb_activity_info
+        WHERE id = #{id,jdbcType=INTEGER}
+    </delete>
     <insert id="insert" parameterType="com.uyoung.core.api.model.ActivityInfo">
         insert into tb_activity_info
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -71,12 +71,8 @@
             <if test="status != null">
                 status,
             </if>
-            <if test="createTime != null">
-                create_time,
-            </if>
-            <if test="updateTime != null">
-                update_time,
-            </if>
+            create_time,
+            update_time,
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -115,12 +111,7 @@
             <if test="status != null">
                 #{status,jdbcType=TINYINT},
             </if>
-            <if test="createTime != null">
-                #{createTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="updateTime != null">
-                #{updateTime,jdbcType=TIMESTAMP},
-            </if>
+            now(),now()
         </trim>
     </insert>
     <update id="updateById" parameterType="com.uyoung.core.api.model.ActivityInfo">
@@ -169,7 +160,8 @@
         where id = #{id,jdbcType=INTEGER}
     </update>
     <select id="getPageByStatus" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-        select <include refid="Base_Column_List"/>
+        select
+        <include refid="Base_Column_List"/>
         from tb_activity_info
         where status = #{status,jdbcType=TINYINT}
         <if test="oriUid != null">

@@ -13,8 +13,8 @@
         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, platform, version, token, imei, user_id, validate, create_time, update_time
-  </sql>
+        id, platform, version, token, imei, user_id, validate, create_time, update_time
+    </sql>
     <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_List"/>
@@ -22,9 +22,9 @@
         where id = #{id,jdbcType=INTEGER}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from tb_mobile_info
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
+        DELETE FROM tb_mobile_info
+        WHERE id = #{id,jdbcType=INTEGER}
+    </delete>
     <insert id="insert" parameterType="com.uyoung.core.api.model.MobileInfo">
         insert into tb_mobile_info
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -49,12 +49,8 @@
             <if test="validate != null">
                 validate,
             </if>
-            <if test="createTime != null">
-                create_time,
-            </if>
-            <if test="updateTime != null">
-                update_time,
-            </if>
+            create_time,
+            update_time,
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -78,12 +74,7 @@
             <if test="validate != null">
                 #{validate,jdbcType=TINYINT},
             </if>
-            <if test="createTime != null">
-                #{createTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="updateTime != null">
-                #{updateTime,jdbcType=TIMESTAMP},
-            </if>
+            now(),now()
         </trim>
     </insert>
     <update id="updateById" parameterType="com.uyoung.core.api.model.MobileInfo">
