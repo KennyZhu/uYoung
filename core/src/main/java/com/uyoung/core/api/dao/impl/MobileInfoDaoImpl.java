@@ -2,6 +2,7 @@ package com.uyoung.core.api.dao.impl;
 
 import com.uyoung.core.api.dao.MobileInfoDao;
 import com.uyoung.core.api.model.MobileInfo;
+import com.uyoung.core.base.dao.BaseDao;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Repository;
  * Desc:
  */
 @Repository
-public class MobileInfoDaoImpl implements MobileInfoDao {
+public class MobileInfoDaoImpl extends BaseDao<MobileInfo> implements MobileInfoDao {
     @Override
     public int deleteByPrimaryKey(Integer id) {
         return 0;
@@ -18,7 +19,7 @@ public class MobileInfoDaoImpl implements MobileInfoDao {
 
     @Override
     public int insert(MobileInfo record) {
-        return 0;
+        return insert("insert", record);
     }
 
     @Override

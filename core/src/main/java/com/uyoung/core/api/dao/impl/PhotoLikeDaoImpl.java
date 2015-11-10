@@ -37,9 +37,4 @@ public class PhotoLikeDaoImpl extends BaseDao implements PhotoLikeDao {
     public PhotoLike getById(Integer id) {
         return null;
     }
-
-    @Override
-    public int updateById(PhotoLike record) {
-        return 0;
-    }
 }

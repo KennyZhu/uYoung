@@ -49,24 +49,6 @@
             now(),now()
         </trim>
     </insert>
-    <update id="updateById" parameterType="com.uyoung.core.api.model.PhotoLike">
-        update tb_photo_like
-        <set>
-            <if test="photoId != null">
-                photo_id = #{photoId,jdbcType=INTEGER},
-            </if>
-            <if test="userId != null">
-                user_id = #{userId,jdbcType=INTEGER},
-            </if>
-            <if test="createTime != null">
-                create_time = #{createTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="updateTime != null">
-                update_time = #{updateTime,jdbcType=TIMESTAMP},
-            </if>
-        </set>
-        where id = #{id,jdbcType=INTEGER}
-    </update>
     <delete id="deleteByUidPhotoId" parameterType="java.util.Map">
         DELETE FROM tb_photo_like
         WHERE user_id = #{userId,jdbcType=INTEGER} AND photo_id = #{photoId,jdbcType=INTEGER}

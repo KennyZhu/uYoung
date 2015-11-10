@@ -29,7 +29,7 @@ public class AlbumInfoDaoImpl extends BaseDao<AlbumInfo> implements AlbumInfoDao
 
     @Override
     public AlbumInfo getById(Integer id) {
-        return null;
+        return selectOne("getById", id);
     }
 
     @Override

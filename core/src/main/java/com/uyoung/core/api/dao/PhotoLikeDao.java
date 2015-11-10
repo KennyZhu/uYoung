@@ -11,6 +11,4 @@ public interface PhotoLikeDao {
     int insert(PhotoLike record);
 
     PhotoLike getById(Integer id);
-
-    int updateById(PhotoLike record);
 }

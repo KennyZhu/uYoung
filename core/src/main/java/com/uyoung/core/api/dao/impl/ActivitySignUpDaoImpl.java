@@ -26,7 +26,7 @@ public class ActivitySignUpDaoImpl extends BaseDao<ActivitySignUp> implements Ac
 
     @Override
     public ActivitySignUp getById(Integer id) {
-        return null;
+        return selectOne("getById", id);
     }
 
     @Override

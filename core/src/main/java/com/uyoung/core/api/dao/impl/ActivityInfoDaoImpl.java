@@ -25,7 +25,7 @@ public class ActivityInfoDaoImpl extends BaseDao<ActivityInfo> implements Activi
 
     @Override
     public int insert(ActivityInfo record) {
-        return 0;
+        return insert("insert", record);
     }
 
     @Override
