@@ -147,9 +147,9 @@ CREATE TABLE tb_photo_info (
   exif_shutter   VARCHAR(10) COMMENT '快门',
   exif_iso       VARCHAR(10) COMMENT '感光度',
   exif_other     VARCHAR(50) COMMENT '其他信息',
-  view_count     INT                NOT NULL
+  view_count     INT                NOT NULL DEFAULT 0
   COMMENT '浏览数',
-  like_count     INT                NOT NULL
+  like_count     INT                NOT NULL DEFAULT 0
   COMMENT '喜欢数',
   comment_count  INT                NULL
   COMMENT '评论数',
@@ -207,7 +207,8 @@ CREATE TABLE tb_third_user (
   COMMENT '性别',
   avatar_url    VARCHAR(250)                DEFAULT NULL
   COMMENT '头像',
-  user_type TINYINT(1) NOT NULL COMMENT '第三方用户类型',
+  user_type     TINYINT(1)         NOT NULL
+  COMMENT '第三方用户类型',
   refresh_time  TIMESTAMP          NULL
   COMMENT 'Token 刷新时间',
   create_time   TIMESTAMP          NULL
