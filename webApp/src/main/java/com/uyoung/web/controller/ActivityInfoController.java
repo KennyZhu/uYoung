@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 /**
  * User: KennyZhu
  * Date: 15/9/28
- * Desc:
+ * Desc: 活动信息
  */
 @Controller
 public class ActivityInfoController extends BaseController {

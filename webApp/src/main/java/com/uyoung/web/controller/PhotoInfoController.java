@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
- * Desc:
+ * Desc:照片信息
  * <p/>Date: 2015-11-10
  * <br/>Time: 16:57
  * <br/>User: ylzhu

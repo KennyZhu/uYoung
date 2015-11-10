@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
- * Desc:
+ * Desc:用户信息
  * <p/>Date: 2015-10-14
  * <br/>Time: 17:57
  * <br/>User: ylzhu

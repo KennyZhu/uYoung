@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
- * Desc:
+ * Desc:相册信息
  * <p/>Date: 2015-10-20
  * <br/>Time: 16:41
  * <br/>User: ylzhu

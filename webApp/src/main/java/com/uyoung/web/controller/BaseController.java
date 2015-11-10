@@ -7,7 +7,7 @@ import com.uyoung.web.enums.ResultCodeEnum;
 import com.uyoung.web.util.JsonUtil;
 
 /**
- * Desc:
+ * Desc:Base Controller
  * <p/>Date: 2015-10-20
  * <br/>Time: 16:42
  * <br/>User: ylzhu
