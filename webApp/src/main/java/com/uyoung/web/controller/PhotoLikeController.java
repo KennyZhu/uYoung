@@ -1,7 +1,13 @@
 package com.uyoung.web.controller;
 
+import com.uyoung.core.api.service.PhotoLikeService;
+import com.uyoung.web.handler.PhotoLikeHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * Desc:照片点赞
@@ -12,10 +18,41 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class PhotoLikeController extends BaseController {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(PhotoLikeController.class);
+
+    @Autowired
+    private PhotoLikeService photoLikeService;
+
+    @Autowired
+    private PhotoLikeHandler handler;
+
     @RequestMapping(value = "/photoLike/like")
+    @ResponseBody
     public String like(Integer uid, Integer photoId) {
         if (uid == null || photoId == null) {
             return buildInvalidParamJson();
+        }
+        try {
+            handler.like(uid, photoId);
+            return buildSuccessJson();
+        } catch (Exception e) {
+            LOGGER.error("#Photo like error.Cause:", e);
+            return buildExceptionJson();
+        }
+    }
+
+    @RequestMapping(value = "/photoLike/unlike")
+    @ResponseBody
+    public String unlike(Integer uid, Integer photoId) {
+        if (uid == null || photoId == null) {
+            return buildInvalidParamJson();
+        }
+        try {
+            photoLikeService.delete(uid, photoId);
+            return buildSuccessJson();
+        } catch (Exception e) {
+            LOGGER.error("#Photo unlike error.Cause:", e);
+            return buildExceptionJson();
         }
     }
 }

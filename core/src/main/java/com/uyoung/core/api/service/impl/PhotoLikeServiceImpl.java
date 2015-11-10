@@ -34,4 +34,12 @@ public class PhotoLikeServiceImpl implements PhotoLikeService {
     public int getCountByPhotoId(int photoId) {
         return 0;
     }
+
+    @Override
+    public int delete(Integer uid, Integer photoId) {
+        if (uid == null || photoId == null) {
+            return 0;
+        }
+        return photoLikeDao.deleteByUidPhotoId(uid, photoId);
+    }
 }

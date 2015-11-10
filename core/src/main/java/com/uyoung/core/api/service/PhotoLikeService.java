@@ -11,6 +11,8 @@ public interface PhotoLikeService {
 
     public int add(PhotoLike photoLike);
 
+    public int delete(Integer uid, Integer photoId);
+
     public PhotoLike getById(int id);
 
     int getCountByPhotoId(int photoId);

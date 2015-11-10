@@ -6,6 +6,8 @@ public interface PhotoLikeDao {
 
     int deleteByPrimaryKey(Integer id);
 
+    int deleteByUidPhotoId(Integer uid, Integer photoId);
+
     int insert(PhotoLike record);
 
     PhotoLike getById(Integer id);
