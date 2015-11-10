@@ -33,7 +33,10 @@ public class PhotoLikeController extends BaseController {
             return buildInvalidParamJson();
         }
         try {
-            handler.like(uid, photoId);
+            boolean result = handler.like(uid, photoId);
+            if (!result) {
+                LOGGER.warn("#Like by uid:" + uid + " photoId:" + photoId + " return false.");
+            }
             return buildSuccessJson();
         } catch (Exception e) {
             LOGGER.error("#Photo like error.Cause:", e);

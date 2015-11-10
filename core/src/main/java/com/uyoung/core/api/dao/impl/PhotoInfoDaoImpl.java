@@ -2,6 +2,7 @@ package com.uyoung.core.api.dao.impl;
 
 import com.uyoung.core.api.dao.PhotoInfoDao;
 import com.uyoung.core.api.model.PhotoInfo;
+import com.uyoung.core.base.dao.BaseDao;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Repository;
  * Desc:
  */
 @Repository
-public class PhotoInfoDaoImpl implements PhotoInfoDao {
+public class PhotoInfoDaoImpl extends BaseDao<PhotoInfo> implements PhotoInfoDao {
     @Override
     public int deleteByPrimaryKey(Integer id) {
         return 0;
@@ -18,12 +19,12 @@ public class PhotoInfoDaoImpl implements PhotoInfoDao {
 
     @Override
     public int insert(PhotoInfo record) {
-        return 0;
+        return insert("insert", record);
     }
 
     @Override
     public PhotoInfo getById(Integer id) {
-        return null;
+        return selectOne("getById", id);
     }
 
     @Override
