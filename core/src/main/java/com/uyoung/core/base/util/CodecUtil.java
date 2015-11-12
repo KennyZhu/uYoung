@@ -22,7 +22,7 @@ import java.net.URLEncoder;
  *
  * @author 开发支持中心。
  */
-public class CodecUtil {
+public final class CodecUtil {
 
     private static final String DEFAULT_URL_ENCODING = "UTF-8";
 

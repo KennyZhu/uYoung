@@ -11,7 +11,7 @@ import java.util.zip.Inflater;
  * <br/>Time: 17:20
  * <br/>User: ylzhu
  */
-public class Base64 {
+public final class Base64 {
     private static final byte[] encodingTable = {(byte) 'A', (byte) 'B',
             (byte) 'C', (byte) 'D', (byte) 'E', (byte) 'F', (byte) 'G',
             (byte) 'H', (byte) 'I', (byte) 'J', (byte) 'K', (byte) 'L',

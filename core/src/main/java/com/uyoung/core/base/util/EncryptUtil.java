@@ -12,7 +12,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Random;
 
-public class EncryptUtil {
+public final class EncryptUtil {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(EncryptUtil.class);
     private static final String ALGORITHM = "DESede"; //定义加密算法,可用 DES,DESede,Blowfish
