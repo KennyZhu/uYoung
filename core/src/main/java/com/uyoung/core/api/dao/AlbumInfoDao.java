@@ -5,7 +5,7 @@ import com.uyoung.core.base.bean.Page;
 
 public interface AlbumInfoDao {
 
-    int deleteByPrimaryKey(Integer id);
+    int deleteById(Integer id);
 
     int insert(AlbumInfo record);
 

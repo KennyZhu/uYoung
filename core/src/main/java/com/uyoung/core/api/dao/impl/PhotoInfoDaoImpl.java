@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class PhotoInfoDaoImpl extends BaseDao<PhotoInfo> implements PhotoInfoDao {
     @Override
-    public int deleteByPrimaryKey(Integer id) {
+    public int deleteById(Integer id) {
         return 0;
     }
 

@@ -31,7 +31,7 @@
         from tb_photo_info
         where id = #{id,jdbcType=INTEGER}
     </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <delete id="deleteById" parameterType="java.lang.Integer">
         DELETE FROM tb_photo_info
         WHERE id = #{id,jdbcType=INTEGER}
     </delete>

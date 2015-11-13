@@ -9,10 +9,28 @@ import com.uyoung.core.api.model.PhotoInfo;
  */
 public interface PhotoInfoService {
 
+    /**
+     * @param photoInfo
+     * @return
+     */
     public int add(PhotoInfo photoInfo);
 
-    public PhotoInfo getById(int id);
+    /**
+     * @param id
+     * @return
+     */
+    public PhotoInfo getById(Integer id);
 
+    /**
+     * @param photoInfo
+     * @return
+     */
     public int updateById(PhotoInfo photoInfo);
+
+    /**
+     * @param id
+     * @return
+     */
+    public int deleteById(Integer id);
 
 }

@@ -26,7 +26,10 @@ public class PhotoInfoServiceImpl implements PhotoInfoService {
     }
 
     @Override
-    public PhotoInfo getById(int id) {
+    public PhotoInfo getById(Integer id) {
+        if (id == null) {
+            return null;
+        }
         return photoInfoDao.getById(id);
     }
 
@@ -36,5 +39,13 @@ public class PhotoInfoServiceImpl implements PhotoInfoService {
             return 0;
         }
         return photoInfoDao.updateById(photoInfo);
+    }
+
+    @Override
+    public int deleteById(Integer id) {
+        if (id == null) {
+            return 0;
+        }
+        return photoInfoDao.deleteById(id);
     }
 }

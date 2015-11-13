@@ -4,7 +4,7 @@ import com.uyoung.core.api.model.PhotoInfo;
 
 public interface PhotoInfoDao {
 
-    int deleteByPrimaryKey(Integer id);
+    int deleteById(Integer id);
 
     int insert(PhotoInfo record);
 

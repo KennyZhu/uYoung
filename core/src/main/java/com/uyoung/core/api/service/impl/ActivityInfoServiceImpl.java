@@ -41,6 +41,14 @@ public class ActivityInfoServiceImpl implements ActivityInfoService {
     }
 
     @Override
+    public int deleteById(Integer activityId) {
+        if (activityId == null) {
+            return 0;
+        }
+        return activityInfoDao.deleteById(activityId);
+    }
+
+    @Override
     public ActivityInfo getById(int id) {
         return activityInfoDao.getById(id);
     }

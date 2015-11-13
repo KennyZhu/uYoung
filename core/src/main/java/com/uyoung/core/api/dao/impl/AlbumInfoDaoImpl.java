@@ -18,8 +18,8 @@ import java.util.Map;
 @Repository
 public class AlbumInfoDaoImpl extends BaseDao<AlbumInfo> implements AlbumInfoDao {
     @Override
-    public int deleteByPrimaryKey(Integer id) {
-        return 0;
+    public int deleteById(Integer id) {
+        return delete("deleteById", id);
     }
 
     @Override

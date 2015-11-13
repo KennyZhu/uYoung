@@ -5,7 +5,7 @@ import com.uyoung.core.base.bean.Page;
 
 public interface ActivityInfoDao {
 
-    int deleteByPrimaryKey(Integer id);
+    int deleteById(Integer id);
 
     int insert(ActivityInfo record);
 

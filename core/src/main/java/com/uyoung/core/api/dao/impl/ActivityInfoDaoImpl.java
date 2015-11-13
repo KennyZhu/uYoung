@@ -19,8 +19,8 @@ import java.util.Map;
 public class ActivityInfoDaoImpl extends BaseDao<ActivityInfo> implements ActivityInfoDao {
 
     @Override
-    public int deleteByPrimaryKey(Integer id) {
-        return 0;
+    public int deleteById(Integer id) {
+        return delete("deleteById", id);
     }
 
     @Override

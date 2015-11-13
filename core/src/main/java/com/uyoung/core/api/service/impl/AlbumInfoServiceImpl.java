@@ -27,8 +27,19 @@ public class AlbumInfoServiceImpl implements AlbumInfoService {
     }
 
     @Override
-    public AlbumInfo getById(int id) {
+    public AlbumInfo getById(Integer id) {
+        if (id == null) {
+            return null;
+        }
         return albumInfoDao.getById(id);
+    }
+
+    @Override
+    public int deleteById(Integer id) {
+        if (id == null) {
+            return 0;
+        }
+        return albumInfoDao.deleteById(id);
     }
 
     @Override
