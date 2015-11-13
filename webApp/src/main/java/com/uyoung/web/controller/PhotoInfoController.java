@@ -37,4 +37,18 @@ public class PhotoInfoController extends BaseController {
             return buildExceptionJson();
         }
     }
+
+    @RequestMapping(value = "/photo/deleteById")
+    public String deleteById(Integer id) {
+        if (id == null) {
+            return buildInvalidParamJson();
+        }
+        try {
+            photoInfoService.deleteById(id);
+            return buildSuccessJson();
+        } catch (Exception e) {
+            LOGGER.error("#Delete Photo error.Id:" + id + " Cause:", e);
+            return buildExceptionJson();
+        }
+    }
 }
