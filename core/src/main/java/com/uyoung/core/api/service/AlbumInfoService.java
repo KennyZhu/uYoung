@@ -17,7 +17,13 @@ public interface AlbumInfoService {
      */
     public int add(AlbumInfo albumInfo);
 
-    public AlbumInfo getById(int id);
+    /**
+     * @param id
+     * @return
+     */
+    public AlbumInfo getById(Integer id);
+
+    public int deleteById(Integer id);
 
     /**
      * 根据创建者获取

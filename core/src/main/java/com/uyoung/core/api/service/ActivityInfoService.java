@@ -31,10 +31,20 @@ public interface ActivityInfoService {
     public ActivityInfo getById(int id);
 
     /**
+     * 创建活动
+     *
      * @param activityInfo
      * @return
      */
     public int add(ActivityInfo activityInfo);
+
+    /**
+     * 删除活动
+     *
+     * @param activityId
+     * @return
+     */
+    public int deleteById(Integer activityId);
 
     /**
      * @param activityInfo
