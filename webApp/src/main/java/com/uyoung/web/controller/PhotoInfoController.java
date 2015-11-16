@@ -38,7 +38,23 @@ public class PhotoInfoController extends BaseController {
         }
     }
 
+    @RequestMapping(value = "/photo/add", method = RequestMethod.POST)
+    @ResponseBody
+    public String updateById(PhotoInfo photoInfo) {
+        if (photoInfo == null) {
+            return buildInvalidParamJson();
+        }
+        try {
+            photoInfoService.updateById(photoInfo);
+            return buildSuccessJson();
+        } catch (Exception e) {
+            LOGGER.error("#Update Photo error.Cause:", e);
+            return buildExceptionJson();
+        }
+    }
+
     @RequestMapping(value = "/photo/deleteById")
+    @ResponseBody
     public String deleteById(Integer id) {
         if (id == null) {
             return buildInvalidParamJson();

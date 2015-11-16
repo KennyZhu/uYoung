@@ -47,4 +47,19 @@ public class AlbumInfoController extends BaseController {
 
         return buildEmptyPageJson(page, pageSize);
     }
+
+    @RequestMapping(value = "/album/add")
+    @ResponseBody
+    public String add(AlbumInfo albumInfo) {
+        if (albumInfo == null) {
+            return buildInvalidParamJson();
+        }
+        try {
+            albumInfoService.add(albumInfo);
+        } catch (Exception e) {
+            LOGGER.error("#Add albumInfo error.Cause:", e);
+            return buildExceptionJson();
+        }
+        return buildSuccessJson();
+    }
 }
