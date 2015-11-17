@@ -13,6 +13,7 @@ import com.uyoung.web.util.JsonUtil;
  * <br/>User: ylzhu
  */
 public class BaseController {
+
     /**
      * @param resultData
      * @return

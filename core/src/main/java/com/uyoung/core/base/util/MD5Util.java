@@ -16,6 +16,9 @@ import java.security.SecureRandom;
  * <br/>User: ylzhu
  */
 public class MD5Util {
+
+    public static final String DEFAULT_ENCODE = "UTF-8";
+
     /**
      * 获取字符串S的MD5摘要串
      *
