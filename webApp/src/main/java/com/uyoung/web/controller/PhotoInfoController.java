@@ -38,7 +38,7 @@ public class PhotoInfoController extends BaseController {
         }
     }
 
-    @RequestMapping(value = "/photo/add", method = RequestMethod.POST)
+    @RequestMapping(value = "/photo/updateById", method = RequestMethod.POST)
     @ResponseBody
     public String updateById(PhotoInfo photoInfo) {
         if (photoInfo == null) {
