@@ -7,7 +7,7 @@
         <!-- 输出debug级别日志 -->
         <param name="threshold" value="INFO"/>
         <layout class="org.apache.log4j.PatternLayout">
-            <param name="ConversionPattern" value="%d - %c [%t] %-5p %c %x %l - %m%n"/>
+            <param name="ConversionPattern" value="%d - [%t] %-5p %c %x %l - %m%n"/>
         </layout>
     </appender>
 
@@ -17,7 +17,7 @@
         <param name="DatePattern" value="'.'yyyy-MM-dd-HH"/>
         <param name="threshold" value="INFO"/>
         <layout class="org.apache.log4j.PatternLayout">
-            <param name="ConversionPattern" value="%d - %c [%t] %-5p %c %x %l - %m%n"/>
+            <param name="ConversionPattern" value="%d - [%t] %-5p %c %x %l - %m%n"/>
         </layout>
     </appender>
 
