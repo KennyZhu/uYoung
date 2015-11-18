@@ -50,6 +50,11 @@ public class CommonController extends BaseController {
     @RequestMapping(value = "/common/cities", method = RequestMethod.POST)
     @ResponseBody
     public String getCityDict(long timestamp, String deviceId, String sign) {
-        return buildSuccessJson(dictCityService.getDefaultCityList());
+        try {
+            return buildSuccessJson(dictCityService.getDefaultCityList());
+        } catch (Exception e) {
+            LOGGER.error("#Get City Dict error.Cause:", e);
+            return buildExceptionJson();
+        }
     }
 }
