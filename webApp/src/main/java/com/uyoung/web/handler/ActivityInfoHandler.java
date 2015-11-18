@@ -101,7 +101,7 @@ public class ActivityInfoHandler {
         List<SignUpUserVo> result = new ArrayList<>(signUps.size());
         List<Integer> uidList = new ArrayList<>(signUps.size());
         for (ActivitySignUp signUp : signUps) {
-            uidList.add(signUp.getId());
+            uidList.add(signUp.getUserId());
         }
         Map<Integer, UserInfo> userInfoMap = userInfoService.getMapByIdList(uidList);
         if (userInfoMap == null || userInfoMap.size() == 0) {
