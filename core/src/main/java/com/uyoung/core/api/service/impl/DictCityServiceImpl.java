@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.xml.sax.InputSource;
 
 import java.io.StringReader;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -54,7 +55,7 @@ public class DictCityServiceImpl implements DictCityService {
 
     @Override
     public List<DictCity> getDefaultCityList() {
-        return dictCityDao.getListByIds(CommonConstant.CITIES);
+        return dictCityDao.getListByIds(Arrays.asList(CommonConstant.CITIES));
     }
 
     private void buildProvinceData(String cityEnName) {
