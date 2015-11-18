@@ -2,7 +2,6 @@ package com.uyoung.web.controller;
 
 import com.uyoung.core.api.service.DictCityService;
 import com.uyoung.core.api.service.SignService;
-import com.uyoung.core.third.qiniu.QiNiuAccessTokenFactory;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,27 +28,15 @@ public class CommonController extends BaseController {
     @Autowired
     private DictCityService dictCityService;
 
-
-    @RequestMapping(value = "/common/qnUpToken", method = RequestMethod.POST)
+    @RequestMapping(value = "/common/cities", method = RequestMethod.POST)
     @ResponseBody
-    public String getQNUpToken(long timestamp, String deviceId, String sign) {
+    public String getCityDict(long timestamp, String deviceId, String sign) {
         if (StringUtils.isBlank(deviceId) || StringUtils.isBlank(sign)) {
             return buildInvalidParamJson();
         }
         if (!signService.checkQNTokenSign(timestamp, deviceId, sign)) {
             return buildInvalidParamJson();
         }
-        try {
-            return buildSuccessJson(QiNiuAccessTokenFactory.getInstance().getDefaultUpToken());
-        } catch (Exception e) {
-            LOGGER.error("#Get QN upToken error.Cause:", e);
-            return buildExceptionJson();
-        }
-    }
-
-    @RequestMapping(value = "/common/cities", method = RequestMethod.POST)
-    @ResponseBody
-    public String getCityDict(long timestamp, String deviceId, String sign) {
         try {
             return buildSuccessJson(dictCityService.getDefaultCityList());
         } catch (Exception e) {
