@@ -97,12 +97,17 @@ public class ActivityInfoHandler {
         if (CollectionUtils.isEmpty(signUps)) {
             Collections.emptyList();
         }
+        LOGGER.info("#Get signUps by activityId:" + activityId + " return size:" + signUps.size());
         List<SignUpUserVo> result = new ArrayList<>(signUps.size());
         List<Integer> uidList = new ArrayList<>(signUps.size());
         for (ActivitySignUp signUp : signUps) {
             uidList.add(signUp.getId());
         }
         Map<Integer, UserInfo> userInfoMap = userInfoService.getMapByIdList(uidList);
+        if (userInfoMap == null || userInfoMap.size() == 0) {
+            return Collections.emptyList();
+        }
+        LOGGER.info("#Get signUps by activityId:" + activityId + " return size:" + userInfoMap.size());
         for (ActivitySignUp signUp : signUps) {
             UserInfo userInfo = userInfoMap.get(signUp.getUserId());
             if (userInfo != null) {
