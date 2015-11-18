@@ -31,7 +31,11 @@
         <include refid="Base_Column_List"/>
         from tb_dict_city
         where id in
-        <foreach collection="ids" index="cityId" item="cityId" open="(" close=")" separator=",">
+        <foreach collection="ids" index="index" item="cityId" open="(" close=")" separator=",">
+            #{cityId,jdbcType=INTEGER}
+        </foreach>
+        or pid in
+        <foreach collection="ids" index="index" item="cityId" open="(" close=")" separator=",">
             #{cityId,jdbcType=INTEGER}
         </foreach>
     </select>
