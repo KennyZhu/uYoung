@@ -1,17 +1,22 @@
 package com.uyoung.core.api.service.impl;
 
+import com.uyoung.core.api.constant.CommonConstant;
+import com.uyoung.core.api.dao.DictCityDao;
+import com.uyoung.core.api.model.DictCity;
 import com.uyoung.core.api.service.DictCityService;
 import com.uyoung.core.base.service.HttpService;
+import org.apache.commons.collections.CollectionUtils;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.input.SAXBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.xml.sax.InputSource;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
+import java.io.StringReader;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -23,28 +28,92 @@ import java.util.List;
 @Service
 public class DictCityServiceImpl implements DictCityService {
 
-    private static final String BASE_URL = "http://flash.weather.com.cn/wmaps/xml/china.xml";
-    private static final String BEIJING_URL = "http://flash.weather.com.cn/wmaps/xml/beijing.xml";
-    private static final String url = "http://dict.58.com/api/local/getLocalList/?pid=0&qq-pf-to=pcqq.c2c";
-    private static final String FILE_NAME = "city_new.xml";
+    private static final Logger LOGGER = LoggerFactory.getLogger(DictCityServiceImpl.class);
+    private static final String BASE_URL = "http://flash.weather.com.cn/wmaps/xml/";
+    private static final String URL_58 = "http://dict.58.com/api/local/getLocalList/?pid=0&qq-pf-to=pcqq.c2c";
 
     @Autowired
     private HttpService httpService;
 
+    @Autowired
+    private DictCityDao dictCityDao;
+
 
     @Override
     public void buildBaseData() {
-        String chinaXml = httpService.sendGetRequest(BASE_URL);
-        SAXBuilder saxBuilder = new SAXBuilder();
+        buildProvinceData("china");
+    }
+
+    @Override
+    public List<DictCity> getDictCityListByIds(List<Integer> ids) {
+        if (CollectionUtils.isEmpty(ids)) {
+            return Collections.emptyList();
+        }
+        return dictCityDao.getListByIds(ids);
+    }
+
+    @Override
+    public List<DictCity> getDefaultCityList() {
+        return dictCityDao.getListByIds(CommonConstant.CITIES);
+    }
+
+    private void buildProvinceData(String cityEnName) {
+        String url = BASE_URL + cityEnName + ".xml";
+        LOGGER.info("#Begin to get dataXml enName is " + cityEnName);
         try {
-            String filePath = this.getClass().getClassLoader().getResource("/").getPath();
-            InputStream inputStream = new FileInputStream(new File(filePath + FILE_NAME));
-            InputSource inputSource = new InputSource(inputStream);
-            Document cityDocument = saxBuilder.build(inputSource);
-            List<Element> elementList = cityDocument.getRootElement().getChild("province").getChildren();
+            String dataXml = httpService.sendGetRequest(url);
+            LOGGER.info("#Begin to get enName is " + cityEnName + " dataXml is " + dataXml);
+            StringReader read = new StringReader(dataXml);
+            InputSource source = new InputSource(read);
+            SAXBuilder saxBuilder = new SAXBuilder();
+            Document cityDocument = saxBuilder.build(source);
+            List<Element> cityElementList = cityDocument.getRootElement().getChildren();
+            for (Element element : cityElementList) {
+                String cnName = element.getAttributeValue("quName");
+                String enName = element.getAttributeValue("pyName");
+                DictCity province = new DictCity(cnName, enName, 0);
+                dictCityDao.insert(province);
+                buildCityData(enName, cnName);
+            }
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error("#Update EnName error.enName is " + cityEnName + "Cause:", e);
 
         }
+    }
+
+    private void buildCityData(String cityEnName, String provinceCnName) {
+        String url = BASE_URL + cityEnName + ".xml";
+        LOGGER.info("#Begin to get dataXml enName is " + cityEnName);
+        try {
+            String dataXml = httpService.sendGetRequest(url);
+            LOGGER.info("#Begin to get enName is " + cityEnName + " dataXml is " + dataXml);
+            StringReader read = new StringReader(dataXml);
+            InputSource source = new InputSource(read);
+            SAXBuilder saxBuilder = new SAXBuilder();
+            Document cityDocument = saxBuilder.build(source);
+            List<Element> cityElementList = cityDocument.getRootElement().getChildren();
+            for (Element element : cityElementList) {
+                String cnName = element.getAttributeValue("cityname");
+                String enName = element.getAttributeValue("pyName");
+                DictCity province = dictCityDao.getByCnName(provinceCnName);
+                if (province != null) {
+                    DictCity city = new DictCity(cnName, enName, province.getId());
+                    dictCityDao.insert(city);
+                }
+            }
+        } catch (Exception e) {
+            LOGGER.error("#Update EnName error.enName is " + cityEnName + "Cause:", e);
+            e.printStackTrace();
+        }
+    }
+
+    private void buildLonLat() {
+//        try {
+//            String jsonData = httpService.sendGetRequest(URL_58);
+//        } catch (Exception e) {
+//            LOGGER.error("#Update EnName error.enName is " + cityEnName + "Cause:", e);
+//            e.printStackTrace();
+//        }
+
     }
 }

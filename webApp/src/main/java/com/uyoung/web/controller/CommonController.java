@@ -1,5 +1,6 @@
 package com.uyoung.web.controller;
 
+import com.uyoung.core.api.service.DictCityService;
 import com.uyoung.core.api.service.SignService;
 import com.uyoung.core.third.qiniu.QiNiuAccessTokenFactory;
 import org.apache.commons.lang.StringUtils;
@@ -25,6 +26,9 @@ public class CommonController extends BaseController {
     @Autowired
     private SignService signService;
 
+    @Autowired
+    private DictCityService dictCityService;
+
 
     @RequestMapping(value = "/common/qnUpToken", method = RequestMethod.POST)
     @ResponseBody
@@ -41,5 +45,11 @@ public class CommonController extends BaseController {
             LOGGER.error("#Get QN upToken error.Cause:", e);
             return buildExceptionJson();
         }
+    }
+
+    @RequestMapping(value = "/common/cities", method = RequestMethod.POST)
+    @ResponseBody
+    public String getCityDict(long timestamp, String deviceId, String sign) {
+        return buildSuccessJson(dictCityService.getDefaultCityList());
     }
 }

@@ -10,7 +10,6 @@ import java.util.Date;
  */
 public class DictCity {
     private int id;
-    private String cityId;
     private String cnName;
     private String enName;
     /**
@@ -30,13 +29,15 @@ public class DictCity {
 
     private Date updateTime;
 
-    public String getCityId() {
-        return cityId;
+    public DictCity() {
     }
 
-    public void setCityId(String cityId) {
-        this.cityId = cityId;
+    public DictCity(String cnName, String enName, int pid) {
+        this.cnName = cnName;
+        this.enName = enName;
+        this.pid = pid;
     }
+
 
     public String getCnName() {
         return cnName;

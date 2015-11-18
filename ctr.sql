@@ -221,24 +221,22 @@ CREATE TABLE tb_third_user (
 
 DROP TABLE tb_dict_city;
 CREATE TABLE tb_dict_city (
-  id          INT         NOT NULL
-  COMMENT 'ID',
-  city_id     VARCHAR(20) NOT NULL
-  COMMENT '城市ID',
-  cn_name     VARCHAR(10) NOT NULL
+  id          INT(4) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  cn_name     VARCHAR(10)        NOT NULL
   COMMENT '中文名字',
-  en_name     VARCHAR(40) NOT NULL
+  en_name     VARCHAR(40)                 DEFAULT NULL
   COMMENT '英文名字',
-  lon         VARCHAR(30)      DEFAULT NULL
+  lon         VARCHAR(30)                 DEFAULT NULL
   COMMENT '经度',
-  lat         VARCHAR(30)      DEFAULT NULL
+  lat         VARCHAR(30)                 DEFAULT NULL
   COMMENT '纬度',
-  pid         INT         NOT NULL
+  pid         INT                NOT NULL
   COMMENT '父ID',
-  create_time TIMESTAMP   NULL
+  create_time TIMESTAMP          NULL
   COMMENT '创建时间',
-  update_time TIMESTAMP   NULL DEFAULT current_timestamp ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间'
-)ENGINE = MyISAM
+  update_time TIMESTAMP          NULL     DEFAULT current_timestamp ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间'
+)
+  ENGINE = MyISAM
   AUTO_INCREMENT = 0
   COMMENT '城市字典表'
   DEFAULT CHARSET = UTF8;
