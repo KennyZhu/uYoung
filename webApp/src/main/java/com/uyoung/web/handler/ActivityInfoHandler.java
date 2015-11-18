@@ -107,9 +107,10 @@ public class ActivityInfoHandler {
         if (userInfoMap == null || userInfoMap.size() == 0) {
             return Collections.emptyList();
         }
-        LOGGER.info("#Get signUps by activityId:" + activityId + " return size:" + userInfoMap.size());
+
         for (ActivitySignUp signUp : signUps) {
             UserInfo userInfo = userInfoMap.get(signUp.getUserId());
+            LOGGER.info("#Get UserInfo by userId :" + signUp.getUserId() + " return :" + userInfo);
             if (userInfo != null) {
                 SignUpUserVo signUpUserVo = new SignUpUserVo();
                 signUpUserVo.setAvatar(userInfoMap.get(signUp.getUserId()).getAvatarUrl());
@@ -118,6 +119,7 @@ public class ActivityInfoHandler {
                 result.add(signUpUserVo);
             }
         }
+        LOGGER.info("#Get signUps by activityId:" + activityId + " return size:" + userInfoMap.size() + " result size is " + result.size());
         return result;
     }
 }
