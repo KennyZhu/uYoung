@@ -80,6 +80,8 @@ public class DictCityServiceImpl implements DictCityService {
             List<DictCity> subCityList = cityMap.get(province.getId());
             if (CollectionUtils.isNotEmpty(subCityList)) {
                 province.setSubDictCityList(subCityList);
+            } else {
+                province.setSubDictCityList(Arrays.asList(province));
             }
         }
         return provinceList;
