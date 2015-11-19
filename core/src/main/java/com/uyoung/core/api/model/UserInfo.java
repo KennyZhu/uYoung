@@ -20,7 +20,7 @@ public class UserInfo {
 
     private String phone;
 
-    private Integer address;
+    private String address;
 
     private String company;
 
@@ -123,15 +123,13 @@ public class UserInfo {
     }
 
 
-    public Integer getAddress() {
+    public String getAddress() {
         return address;
     }
 
-
-    public void setAddress(Integer address) {
+    public void setAddress(String address) {
         this.address = address;
     }
-
 
     public String getCompany() {
         return company;

@@ -10,7 +10,7 @@
         <result column="gender" property="gender" jdbcType="TINYINT"/>
         <result column="avatar_url" property="avatarUrl" jdbcType="VARCHAR"/>
         <result column="phone" property="phone" jdbcType="VARCHAR"/>
-        <result column="address" property="address" jdbcType="INTEGER"/>
+        <result column="address" property="address" jdbcType="VARCHAR"/>
         <result column="company" property="company" jdbcType="VARCHAR"/>
         <result column="position" property="position" jdbcType="VARCHAR"/>
         <result column="equipment" property="equipment" jdbcType="VARCHAR"/>
@@ -116,7 +116,7 @@
                 #{phone,jdbcType=VARCHAR},
             </if>
             <if test="address != null">
-                #{address,jdbcType=INTEGER},
+                #{address,jdbcType=VARCHAR},
             </if>
             <if test="company != null">
                 #{company,jdbcType=VARCHAR},
@@ -162,7 +162,7 @@
                 phone = #{phone,jdbcType=VARCHAR},
             </if>
             <if test="address != null">
-                address = #{address,jdbcType=INTEGER},
+                address = #{address,jdbcType=VARCHAR},
             </if>
             <if test="company != null">
                 company = #{company,jdbcType=VARCHAR},
