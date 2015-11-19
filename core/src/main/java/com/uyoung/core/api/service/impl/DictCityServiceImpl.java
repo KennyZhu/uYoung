@@ -69,6 +69,7 @@ public class DictCityServiceImpl implements DictCityService {
                 List<DictCity> subCityList = cityMap.get(city.getPid());
                 if (CollectionUtils.isEmpty(subCityList)) {
                     subCityList = new ArrayList<>();
+                    cityMap.put(city.getPid(), subCityList);
                 }
                 subCityList.add(city);
             }

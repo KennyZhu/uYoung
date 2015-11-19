@@ -113,4 +113,19 @@ public class DictCity {
     public void setSubDictCityList(List<DictCity> subDictCityList) {
         this.subDictCityList = subDictCityList;
     }
+
+    @Override
+    public String toString() {
+        return "DictCity{" +
+                "cnName='" + cnName + '\'' +
+                ", id=" + id +
+                ", enName='" + enName + '\'' +
+                ", lon='" + lon + '\'' +
+                ", lat='" + lat + '\'' +
+                ", pid=" + pid +
+                ", subDictCityList=" + subDictCityList +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                '}';
+    }
 }
