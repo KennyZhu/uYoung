@@ -81,7 +81,8 @@ public class DictCityServiceImpl implements DictCityService {
             if (CollectionUtils.isNotEmpty(subCityList)) {
                 province.setSubDictCityList(subCityList);
             } else {
-                province.setSubDictCityList(Arrays.asList(province));
+                DictCity self = province;
+                province.setSubDictCityList(Arrays.asList(self));
             }
         }
         return provinceList;
