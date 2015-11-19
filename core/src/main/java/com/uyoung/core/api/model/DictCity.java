@@ -115,6 +115,24 @@ public class DictCity {
     }
 
     @Override
+    public DictCity clone() {
+        DictCity newCity = new DictCity();
+        newCity.setCnName(this.cnName);
+        newCity.setEnName(this.enName);
+        newCity.setId(this.id);
+        newCity.setLat(this.lat);
+        newCity.setLon(this.lon);
+        newCity.setPid(this.pid);
+        newCity.setCreateTime(this.createTime);
+        return newCity;
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
     public String toString() {
         return "DictCity{" +
                 "cnName='" + cnName + '\'' +
