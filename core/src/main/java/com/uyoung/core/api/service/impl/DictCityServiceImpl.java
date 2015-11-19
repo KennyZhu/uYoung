@@ -82,6 +82,7 @@ public class DictCityServiceImpl implements DictCityService {
                 province.setSubDictCityList(subCityList);
             } else {
                 DictCity self = province;
+                self.setSubDictCityList(null);
                 province.setSubDictCityList(Arrays.asList(self));
             }
         }
