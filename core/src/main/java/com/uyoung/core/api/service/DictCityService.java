@@ -17,4 +17,5 @@ public interface DictCityService {
     public List<DictCity> getDictCityListByIds(List<Integer> ids);
 
     public List<DictCity> getDefaultCityList();
+
 }

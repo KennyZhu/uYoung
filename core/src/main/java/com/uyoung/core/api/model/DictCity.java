@@ -1,6 +1,7 @@
 package com.uyoung.core.api.model;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Desc:
@@ -24,6 +25,8 @@ public class DictCity {
      * 父城市ID
      */
     private int pid;
+
+    private List<DictCity> subDictCityList;
 
     private Date createTime;
 
@@ -101,5 +104,13 @@ public class DictCity {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public List<DictCity> getSubDictCityList() {
+        return subDictCityList;
+    }
+
+    public void setSubDictCityList(List<DictCity> subDictCityList) {
+        this.subDictCityList = subDictCityList;
     }
 }

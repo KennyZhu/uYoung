@@ -16,9 +16,12 @@ import org.springframework.stereotype.Service;
 import org.xml.sax.InputSource;
 
 import java.io.StringReader;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Desc:
@@ -55,7 +58,29 @@ public class DictCityServiceImpl implements DictCityService {
 
     @Override
     public List<DictCity> getDefaultCityList() {
-        return dictCityDao.getListByIds(Arrays.asList(CommonConstant.CITIES));
+        List<Integer> provinceIdList = Arrays.asList(CommonConstant.CITIES);
+        List<DictCity> allCityList = dictCityDao.getListByIds(provinceIdList);
+        List<DictCity> provinceList = new ArrayList<>();
+        Map<Integer, List<DictCity>> cityMap = new HashMap<>();
+        for (DictCity city : allCityList) {
+            if (provinceIdList.contains(city.getId())) {
+                provinceList.add(city);
+            } else if (provinceIdList.contains(city.getPid())) {
+                List<DictCity> subCityList = cityMap.get(city.getPid());
+                if (CollectionUtils.isEmpty(subCityList)) {
+                    subCityList = new ArrayList<>();
+                }
+                subCityList.add(city);
+            }
+        }
+
+        for (DictCity province : provinceList) {
+            List<DictCity> subCityList = cityMap.get(province.getId());
+            if (CollectionUtils.isNotEmpty(subCityList)) {
+                province.setSubDictCityList(subCityList);
+            }
+        }
+        return provinceList;
     }
 
     private void buildProvinceData(String cityEnName) {
