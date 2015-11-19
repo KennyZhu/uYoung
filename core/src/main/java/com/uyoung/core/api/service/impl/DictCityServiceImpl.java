@@ -16,12 +16,7 @@ import org.springframework.stereotype.Service;
 import org.xml.sax.InputSource;
 
 import java.io.StringReader;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Desc:
@@ -71,8 +66,9 @@ public class DictCityServiceImpl implements DictCityService {
                     subCityList = new ArrayList<>();
                     subCityList.add(city);
                     cityMap.put(city.getPid(), subCityList);
+                } else {
+                    subCityList.add(city);
                 }
-                subCityList.add(city);
             }
         }
 
