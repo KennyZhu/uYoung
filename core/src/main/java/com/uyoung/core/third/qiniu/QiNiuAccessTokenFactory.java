@@ -2,6 +2,7 @@ package com.uyoung.core.third.qiniu;
 
 import com.qiniu.util.Auth;
 import com.qiniu.util.StringMap;
+import org.apache.commons.lang.StringUtils;
 
 /**
  * Desc:
@@ -29,6 +30,19 @@ public final class QiNiuAccessTokenFactory {
      */
     public String getDefaultUpToken() {
         return auth.uploadToken(QiNiuConstant.DEFAULT_BUCKET);
+    }
+
+    /**
+     * 获取指定Key的上传凭证
+     *
+     * @param key
+     * @return
+     */
+    public String getUpToken(String key) {
+        if (StringUtils.isBlank(key)) {
+            return getDefaultUpToken();
+        }
+        return auth.uploadToken(QiNiuConstant.DEFAULT_BUCKET, key);
     }
 
     /**

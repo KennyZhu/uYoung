@@ -29,7 +29,7 @@ public class QNController extends BaseController {
 
     @RequestMapping(value = "/qn/qnUpToken", method = RequestMethod.POST)
     @ResponseBody
-    public String getQNUpToken(long timestamp, String deviceId, String sign) {
+    public String getQNUpToken(long timestamp, String deviceId, String sign, String key) {
         if (StringUtils.isBlank(deviceId) || StringUtils.isBlank(sign)) {
             return buildInvalidParamJson();
         }
@@ -38,7 +38,7 @@ public class QNController extends BaseController {
         }
         try {
             QNCommonVo commonVo = new QNCommonVo();
-            commonVo.setUpToken(QiNiuAccessTokenFactory.getInstance().getDefaultUpToken());
+            commonVo.setUpToken(QiNiuAccessTokenFactory.getInstance().getUpToken(key));
             commonVo.setUrl(QiNiuConstant.URL_PREFIX);
             return buildSuccessJson(commonVo);
         } catch (Exception e) {
