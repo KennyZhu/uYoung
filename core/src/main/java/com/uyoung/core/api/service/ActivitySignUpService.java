@@ -13,6 +13,8 @@ public interface ActivitySignUpService {
 
     public int add(ActivitySignUp activitySignUp);
 
+    public int cancel(Integer aid, Integer uid);
+
     public ActivitySignUp getById(int id);
 
     public int updateById(ActivitySignUp activitySignUp);

@@ -14,5 +14,7 @@ public interface ActivitySignUpDao {
 
     int updateById(ActivitySignUp record);
 
+    int updateStatusByUidAid(Integer uid, Integer aid, int status);
+
     List<ActivitySignUp> getListByActivityId(Integer aid);
 }

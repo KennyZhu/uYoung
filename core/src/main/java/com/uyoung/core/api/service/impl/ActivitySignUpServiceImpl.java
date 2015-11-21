@@ -1,6 +1,7 @@
 package com.uyoung.core.api.service.impl;
 
 import com.uyoung.core.api.dao.ActivitySignUpDao;
+import com.uyoung.core.api.enums.ActivitySignUpStatusEnum;
 import com.uyoung.core.api.model.ActivitySignUp;
 import com.uyoung.core.api.service.ActivitySignUpService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,5 +47,13 @@ public class ActivitySignUpServiceImpl implements ActivitySignUpService {
             return Collections.emptyList();
         }
         return activitySignUpDao.getListByActivityId(activityId);
+    }
+
+    @Override
+    public int cancel(Integer aid, Integer uid) {
+        if (aid == null || uid == null) {
+            return 0;
+        }
+        return activitySignUpDao.updateStatusByUidAid(uid, aid, ActivitySignUpStatusEnum.CANCEL.getStatus());
     }
 }

@@ -36,4 +36,20 @@ public class ActivitySignUpController extends BaseController {
         }
         return buildSuccessJson();
     }
+
+    @RequestMapping(value = "/activity/calSignUp")
+    @ResponseBody
+    public String calSignUp(Integer uid, Integer aid) {
+        if (uid == null || aid == null) {
+            return buildInvalidParamJson();
+        }
+        try {
+            signUpService.cancel(uid, aid);
+
+        } catch (Exception e) {
+            LOGGER.error("#Cancel aid:" + aid + " uid:" + uid + " error.Cause:", e);
+            return buildExceptionJson();
+        }
+        return buildSuccessJson();
+    }
 }

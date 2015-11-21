@@ -86,4 +86,10 @@
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
+    <update id="updateStatusByUidAid" parameterType="java.util.Map">
+        update tb_activity_signup
+        set status = #{status,jdbcType=INTEGER}
+        where activity_id=#{aid,jdbcType=INTEGER}
+        and user_id=#{uid,jdbcType=INTEGER}
+    </update>
 </mapper>
