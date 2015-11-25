@@ -16,7 +16,7 @@ import java.io.IOException;
  * <br/>User: ylzhu
  */
 public class AlbumInfoControllerTest extends BaseControllerTest {
-    private static final Logger LOGGER = LoggerFactory.getLogger(ActivityInfoControllerTest.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ActivityControllerTest.class);
 
     @Test
     public void testLogin() throws IOException {

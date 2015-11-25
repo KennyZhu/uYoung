@@ -1,6 +1,7 @@
 package com.uyoung.web.handler;
 
 import com.uyoung.core.api.enums.ActivityStatusEnum;
+import com.uyoung.core.api.enums.ActivityTypeEnum;
 import com.uyoung.core.api.model.ActivityInfo;
 import com.uyoung.core.api.model.ActivitySignUp;
 import com.uyoung.core.api.model.UserInfo;
@@ -9,6 +10,7 @@ import com.uyoung.core.api.service.ActivitySignUpService;
 import com.uyoung.core.api.service.UserInfoService;
 import com.uyoung.core.base.bean.Page;
 import com.uyoung.web.vo.ActivityInfoVo;
+import com.uyoung.web.vo.ActivityTypeVo;
 import com.uyoung.web.vo.SignUpUserVo;
 import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
@@ -120,6 +122,14 @@ public class ActivityInfoHandler {
             }
         }
         LOGGER.info("#Get signUps by activityId:" + activityId + " return size:" + userInfoMap.size() + " result size is " + result.size());
+        return result;
+    }
+
+    public List<ActivityTypeVo> getAllActivityTypes() {
+        List<ActivityTypeVo> result = new ArrayList<>(ActivityTypeEnum.values().length);
+        for (ActivityTypeEnum typeEnum : ActivityTypeEnum.values()) {
+            result.add(new ActivityTypeVo(typeEnum));
+        }
         return result;
     }
 }

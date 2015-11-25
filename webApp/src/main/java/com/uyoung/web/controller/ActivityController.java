@@ -9,6 +9,7 @@ import com.uyoung.web.enums.ResultCodeEnum;
 import com.uyoung.web.handler.ActivityInfoHandler;
 import com.uyoung.web.util.JsonUtil;
 import com.uyoung.web.vo.ActivityInfoVo;
+import com.uyoung.web.vo.ActivityTypeVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,15 +18,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
+
 /**
  * User: KennyZhu
  * Date: 15/9/28
  * Desc: 活动信息
  */
 @Controller
-public class ActivityInfoController extends BaseController {
+public class ActivityController extends BaseController {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ActivityInfoController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ActivityController.class);
 
     @Autowired
     private ActivityInfoHandler activityInfoHandler;
@@ -71,5 +74,19 @@ public class ActivityInfoController extends BaseController {
             return buildExceptionJson();
         }
         return buildSuccessJson();
+    }
+
+    @RequestMapping(value = "/activity/types")
+    @ResponseBody
+    public String getTypes() {
+        try {
+            BaseResult baseResult = new BaseResult(ResultCodeEnum.SUCCESS.getCode(), ResultCodeEnum.SUCCESS.getDesc());
+            List<ActivityTypeVo> activityTypeVos = activityInfoHandler.getAllActivityTypes();
+            baseResult.setResultData(activityTypeVos);
+            return JsonUtil.getJsonString(baseResult);
+        } catch (Exception e) {
+            LOGGER.error("#Add activity error!Cause:", e);
+            return buildExceptionJson();
+        }
     }
 }
