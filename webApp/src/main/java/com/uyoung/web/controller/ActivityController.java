@@ -36,18 +36,38 @@ public class ActivityController extends BaseController {
     @Autowired
     private ActivityInfoService activityInfoService;
 
+    /**
+     * 批量获取活动
+     *
+     * @param pageNum
+     * @param pageSize
+     * @param status
+     * @param uid
+     * @return
+     */
     @RequestMapping(value = "/activity/getPageByStatus")
     @ResponseBody
     public String getPageByStatus(Integer pageNum, Integer pageSize, Integer status, Integer uid) {
         if (pageNum == null || pageSize == null || ActivityStatusEnum.getByStatus(status) == null) {
             return buildInvalidParamJson();
         }
-        Page<ActivityInfoVo> infoPage = activityInfoHandler.getPageByStatus(pageNum, pageSize, ActivityStatusEnum.getByStatus(status), uid);
-        BaseResult baseResult = new BaseResult(ResultCodeEnum.SUCCESS.getCode(), ResultCodeEnum.SUCCESS.getDesc());
-        baseResult.setResultData(infoPage);
-        return JsonUtil.getJsonString(baseResult);
+        try {
+            Page<ActivityInfoVo> infoPage = activityInfoHandler.getPageByStatus(pageNum, pageSize, ActivityStatusEnum.getByStatus(status), uid);
+            BaseResult baseResult = new BaseResult(ResultCodeEnum.SUCCESS.getCode(), ResultCodeEnum.SUCCESS.getDesc());
+            baseResult.setResultData(infoPage);
+            return JsonUtil.getJsonString(baseResult);
+        } catch (Exception e) {
+            LOGGER.error("#Get page by status error.uid is :" + uid + " status is " + status + " Cause:", e);
+            return buildExceptionJson();
+        }
     }
 
+    /**
+     * 获取指定的活动
+     *
+     * @param id
+     * @return
+     */
     @RequestMapping(value = "/activity/getById")
     @ResponseBody
     public String getById(Integer id) {
@@ -61,6 +81,12 @@ public class ActivityController extends BaseController {
         return JsonUtil.getJsonString(baseResult);
     }
 
+    /**
+     * 增加活动
+     *
+     * @param activityInfo
+     * @return
+     */
     @RequestMapping(value = "/activity/add", method = RequestMethod.POST)
     @ResponseBody
     public String add(ActivityInfo activityInfo) {
@@ -76,6 +102,11 @@ public class ActivityController extends BaseController {
         return buildSuccessJson();
     }
 
+    /**
+     * 获取所有的活动类型
+     *
+     * @return
+     */
     @RequestMapping(value = "/activity/types")
     @ResponseBody
     public String getTypes() {
