@@ -33,4 +33,7 @@ public interface PhotoInfoService {
      */
     public int deleteById(Integer id);
 
+
+    public int deleteByAlbumId(Integer albumId);
+
 }

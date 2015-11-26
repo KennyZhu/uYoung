@@ -35,6 +35,10 @@
         DELETE FROM tb_photo_info
         WHERE id = #{id,jdbcType=INTEGER}
     </delete>
+    <delete id="deleteByAlbumId" parameterType="java.lang.Integer">
+        DELETE FROM tb_photo_info
+        WHERE album_id = #{albumId,jdbcType=INTEGER}
+    </delete>
     <insert id="insert" parameterType="com.uyoung.core.api.model.PhotoInfo">
         <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
             SELECT LAST_INSERT_ID() AS id
@@ -187,9 +191,7 @@
             <if test="createTime != null">
                 create_time = #{createTime,jdbcType=TIMESTAMP},
             </if>
-            <if test="updateTime != null">
-                update_time = #{updateTime,jdbcType=TIMESTAMP},
-            </if>
+            update_time = now(),
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>

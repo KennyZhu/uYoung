@@ -23,6 +23,20 @@ public interface AlbumInfoService {
      */
     public AlbumInfo getById(Integer id);
 
+    /**
+     * 更新信息
+     *
+     * @param albumInfo
+     * @return
+     */
+    public int updateById(AlbumInfo albumInfo);
+
+    /**
+     * 删除相册,删除相册中的所有照片信息
+     *
+     * @param id
+     * @return
+     */
     public int deleteById(Integer id);
 
     /**

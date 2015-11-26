@@ -48,6 +48,23 @@ public class BaseController {
     }
 
     /**
+     * 操作失败
+     *
+     * @param failDesc
+     * @return
+     */
+    protected String buildFailJson(String failDesc) {
+        return JsonUtil.getJsonString(new BaseResult(ResultCodeEnum.FAIL.getCode(), failDesc));
+    }
+
+    /**
+     * @return
+     */
+    protected String buildFailJson() {
+        return buildFailJson(ResultCodeEnum.FAIL.getDesc());
+    }
+
+    /**
      * 空结果
      *
      * @param page

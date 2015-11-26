@@ -48,4 +48,12 @@ public class PhotoInfoServiceImpl implements PhotoInfoService {
         }
         return photoInfoDao.deleteById(id);
     }
+
+    @Override
+    public int deleteByAlbumId(Integer albumId) {
+        if (albumId == null) {
+            return 0;
+        }
+        return photoInfoDao.deleteByAlbumId(albumId);
+    }
 }

@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
 public class PhotoInfoDaoImpl extends BaseDao<PhotoInfo> implements PhotoInfoDao {
     @Override
     public int deleteById(Integer id) {
-        return 0;
+        return delete("deleteById", id);
     }
 
     @Override
@@ -29,6 +29,11 @@ public class PhotoInfoDaoImpl extends BaseDao<PhotoInfo> implements PhotoInfoDao
 
     @Override
     public int updateById(PhotoInfo record) {
-        return 0;
+        return update("updateById", record);
+    }
+
+    @Override
+    public int deleteByAlbumId(Integer albumId) {
+        return delete("deleteByAlbumId", albumId);
     }
 }

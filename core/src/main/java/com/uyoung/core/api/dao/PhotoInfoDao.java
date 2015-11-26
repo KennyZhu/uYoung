@@ -11,4 +11,6 @@ public interface PhotoInfoDao {
     PhotoInfo getById(Integer id);
 
     int updateById(PhotoInfo record);
+
+    int deleteByAlbumId(Integer albumId);
 }

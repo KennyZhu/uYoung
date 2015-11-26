@@ -34,7 +34,7 @@ public class AlbumInfoDaoImpl extends BaseDao<AlbumInfo> implements AlbumInfoDao
 
     @Override
     public int updateById(AlbumInfo record) {
-        return 0;
+        return update("updateById", record);
     }
 
     @Override

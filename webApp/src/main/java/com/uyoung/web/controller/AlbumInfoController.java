@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -26,6 +27,12 @@ public class AlbumInfoController extends BaseController {
     @Autowired
     private AlbumInfoService albumInfoService;
 
+    /**
+     * @param uid
+     * @param page
+     * @param pageSize
+     * @return
+     */
     @RequestMapping(value = "/album/getByUid")
     @ResponseBody
     public String getByUid(Integer uid, Integer page, Integer pageSize) {
@@ -48,7 +55,11 @@ public class AlbumInfoController extends BaseController {
         return buildEmptyPageJson(page, pageSize);
     }
 
-    @RequestMapping(value = "/album/add")
+    /**
+     * @param albumInfo
+     * @return
+     */
+    @RequestMapping(value = "/album/add", method = RequestMethod.POST)
     @ResponseBody
     public String add(AlbumInfo albumInfo) {
         if (albumInfo == null) {
@@ -58,6 +69,47 @@ public class AlbumInfoController extends BaseController {
             albumInfoService.add(albumInfo);
         } catch (Exception e) {
             LOGGER.error("#Add albumInfo error.Cause:", e);
+            return buildExceptionJson();
+        }
+        return buildSuccessJson();
+    }
+
+    /**
+     * @param albumInfo
+     * @return
+     */
+    @RequestMapping(value = "/album/updateById", method = RequestMethod.POST)
+    @ResponseBody
+    public String updateById(AlbumInfo albumInfo) {
+        if (albumInfo == null || albumInfo.getId() == null) {
+            return buildInvalidParamJson();
+        }
+        try {
+            albumInfoService.updateById(albumInfo);
+        } catch (Exception e) {
+            LOGGER.error("#Update albumInfo error.Cause:", e);
+            return buildExceptionJson();
+        }
+        return buildSuccessJson();
+    }
+
+    @RequestMapping(value = "/album/deleteById", method = RequestMethod.POST)
+    @ResponseBody
+    public String deleteById(Integer id, Integer uid) {
+        if (id == null || uid == null) {
+            return buildInvalidParamJson();
+        }
+        try {
+            AlbumInfo albumInfo = albumInfoService.getById(id);
+            if (albumInfo == null) {
+                return buildFailJson("没有对应的相册");
+            }
+            if (!uid.equals(albumInfo.getCreateUserId())) {
+                return buildFailJson("不能删除别人的相册");
+            }
+            albumInfoService.deleteById(id);
+        } catch (Exception e) {
+            LOGGER.error("#Delete albumInfo error.Cause:", e);
             return buildExceptionJson();
         }
         return buildSuccessJson();

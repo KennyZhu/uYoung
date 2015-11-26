@@ -3,7 +3,10 @@ package com.uyoung.core.api.service.impl;
 import com.uyoung.core.api.dao.AlbumInfoDao;
 import com.uyoung.core.api.model.AlbumInfo;
 import com.uyoung.core.api.service.AlbumInfoService;
+import com.uyoung.core.api.service.PhotoInfoService;
 import com.uyoung.core.base.bean.Page;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,8 +18,13 @@ import org.springframework.stereotype.Service;
 @Service("albumInfoService")
 public class AlbumInfoServiceImpl implements AlbumInfoService {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(AlbumInfoServiceImpl.class);
+
     @Autowired
     private AlbumInfoDao albumInfoDao;
+
+    @Autowired
+    private PhotoInfoService photoInfoService;
 
     @Override
     public int add(AlbumInfo albumInfo) {
@@ -32,6 +40,17 @@ public class AlbumInfoServiceImpl implements AlbumInfoService {
             return null;
         }
         return albumInfoDao.getById(id);
+    }
+
+    @Override
+    public int updateById(AlbumInfo albumInfo) {
+        if (albumInfo == null || albumInfo.getId() == null) {
+            LOGGER.error("#Invalid param.");
+            return 0;
+        }
+
+        return albumInfoDao.updateById(albumInfo);
+
     }
 
     @Override

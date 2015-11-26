@@ -121,9 +121,7 @@
             <if test="createTime != null">
                 create_time = #{createTime,jdbcType=TIMESTAMP},
             </if>
-            <if test="updateTime != null">
-                update_time = #{updateTime,jdbcType=TIMESTAMP},
-            </if>
+
             <if test="activityId != null">
                 activity_id = #{activityId,jdbcType=INTEGER},
             </if>
@@ -133,6 +131,7 @@
             <if test="totalPhotoCount != null">
                 total_photo_count = #{totalPhotoCount,jdbcType=INTEGER},
             </if>
+            update_time = now(),
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>

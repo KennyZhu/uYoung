@@ -7,7 +7,7 @@ package com.uyoung.web.enums;
  */
 public enum ResultCodeEnum {
 
-    SUCCESS(100, "success"), EXCEPTION(-1, "exception"), INVALID_PARAM(101, "invalid param");
+    SUCCESS(100, "success"), FAIL(101, "fail"), EXCEPTION(-1, "exception"), INVALID_PARAM(-2, "invalid param");
     private final int code;
     private final String desc;
 
