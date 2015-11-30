@@ -1,5 +1,6 @@
 package com.uyoung.core.api.service;
 
+import com.uyoung.core.api.enums.ActivitySignUpStatusEnum;
 import com.uyoung.core.api.model.ActivitySignUp;
 
 import java.util.List;
@@ -18,6 +19,8 @@ public interface ActivitySignUpService {
     public ActivitySignUp getById(int id);
 
     public int updateById(ActivitySignUp activitySignUp);
+
+    int updateStatusByUidAid(Integer uid, Integer aid, ActivitySignUpStatusEnum statusEnum);
 
     List<ActivitySignUp> getListByActivityId(Integer activityId);
 }

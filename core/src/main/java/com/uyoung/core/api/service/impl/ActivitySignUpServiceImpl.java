@@ -42,6 +42,14 @@ public class ActivitySignUpServiceImpl implements ActivitySignUpService {
     }
 
     @Override
+    public int updateStatusByUidAid(Integer uid, Integer aid, ActivitySignUpStatusEnum statusEnum) {
+        if (uid == null || aid == null) {
+            return 0;
+        }
+        return activitySignUpDao.updateStatusByUidAid(uid, aid, statusEnum.getStatus());
+    }
+
+    @Override
     public List<ActivitySignUp> getListByActivityId(Integer activityId) {
         if (activityId == null) {
             return Collections.emptyList();

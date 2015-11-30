@@ -1,5 +1,6 @@
 package com.uyoung.web.controller;
 
+import com.uyoung.core.api.enums.ActivitySignUpStatusEnum;
 import com.uyoung.core.api.model.ActivitySignUp;
 import com.uyoung.core.api.service.ActivitySignUpService;
 import org.slf4j.Logger;
@@ -22,6 +23,12 @@ public class ActivitySignUpController extends BaseController {
     @Autowired
     private ActivitySignUpService signUpService;
 
+    /**
+     * 报名
+     *
+     * @param activitySignUp
+     * @return
+     */
     @RequestMapping(value = "/activity/signUp")
     @ResponseBody
     public String signUp(ActivitySignUp activitySignUp) {
@@ -37,17 +44,45 @@ public class ActivitySignUpController extends BaseController {
         return buildSuccessJson();
     }
 
+    /**
+     * 取消报名
+     *
+     * @param uid
+     * @param activityId
+     * @return
+     */
     @RequestMapping(value = "/activity/calSignUp")
     @ResponseBody
     public String calSignUp(Integer uid, Integer activityId) {
         if (uid == null || activityId == null) {
             return buildInvalidParamJson();
         }
+
         try {
             signUpService.cancel(uid, activityId);
 
         } catch (Exception e) {
             LOGGER.error("#Cancel aid:" + activityId + " uid:" + uid + " error.Cause:", e);
+            return buildExceptionJson();
+        }
+        return buildSuccessJson();
+    }
+
+    /**
+     * 确认报名
+     *
+     * @return
+     */
+    @RequestMapping(value = "/activity/conSignUp")
+    @ResponseBody
+    public String confirmSignUp(Integer uid, Integer activityId) {
+        if (uid == null || activityId == null) {
+            return buildInvalidParamJson();
+        }
+        try {
+            signUpService.updateStatusByUidAid(uid, activityId, ActivitySignUpStatusEnum.SUCCESS);
+        } catch (Exception e) {
+            LOGGER.error("#Confirm signUp aid:" + activityId + " uid:" + uid);
             return buildExceptionJson();
         }
         return buildSuccessJson();
