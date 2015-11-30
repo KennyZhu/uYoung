@@ -39,15 +39,15 @@ public class ActivitySignUpController extends BaseController {
 
     @RequestMapping(value = "/activity/calSignUp")
     @ResponseBody
-    public String calSignUp(Integer uid, Integer aid) {
-        if (uid == null || aid == null) {
+    public String calSignUp(Integer uid, Integer activityId) {
+        if (uid == null || activityId == null) {
             return buildInvalidParamJson();
         }
         try {
-            signUpService.cancel(uid, aid);
+            signUpService.cancel(uid, activityId);
 
         } catch (Exception e) {
-            LOGGER.error("#Cancel aid:" + aid + " uid:" + uid + " error.Cause:", e);
+            LOGGER.error("#Cancel aid:" + activityId + " uid:" + uid + " error.Cause:", e);
             return buildExceptionJson();
         }
         return buildSuccessJson();
