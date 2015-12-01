@@ -52,4 +52,13 @@ public interface ActivityInfoService {
      */
     public int updateById(ActivityInfo activityInfo);
 
+    /**
+     * 更新活动状态
+     *
+     * @param activityId
+     * @param activityStatusEnum
+     * @return
+     */
+    public int updateStatusById(Integer activityId, ActivityStatusEnum activityStatusEnum);
+
 }

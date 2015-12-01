@@ -55,6 +55,17 @@ public class ActivityInfoServiceImpl implements ActivityInfoService {
 
     @Override
     public int updateById(ActivityInfo activityInfo) {
+        if (activityInfo == null || activityInfo.getId() == null) {
+            return 0;
+        }
         return activityInfoDao.updateById(activityInfo);
+    }
+
+    @Override
+    public int updateStatusById(Integer activityId, ActivityStatusEnum activityStatusEnum) {
+        if (activityId == null || activityStatusEnum == null) {
+            return 0;
+        }
+        return activityInfoDao.updateByIdStatus(activityId, activityStatusEnum.getStatus());
     }
 }

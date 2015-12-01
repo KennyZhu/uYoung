@@ -1,5 +1,7 @@
 package com.uyoung.core.api.model;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class ActivitySignUp {
@@ -62,5 +64,15 @@ public class ActivitySignUp {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public static void main(String[] args) throws Exception {
+        String strDate1 = "2015-12-01 20:34:52";
+        String strDate2 = "2015-11-30 20:34:52";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        Date date1 = simpleDateFormat.parse(strDate1);
+        Date date2 = simpleDateFormat.parse(strDate2);
+        Timestamp time1 = new Timestamp(date1.getTime());
+        System.out.println(time1.after(date2));
     }
 }

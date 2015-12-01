@@ -35,7 +35,7 @@ public class ActivityInfoDaoImpl extends BaseDao<ActivityInfo> implements Activi
 
     @Override
     public int updateById(ActivityInfo record) {
-        return 0;
+        return update("updateById", record);
     }
 
     @Override
@@ -44,5 +44,13 @@ public class ActivityInfoDaoImpl extends BaseDao<ActivityInfo> implements Activi
         paramMap.put("status", status);
         paramMap.put("oriUid", oriUid);
         return selectPage("getPageByStatus", paramMap, new RowBounds(offset, limit));
+    }
+
+    @Override
+    public int updateByIdStatus(Integer id, Integer status) {
+        Map<String, Integer> paramMap = new HashMap<>();
+        paramMap.put("id", id);
+        paramMap.put("status", status);
+        return update("updateByIdStatus", paramMap);
     }
 }

@@ -103,6 +103,28 @@ public class ActivityController extends BaseController {
     }
 
     /**
+     * 取消活动
+     *
+     * @param activityId
+     * @param uid
+     * @return
+     */
+    @RequestMapping(value = "/activity/cal")
+    @ResponseBody
+    public String cal(Integer uid, Integer activityId) {
+        if (uid == null || activityId == null) {
+            return buildInvalidParamJson();
+        }
+        try {
+//            activityInfoService.add(activityInfo);
+        } catch (Exception e) {
+            LOGGER.error("#Add activity error!Cause:", e);
+            return buildExceptionJson();
+        }
+        return buildSuccessJson();
+    }
+
+    /**
      * 获取所有的活动类型
      *
      * @return

@@ -156,9 +156,7 @@
             <if test="createTime != null">
                 create_time = #{createTime,jdbcType=TIMESTAMP},
             </if>
-            <if test="updateTime != null">
-                update_time = #{updateTime,jdbcType=TIMESTAMP},
-            </if>
+            update_time = now(),
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
@@ -171,4 +169,11 @@
             and ori_user_id = #{oriUserId,jdbcType=INTEGER}
         </if>
     </select>
+    <update id="updateByIdStatus" parameterType="java.util.Map">
+        update tb_activity_info
+        set status = #{status,jdbcType=TINYINT}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+
 </mapper>
