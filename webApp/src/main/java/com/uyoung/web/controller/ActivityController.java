@@ -109,7 +109,7 @@ public class ActivityController extends BaseController {
      * @param uid
      * @return
      */
-    @RequestMapping(value = "/activity/cal")
+    @RequestMapping(value = "/activity/cal", method = RequestMethod.POST)
     @ResponseBody
     public String cal(Integer uid, Integer activityId) {
         if (uid == null || activityId == null) {
@@ -118,7 +118,7 @@ public class ActivityController extends BaseController {
         try {
             activityInfoService.cancel(uid, activityId);
         } catch (Exception e) {
-            LOGGER.error("#Add activity error!Cause:", e);
+            LOGGER.error("#Cal activity error!Uid is:" + uid + " activityId is " + activityId + "Cause:", e);
             return buildExceptionJson();
         }
         return buildSuccessJson();
