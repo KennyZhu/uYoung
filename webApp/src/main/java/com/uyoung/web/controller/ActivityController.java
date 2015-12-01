@@ -116,7 +116,7 @@ public class ActivityController extends BaseController {
             return buildInvalidParamJson();
         }
         try {
-//            activityInfoService.add(activityInfo);
+            activityInfoService.cancel(uid, activityId);
         } catch (Exception e) {
             LOGGER.error("#Add activity error!Cause:", e);
             return buildExceptionJson();

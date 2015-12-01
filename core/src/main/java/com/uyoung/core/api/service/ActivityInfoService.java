@@ -61,4 +61,13 @@ public interface ActivityInfoService {
      */
     public int updateStatusById(Integer activityId, ActivityStatusEnum activityStatusEnum);
 
+    /**
+     * 取消活动
+     *
+     * @param uid
+     * @param activityId
+     * @return
+     */
+    public int cancel(Integer uid, Integer activityId);
+
 }

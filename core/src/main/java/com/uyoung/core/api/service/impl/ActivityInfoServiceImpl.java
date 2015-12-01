@@ -5,6 +5,8 @@ import com.uyoung.core.api.enums.ActivityStatusEnum;
 import com.uyoung.core.api.model.ActivityInfo;
 import com.uyoung.core.api.service.ActivityInfoService;
 import com.uyoung.core.base.bean.Page;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,8 @@ import org.springframework.stereotype.Service;
  */
 @Service("activityInfoService")
 public class ActivityInfoServiceImpl implements ActivityInfoService {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ActivityInfoServiceImpl.class);
     @Autowired
     private ActivityInfoDao activityInfoDao;
 
@@ -67,5 +71,22 @@ public class ActivityInfoServiceImpl implements ActivityInfoService {
             return 0;
         }
         return activityInfoDao.updateByIdStatus(activityId, activityStatusEnum.getStatus());
+    }
+
+    @Override
+    public int cancel(Integer uid, Integer activityId) {
+        if (uid == null || activityId == null) {
+            return 0;
+        }
+        ActivityInfo activityInfo = activityInfoDao.getById(activityId);
+        if (activityInfo == null) {
+            LOGGER.error("#Can not found activityInfo.ActivityId is " + activityId);
+            return 0;
+        }
+        if (activityInfo.getOriUserId() != uid) {
+            LOGGER.error("#Activity :" + activityId + " is not User:" + uid);
+            return 0;
+        }
+        return updateStatusById(activityId, ActivityStatusEnum.CANCEL);
     }
 }
