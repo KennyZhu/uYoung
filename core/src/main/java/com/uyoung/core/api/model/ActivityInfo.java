@@ -12,6 +12,10 @@ public class ActivityInfo {
 
     private Date beginTime;
 
+    private String strBeginTime;
+
+    private String strEndTime;
+
     private Date endTime;
 
     private String address;
@@ -145,6 +149,21 @@ public class ActivityInfo {
         return updateTime;
     }
 
+    public String getStrBeginTime() {
+        return strBeginTime;
+    }
+
+    public void setStrBeginTime(String strBeginTime) {
+        this.strBeginTime = strBeginTime;
+    }
+
+    public String getStrEndTime() {
+        return strEndTime;
+    }
+
+    public void setStrEndTime(String strEndTime) {
+        this.strEndTime = strEndTime;
+    }
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
@@ -165,6 +184,7 @@ public class ActivityInfo {
     public static void badMethod() {
         throw new NullPointerException();
     }
+
     @Override
     public String toString() {
         return "ActivityInfo{" +

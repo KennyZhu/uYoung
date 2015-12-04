@@ -5,10 +5,13 @@ import com.uyoung.core.api.enums.ActivityStatusEnum;
 import com.uyoung.core.api.model.ActivityInfo;
 import com.uyoung.core.api.service.ActivityInfoService;
 import com.uyoung.core.base.bean.Page;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.text.SimpleDateFormat;
 
 /**
  * User: KennyZhu
@@ -40,6 +43,18 @@ public class ActivityInfoServiceImpl implements ActivityInfoService {
     public int add(ActivityInfo activityInfo) {
         if (activityInfo == null) {
             return 0;
+        }
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+
+            if (StringUtils.isNotBlank(activityInfo.getStrBeginTime())) {
+                activityInfo.setBeginTime(simpleDateFormat.parse(activityInfo.getStrBeginTime()));
+            }
+            if (StringUtils.isNotBlank(activityInfo.getStrEndTime())) {
+                activityInfo.setEndTime(simpleDateFormat.parse(activityInfo.getStrEndTime()));
+            }
+        } catch (Exception e) {
+
         }
         return activityInfoDao.insert(activityInfo);
     }
