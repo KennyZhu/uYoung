@@ -1,5 +1,6 @@
 package com.uyoung.web.handler;
 
+import com.uyoung.core.api.enums.ActivitySignUpStatusEnum;
 import com.uyoung.core.api.enums.ActivityStatusEnum;
 import com.uyoung.core.api.enums.ActivityTypeEnum;
 import com.uyoung.core.api.model.ActivityInfo;
@@ -131,5 +132,21 @@ public class ActivityInfoHandler {
             result.add(new ActivityTypeVo(typeEnum));
         }
         return result;
+    }
+
+    /**
+     * @param activityInfo
+     * @return
+     */
+    public void createActivity(ActivityInfo activityInfo) {
+        int createResult = activityInfoService.add(activityInfo);
+        if (createResult == 0) {
+            return;
+        }
+        ActivitySignUp activitySignUp = new ActivitySignUp();
+        activitySignUp.setActivityId(activityInfo.getId());
+        activitySignUp.setUserId(activityInfo.getOriUserId());
+        activitySignUp.setStatus(ActivitySignUpStatusEnum.SUCCESS.getStatus());
+        signUpService.add(activitySignUp);
     }
 }

@@ -28,6 +28,8 @@ public class AlbumInfoController extends BaseController {
     private AlbumInfoService albumInfoService;
 
     /**
+     * 获取用户创建的相册
+     *
      * @param uid
      * @param page
      * @param pageSize
@@ -56,6 +58,8 @@ public class AlbumInfoController extends BaseController {
     }
 
     /**
+     * 添加相册
+     *
      * @param albumInfo
      * @return
      */
@@ -75,6 +79,8 @@ public class AlbumInfoController extends BaseController {
     }
 
     /**
+     * 更新相册
+     *
      * @param albumInfo
      * @return
      */
@@ -93,6 +99,13 @@ public class AlbumInfoController extends BaseController {
         return buildSuccessJson();
     }
 
+    /**
+     * 删除相册
+     *
+     * @param id
+     * @param uid
+     * @return
+     */
     @RequestMapping(value = "/album/deleteById", method = RequestMethod.POST)
     @ResponseBody
     public String deleteById(Integer id, Integer uid) {
@@ -112,6 +125,18 @@ public class AlbumInfoController extends BaseController {
             LOGGER.error("#Delete albumInfo error.Cause:", e);
             return buildExceptionJson();
         }
+        return buildSuccessJson();
+    }
+
+    /**
+     * 相册详情
+     *
+     * @param albumId
+     * @return TODO
+     */
+    @RequestMapping(value = "/album/getDetailById")
+    @ResponseBody
+    public String getDetailById(Integer albumId) {
         return buildSuccessJson();
     }
 }

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
- * Desc:
+ * Desc:通用功能
  * <p/>Date: 2015-11-17
  * <br/>Time: 17:20
  * <br/>User: ylzhu
@@ -43,5 +43,17 @@ public class CommonController extends BaseController {
             LOGGER.error("#Get City Dict error.Cause:", e);
             return buildExceptionJson();
         }
+    }
+
+    /**
+     * 判断版本审核状态
+     *
+     * @param version
+     * @return
+     */
+    @RequestMapping(value = "/common/audit")
+    @ResponseBody
+    public String getAuditStatus(String version) {
+        return buildSuccessJson();
     }
 }
