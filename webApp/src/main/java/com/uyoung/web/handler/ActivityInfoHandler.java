@@ -135,6 +135,8 @@ public class ActivityInfoHandler {
     }
 
     /**
+     * 创建活动
+     *
      * @param activityInfo
      * @return
      */
