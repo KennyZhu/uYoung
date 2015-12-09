@@ -195,4 +195,11 @@
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
+
+    <select id="getListByAlbumId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_photo_info
+        where album_id = #{albumId,jdbcType=INTEGER}
+    </select>
 </mapper>

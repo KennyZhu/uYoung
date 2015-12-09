@@ -2,6 +2,8 @@ package com.uyoung.core.api.service;
 
 import com.uyoung.core.api.model.PhotoInfo;
 
+import java.util.List;
+
 /**
  * User: KennyZhu
  * Date: 15/9/20
@@ -32,6 +34,14 @@ public interface PhotoInfoService {
      * @return
      */
     public int deleteById(Integer id);
+
+    /**
+     * 根据相册ID获取所有的照片
+     *
+     * @param albumId
+     * @return
+     */
+    public List<PhotoInfo> getListByAlbumId(Integer albumId);
 
 
     public int deleteByAlbumId(Integer albumId);
