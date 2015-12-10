@@ -14,6 +14,8 @@ public class AlbumDetailVo {
 
     private Integer albumId;
 
+    private String albumDesc;
+
     private Integer oriUserId;
 
     private String oriUrl;
@@ -80,5 +82,13 @@ public class AlbumDetailVo {
 
     public void setPhotoInfoList(List<PhotoInfo> photoInfoList) {
         this.photoInfoList = photoInfoList;
+    }
+
+    public String getAlbumDesc() {
+        return albumDesc;
+    }
+
+    public void setAlbumDesc(String albumDesc) {
+        this.albumDesc = albumDesc;
     }
 }
