@@ -5,6 +5,8 @@ import com.uyoung.core.api.model.PhotoInfo;
 import com.uyoung.core.base.dao.BaseDao;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * User: KennyZhu
  * Date: 15/9/20
@@ -35,5 +37,10 @@ public class PhotoInfoDaoImpl extends BaseDao<PhotoInfo> implements PhotoInfoDao
     @Override
     public int deleteByAlbumId(Integer albumId) {
         return delete("deleteByAlbumId", albumId);
+    }
+
+    @Override
+    public List<PhotoInfo> getListByAlbumId(Integer albumId) {
+        return selectList("getListByAlbumId", albumId);
     }
 }

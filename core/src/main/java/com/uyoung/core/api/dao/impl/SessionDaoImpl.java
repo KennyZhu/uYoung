@@ -3,6 +3,7 @@ package com.uyoung.core.api.dao.impl;
 import com.uyoung.core.api.dao.SessionDao;
 import com.uyoung.core.api.model.Session;
 import com.uyoung.core.base.dao.BaseDao;
+import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,6 +14,7 @@ import java.util.Map;
  * <br/>Time: 17:37
  * <br/>User: ylzhu
  */
+@Repository
 public class SessionDaoImpl extends BaseDao<Session> implements SessionDao {
     @Override
     public int deleteById(Integer id) {

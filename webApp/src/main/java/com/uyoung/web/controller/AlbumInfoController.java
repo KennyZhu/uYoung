@@ -4,6 +4,8 @@ import com.uyoung.core.api.model.AlbumInfo;
 import com.uyoung.core.api.service.AlbumInfoService;
 import com.uyoung.core.base.bean.Page;
 import com.uyoung.web.handler.AlbumInfoBuilder;
+import com.uyoung.web.handler.AlbumInfoHandler;
+import com.uyoung.web.vo.AlbumDetailVo;
 import com.uyoung.web.vo.AlbumInfoVo;
 import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
@@ -26,6 +28,9 @@ public class AlbumInfoController extends BaseController {
     private static final Logger LOGGER = LoggerFactory.getLogger(AlbumInfoController.class);
     @Autowired
     private AlbumInfoService albumInfoService;
+
+    @Autowired
+    private AlbumInfoHandler handler;
 
     /**
      * 获取用户创建的相册
@@ -137,6 +142,15 @@ public class AlbumInfoController extends BaseController {
     @RequestMapping(value = "/album/getDetailById")
     @ResponseBody
     public String getDetailById(Integer albumId) {
-        return buildSuccessJson();
+        if (albumId == null) {
+            return buildInvalidParamJson();
+        }
+        try {
+            AlbumDetailVo detailVo = handler.getAlbumDetailById(albumId);
+            return buildSuccessJson(detailVo);
+        } catch (Exception e) {
+            LOGGER.error("#Add albumInfo error.Cause:", e);
+            return buildExceptionJson();
+        }
     }
 }

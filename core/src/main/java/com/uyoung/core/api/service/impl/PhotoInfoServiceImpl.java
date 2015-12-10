@@ -6,6 +6,9 @@ import com.uyoung.core.api.service.PhotoInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
+import java.util.List;
+
 /**
  * User: KennyZhu
  * Date: 15/9/20
@@ -47,6 +50,15 @@ public class PhotoInfoServiceImpl implements PhotoInfoService {
             return 0;
         }
         return photoInfoDao.deleteById(id);
+    }
+
+    @Override
+    public List<PhotoInfo> getListByAlbumId(Integer albumId) {
+        if (albumId == null) {
+            return Collections.EMPTY_LIST;
+        }
+        return photoInfoDao.getListByAlbumId(albumId);
+
     }
 
     @Override
