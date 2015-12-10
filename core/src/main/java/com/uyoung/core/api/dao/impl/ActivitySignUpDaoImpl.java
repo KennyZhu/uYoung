@@ -32,11 +32,6 @@ public class ActivitySignUpDaoImpl extends BaseDao<ActivitySignUp> implements Ac
     }
 
     @Override
-    public int updateById(ActivitySignUp record) {
-        return 0;
-    }
-
-    @Override
     public int updateStatusByUidAid(Integer uid, Integer aid, int status) {
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("uid", uid);
@@ -48,7 +43,24 @@ public class ActivitySignUpDaoImpl extends BaseDao<ActivitySignUp> implements Ac
     }
 
     @Override
+    public int updateActivityStatusByAid(Integer aid, int status) {
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("aid", aid);
+        paramMap.put("status", status);
+
+        return update("updateActivityStatusByAid", paramMap);
+    }
+
+    @Override
     public List<ActivitySignUp> getListByActivityId(Integer aid) {
         return selectList("getListByActivityId", aid);
+    }
+
+    @Override
+    public List<ActivitySignUp> getListByUidActivityStatusList(Integer uid, List<Integer> actStatusList) {
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("uid", uid);
+        paramMap.put("actStatusList", actStatusList);
+        return selectList("getListByUidActivityStatusList", paramMap);
     }
 }

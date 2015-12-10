@@ -170,10 +170,19 @@
         </if>
     </select>
     <update id="updateByIdStatus" parameterType="java.util.Map">
-        update tb_activity_info
-        set status = #{status,jdbcType=TINYINT}
-        where id = #{id,jdbcType=INTEGER}
+        UPDATE tb_activity_info
+        SET status = #{status,jdbcType=TINYINT}
+        WHERE id = #{id,jdbcType=INTEGER}
     </update>
+    <select id="getListByIdList" parameterType="java.util.ArrayList" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        from tb_activity_info
+        where id in
+        <foreach collection="idList" index="id" item="id" open="(" separator="," close=")">
+            #{id,jdbcType=INTEGER}
+        </foreach>
+    </select>
 
 
 </mapper>

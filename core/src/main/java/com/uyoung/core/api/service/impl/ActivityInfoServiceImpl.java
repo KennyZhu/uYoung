@@ -5,6 +5,7 @@ import com.uyoung.core.api.enums.ActivityStatusEnum;
 import com.uyoung.core.api.model.ActivityInfo;
 import com.uyoung.core.api.service.ActivityInfoService;
 import com.uyoung.core.base.bean.Page;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * User: KennyZhu
@@ -104,5 +107,13 @@ public class ActivityInfoServiceImpl implements ActivityInfoService {
             return 0;
         }
         return updateStatusById(activityId, ActivityStatusEnum.CANCEL);
+    }
+
+    @Override
+    public List<ActivityInfo> getListByIdList(List<Integer> idList) {
+        if (CollectionUtils.isEmpty(idList)) {
+            return Collections.EMPTY_LIST;
+        }
+        return activityInfoDao.getListByIdList(idList);
     }
 }

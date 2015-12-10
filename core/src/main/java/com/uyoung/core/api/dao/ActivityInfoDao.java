@@ -3,6 +3,8 @@ package com.uyoung.core.api.dao;
 import com.uyoung.core.api.model.ActivityInfo;
 import com.uyoung.core.base.bean.Page;
 
+import java.util.List;
+
 public interface ActivityInfoDao {
 
     int deleteById(Integer id);
@@ -16,4 +18,6 @@ public interface ActivityInfoDao {
     int updateByIdStatus(Integer id, Integer status);
 
     Page<ActivityInfo> getPageByStatus(int offset, int limit, int status, Integer oriUid);
+
+    List<ActivityInfo> getListByIdList(List<Integer> idList);
 }
