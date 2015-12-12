@@ -49,6 +49,7 @@ public class AlbumInfoHandler {
         detailVo.setOriNickName(userInfo.getNickName());
         detailVo.setCreateTime(info.getCreateTime());
         detailVo.setPhotoNum(info.getTotalPhotoCount());
+        detailVo.setAlbumDesc(info.getAlbumName());
         List<PhotoInfo> photoInfos = photoInfoService.getListByAlbumId(info.getId());
         if (CollectionUtils.isNotEmpty(photoInfos)) {
             detailVo.setPhotoInfoList(photoInfos);

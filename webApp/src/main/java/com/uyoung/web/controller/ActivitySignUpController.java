@@ -3,6 +3,7 @@ package com.uyoung.web.controller;
 import com.uyoung.core.api.enums.ActivitySignUpStatusEnum;
 import com.uyoung.core.api.model.ActivitySignUp;
 import com.uyoung.core.api.service.ActivitySignUpService;
+import com.uyoung.web.handler.ActivitySignUpHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,9 @@ public class ActivitySignUpController extends BaseController {
     @Autowired
     private ActivitySignUpService signUpService;
 
+    @Autowired
+    private ActivitySignUpHandler handler;
+
     /**
      * 报名
      *
@@ -36,7 +40,7 @@ public class ActivitySignUpController extends BaseController {
             return buildInvalidParamJson();
         }
         try {
-            signUpService.add(activitySignUp);
+            handler.signUp(activitySignUp);
         } catch (Exception e) {
             LOGGER.error("#SignUp activity error.Cause:", e);
             return buildExceptionJson();

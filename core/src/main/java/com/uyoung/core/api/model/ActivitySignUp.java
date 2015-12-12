@@ -14,6 +14,8 @@ public class ActivitySignUp {
 
     private Integer status;
 
+    private Integer activityStatus;
+
     private Date createTime;
 
     private Date updateTime;
@@ -64,6 +66,14 @@ public class ActivitySignUp {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public Integer getActivityStatus() {
+        return activityStatus;
+    }
+
+    public void setActivityStatus(Integer activityStatus) {
+        this.activityStatus = activityStatus;
     }
 
     public static void main(String[] args) throws Exception {

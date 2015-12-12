@@ -6,11 +6,12 @@
         <result column="activity_id" property="activityId" jdbcType="INTEGER"/>
         <result column="user_id" property="userId" jdbcType="INTEGER"/>
         <result column="status" property="status" jdbcType="TINYINT"/>
+        <result column="activity_status" property="status" jdbcType="TINYINT"/>
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, activity_id, user_id, status, create_time, update_time
+        id, activity_id, user_id, status, activity_status, create_time, update_time
     </sql>
     <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
@@ -46,6 +47,9 @@
             <if test="status != null">
                 status,
             </if>
+            <if test="activityStatus != null">
+                activity_status,
+            </if>
             create_time,
             update_time,
         </trim>
@@ -62,34 +66,31 @@
             <if test="status != null">
                 #{status,jdbcType=TINYINT},
             </if>
+            <if test="activity_status != null">
+                #{activityStatus,jdbcType=TINYINT},
+            </if>
             now(),now()
         </trim>
     </insert>
-    <update id="updateById" parameterType="com.uyoung.core.api.model.ActivitySignUp">
-        update tb_activity_signup
-        <set>
-            <if test="activityId != null">
-                activity_id = #{activityId,jdbcType=INTEGER},
-            </if>
-            <if test="userId != null">
-                user_id = #{userId,jdbcType=INTEGER},
-            </if>
-            <if test="status != null">
-                status = #{status,jdbcType=TINYINT},
-            </if>
-            <if test="createTime != null">
-                create_time = #{createTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="updateTime != null">
-                update_time = #{updateTime,jdbcType=TIMESTAMP},
-            </if>
-        </set>
-        where id = #{id,jdbcType=INTEGER}
-    </update>
     <update id="updateStatusByUidAid" parameterType="java.util.Map">
-        update tb_activity_signup
-        set status = #{status,jdbcType=INTEGER}
-        where activity_id=#{aid,jdbcType=INTEGER}
-        and user_id=#{uid,jdbcType=INTEGER}
+        UPDATE tb_activity_signup
+        SET status = #{status,jdbcType=INTEGER}
+        WHERE activity_id =#{aid,jdbcType=INTEGER}
+              AND user_id =#{uid,jdbcType=INTEGER}
     </update>
+    <update id="updateActivityStatusByAid" parameterType="java.util.Map">
+        UPDATE tb_activity_signup
+        SET activity_status = #{activityStatus,jdbcType=INTEGER}
+        WHERE activity_id =#{aid,jdbcType=INTEGER}
+    </update>
+    <select id="getListByUidActivityStatusList" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_activity_signup
+        where user_id = #{uid,jdbcType=INTEGER}
+        and activity_status in
+        <foreach collection="actStatusList" index="status" separator="," open="(" close=")" item="status">
+            #{status,jdbcType=TINYINT}
+        </foreach>
+    </select>
 </mapper>

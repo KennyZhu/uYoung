@@ -4,6 +4,8 @@ import com.uyoung.core.api.enums.ActivityStatusEnum;
 import com.uyoung.core.api.model.ActivityInfo;
 import com.uyoung.core.base.bean.Page;
 
+import java.util.List;
+
 /**
  * User: KennyZhu
  * Date: 15/9/20
@@ -69,5 +71,14 @@ public interface ActivityInfoService {
      * @return
      */
     public int cancel(Integer uid, Integer activityId);
+
+    /**
+     * 批量获取活动信息
+     *
+     * @param idList
+     * @return
+     */
+    public List<ActivityInfo> getListByIdList(List<Integer> idList);
+
 
 }

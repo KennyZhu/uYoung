@@ -9,9 +9,23 @@ import java.util.stream.Stream;
  */
 public enum ActivityStatusEnum {
 
-
+    /**
+     * 报名中
+     */
+    SIGNUP(0, "报名中"),
+    /**
+     * 进行中
+     */
     ACTIVE(1, "进行中"),
+
+    /**
+     * 已完成
+     */
     COMPLETE(2, "已完成"),
+
+    /**
+     * 已取消
+     */
     CANCEL(3, "已取消");
 
 

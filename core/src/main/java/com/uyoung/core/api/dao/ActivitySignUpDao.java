@@ -12,9 +12,11 @@ public interface ActivitySignUpDao {
 
     ActivitySignUp getById(Integer id);
 
-    int updateById(ActivitySignUp record);
-
     int updateStatusByUidAid(Integer uid, Integer aid, int status);
 
+    int updateActivityStatusByAid(Integer aid, int status);
+
     List<ActivitySignUp> getListByActivityId(Integer aid);
+
+    List<ActivitySignUp> getListByUidActivityStatusList(Integer uid, List<Integer> actStatusList);
 }

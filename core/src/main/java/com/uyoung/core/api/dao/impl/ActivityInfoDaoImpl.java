@@ -8,6 +8,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -52,5 +53,10 @@ public class ActivityInfoDaoImpl extends BaseDao<ActivityInfo> implements Activi
         paramMap.put("id", id);
         paramMap.put("status", status);
         return update("updateByIdStatus", paramMap);
+    }
+
+    @Override
+    public List<ActivityInfo> getListByIdList(List<Integer> idList) {
+        return selectList("getListByIdList", idList);
     }
 }
