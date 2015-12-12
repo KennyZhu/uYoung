@@ -75,12 +75,12 @@ public class AlbumInfoController extends BaseController {
             return buildInvalidParamJson();
         }
         try {
-            albumInfoService.add(albumInfo);
+            int result = albumInfoService.add(albumInfo);
         } catch (Exception e) {
             LOGGER.error("#Add albumInfo error.Cause:", e);
             return buildExceptionJson();
         }
-        return buildSuccessJson();
+        return buildSuccessJson(albumInfo);
     }
 
     /**
