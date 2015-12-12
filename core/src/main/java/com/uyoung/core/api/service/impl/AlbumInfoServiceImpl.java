@@ -10,6 +10,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 /**
  * User: KennyZhu
  * Date: 15/9/20
@@ -31,6 +33,9 @@ public class AlbumInfoServiceImpl implements AlbumInfoService {
         if (albumInfo == null) {
             return 0;
         }
+        Date now = new Date();
+        albumInfo.setCreateTime(now);
+        albumInfo.setUpdateTime(now);
         return albumInfoDao.insert(albumInfo);
     }
 
