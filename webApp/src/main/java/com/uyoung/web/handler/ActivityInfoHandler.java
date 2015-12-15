@@ -11,6 +11,7 @@ import com.uyoung.core.api.service.ActivitySignUpService;
 import com.uyoung.core.api.service.UserInfoService;
 import com.uyoung.core.base.bean.Page;
 import com.uyoung.web.vo.ActivityInfoVo;
+import com.uyoung.web.vo.ActivityStatusVo;
 import com.uyoung.web.vo.ActivityTypeVo;
 import com.uyoung.web.vo.SignUpUserVo;
 import org.apache.commons.collections.CollectionUtils;
@@ -126,10 +127,28 @@ public class ActivityInfoHandler {
         return result;
     }
 
+    /**
+     * 获取所有活动类型
+     *
+     * @return
+     */
     public List<ActivityTypeVo> getAllActivityTypes() {
         List<ActivityTypeVo> result = new ArrayList<>(ActivityTypeEnum.values().length);
         for (ActivityTypeEnum typeEnum : ActivityTypeEnum.values()) {
             result.add(new ActivityTypeVo(typeEnum));
+        }
+        return result;
+    }
+
+    /**
+     * 获取所有活动状态
+     *
+     * @return
+     */
+    public List<ActivityStatusVo> getAllActivityStatus() {
+        List<ActivityStatusVo> result = new ArrayList<>(ActivityStatusEnum.values().length);
+        for (ActivityStatusEnum statusEnum : ActivityStatusEnum.values()) {
+            result.add(new ActivityStatusVo(statusEnum));
         }
         return result;
     }

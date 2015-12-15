@@ -9,6 +9,7 @@ import com.uyoung.web.enums.ResultCodeEnum;
 import com.uyoung.web.handler.ActivityInfoHandler;
 import com.uyoung.web.util.JsonUtil;
 import com.uyoung.web.vo.ActivityInfoVo;
+import com.uyoung.web.vo.ActivityStatusVo;
 import com.uyoung.web.vo.ActivityTypeVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -138,7 +139,26 @@ public class ActivityController extends BaseController {
             baseResult.setResultData(activityTypeVos);
             return JsonUtil.getJsonString(baseResult);
         } catch (Exception e) {
-            LOGGER.error("#Add activity error!Cause:", e);
+            LOGGER.error("#Add activity types error!Cause:", e);
+            return buildExceptionJson();
+        }
+    }
+
+    /**
+     * 获取所有的活动类状态
+     *
+     * @return
+     */
+    @RequestMapping(value = "/activity/statuses")
+    @ResponseBody
+    public String getStatuses() {
+        try {
+            BaseResult baseResult = new BaseResult(ResultCodeEnum.SUCCESS.getCode(), ResultCodeEnum.SUCCESS.getDesc());
+            List<ActivityStatusVo> activityStatusVos = activityInfoHandler.getAllActivityStatus();
+            baseResult.setResultData(activityStatusVos);
+            return JsonUtil.getJsonString(baseResult);
+        } catch (Exception e) {
+            LOGGER.error("#Add activity status error!Cause:", e);
             return buildExceptionJson();
         }
     }
