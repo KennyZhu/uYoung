@@ -31,7 +31,7 @@ public class PhotoInfoController extends BaseController {
         }
         try {
             photoInfoService.add(photoInfo);
-            return buildSuccessJson();
+            return buildSuccessJson(photoInfo.getId());
         } catch (Exception e) {
             LOGGER.error("#Add Photo error.Cause:", e);
             return buildExceptionJson();
