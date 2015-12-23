@@ -1,5 +1,6 @@
 package com.uyoung.web.controller;
 
+import com.uyoung.core.api.model.PhotoLike;
 import com.uyoung.core.api.service.PhotoLikeService;
 import com.uyoung.web.handler.PhotoLikeHandler;
 import org.slf4j.Logger;
@@ -53,6 +54,21 @@ public class PhotoLikeController extends BaseController {
         try {
             photoLikeService.delete(uid, photoId);
             return buildSuccessJson();
+        } catch (Exception e) {
+            LOGGER.error("#Photo unlike error.Cause:", e);
+            return buildExceptionJson();
+        }
+    }
+
+    @RequestMapping(value = "/photoLike/get")
+    @ResponseBody
+    public String getByUidPhotoId(Integer uid, Integer photoId) {
+        if (uid == null || photoId == null) {
+            return buildInvalidParamJson();
+        }
+        try {
+            PhotoLike photoLike = photoLikeService.getByUidPhotoId(uid, photoId);
+            return buildSuccessJson(photoLike != null);
         } catch (Exception e) {
             LOGGER.error("#Photo unlike error.Cause:", e);
             return buildExceptionJson();

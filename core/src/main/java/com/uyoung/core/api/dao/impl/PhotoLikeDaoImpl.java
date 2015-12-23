@@ -14,7 +14,7 @@ import java.util.Map;
  * Desc:
  */
 @Repository
-public class PhotoLikeDaoImpl extends BaseDao implements PhotoLikeDao {
+public class PhotoLikeDaoImpl extends BaseDao<PhotoLike> implements PhotoLikeDao {
     @Override
     public int deleteByPrimaryKey(Integer id) {
         return 0;
@@ -36,5 +36,13 @@ public class PhotoLikeDaoImpl extends BaseDao implements PhotoLikeDao {
     @Override
     public PhotoLike getById(Integer id) {
         return null;
+    }
+
+    @Override
+    public PhotoLike getByUidPhotoId(Integer uid, Integer photoId) {
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("uid", uid);
+        paramMap.put("photoId", photoId);
+        return selectOne("getByUidPhotoId", paramMap);
     }
 }

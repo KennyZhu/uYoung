@@ -15,5 +15,7 @@ public interface PhotoLikeService {
 
     public PhotoLike getById(int id);
 
+    public PhotoLike getByUidPhotoId(Integer uid, Integer photoId);
+
     int getCountByPhotoId(int photoId);
 }

@@ -42,4 +42,12 @@ public class PhotoLikeServiceImpl implements PhotoLikeService {
         }
         return photoLikeDao.deleteByUidPhotoId(uid, photoId);
     }
+
+    @Override
+    public PhotoLike getByUidPhotoId(Integer uid, Integer photoId) {
+        if (uid == null || photoId == null) {
+            return null;
+        }
+        return photoLikeDao.getByUidPhotoId(uid, photoId);
+    }
 }

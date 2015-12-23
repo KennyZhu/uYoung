@@ -97,9 +97,9 @@ public class ActivitySignUpController extends BaseController {
      *
      * @return
      */
-    @RequestMapping(value = "/activity/checkoutSignUp")
+    @RequestMapping(value = "/activity/get")
     @ResponseBody
-    public String checkSignUp(Integer uid, Integer activityId) {
+    public String getByUidActivityId(Integer uid, Integer activityId) {
         if (uid == null || activityId == null) {
             return buildInvalidParamJson();
         }

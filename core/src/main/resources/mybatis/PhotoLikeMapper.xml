@@ -56,4 +56,10 @@
         DELETE FROM tb_photo_like
         WHERE user_id = #{userId,jdbcType=INTEGER} AND photo_id = #{photoId,jdbcType=INTEGER}
     </delete>
+    <select id="getByUidPhotoId" parameterType="java.util.Map">
+        select <include refid="Base_Column_List"/>
+        from tb_photo_like
+        where user_id = #{uid,jdbcType=INTEGER}
+        and photo_id = #{photoId,jdbcType=INTEGER}
+    </select>
 </mapper>
