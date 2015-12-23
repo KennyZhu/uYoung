@@ -19,4 +19,6 @@ public interface ActivitySignUpDao {
     List<ActivitySignUp> getListByActivityId(Integer aid);
 
     List<ActivitySignUp> getListByUidActivityStatusList(Integer uid, List<Integer> actStatusList);
+
+    ActivitySignUp getByAidUid(Integer aid, Integer uid);
 }

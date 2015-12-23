@@ -21,6 +21,13 @@ public interface ActivitySignUpService {
      */
     public int add(ActivitySignUp activitySignUp);
 
+    /**
+     * @param aid
+     * @param uid
+     * @return
+     */
+    public ActivitySignUp getByAidUid(Integer aid, Integer uid);
+
 
     /**
      * 取消报名
@@ -39,6 +46,12 @@ public interface ActivitySignUpService {
      */
     public ActivitySignUp getById(int id);
 
+    /**
+     * @param uid
+     * @param aid
+     * @param statusEnum
+     * @return
+     */
     int updateStatusByUidAid(Integer uid, Integer aid, ActivitySignUpStatusEnum statusEnum);
 
     /**

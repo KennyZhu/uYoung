@@ -63,4 +63,12 @@ public class ActivitySignUpDaoImpl extends BaseDao<ActivitySignUp> implements Ac
         paramMap.put("actStatusList", actStatusList);
         return selectList("getListByUidActivityStatusList", paramMap);
     }
+
+    @Override
+    public ActivitySignUp getByAidUid(Integer aid, Integer uid) {
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("aid", aid);
+        paramMap.put("uid", uid);
+        return selectOne("getByAidUid", paramMap);
+    }
 }

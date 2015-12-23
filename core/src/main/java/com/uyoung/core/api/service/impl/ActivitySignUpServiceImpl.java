@@ -79,4 +79,12 @@ public class ActivitySignUpServiceImpl implements ActivitySignUpService {
         }
         return activitySignUpDao.getListByUidActivityStatusList(uid, statusList);
     }
+
+    @Override
+    public ActivitySignUp getByAidUid(Integer aid, Integer uid) {
+        if (aid == null || uid == null) {
+            return null;
+        }
+        return activitySignUpDao.getByAidUid(aid, uid);
+    }
 }

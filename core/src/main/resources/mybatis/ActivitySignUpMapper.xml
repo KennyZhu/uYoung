@@ -93,4 +93,11 @@
             #{status,jdbcType=TINYINT}
         </foreach>
     </select>
+    <select id="getByAidUid" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_activity_signup
+        where activity_id = #{aid,jdbcType=INTEGER}
+        and user_id = #{uid,jdbcType=INTEGER}
+    </select>
 </mapper>
