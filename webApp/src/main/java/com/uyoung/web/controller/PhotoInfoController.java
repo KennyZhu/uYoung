@@ -2,6 +2,7 @@ package com.uyoung.web.controller;
 
 import com.uyoung.core.api.model.PhotoInfo;
 import com.uyoung.core.api.service.PhotoInfoService;
+import com.uyoung.web.handler.PhotoInfoHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,9 @@ public class PhotoInfoController extends BaseController {
     @Autowired
     private PhotoInfoService photoInfoService;
 
+    @Autowired
+    private PhotoInfoHandler handler;
+
     @RequestMapping(value = "/photo/add", method = RequestMethod.POST)
     @ResponseBody
     public String add(PhotoInfo photoInfo) {
@@ -38,6 +42,12 @@ public class PhotoInfoController extends BaseController {
         }
     }
 
+    /**
+     * 照片上传接口
+     *
+     * @param photoInfo
+     * @return
+     */
     @RequestMapping(value = "/photo/updateById", method = RequestMethod.POST)
     @ResponseBody
     public String updateById(PhotoInfo photoInfo) {
@@ -47,6 +57,27 @@ public class PhotoInfoController extends BaseController {
         try {
             photoInfoService.updateById(photoInfo);
             return buildSuccessJson();
+        } catch (Exception e) {
+            LOGGER.error("#Update Photo error.Cause:", e);
+            return buildExceptionJson();
+        }
+    }
+
+    /**
+     * 照片下载接口
+     *
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/photo/downloadUrl")
+    @ResponseBody
+    public String downLoadUrl(Integer id) {
+
+        if (id == null) {
+            return buildInvalidParamJson();
+        }
+        try {
+            return buildSuccessJson(handler.getUrlVo(id));
         } catch (Exception e) {
             LOGGER.error("#Update Photo error.Cause:", e);
             return buildExceptionJson();

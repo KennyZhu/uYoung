@@ -5,7 +5,7 @@ import com.qiniu.util.StringMap;
 import org.apache.commons.lang.StringUtils;
 
 /**
- * Desc:
+ * Desc:七牛云存储处理
  * <p/>Date: 2015-11-17
  * <br/>Time: 16:54
  * <br/>User: ylzhu
@@ -43,6 +43,33 @@ public final class QiNiuAccessTokenFactory {
             return getDefaultUpToken();
         }
         return auth.uploadToken(QiNiuConstant.DEFAULT_BUCKET, key);
+    }
+
+    /**
+     * 获取下载URL
+     *
+     * @param baseUrl
+     * @return
+     */
+    public String getPrivateDownLoadUrl(String baseUrl) {
+        if (StringUtils.isBlank(baseUrl)) {
+            return null;
+        }
+        return auth.privateDownloadUrl(baseUrl);
+    }
+
+    /**
+     * 获取照片的EXIF信息URL
+     *
+     * @param baseUrl
+     * @return
+     */
+    public String getPrivateExifUrl(String baseUrl) {
+        if (StringUtils.isBlank(baseUrl)) {
+            return null;
+        }
+        baseUrl = baseUrl + "?exif";
+        return getPrivateDownLoadUrl(baseUrl);
     }
 
     /**
