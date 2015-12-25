@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
  * <br/>Time: 12:07
  * <br/>User: ylzhu
  */
-class PhotoDeleteTask extends AbsPhotoTask {
+public class PhotoDeleteTask extends AbsPhotoTask {
     private static final Logger LOGGER = LoggerFactory.getLogger(PhotoDeleteTask.class);
 
     public PhotoDeleteTask(Integer photoId) {

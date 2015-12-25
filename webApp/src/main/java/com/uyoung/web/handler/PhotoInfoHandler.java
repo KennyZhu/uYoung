@@ -3,6 +3,7 @@ package com.uyoung.web.handler;
 import com.uyoung.core.api.model.PhotoInfo;
 import com.uyoung.core.api.service.PhotoInfoService;
 import com.uyoung.core.api.task.TaskFactory;
+import com.uyoung.core.api.task.impl.PhotoDeleteTask;
 import com.uyoung.core.third.qiniu.QiNiuStoreFactory;
 import com.uyoung.web.vo.PhotoInfoUrlVo;
 import org.slf4j.Logger;
