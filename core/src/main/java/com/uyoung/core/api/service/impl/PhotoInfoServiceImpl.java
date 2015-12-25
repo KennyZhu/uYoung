@@ -68,4 +68,32 @@ public class PhotoInfoServiceImpl implements PhotoInfoService {
         }
         return photoInfoDao.deleteByAlbumId(albumId);
     }
+
+    @Override
+    public synchronized int incLikeCount(Integer photoId) {
+        if (photoId == null) {
+            return 0;
+        }
+        return photoInfoDao.incLikeCount(photoId);
+    }
+
+    @Override
+    public synchronized int decLikeCount(Integer photoId) {
+        if (photoId == null) {
+            return 0;
+        }
+        PhotoInfo photoInfo = photoInfoDao.getById(photoId);
+        if (photoInfo != null && photoInfo.getLikeCount() > 0) {
+            return photoInfoDao.decLikeCount(photoId);
+        }
+        return 0;
+    }
+
+    @Override
+    public synchronized int incViewCount(Integer photoId) {
+        if (photoId == null) {
+            return 0;
+        }
+        return photoInfoDao.incViewCount(photoId);
+    }
 }

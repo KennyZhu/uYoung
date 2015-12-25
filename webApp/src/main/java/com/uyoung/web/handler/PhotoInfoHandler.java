@@ -2,7 +2,8 @@ package com.uyoung.web.handler;
 
 import com.uyoung.core.api.model.PhotoInfo;
 import com.uyoung.core.api.service.PhotoInfoService;
-import com.uyoung.core.third.qiniu.QiNiuAccessTokenFactory;
+import com.uyoung.core.api.task.TaskFactory;
+import com.uyoung.core.third.qiniu.QiNiuStoreFactory;
 import com.uyoung.web.vo.PhotoInfoUrlVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +22,8 @@ public class PhotoInfoHandler {
 
     @Autowired
     private PhotoInfoService photoInfoService;
+    @Autowired
+    private TaskFactory taskFactory;
 
 
     /**
@@ -40,8 +43,16 @@ public class PhotoInfoHandler {
         }
         PhotoInfoUrlVo resultVo = new PhotoInfoUrlVo();
         String baseUrl = photoInfo.getPhotoUrl();
-        resultVo.setDownLoadUrl(QiNiuAccessTokenFactory.getInstance().getPrivateDownLoadUrl(baseUrl));
-        resultVo.setExifUrl(QiNiuAccessTokenFactory.getInstance().getPrivateExifUrl(baseUrl));
+        resultVo.setDownLoadUrl(QiNiuStoreFactory.getInstance().getPrivateDownLoadUrl(baseUrl));
+        resultVo.setExifUrl(QiNiuStoreFactory.getInstance().getPrivateExifUrl(baseUrl));
         return resultVo;
+    }
+
+    public void deleteById(Integer id) {
+        if (id == null) {
+            return;
+        }
+        photoInfoService.deleteById(id);
+        taskFactory.addTask(new PhotoDeleteTask(id));
     }
 }

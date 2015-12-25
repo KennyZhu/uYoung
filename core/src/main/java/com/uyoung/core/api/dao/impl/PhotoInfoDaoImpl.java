@@ -43,4 +43,19 @@ public class PhotoInfoDaoImpl extends BaseDao<PhotoInfo> implements PhotoInfoDao
     public List<PhotoInfo> getListByAlbumId(Integer albumId) {
         return selectList("getListByAlbumId", albumId);
     }
+
+    @Override
+    public int incLikeCount(Integer id) {
+        return update("incLikeCount", id);
+    }
+
+    @Override
+    public int decLikeCount(Integer id) {
+        return update("decLikeCount", id);
+    }
+
+    @Override
+    public int incViewCount(Integer id) {
+        return update("incViewCount", id);
+    }
 }

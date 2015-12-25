@@ -17,4 +17,10 @@ public interface PhotoInfoDao {
     int deleteByAlbumId(Integer albumId);
 
     List<PhotoInfo> getListByAlbumId(Integer albumId);
+
+    int incLikeCount(Integer id);
+
+    int decLikeCount(Integer id);
+
+    int incViewCount(Integer id);
 }

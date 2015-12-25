@@ -202,4 +202,19 @@
         from tb_photo_info
         where album_id = #{albumId,jdbcType=INTEGER}
     </select>
+    <update id="incLikeCount" parameterType="java.lang.Integer">
+        UPDATE tb_photo_info
+        SET like_count = like_count + 1
+        WHERE id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="decLikeCount" parameterType="java.lang.Integer">
+        UPDATE tb_photo_info
+        SET like_count = like_count - 1
+        WHERE id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="incViewCount" parameterType="java.lang.Integer">
+        UPDATE tb_photo_info
+        SET view_count = view_count + 1
+        WHERE id = #{id,jdbcType=INTEGER}
+    </update>
 </mapper>
