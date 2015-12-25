@@ -45,21 +45,6 @@ public class PhotoLikeController extends BaseController {
         }
     }
 
-    @RequestMapping(value = "/photoLike/unlike")
-    @ResponseBody
-    public String unlike(Integer uid, Integer photoId) {
-        if (uid == null || photoId == null) {
-            return buildInvalidParamJson();
-        }
-        try {
-            photoLikeService.delete(uid, photoId);
-            return buildSuccessJson();
-        } catch (Exception e) {
-            LOGGER.error("#Photo unlike error.Cause:", e);
-            return buildExceptionJson();
-        }
-    }
-
     @RequestMapping(value = "/photoLike/get")
     @ResponseBody
     public String getByUidPhotoId(Integer uid, Integer photoId) {

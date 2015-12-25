@@ -1,11 +1,7 @@
 package com.uyoung.web.handler;
 
-import com.uyoung.core.api.model.PhotoInfo;
 import com.uyoung.core.api.model.PhotoLike;
-import com.uyoung.core.api.model.UserInfo;
-import com.uyoung.core.api.service.PhotoInfoService;
 import com.uyoung.core.api.service.PhotoLikeService;
-import com.uyoung.core.api.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -20,28 +16,20 @@ public class PhotoLikeHandler {
     @Autowired
     private PhotoLikeService photoLikeService;
 
-    @Autowired
-    private UserInfoService userInfoService;
-
-    @Autowired
-    private PhotoInfoService photoInfoService;
-
     public boolean like(Integer uid, Integer photoId) {
         if (uid == null || photoId == null) {
             return false;
         }
-        UserInfo userInfo = userInfoService.getById(uid);
-        if (userInfo == null) {
-            return false;
+        PhotoLike photoLike = photoLikeService.getByUidPhotoId(uid, photoId);
+        if (photoLike == null) {
+            photoLike = new PhotoLike();
+            photoLike.setPhotoId(photoId);
+            photoLike.setUserId(uid);
+            photoLikeService.add(photoLike);
+        } else {
+            //TODO 更新喜欢数
+            photoLikeService.delete(uid, photoId);
         }
-        PhotoInfo photoInfo = photoInfoService.getById(photoId);
-        if (photoInfo == null) {
-            return false;
-        }
-        PhotoLike photoLike = new PhotoLike();
-        photoLike.setPhotoId(photoId);
-        photoLike.setUserId(uid);
-        photoLikeService.add(photoLike);
         return true;
     }
 }

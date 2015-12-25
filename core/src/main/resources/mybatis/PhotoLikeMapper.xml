@@ -25,7 +25,7 @@
         <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
             SELECT LAST_INSERT_ID() AS id
         </selectKey>
-        insert into tb_photo_like
+        insert ignore into tb_photo_like
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
                 id,
@@ -57,7 +57,8 @@
         WHERE user_id = #{userId,jdbcType=INTEGER} AND photo_id = #{photoId,jdbcType=INTEGER}
     </delete>
     <select id="getByUidPhotoId" parameterType="java.util.Map" resultMap="BaseResultMap">
-        select <include refid="Base_Column_List"/>
+        select
+        <include refid="Base_Column_List"/>
         from tb_photo_like
         where user_id = #{uid,jdbcType=INTEGER}
         and photo_id = #{photoId,jdbcType=INTEGER}
