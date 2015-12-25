@@ -8,10 +8,6 @@ package com.uyoung.core.api.task.impl;
  */
 public class PhotoLikeCountTask extends AbsPhotoTask {
 
-    public PhotoLikeCountTask(Integer photoId) {
-        super(photoId);
-    }
-
     @Override
     public Boolean call() throws Exception {
         return false;

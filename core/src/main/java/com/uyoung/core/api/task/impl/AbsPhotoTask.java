@@ -13,26 +13,8 @@ import com.uyoung.core.base.util.SpringContextHolder;
  * <br/>User: ylzhu
  */
 abstract class AbsPhotoTask implements Task {
-    protected Integer photoId;
-
-    public AbsPhotoTask(Integer photoId) {
-        this.photoId = photoId;
-    }
 
     protected PhotoInfoService photoInfoService = SpringContextHolder.getBean("photoInfoService");
 
     protected AlbumInfoService albumInfoService = SpringContextHolder.getBean("albumInfoService");
-
-
-    /**
-     * 获取照片信息
-     *
-     * @return
-     */
-    protected PhotoInfo getById() {
-        if (photoId == null) {
-            return null;
-        }
-        return photoInfoService.getById(photoId);
-    }
 }

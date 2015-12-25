@@ -1,6 +1,5 @@
 package com.uyoung.core.api.task.impl;
 
-import com.uyoung.core.api.model.PhotoInfo;
 import com.uyoung.core.third.qiniu.QiNiuStoreFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,16 +13,19 @@ import org.slf4j.LoggerFactory;
 public class PhotoDeleteTask extends AbsPhotoTask {
     private static final Logger LOGGER = LoggerFactory.getLogger(PhotoDeleteTask.class);
 
-    public PhotoDeleteTask(Integer photoId) {
-        super(photoId);
+    private String photoKey;
+
+    public PhotoDeleteTask(String photoKey) {
+        this.photoKey = photoKey;
     }
 
     @Override
+
     public Boolean call() throws Exception {
         try {
             return delFromQiNiu();
         } catch (Exception e) {
-            LOGGER.error("#Execute photo delete error.id is " + photoId + " Cause:", e);
+            LOGGER.error("#Execute photo delete error.Key is " + photoKey + " Cause:", e);
         }
         return false;
     }
@@ -34,13 +36,7 @@ public class PhotoDeleteTask extends AbsPhotoTask {
      * @return
      */
     private boolean delFromQiNiu() {
-
-        LOGGER.info("#Begin to del photo from qiniu id is " + photoId);
-        PhotoInfo photoInfo = getById();
-        if (photoInfo != null) {
-            return QiNiuStoreFactory.getInstance().del(photoInfo.getPhotoUrl());
-        }
-        LOGGER.warn("#Get photo by id:" + photoId + " return null.");
-        return false;
+        LOGGER.info("#Begin to del photo from qiniu Key is " + photoKey);
+        return QiNiuStoreFactory.getInstance().del(photoKey);
     }
 }

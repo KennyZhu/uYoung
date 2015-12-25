@@ -53,6 +53,10 @@ public class PhotoInfoHandler {
         if (id == null) {
             return;
         }
+        PhotoInfo photoInfo = photoInfoService.getById(id);
+        if (photoInfo == null) {
+            return;
+        }
         photoInfoService.deleteById(id);
         taskFactory.addTask(new PhotoDeleteTask(id));
     }
