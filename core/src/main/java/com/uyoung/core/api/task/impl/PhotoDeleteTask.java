@@ -35,10 +35,12 @@ public class PhotoDeleteTask extends AbsPhotoTask {
      */
     private boolean delFromQiNiu() {
 
+        LOGGER.info("#Begin to del photo from qiniu id is " + photoId);
         PhotoInfo photoInfo = getById();
         if (photoInfo != null) {
             return QiNiuStoreFactory.getInstance().del(photoInfo.getPhotoUrl());
         }
+        LOGGER.warn("#Get photo by id:" + photoId + " return null.");
         return false;
     }
 }

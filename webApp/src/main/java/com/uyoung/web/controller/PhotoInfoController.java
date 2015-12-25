@@ -91,7 +91,7 @@ public class PhotoInfoController extends BaseController {
             return buildInvalidParamJson();
         }
         try {
-            photoInfoService.deleteById(id);
+            handler.deleteById(id);
             return buildSuccessJson();
         } catch (Exception e) {
             LOGGER.error("#Delete Photo error.Id:" + id + " Cause:", e);
