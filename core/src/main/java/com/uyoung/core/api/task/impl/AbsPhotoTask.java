@@ -19,7 +19,7 @@ abstract class AbsPhotoTask implements Task {
         this.photoId = photoId;
     }
 
-    protected PhotoInfoService photoInfoService = SpringContextHolder.getBean("photoInfoSer");
+    protected PhotoInfoService photoInfoService = SpringContextHolder.getBean("photoInfoService");
 
     protected AlbumInfoService albumInfoService = SpringContextHolder.getBean("albumInfoService");
 
