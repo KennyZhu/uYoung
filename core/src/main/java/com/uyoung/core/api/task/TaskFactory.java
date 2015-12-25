@@ -31,6 +31,7 @@ public class TaskFactory {
      */
     @PostConstruct
     private void init() {
+        LOGGER.info("#Begin to init TaskFactory.");
         taskScheduler = new TaskScheduler(blockingQueue);
         taskExecutor = new TaskExecutor(blockingQueue);
         start();

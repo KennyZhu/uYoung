@@ -26,6 +26,7 @@ class TaskExecutor {
      * 任务执行
      */
     public void exec() {
+        LOGGER.info("#Begin to run task Executor.");
         while (true) {
             try {
                 Task task = blockingQueue.take();
