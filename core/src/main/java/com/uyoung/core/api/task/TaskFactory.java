@@ -29,7 +29,6 @@ public class TaskFactory {
     /**
      * 初始化方法
      */
-    @PostConstruct
     private void init() {
         LOGGER.info("#Begin to init TaskFactory.");
         taskScheduler = new TaskScheduler(blockingQueue);
