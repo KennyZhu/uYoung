@@ -27,12 +27,21 @@ class TaskExecutor {
      */
     public void exec() {
         LOGGER.info("#Begin to run task Executor.");
-        while (true) {
-            try {
-                Task task = blockingQueue.take();
-                EXECUTOR.submit(task);
-            } catch (Exception e) {
-                LOGGER.error("#Take task error.Cause:", e);
+        TaskRunner runner = new TaskRunner();
+        runner.start();
+    }
+
+    private class TaskRunner extends Thread {
+        @Override
+        public void run() {
+            LOGGER.info("#Begin to run task Runner.");
+            while (true) {
+                try {
+                    Task task = blockingQueue.take();
+                    EXECUTOR.submit(task);
+                } catch (Exception e) {
+                    LOGGER.error("#Take task error.Cause:", e);
+                }
             }
         }
     }
