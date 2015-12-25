@@ -16,6 +16,13 @@ public class PhotoLikeHandler {
     @Autowired
     private PhotoLikeService photoLikeService;
 
+    /**
+     * 照片点赞（并发问题）
+     *
+     * @param uid
+     * @param photoId
+     * @return
+     */
     public boolean like(Integer uid, Integer photoId) {
         if (uid == null || photoId == null) {
             return false;
