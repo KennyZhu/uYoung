@@ -6,11 +6,14 @@ import com.uyoung.core.api.model.UserInfo;
 import com.uyoung.core.api.service.AlbumInfoService;
 import com.uyoung.core.api.service.PhotoInfoService;
 import com.uyoung.core.api.service.UserInfoService;
+import com.uyoung.core.api.task.TaskFactory;
+import com.uyoung.core.api.task.impl.AlbumDeleteTask;
 import com.uyoung.web.vo.AlbumDetailVo;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,9 +27,10 @@ public class AlbumInfoHandler {
     private AlbumInfoService albumInfoService;
     @Autowired
     private UserInfoService userInfoService;
-
     @Autowired
     private PhotoInfoService photoInfoService;
+    @Autowired
+    private TaskFactory taskFactory;
 
     /**
      * 构造相册详情
@@ -64,7 +68,6 @@ public class AlbumInfoHandler {
     }
 
     /**
-     *
      * @param id
      */
     public void deleteById(Integer id) {
@@ -76,5 +79,16 @@ public class AlbumInfoHandler {
             return;
         }
 
+        albumInfoService.deleteById(id);
+        List<PhotoInfo> photoInfos = photoInfoService.getListByAlbumId(id);
+        if (CollectionUtils.isNotEmpty(photoInfos)) {
+            List<String> keys = new ArrayList<>(photoInfos.size());
+            for (PhotoInfo photoInfo : photoInfos) {
+                keys.add(photoInfo.getPhotoUrl());
+            }
+
+            photoInfoService.deleteByAlbumId(id);
+            taskFactory.addTask(new AlbumDeleteTask(keys));
+        }
     }
 }

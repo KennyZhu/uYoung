@@ -118,8 +118,8 @@ public class AlbumInfoController extends BaseController {
             return buildInvalidParamJson();
         }
         try {
-
-
+            //TODO 校验用户不能删除
+            handler.deleteById(id);
         } catch (Exception e) {
             LOGGER.error("#Delete albumInfo error.Cause:", e);
             return buildExceptionJson();
