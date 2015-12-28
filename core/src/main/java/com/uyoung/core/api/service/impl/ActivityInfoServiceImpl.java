@@ -102,7 +102,7 @@ public class ActivityInfoServiceImpl implements ActivityInfoService {
             LOGGER.error("#Can not found activityInfo.ActivityId is " + activityId);
             return 0;
         }
-        if (activityInfo.getOriUserId() != uid) {
+        if (!activityInfo.getOriUserId().equals(uid)) {
             LOGGER.error("#Activity :" + activityId + " is not User:" + uid);
             return 0;
         }

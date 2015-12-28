@@ -78,7 +78,7 @@ public class DictCityServiceImpl implements DictCityService {
                 province.setSubDictCityList(subCityList);
             } else {
                 DictCity provinceSelf = province.clone();
-                province.setSubDictCityList(Arrays.asList(provinceSelf));
+                province.setSubDictCityList(Collections.singletonList(provinceSelf));
             }
         }
         return provinceList;

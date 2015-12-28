@@ -1,6 +1,5 @@
 package com.uyoung.core.api.task.impl;
 
-import com.uyoung.core.api.model.PhotoInfo;
 import com.uyoung.core.api.service.AlbumInfoService;
 import com.uyoung.core.api.service.PhotoInfoService;
 import com.uyoung.core.api.task.Task;

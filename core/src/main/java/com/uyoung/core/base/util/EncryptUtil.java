@@ -76,22 +76,16 @@ public final class EncryptUtil {
         if (alen != 24 || (clen < 8 || clen > 20))
             return null;
         int demension = alen - clen;
-        for (int i = 0; i < C.length; i++) {
-            B[i] = C[i];
-        }
+        System.arraycopy(C, 0, B, 0, C.length);
 
         int piont = 1;
         while (demension > 0) {
             if (demension > clen) {
-                for (int i = 0; i < clen; i++) {
-                    B[clen * piont + i] = C[i];
-                }
+                System.arraycopy(C, 0, B, clen * piont + 0, clen);
                 piont++;
 
             } else {
-                for (int i = 0; i < demension; i++) {
-                    B[clen * piont + i] = C[i];
-                }
+                System.arraycopy(C, 0, B, clen * piont + 0, demension);
             }
             demension = demension - clen;
 
@@ -197,40 +191,6 @@ public final class EncryptUtil {
         }
 
         return strRandom;
-    }
-
-    /**
-     * @param args
-     */
-    public static void main(String[] args) {
-        // TODO Auto-generated method stub
-
-        try {
-            test();
-        } catch (UnsupportedEncodingException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        int[] ss =
-                {1, 2};
-        String randormstr = EncryptUtil.RndString(10, null);
-        System.out.println("suiko字符串:" + randormstr);
-        //		final byte[] keyBytes =
-        //		{ 0x11, 0x22, 0x4F, 0x58, (byte) 0x88, 0x10, 0x40, 0x38, 0x28, 0x25, 0x79, 0x51, (byte) 0xCB, (byte) 0xDD,
-        //				0x55, 0x66, 0x77, 0x29, 0x74, (byte) 0x98, 0x30, 0x40, 0x36, (byte) 0xE2 }; //24字节的密钥
-        final byte[] srckeyBytes =
-                {(byte) 0xef, 0x2b, (byte) 0xcc, (byte) 0xdc, (byte) 0x9b, 0x3b, (byte) 0xf7, 0x2a, 0x68, (byte) 0xad,
-                        (byte) 0xeb, 0x72, (byte) 0xe3, 0x78, 0x2f, 0x5e, 0x7, 0x77, (byte) 0xd5, (byte) 0xc1, 0x7d, 0x40,
-                        0x66, (byte) 0xb8};
-        byte[] keyBytes = EncryptUtil.genCroptyKey(srckeyBytes, "qwertyuiop");
-        String szSrc = "userName=yuqihong106@163.com&sessionId=dfasdfaPG1231231";
-        System.out.println("加密前的字符串:" + szSrc);
-        byte[] encoded = encryptMode(keyBytes, szSrc.getBytes());
-        System.out.println("加密后的字符串:" + new String(encoded));
-        System.out.println("base64加密后的字符串:" + EncryptUtil.getBASE64(encoded));
-        byte[] srcBytes = decryptMode(keyBytes, encoded);
-        System.out.println("解密后的字符串:" + (new String(srcBytes)));
-
     }
 
     public static void test() throws UnsupportedEncodingException {
