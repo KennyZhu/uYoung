@@ -118,14 +118,8 @@ public class AlbumInfoController extends BaseController {
             return buildInvalidParamJson();
         }
         try {
-            AlbumInfo albumInfo = albumInfoService.getById(id);
-            if (albumInfo == null) {
-                return buildFailJson("没有对应的相册");
-            }
-            if (!uid.equals(albumInfo.getCreateUserId())) {
-                return buildFailJson("不能删除别人的相册");
-            }
-            albumInfoService.deleteById(id);
+
+
         } catch (Exception e) {
             LOGGER.error("#Delete albumInfo error.Cause:", e);
             return buildExceptionJson();

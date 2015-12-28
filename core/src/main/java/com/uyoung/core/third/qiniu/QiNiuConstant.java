@@ -1,5 +1,7 @@
 package com.uyoung.core.third.qiniu;
 
+import org.apache.commons.lang.StringUtils;
+
 /**
  * Desc:
  * <p/>Date: 2015-11-17
@@ -20,5 +22,18 @@ public final class QiNiuConstant {
     /**
      * 域名
      */
-    public static final String URL_PREFIX = "7xnzko.com1.z0.glb.clouddn.com";
+    public static final String URL_PREFIX = "http://7xnzko.com1.z0.glb.clouddn.com/";
+
+    /**
+     * 获取照片URL
+     *
+     * @param key
+     * @return
+     */
+    public static String getUrl(String key) {
+        if (StringUtils.isBlank(key)) {
+            return null;
+        }
+        return URL_PREFIX + key;
+    }
 }

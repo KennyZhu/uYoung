@@ -28,6 +28,12 @@ public class AlbumInfoHandler {
     @Autowired
     private PhotoInfoService photoInfoService;
 
+    /**
+     * 构造相册详情
+     *
+     * @param id
+     * @return
+     */
     public AlbumDetailVo getAlbumDetailById(Integer id) {
         if (id == null) {
             return null;
@@ -55,5 +61,20 @@ public class AlbumInfoHandler {
             detailVo.setPhotoInfoList(photoInfos);
         }
         return detailVo;
+    }
+
+    /**
+     *
+     * @param id
+     */
+    public void deleteById(Integer id) {
+        if (id == null) {
+            return;
+        }
+        AlbumInfo albumInfo = albumInfoService.getById(id);
+        if (albumInfo == null) {
+            return;
+        }
+
     }
 }
