@@ -14,4 +14,8 @@ public interface AlbumInfoDao {
     int updateById(AlbumInfo record);
 
     Page<AlbumInfo> getPageByCreateUserId(Integer cuid, Integer page, Integer pageSize);
+
+    int incLikeCount(Integer id);
+
+    int decLikeCount(Integer id);
 }

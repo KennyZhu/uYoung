@@ -49,4 +49,20 @@ public interface AlbumInfoService {
      * @return
      */
     public Page<AlbumInfo> getPageByCreateUserId(Integer createUserId, Integer page, Integer pageSize);
+
+    /**
+     * 增加点赞数
+     *
+     * @param id
+     * @return
+     */
+    int incLikeCount(Integer id);
+
+    /**
+     * 取消点赞数
+     *
+     * @param id
+     * @return
+     */
+    int decLikeCount(Integer id);
 }

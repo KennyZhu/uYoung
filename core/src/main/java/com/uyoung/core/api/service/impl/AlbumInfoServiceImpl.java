@@ -74,4 +74,20 @@ public class AlbumInfoServiceImpl implements AlbumInfoService {
         }
         return albumInfoDao.getPageByCreateUserId(createUserId, page, pageNum);
     }
+
+    @Override
+    public int decLikeCount(Integer id) {
+        if (id == null) {
+            return 0;
+        }
+        return albumInfoDao.decLikeCount(id);
+    }
+
+    @Override
+    public int incLikeCount(Integer id) {
+        if (id == null) {
+            return 0;
+        }
+        return albumInfoDao.incLikeCount(id);
+    }
 }

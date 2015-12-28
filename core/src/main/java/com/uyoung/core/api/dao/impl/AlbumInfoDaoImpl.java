@@ -47,4 +47,14 @@ public class AlbumInfoDaoImpl extends BaseDao<AlbumInfo> implements AlbumInfoDao
         int offset = pageSize * (page - 1) + 1;
         return selectPage("getPageByCreateUserId", param, new RowBounds(offset, pageSize));
     }
+
+    @Override
+    public int incLikeCount(Integer id) {
+        return update("incLikeCount", id);
+    }
+
+    @Override
+    public int decLikeCount(Integer id) {
+        return update("decLikeCount", id);
+    }
 }

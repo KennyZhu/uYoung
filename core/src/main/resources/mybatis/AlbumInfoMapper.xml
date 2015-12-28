@@ -144,4 +144,14 @@
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
+    <update id="incLikeCount" parameterType="java.lang.Integer">
+        UPDATE tb_album_info
+        SET total_like_count = total_like_count + 1
+        WHERE id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="decLikeCount" parameterType="java.lang.Integer">
+        UPDATE tb_album_info
+        SET total_like_count = total_like_count - 1
+        WHERE id = #{id,jdbcType=INTEGER}
+    </update>
 </mapper>

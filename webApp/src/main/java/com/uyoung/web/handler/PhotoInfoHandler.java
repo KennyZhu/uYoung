@@ -59,6 +59,6 @@ public class PhotoInfoHandler {
             return;
         }
         photoInfoService.deleteById(id);
-        taskFactory.addTask(new PhotoDeleteTask(photoInfo.getPhotoUrl()));
+        taskFactory.addTask(new PhotoDeleteTask(photoInfo));
     }
 }
