@@ -40,7 +40,10 @@ public class ActivitySignUpController extends BaseController {
             return buildInvalidParamJson();
         }
         try {
-            handler.signUp(activitySignUp);
+            boolean result = handler.signUp(activitySignUp);
+            if (!result) {
+                LOGGER.error("#SignUp failed.ActivitySignUp is " + activitySignUp.toString());
+            }
         } catch (Exception e) {
             LOGGER.error("#SignUp activity error.Cause:", e);
             return buildExceptionJson();
@@ -92,23 +95,5 @@ public class ActivitySignUpController extends BaseController {
         return buildSuccessJson();
     }
 
-    /**
-     * 检查报名
-     *
-     * @return
-     */
-    @RequestMapping(value = "/activity/get")
-    @ResponseBody
-    public String getByUidActivityId(Integer uid, Integer activityId) {
-        if (uid == null || activityId == null) {
-            return buildInvalidParamJson();
-        }
-        try {
-            ActivitySignUp activitySignUp = signUpService.getByAidUid(activityId, uid);
-            return buildSuccessJson(activitySignUp);
-        } catch (Exception e) {
-            LOGGER.error("#Confirm signUp aid:" + activityId + " uid:" + uid);
-            return buildExceptionJson();
-        }
-    }
+
 }

@@ -8,6 +8,8 @@ import com.uyoung.core.api.service.ActivityInfoService;
 import com.uyoung.core.api.service.ActivitySignUpService;
 import com.uyoung.web.enums.ResultCodeEnum;
 import org.apache.commons.collections.CollectionUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +25,7 @@ import java.util.List;
 @Service
 public class ActivitySignUpHandler {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(ActivitySignUpHandler.class);
     @Autowired
     private ActivitySignUpService signUpService;
 
@@ -37,11 +40,13 @@ public class ActivitySignUpHandler {
      */
     public boolean signUp(ActivitySignUp activitySignUp) throws Exception {
         if (activitySignUp == null || activitySignUp.getActivityId() == null || activitySignUp.getUserId() == null) {
-            return false;
+            LOGGER.error("#Invalid param.");
+            throw new BusinessException("Invalid param.");
         }
         Integer activityId = activitySignUp.getActivityId();
         ActivityInfo activityInfo = activityInfoService.getById(activityId);
         if (activityInfo == null) {
+            LOGGER.error("#Get activityInfo by activityId return null.");
             throw new BusinessException(ResultCodeEnum.ACTIVITY_NOT_EXIST);
         }
         ActivityStatusEnum statusEnum = ActivityStatusEnum.getByStatus(activityInfo.getStatus());
@@ -64,12 +69,17 @@ public class ActivitySignUpHandler {
                 activityIdList.add(signUp.getActivityId());
             }
             List<ActivityInfo> activityInfos = activityInfoService.getListByIdList(activityIdList);
-            for (ActivityInfo activity : activityInfos) {
-                if (activityInfo.getBeginTime().after(activity.getBeginTime()) && activityInfo.getBeginTime().before(activity.getEndTime())) {
-                    return false;
-                }
-                if (activity.getBeginTime().after(activity.getBeginTime()) && activity.getBeginTime().before(activityInfo.getEndTime())) {
-                    return false;
+            if (CollectionUtils.isNotEmpty(activityInfos)) {
+                LOGGER.info("#Signed activity size is :" + activityInfos.size());
+                for (ActivityInfo activity : activityInfos) {
+                    if (activityInfo.getBeginTime().after(activity.getBeginTime()) && activityInfo.getBeginTime().before(activity.getEndTime())) {
+                        LOGGER.error("#ActivituInfo :" + activityInfo.toString() + " Activity:" + activity.toString());
+                        return false;
+                    }
+                    if (activity.getBeginTime().after(activity.getBeginTime()) && activity.getBeginTime().before(activityInfo.getEndTime())) {
+                        LOGGER.error("#ActivituInfo :" + activityInfo.toString() + " Activity:" + activity.toString());
+                        return false;
+                    }
                 }
             }
         }
