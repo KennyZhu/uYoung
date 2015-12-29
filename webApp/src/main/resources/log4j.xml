@@ -10,6 +10,18 @@
             <param name="ConversionPattern" value="%d - [%t] %-5p %c %x %l - %m%n"/>
         </layout>
     </appender>
+    <appender name="springAppender" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="${catalina.home}/log/uyoung.log"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd-HH"/>
+        <param name="threshold" value="INFO"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d - [%t] %-5p %c %x %l - %m%n"/>
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="LevelMin" value="WARN"/>
+            <param name="LevelMax" value="ERROR"/>
+        </filter>
+    </appender>
 
     <!-- 业务日志输出 -->
     <appender name="rootAppender" class="org.apache.log4j.DailyRollingFileAppender">
@@ -20,6 +32,11 @@
             <param name="ConversionPattern" value="%d - [%t] %-5p %c %x %l - %m%n"/>
         </layout>
     </appender>
+
+    <logger name="org.springframework.web" additivity="false">
+        <level value="WARN"/>
+        <appender-ref ref="springAppender"/>
+    </logger>
 
     <root>
         <level value="INFO"/>
