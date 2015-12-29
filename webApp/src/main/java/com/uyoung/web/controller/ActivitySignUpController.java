@@ -1,6 +1,7 @@
 package com.uyoung.web.controller;
 
 import com.uyoung.core.api.enums.ActivitySignUpStatusEnum;
+import com.uyoung.core.api.model.ActivitySignUp;
 import com.uyoung.core.api.service.ActivitySignUpService;
 import com.uyoung.web.handler.ActivitySignUpHandler;
 import org.slf4j.Logger;
@@ -93,5 +94,23 @@ public class ActivitySignUpController extends BaseController {
         return buildSuccessJson();
     }
 
-
+    /**
+     * 检查报名
+     *
+     * @return
+     */
+    @RequestMapping(value = "/activity/getSignUp")
+    @ResponseBody
+    public String getByUidActivityId(Integer uid, Integer activityId) {
+        if (uid == null || activityId == null) {
+            return buildInvalidParamJson();
+        }
+        try {
+            ActivitySignUp activitySignUp = signUpService.getByAidUid(activityId, uid);
+            return buildSuccessJson(activitySignUp);
+        } catch (Exception e) {
+            LOGGER.error("#Confirm signUp aid:" + activityId + " uid:" + uid);
+            return buildExceptionJson();
+        }
+    }
 }
