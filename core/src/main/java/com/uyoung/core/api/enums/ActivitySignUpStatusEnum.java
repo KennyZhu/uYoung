@@ -7,10 +7,6 @@ package com.uyoung.core.api.enums;
  */
 public enum ActivitySignUpStatusEnum {
 
-    /**
-     * 初始状态
-     */
-    INIT(0),
 
     /**
      * 报名成功
@@ -20,7 +16,13 @@ public enum ActivitySignUpStatusEnum {
     /**
      * 取消报名
      */
-    CANCEL(2);
+    CANCEL(2),
+
+    /**
+     * 现场确认签到
+     */
+    CONFIRM(3);
+
     private int status;
 
     private ActivitySignUpStatusEnum(int status) {

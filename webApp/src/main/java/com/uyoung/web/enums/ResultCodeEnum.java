@@ -1,5 +1,7 @@
 package com.uyoung.web.enums;
 
+import java.util.stream.Stream;
+
 /**
  * User: KennyZhu
  * Date: 15/9/28
@@ -17,10 +19,12 @@ public enum ResultCodeEnum {
      */
     ACTIVITY_NOT_EXIST(-100, "活动不存在"),
 
+
     /**
      * 活动已经开始
      */
     ACTIVITY_STARTED(-101, "活动已经开始"),
+
     /**
      * 活动已经取消
      */
@@ -29,7 +33,12 @@ public enum ResultCodeEnum {
     /**
      * 活动已经结束
      */
-    ACTIVITY_COMPLETED(-103, "活动已经结束");
+    ACTIVITY_COMPLETED(-103, "活动已经结束"),
+
+    /**
+     * 活动不能报名
+     */
+    ACTIVITY_NOT_SIGN_UP(-104, "活动已经不能报名");
 
 
     private final int code;
@@ -46,5 +55,9 @@ public enum ResultCodeEnum {
 
     public String getDesc() {
         return desc;
+    }
+
+    public static ResultCodeEnum getByCode(int code) {
+        return Stream.of(ResultCodeEnum.values()).filter(resultCodeEnum -> resultCodeEnum.getCode() == code).findFirst().orElse(null);
     }
 }

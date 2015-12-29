@@ -48,15 +48,9 @@ public class ActivitySignUpHandler {
             throw new BusinessException(ResultCodeEnum.ACTIVITY_NOT_EXIST);
         }
         ActivityStatusEnum statusEnum = ActivityStatusEnum.getByStatus(activityInfo.getStatus());
-        switch (statusEnum) {
-            case ACTIVE:
-                throw new BusinessException(ResultCodeEnum.ACTIVITY_STARTED);
-            case CANCEL:
-                throw new BusinessException(ResultCodeEnum.ACTIVITY_CANCEL);
-            case COMPLETE:
-                throw new BusinessException(ResultCodeEnum.ACTIVITY_COMPLETED);
+        if (ActivityStatusEnum.SIGNUP != statusEnum) {
+            throw new BusinessException(ResultCodeEnum.ACTIVITY_NOT_SIGN_UP);
         }
-
         ArrayList<ActivityStatusEnum> activityStatusEnums = new ArrayList<>();
         activityStatusEnums.add(ActivityStatusEnum.ACTIVE);
         activityStatusEnums.add(ActivityStatusEnum.SIGNUP);

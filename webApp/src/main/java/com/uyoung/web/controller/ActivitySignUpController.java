@@ -1,8 +1,10 @@
 package com.uyoung.web.controller;
 
 import com.uyoung.core.api.enums.ActivitySignUpStatusEnum;
+import com.uyoung.core.api.exception.BusinessException;
 import com.uyoung.core.api.model.ActivitySignUp;
 import com.uyoung.core.api.service.ActivitySignUpService;
+import com.uyoung.web.enums.ResultCodeEnum;
 import com.uyoung.web.handler.ActivitySignUpHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,6 +45,9 @@ public class ActivitySignUpController extends BaseController {
             if (!result) {
                 LOGGER.error("#SignUp failed.Uid is " + uid + " activityId is " + activityId);
             }
+        } catch (BusinessException busE) {
+            LOGGER.error("#SignUp activity error.Cause:", busE);
+            return buildFailJson(ResultCodeEnum.getByCode(Integer.valueOf(busE.getMessage())).getDesc());
         } catch (Exception e) {
             LOGGER.error("#SignUp activity error.Cause:", e);
             return buildExceptionJson();

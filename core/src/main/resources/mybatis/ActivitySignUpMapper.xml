@@ -6,12 +6,11 @@
         <result column="activity_id" property="activityId" jdbcType="INTEGER"/>
         <result column="user_id" property="userId" jdbcType="INTEGER"/>
         <result column="status" property="status" jdbcType="TINYINT"/>
-        <result column="activity_status" property="status" jdbcType="TINYINT"/>
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, activity_id, user_id, status, activity_status, create_time, update_time
+        id, activity_id, user_id, status, create_time, update_time
     </sql>
     <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
@@ -47,9 +46,6 @@
             <if test="status != null">
                 status,
             </if>
-            <if test="activityStatus != null">
-                activity_status,
-            </if>
             create_time,
             update_time,
         </trim>
@@ -65,9 +61,6 @@
             </if>
             <if test="status != null">
                 #{status,jdbcType=TINYINT},
-            </if>
-            <if test="activityStatus != null">
-                #{activityStatus,jdbcType=TINYINT},
             </if>
             now(),now()
         </trim>
