@@ -57,6 +57,8 @@ public class ActivityInfoDaoImpl extends BaseDao<ActivityInfo> implements Activi
 
     @Override
     public List<ActivityInfo> getListByIdList(List<Integer> idList) {
-        return selectList("getListByIdList", idList);
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("idList", idList);
+        return selectList("getListByIdList", paramMap);
     }
 }
