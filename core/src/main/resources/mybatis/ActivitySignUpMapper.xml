@@ -83,7 +83,7 @@
         SET activity_status = #{activityStatus,jdbcType=INTEGER}
         WHERE activity_id =#{aid,jdbcType=INTEGER}
     </update>
-    <select id="getListByUidActivityStatusList" parameterType="java.util.Map">
+    <select id="getListByUidActivityStatusList" parameterType="java.util.Map" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from tb_activity_signup
