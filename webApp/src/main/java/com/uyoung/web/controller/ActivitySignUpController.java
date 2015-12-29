@@ -1,7 +1,6 @@
 package com.uyoung.web.controller;
 
 import com.uyoung.core.api.enums.ActivitySignUpStatusEnum;
-import com.uyoung.core.api.model.ActivitySignUp;
 import com.uyoung.core.api.service.ActivitySignUpService;
 import com.uyoung.web.handler.ActivitySignUpHandler;
 import org.slf4j.Logger;
@@ -30,19 +29,18 @@ public class ActivitySignUpController extends BaseController {
     /**
      * 报名
      *
-     * @param activitySignUp
      * @return
      */
     @RequestMapping(value = "/activity/signUp")
     @ResponseBody
-    public String signUp(ActivitySignUp activitySignUp) {
-        if (activitySignUp == null) {
+    public String signUp(Integer uid, Integer activityId) {
+        if (uid == null || activityId == null) {
             return buildInvalidParamJson();
         }
         try {
-            boolean result = handler.signUp(activitySignUp);
+            boolean result = handler.signUp(uid, activityId);
             if (!result) {
-                LOGGER.error("#SignUp failed.ActivitySignUp is " + activitySignUp.toString());
+                LOGGER.error("#SignUp failed.Uid is " + uid + " activityId is " + activityId);
             }
         } catch (Exception e) {
             LOGGER.error("#SignUp activity error.Cause:", e);

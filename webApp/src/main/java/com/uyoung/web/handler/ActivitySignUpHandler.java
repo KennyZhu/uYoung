@@ -35,15 +35,13 @@ public class ActivitySignUpHandler {
     /**
      * 报名
      *
-     * @param activitySignUp
      * @return
      */
-    public boolean signUp(ActivitySignUp activitySignUp) throws Exception {
-        if (activitySignUp == null || activitySignUp.getActivityId() == null || activitySignUp.getUserId() == null) {
+    public boolean signUp(Integer uid, Integer activityId) throws Exception {
+        if (activityId == null || uid == null) {
             LOGGER.error("#Invalid param.");
             throw new BusinessException("Invalid param.");
         }
-        Integer activityId = activitySignUp.getActivityId();
         ActivityInfo activityInfo = activityInfoService.getById(activityId);
         if (activityInfo == null) {
             LOGGER.error("#Get activityInfo by activityId return null.");
@@ -62,7 +60,7 @@ public class ActivitySignUpHandler {
         ArrayList<ActivityStatusEnum> activityStatusEnums = new ArrayList<>();
         activityStatusEnums.add(ActivityStatusEnum.ACTIVE);
         activityStatusEnums.add(ActivityStatusEnum.SIGNUP);
-        List<ActivitySignUp> alreadySignActs = signUpService.getListByUidActivityStatusList(activitySignUp.getUserId(), activityStatusEnums);
+        List<ActivitySignUp> alreadySignActs = signUpService.getListByUidActivityStatusList(uid, activityStatusEnums);
         if (CollectionUtils.isNotEmpty(alreadySignActs)) {
             List<Integer> activityIdList = new ArrayList<>();
             for (ActivitySignUp signUp : alreadySignActs) {
@@ -83,6 +81,10 @@ public class ActivitySignUpHandler {
                 }
             }
         }
+        ActivitySignUp activitySignUp = new ActivitySignUp();
+        activitySignUp.setActivityId(activityId);
+        activitySignUp.setUserId(uid);
+        activitySignUp.setActivityStatus(activityInfo.getStatus());
         int result = signUpService.add(activitySignUp);
         return result == 1;
     }
