@@ -65,4 +65,14 @@ public interface AlbumInfoService {
      * @return
      */
     int decLikeCount(Integer id);
+
+
+    /**
+     * 更新封面照片URL
+     *
+     * @param id
+     * @param firstPhotoUrl
+     * @return
+     */
+    int updateFirstPhotoUrl(Integer id, String firstPhotoUrl);
 }

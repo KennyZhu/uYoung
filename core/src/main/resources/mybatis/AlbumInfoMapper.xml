@@ -154,4 +154,9 @@
         SET total_like_count = total_like_count - 1
         WHERE id = #{id,jdbcType=INTEGER}
     </update>
+    <update id="updateFirstPhotoUrl" parameterType="java.util.Map">
+        UPDATE tb_album_info
+        SET first_photo_url = #{firstPhotoUrl,jdbcType = VARCHAR}
+        WHERE id = #{id,jdbcType=INTEGER}
+    </update>
 </mapper>

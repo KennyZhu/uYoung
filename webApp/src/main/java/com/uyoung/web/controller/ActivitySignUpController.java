@@ -44,6 +44,7 @@ public class ActivitySignUpController extends BaseController {
             boolean result = handler.signUp(uid, activityId);
             if (!result) {
                 LOGGER.error("#SignUp failed.Uid is " + uid + " activityId is " + activityId);
+                return buildFailJson();
             }
         } catch (BusinessException busE) {
             LOGGER.error("#SignUp activity error.Cause:", busE);

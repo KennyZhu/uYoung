@@ -10,6 +10,7 @@ import com.uyoung.web.handler.AlbumInfoHandler;
 import com.uyoung.web.vo.AlbumDetailVo;
 import com.uyoung.web.vo.AlbumInfoVo;
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -152,5 +153,27 @@ public class AlbumInfoController extends BaseController {
             LOGGER.error("#Add albumInfo error.Cause:", e);
             return buildExceptionJson();
         }
+    }
+
+    /**
+     * 更新相册封面URL
+     *
+     * @param albumId
+     * @param firstUrl
+     * @return
+     */
+    @RequestMapping(value = "/album/updateFirstUrl")
+    @ResponseBody
+    public String updateFirstUrl(Integer albumId, String firstUrl) {
+        if (albumId == null || StringUtils.isBlank(firstUrl)) {
+            return buildInvalidParamJson();
+        }
+        try {
+            albumInfoService.updateFirstPhotoUrl(albumId, firstUrl);
+        } catch (Exception e) {
+            LOGGER.error("#UpdateFirstUrl error.Id is " + albumId + " firstPhotoUrl is " + firstUrl + "Cause:", e);
+            return buildExceptionJson();
+        }
+        return buildSuccessJson();
     }
 }

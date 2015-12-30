@@ -3,7 +3,6 @@ package com.uyoung.core.api.service.impl;
 import com.uyoung.core.api.dao.AlbumInfoDao;
 import com.uyoung.core.api.model.AlbumInfo;
 import com.uyoung.core.api.service.AlbumInfoService;
-import com.uyoung.core.api.service.PhotoInfoService;
 import com.uyoung.core.base.bean.Page;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,9 +23,6 @@ public class AlbumInfoServiceImpl implements AlbumInfoService {
 
     @Autowired
     private AlbumInfoDao albumInfoDao;
-
-    @Autowired
-    private PhotoInfoService photoInfoService;
 
     @Override
     public int add(AlbumInfo albumInfo) {
@@ -89,5 +85,14 @@ public class AlbumInfoServiceImpl implements AlbumInfoService {
             return 0;
         }
         return albumInfoDao.incLikeCount(id);
+    }
+
+    @Override
+    public int updateFirstPhotoUrl(Integer id, String firstPhotoUrl) {
+        if (id == null || firstPhotoUrl == null) {
+            return 0;
+        }
+        return albumInfoDao.updateFirstPhotoUrl(id, firstPhotoUrl);
+
     }
 }
