@@ -54,7 +54,7 @@ public class ActivitySignUpServiceImpl implements ActivitySignUpService {
     }
 
     @Override
-    public boolean cancel(Integer aid, Integer uid) {
+    public boolean cancel(Integer uid, Integer aid) {
         if (aid == null || uid == null) {
             LOGGER.error("Invalid param.");
             return false;
