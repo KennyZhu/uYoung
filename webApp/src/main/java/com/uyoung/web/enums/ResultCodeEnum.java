@@ -38,7 +38,17 @@ public enum ResultCodeEnum {
     /**
      * 活动不能报名
      */
-    ACTIVITY_NOT_SIGN_UP(-104, "活动已经不能报名");
+    ACTIVITY_NOT_SIGN_UP(-104, "活动已经不能报名"),
+
+    /**
+     * 不能删除别人的相册
+     */
+    ALBUM_DELETE_NOT_USERS(-105, "不能删除别人的相册"),
+
+    /**
+     * 没有找到相册
+     */
+    ALBUM_NOT_FOUND(-106, "没有找到相册");
 
 
     private final int code;
