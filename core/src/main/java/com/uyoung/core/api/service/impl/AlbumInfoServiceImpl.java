@@ -88,11 +88,10 @@ public class AlbumInfoServiceImpl implements AlbumInfoService {
     }
 
     @Override
-    public int updateFirstPhotoUrl(Integer id, String firstPhotoUrl) {
+    public boolean updateFirstPhotoUrl(Integer id, String firstPhotoUrl) {
         if (id == null || firstPhotoUrl == null) {
-            return 0;
+            return false;
         }
-        return albumInfoDao.updateFirstPhotoUrl(id, firstPhotoUrl);
-
+        return albumInfoDao.updateFirstPhotoUrl(id, firstPhotoUrl) == 1;
     }
 }

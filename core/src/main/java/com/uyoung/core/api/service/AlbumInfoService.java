@@ -74,5 +74,5 @@ public interface AlbumInfoService {
      * @param firstPhotoUrl
      * @return
      */
-    int updateFirstPhotoUrl(Integer id, String firstPhotoUrl);
+    boolean updateFirstPhotoUrl(Integer id, String firstPhotoUrl);
 }
