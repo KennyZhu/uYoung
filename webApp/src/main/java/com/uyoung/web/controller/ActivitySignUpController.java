@@ -68,10 +68,11 @@ public class ActivitySignUpController extends BaseController {
         if (uid == null || activityId == null) {
             return buildInvalidParamJson();
         }
-
         try {
-            signUpService.cancel(uid, activityId);
-
+            boolean result = signUpService.cancel(uid, activityId);
+            if (!result) {
+                LOGGER.error("#Cancel failed.aid is " + activityId + " uid is " + uid);
+            }
         } catch (Exception e) {
             LOGGER.error("#Cancel aid:" + activityId + " uid:" + uid + " error.Cause:", e);
             return buildExceptionJson();

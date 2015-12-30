@@ -38,7 +38,6 @@ public class ActivitySignUpDaoImpl extends BaseDao<ActivitySignUp> implements Ac
         paramMap.put("uid", uid);
         paramMap.put("aid", aid);
         paramMap.put("status", status);
-
         return update("updateStatusByUidAid", paramMap);
 
     }

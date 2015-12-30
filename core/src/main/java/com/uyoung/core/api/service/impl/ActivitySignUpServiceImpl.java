@@ -4,6 +4,8 @@ import com.uyoung.core.api.dao.ActivitySignUpDao;
 import com.uyoung.core.api.enums.ActivitySignUpStatusEnum;
 import com.uyoung.core.api.model.ActivitySignUp;
 import com.uyoung.core.api.service.ActivitySignUpService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,7 @@ import java.util.List;
  */
 @Service("activitySignUpService")
 public class ActivitySignUpServiceImpl implements ActivitySignUpService {
+    private static final Logger LOGGER = LoggerFactory.getLogger(ActivitySignUpServiceImpl.class);
     @Autowired
     private ActivitySignUpDao activitySignUpDao;
 
@@ -51,11 +54,12 @@ public class ActivitySignUpServiceImpl implements ActivitySignUpService {
     }
 
     @Override
-    public int cancel(Integer aid, Integer uid) {
+    public boolean cancel(Integer aid, Integer uid) {
         if (aid == null || uid == null) {
-            return 0;
+            LOGGER.error("Invalid param.");
+            return false;
         }
-        return activitySignUpDao.updateStatusByUidAid(uid, aid, ActivitySignUpStatusEnum.CANCEL.getStatus());
+        return activitySignUpDao.updateStatusByUidAid(uid, aid, ActivitySignUpStatusEnum.CANCEL.getStatus()) == 1;
     }
 
     @Override

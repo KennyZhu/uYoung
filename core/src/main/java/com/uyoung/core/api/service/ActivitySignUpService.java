@@ -36,7 +36,7 @@ public interface ActivitySignUpService {
      * @param uid
      * @return
      */
-    public int cancel(Integer aid, Integer uid);
+    public boolean cancel(Integer aid, Integer uid);
 
     /**
      * 获取报名信息
