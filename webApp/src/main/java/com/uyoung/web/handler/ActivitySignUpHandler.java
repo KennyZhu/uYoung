@@ -1,5 +1,6 @@
 package com.uyoung.web.handler;
 
+import com.uyoung.core.api.constant.CommonConstant;
 import com.uyoung.core.api.enums.ActivityStatusEnum;
 import com.uyoung.core.api.exception.BusinessException;
 import com.uyoung.core.api.model.ActivityInfo;
@@ -7,6 +8,7 @@ import com.uyoung.core.api.model.ActivitySignUp;
 import com.uyoung.core.api.service.ActivityInfoService;
 import com.uyoung.core.api.service.ActivitySignUpService;
 import com.uyoung.web.enums.ResultCodeEnum;
+import com.uyoung.web.util.DateUtil;
 import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,10 +53,7 @@ public class ActivitySignUpHandler {
         if (ActivityStatusEnum.SIGNUP != statusEnum) {
             throw new BusinessException(ResultCodeEnum.ACTIVITY_NOT_SIGN_UP);
         }
-        ArrayList<ActivityStatusEnum> activityStatusEnums = new ArrayList<>();
-        activityStatusEnums.add(ActivityStatusEnum.ACTIVE);
-        activityStatusEnums.add(ActivityStatusEnum.SIGNUP);
-        List<ActivitySignUp> alreadySignActs = signUpService.getListByUidActivityStatusList(uid, activityStatusEnums);
+        List<ActivitySignUp> alreadySignActs = signUpService.getListByUidBeginTime(uid, DateUtil.getDate(CommonConstant.MAX_ACTIVITY_SIGNUP_TIME + CommonConstant.MAX_ACTIVITY_TIME_INTERVAL));
         if (CollectionUtils.isNotEmpty(alreadySignActs)) {
             List<Integer> activityIdList = new ArrayList<>();
             for (ActivitySignUp signUp : alreadySignActs) {

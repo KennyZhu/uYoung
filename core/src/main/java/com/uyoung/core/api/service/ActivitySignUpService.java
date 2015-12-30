@@ -1,9 +1,9 @@
 package com.uyoung.core.api.service;
 
 import com.uyoung.core.api.enums.ActivitySignUpStatusEnum;
-import com.uyoung.core.api.enums.ActivityStatusEnum;
 import com.uyoung.core.api.model.ActivitySignUp;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -55,16 +55,6 @@ public interface ActivitySignUpService {
     int updateStatusByUidAid(Integer uid, Integer aid, ActivitySignUpStatusEnum statusEnum);
 
     /**
-     * 更新活动状态
-     *
-     * @param aid
-     * @param activityStatusEnum
-     * @return
-     */
-    int updateActivityStatusByAid(Integer aid, ActivityStatusEnum activityStatusEnum);
-
-
-    /**
      * 获取指定活动的所有报名
      *
      * @param activityId
@@ -73,11 +63,11 @@ public interface ActivitySignUpService {
     List<ActivitySignUp> getListByActivityId(Integer activityId);
 
     /**
-     * 获取用户报名的指定状态的活动
+     * 获取指定时间内的所有报名信息
      *
      * @param uid
-     * @param activityStatusEnums
+     * @param beginTime
      * @return
      */
-    List<ActivitySignUp> getListByUidActivityStatusList(Integer uid, List<ActivityStatusEnum> activityStatusEnums);
+    List<ActivitySignUp> getListByUidBeginTime(Integer uid, Date beginTime);
 }

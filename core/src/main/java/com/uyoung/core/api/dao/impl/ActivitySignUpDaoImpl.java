@@ -5,6 +5,7 @@ import com.uyoung.core.api.model.ActivitySignUp;
 import com.uyoung.core.base.dao.BaseDao;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,25 +44,16 @@ public class ActivitySignUpDaoImpl extends BaseDao<ActivitySignUp> implements Ac
     }
 
     @Override
-    public int updateActivityStatusByAid(Integer aid, int status) {
-        Map<String, Object> paramMap = new HashMap<>();
-        paramMap.put("aid", aid);
-        paramMap.put("status", status);
-
-        return update("updateActivityStatusByAid", paramMap);
-    }
-
-    @Override
     public List<ActivitySignUp> getListByActivityId(Integer aid) {
         return selectList("getListByActivityId", aid);
     }
 
     @Override
-    public List<ActivitySignUp> getListByUidActivityStatusList(Integer uid, List<Integer> actStatusList) {
+    public List<ActivitySignUp> getListByUidBeginTime(Integer uid, Date beginTime) {
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("uid", uid);
-        paramMap.put("actStatusList", actStatusList);
-        return selectList("getListByUidActivityStatusList", paramMap);
+        paramMap.put("beginTime", beginTime);
+        return selectList("getListByUidBeginTime", paramMap);
     }
 
     @Override

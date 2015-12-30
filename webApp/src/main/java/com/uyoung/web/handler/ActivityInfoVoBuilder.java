@@ -8,7 +8,7 @@ import com.uyoung.core.api.model.ActivityInfo;
 import com.uyoung.core.api.model.UserInfo;
 import com.uyoung.core.api.service.UserInfoService;
 import com.uyoung.core.base.util.SpringContextHolder;
-import com.uyoung.web.util.DataUtil;
+import com.uyoung.web.util.DateUtil;
 import com.uyoung.web.vo.ActivityInfoVo;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -56,9 +56,9 @@ public class ActivityInfoVoBuilder {
             LOGGER.warn("#Can not found activity status:", activityInfo.getStatus());
         }
 
-        infoVo.setDay(DataUtil.getDay(activityInfo.getBeginTime()));
-        infoVo.setMon(DataUtil.getMonth(activityInfo.getBeginTime()));
-        WeekEnum weekEnum = WeekEnum.getByWeek(DataUtil.getWeek(activityInfo.getBeginTime()));
+        infoVo.setDay(DateUtil.getDay(activityInfo.getBeginTime()));
+        infoVo.setMon(DateUtil.getMonth(activityInfo.getBeginTime()));
+        WeekEnum weekEnum = WeekEnum.getByWeek(DateUtil.getWeek(activityInfo.getBeginTime()));
         if (weekEnum != null) {
             infoVo.setWeekDesc(weekEnum.getWeekCnDesc());
         } else {

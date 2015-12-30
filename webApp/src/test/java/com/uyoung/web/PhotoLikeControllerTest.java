@@ -22,6 +22,5 @@ public class PhotoLikeControllerTest extends BaseControllerTest {
         PhotoLikeController controller = (PhotoLikeController) this.applicationContext.getBean("photoLikeController");
 //        MockHttpServletRequest request = new MockHttpServletRequest();
 //        request.setMethod("GET");
-        LOGGER.info(controller.unlike(1, 1));
     }
 }

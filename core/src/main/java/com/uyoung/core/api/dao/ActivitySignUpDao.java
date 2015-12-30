@@ -2,6 +2,7 @@ package com.uyoung.core.api.dao;
 
 import com.uyoung.core.api.model.ActivitySignUp;
 
+import java.util.Date;
 import java.util.List;
 
 public interface ActivitySignUpDao {
@@ -14,11 +15,9 @@ public interface ActivitySignUpDao {
 
     int updateStatusByUidAid(Integer uid, Integer aid, int status);
 
-    int updateActivityStatusByAid(Integer aid, int status);
-
     List<ActivitySignUp> getListByActivityId(Integer aid);
 
-    List<ActivitySignUp> getListByUidActivityStatusList(Integer uid, List<Integer> actStatusList);
+    List<ActivitySignUp> getListByUidBeginTime(Integer uid, Date beginTime);
 
     ActivitySignUp getByAidUid(Integer aid, Integer uid);
 }
