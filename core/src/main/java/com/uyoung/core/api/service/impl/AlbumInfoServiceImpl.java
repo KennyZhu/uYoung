@@ -4,6 +4,7 @@ import com.uyoung.core.api.dao.AlbumInfoDao;
 import com.uyoung.core.api.model.AlbumInfo;
 import com.uyoung.core.api.service.AlbumInfoService;
 import com.uyoung.core.base.bean.Page;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -89,7 +90,7 @@ public class AlbumInfoServiceImpl implements AlbumInfoService {
 
     @Override
     public boolean updateFirstPhotoUrl(Integer id, String firstPhotoUrl) {
-        if (id == null || firstPhotoUrl == null) {
+        if (id == null || StringUtils.isBlank(firstPhotoUrl)) {
             return false;
         }
         return albumInfoDao.updateFirstPhotoUrl(id, firstPhotoUrl) == 1;

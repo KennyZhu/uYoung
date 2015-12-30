@@ -62,7 +62,7 @@ public class AlbumInfoDaoImpl extends BaseDao<AlbumInfo> implements AlbumInfoDao
     public int updateFirstPhotoUrl(Integer id, String firstUrl) {
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("id", id);
-        paramMap.put("firstUrl", firstUrl);
+        paramMap.put("firstPhotoUrl", firstUrl);
         return update("updateFirstPhotoUrl", paramMap);
     }
 }
