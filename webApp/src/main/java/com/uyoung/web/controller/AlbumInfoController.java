@@ -159,19 +159,22 @@ public class AlbumInfoController extends BaseController {
      * 更新相册封面URL
      *
      * @param id
-     * @param firstUrl
+     * @param url
      * @return
      */
     @RequestMapping(value = "/album/updateFirstUrl")
     @ResponseBody
-    public String updateFirstUrl(Integer id, String firstUrl) {
-        if (id == null || StringUtils.isBlank(firstUrl)) {
+    public String updateFirstUrl(Integer id, String url) {
+        if (id == null || StringUtils.isBlank(url)) {
             return buildInvalidParamJson();
         }
         try {
-            albumInfoService.updateFirstPhotoUrl(id, firstUrl);
+            boolean result = albumInfoService.updateFirstPhotoUrl(id, url);
+            if (!result) {
+                return buildFailJson();
+            }
         } catch (Exception e) {
-            LOGGER.error("#UpdateFirstUrl error.Id is " + id + " firstPhotoUrl is " + firstUrl + "Cause:", e);
+            LOGGER.error("#UpdateFirstUrl error.Id is " + id + " firstPhotoUrl is " + url + "Cause:", e);
             return buildExceptionJson();
         }
         return buildSuccessJson();
