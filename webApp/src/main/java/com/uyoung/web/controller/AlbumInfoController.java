@@ -99,7 +99,7 @@ public class AlbumInfoController extends AlbumBaseController {
             return buildInvalidParamJson();
         }
         try {
-            checkUser(albumInfo.getId());
+//            checkUser(albumInfo.getId());
             albumInfoService.updateById(albumInfo);
         } catch (Exception e) {
             LOGGER.error("#Update albumInfo error.Cause:", e);
@@ -122,10 +122,10 @@ public class AlbumInfoController extends AlbumBaseController {
             return buildInvalidParamJson();
         }
         try {
-            checkUser(id);
+//            checkUser(id);
             handler.deleteById(uid, id);
         } catch (BusinessException busE) {
-            LOGGER.error("#Delete activity error.Uid is " + uid + " id is " + id + "Cause:", busE);
+            LOGGER.error("#Delete album error.Uid is " + uid + " id is " + id + "Cause:", busE);
             return buildFailJson(ResultCodeEnum.getByCode(Integer.valueOf(busE.getMessage())).getDesc());
         } catch
                 (Exception e) {
