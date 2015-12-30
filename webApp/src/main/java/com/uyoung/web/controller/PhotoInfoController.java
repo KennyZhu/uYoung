@@ -2,7 +2,6 @@ package com.uyoung.web.controller;
 
 import com.uyoung.core.api.model.PhotoInfo;
 import com.uyoung.core.api.service.PhotoInfoService;
-import com.uyoung.core.third.qiniu.QiNiuConstant;
 import com.uyoung.web.controller.base.BaseController;
 import com.uyoung.web.handler.PhotoInfoHandler;
 import org.slf4j.Logger;
@@ -36,7 +35,6 @@ public class PhotoInfoController extends BaseController {
             return buildInvalidParamJson();
         }
         try {
-            photoInfo.setPhotoUrl(QiNiuConstant.getUrl(photoInfo.getPhotoUrl()));
             photoInfoService.add(photoInfo);
             return buildSuccessJson(photoInfo.getId());
         } catch (Exception e) {
