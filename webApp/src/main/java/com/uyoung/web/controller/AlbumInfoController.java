@@ -162,7 +162,7 @@ public class AlbumInfoController extends BaseController {
      * @param url
      * @return
      */
-    @RequestMapping(value = "/album/updateFirstUrl")
+    @RequestMapping(value = "/album/updateFirstUrl", method = RequestMethod.POST)
     @ResponseBody
     public String updateFirstUrl(Integer id, String url) {
         if (id == null || StringUtils.isBlank(url)) {
