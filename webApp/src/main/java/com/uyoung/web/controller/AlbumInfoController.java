@@ -4,6 +4,7 @@ import com.uyoung.core.api.exception.BusinessException;
 import com.uyoung.core.api.model.AlbumInfo;
 import com.uyoung.core.api.service.AlbumInfoService;
 import com.uyoung.core.base.bean.Page;
+import com.uyoung.web.controller.base.AlbumBaseController;
 import com.uyoung.web.enums.ResultCodeEnum;
 import com.uyoung.web.handler.AlbumInfoBuilder;
 import com.uyoung.web.handler.AlbumInfoHandler;
@@ -26,7 +27,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * <br/>User: ylzhu
  */
 @Controller
-public class AlbumInfoController extends BaseController {
+public class AlbumInfoController extends AlbumBaseController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AlbumInfoController.class);
     @Autowired
@@ -49,7 +50,6 @@ public class AlbumInfoController extends BaseController {
         if (uid == null) {
             return buildInvalidParamJson();
         }
-
         try {
             Page<AlbumInfo> albumInfoPage = albumInfoService.getPageByCreateUserId(uid, page, pageSize);
             if (albumInfoPage != null && CollectionUtils.isNotEmpty(albumInfoPage.getDataList())) {
@@ -99,6 +99,7 @@ public class AlbumInfoController extends BaseController {
             return buildInvalidParamJson();
         }
         try {
+            checkUser(albumInfo.getId());
             albumInfoService.updateById(albumInfo);
         } catch (Exception e) {
             LOGGER.error("#Update albumInfo error.Cause:", e);
@@ -121,7 +122,7 @@ public class AlbumInfoController extends BaseController {
             return buildInvalidParamJson();
         }
         try {
-
+            checkUser(id);
             handler.deleteById(uid, id);
         } catch (BusinessException busE) {
             LOGGER.error("#Delete activity error.Uid is " + uid + " id is " + id + "Cause:", busE);
@@ -138,7 +139,7 @@ public class AlbumInfoController extends BaseController {
      * 相册详情
      *
      * @param albumId
-     * @return TODO
+     * @return
      */
     @RequestMapping(value = "/album/getDetailById")
     @ResponseBody

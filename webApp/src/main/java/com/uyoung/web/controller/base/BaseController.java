@@ -1,4 +1,4 @@
-package com.uyoung.web.controller;
+package com.uyoung.web.controller.base;
 
 import com.uyoung.core.api.model.UserInfo;
 import com.uyoung.core.base.bean.Page;
@@ -91,6 +91,15 @@ public class BaseController {
      * @return
      */
     protected UserInfo getCurrentLoginUser() {
+        return null;
+    }
+
+    /**
+     * 获取当前登录用户ID
+     *
+     * @return
+     */
+    protected Integer getCurrentLoginUid() {
         return null;
     }
 

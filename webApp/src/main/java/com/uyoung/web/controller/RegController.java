@@ -2,6 +2,7 @@ package com.uyoung.web.controller;
 
 import com.uyoung.core.api.model.UserInfo;
 import com.uyoung.core.api.service.UserInfoService;
+import com.uyoung.web.controller.base.BaseController;
 import com.uyoung.web.util.JsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -4,6 +4,7 @@ import com.uyoung.core.api.enums.ActivitySignUpStatusEnum;
 import com.uyoung.core.api.exception.BusinessException;
 import com.uyoung.core.api.model.ActivitySignUp;
 import com.uyoung.core.api.service.ActivitySignUpService;
+import com.uyoung.web.controller.base.BaseController;
 import com.uyoung.web.enums.ResultCodeEnum;
 import com.uyoung.web.handler.ActivitySignUpHandler;
 import org.slf4j.Logger;

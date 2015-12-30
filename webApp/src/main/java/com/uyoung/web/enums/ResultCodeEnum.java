@@ -13,6 +13,7 @@ public enum ResultCodeEnum {
     FAIL(101, "fail"),
     EXCEPTION(-1, "exception"),
     INVALID_PARAM(-2, "invalid param"),
+    NOT_LOGIN(-3, "not login"),
 
     /**
      * 活动不存在
@@ -43,14 +44,12 @@ public enum ResultCodeEnum {
     /**
      * 不能删除别人的相册
      */
-    ALBUM_DELETE_NOT_USERS(-105, "不能删除别人的相册"),
+    ALBUM_NOT_CREATOR(-105, "不是相册创建者，不能操作"),
 
     /**
      * 没有找到相册
      */
     ALBUM_NOT_FOUND(-106, "没有找到相册");
-
-
     private final int code;
     private final String desc;
 

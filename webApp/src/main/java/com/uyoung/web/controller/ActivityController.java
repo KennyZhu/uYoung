@@ -2,10 +2,10 @@ package com.uyoung.web.controller;
 
 import com.uyoung.core.api.enums.ActivityStatusEnum;
 import com.uyoung.core.api.model.ActivityInfo;
-import com.uyoung.core.api.model.ActivitySignUp;
 import com.uyoung.core.api.service.ActivityInfoService;
 import com.uyoung.core.base.bean.Page;
 import com.uyoung.web.bean.BaseResult;
+import com.uyoung.web.controller.base.BaseController;
 import com.uyoung.web.enums.ResultCodeEnum;
 import com.uyoung.web.handler.ActivityInfoHandler;
 import com.uyoung.web.util.JsonUtil;

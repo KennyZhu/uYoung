@@ -2,6 +2,7 @@ package com.uyoung.web.controller;
 
 import com.uyoung.core.api.service.DictCityService;
 import com.uyoung.core.api.service.SignService;
+import com.uyoung.web.controller.base.BaseController;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

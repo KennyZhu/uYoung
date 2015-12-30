@@ -1,6 +1,5 @@
 package com.uyoung.web.handler;
 
-import com.uyoung.core.api.exception.BusinessException;
 import com.uyoung.core.api.model.AlbumInfo;
 import com.uyoung.core.api.model.PhotoInfo;
 import com.uyoung.core.api.model.UserInfo;
@@ -9,7 +8,6 @@ import com.uyoung.core.api.service.PhotoInfoService;
 import com.uyoung.core.api.service.UserInfoService;
 import com.uyoung.core.api.task.TaskFactory;
 import com.uyoung.core.api.task.impl.AlbumDeleteTask;
-import com.uyoung.web.enums.ResultCodeEnum;
 import com.uyoung.web.vo.AlbumDetailVo;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,15 +76,6 @@ public class AlbumInfoHandler {
         if (id == null || uid == null) {
             return;
         }
-        AlbumInfo albumInfo = albumInfoService.getById(id);
-        if (albumInfo == null) {
-            throw new BusinessException(ResultCodeEnum.ALBUM_NOT_FOUND);
-        }
-
-        if (!uid.equals(albumInfo.getCreateUserId())) {
-            throw new BusinessException(ResultCodeEnum.ALBUM_DELETE_NOT_USERS);
-        }
-
         albumInfoService.deleteById(id);
         List<PhotoInfo> photoInfos = photoInfoService.getListByAlbumId(id);
         if (CollectionUtils.isNotEmpty(photoInfos)) {
