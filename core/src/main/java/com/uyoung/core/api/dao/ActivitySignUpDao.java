@@ -7,8 +7,6 @@ import java.util.List;
 
 public interface ActivitySignUpDao {
 
-    int deleteByPrimaryKey(Integer id);
-
     int insert(ActivitySignUp record);
 
     ActivitySignUp getById(Integer id);
@@ -20,4 +18,6 @@ public interface ActivitySignUpDao {
     List<ActivitySignUp> getListByUidBeginTime(Integer uid, Date beginTime);
 
     ActivitySignUp getByAidUid(Integer aid, Integer uid);
+
+    int deleteByUidAid(Integer uid, Integer aid);
 }

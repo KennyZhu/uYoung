@@ -59,7 +59,7 @@ public class ActivitySignUpServiceImpl implements ActivitySignUpService {
             LOGGER.error("Invalid param.");
             return false;
         }
-        return activitySignUpDao.updateStatusByUidAid(uid, aid, ActivitySignUpStatusEnum.CANCEL.getStatus()) == 1;
+        return activitySignUpDao.deleteByUidAid(uid, aid) == 1;
     }
 
     @Override
