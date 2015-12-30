@@ -72,6 +72,7 @@ public class ActivitySignUpController extends BaseController {
             boolean result = signUpService.cancel(uid, activityId);
             if (!result) {
                 LOGGER.error("#Cancel failed.aid is " + activityId + " uid is " + uid);
+                return buildFailJson();
             }
         } catch (Exception e) {
             LOGGER.error("#Cancel aid:" + activityId + " uid:" + uid + " error.Cause:", e);
