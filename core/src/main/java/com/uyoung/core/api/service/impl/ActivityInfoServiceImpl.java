@@ -1,5 +1,6 @@
 package com.uyoung.core.api.service.impl;
 
+import com.uyoung.core.api.anno.parse.SortParser;
 import com.uyoung.core.api.bean.ActivityConditionBean;
 import com.uyoung.core.api.dao.ActivityInfoDao;
 import com.uyoung.core.api.enums.ActivityStatusEnum;
@@ -51,6 +52,7 @@ public class ActivityInfoServiceImpl implements ActivityInfoService {
         if (conditionBean == null) {
             return buildEmptyPage(pageNum, pageSize);
         }
+        conditionBean.setSortColumn(SortParser.parser(conditionBean));
         int offset = pageSize * (pageNum - 1) + 1;
         return activityInfoDao.getPageByCondition(conditionBean, offset, pageSize);
     }
