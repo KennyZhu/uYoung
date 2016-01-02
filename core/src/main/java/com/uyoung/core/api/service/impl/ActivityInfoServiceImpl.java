@@ -1,5 +1,6 @@
 package com.uyoung.core.api.service.impl;
 
+import com.uyoung.core.api.bean.ActivityConditionBean;
 import com.uyoung.core.api.dao.ActivityInfoDao;
 import com.uyoung.core.api.enums.ActivityStatusEnum;
 import com.uyoung.core.api.model.ActivityInfo;
@@ -32,15 +33,27 @@ public class ActivityInfoServiceImpl implements ActivityInfoService {
     @Override
     public Page<ActivityInfo> getPageByStatus(int pageNum, int pageSize, ActivityStatusEnum statusEnum, Integer oriUid) {
         if (statusEnum == null) {
-            Page<ActivityInfo> result = new Page<>();
-            result.setPageNum(pageNum);
-            result.setPageSize(pageSize);
-            return result;
+            return buildEmptyPage(pageNum, pageSize);
         }
         int offset = pageSize * (pageNum - 1) + 1;
         return activityInfoDao.getPageByStatus(offset, pageSize, statusEnum.getStatus(), oriUid);
     }
 
+    private Page<ActivityInfo> buildEmptyPage(int pageNum, int pageSize) {
+        Page<ActivityInfo> result = new Page<>();
+        result.setPageNum(pageNum);
+        result.setPageSize(pageSize);
+        return result;
+    }
+
+    @Override
+    public Page<ActivityInfo> getPageByCondition(ActivityConditionBean conditionBean, int pageNum, int pageSize) {
+        if (conditionBean == null) {
+            return buildEmptyPage(pageNum, pageSize);
+        }
+        int offset = pageSize * (pageNum - 1) + 1;
+        return activityInfoDao.getPageByCondition(conditionBean, offset, pageSize);
+    }
 
     @Override
     public int add(ActivityInfo activityInfo) {

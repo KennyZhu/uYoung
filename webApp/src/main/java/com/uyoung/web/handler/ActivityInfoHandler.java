@@ -1,5 +1,6 @@
 package com.uyoung.web.handler;
 
+import com.uyoung.core.api.bean.ActivityConditionBean;
 import com.uyoung.core.api.enums.ActivitySignUpStatusEnum;
 import com.uyoung.core.api.enums.ActivityStatusEnum;
 import com.uyoung.core.api.enums.ActivityTypeEnum;
@@ -60,20 +61,7 @@ public class ActivityInfoHandler {
         if (activityInfoPage == null || CollectionUtils.isEmpty(activityInfoPage.getDataList())) {
             return result;
         }
-        List<ActivityInfo> activityInfoList = activityInfoPage.getDataList();
-        List<ActivityInfoVo> activityInfoVos = new ArrayList<>(activityInfoList.size());
-        List<Integer> oriUserIds = new ArrayList<>(activityInfoList.size());
-        for (ActivityInfo activityInfo : activityInfoList) {
-            oriUserIds.add(activityInfo.getOriUserId());
-        }
-        Map<Integer, UserInfo> userInfoMap = userInfoService.getMapByIdList(oriUserIds);
-        for (ActivityInfo activityInfo : activityInfoList) {
-            ActivityInfoVo infoVo = new ActivityInfoVoBuilder(activityInfo).buildBase().getInfoVo();
-            buildAvatarUrl(infoVo, userInfoMap);
-            activityInfoVos.add(infoVo);
-        }
-
-        result.setDataList(activityInfoVos);
+        buildActivityWithUserInfo(result, activityInfoPage);
         return result;
     }
 
@@ -96,6 +84,12 @@ public class ActivityInfoHandler {
         return result;
     }
 
+    /**
+     * 构建活动相关的报名用户
+     *
+     * @param activityId
+     * @return
+     */
     public List<SignUpUserVo> buildSignUpUserVosByActivityId(Integer activityId) {
         List<ActivitySignUp> signUps = signUpService.getListByActivityId(activityId);
         if (CollectionUtils.isEmpty(signUps)) {
@@ -170,4 +164,44 @@ public class ActivityInfoHandler {
         activitySignUp.setStatus(ActivitySignUpStatusEnum.SUCCESS.getStatus());
         signUpService.add(activitySignUp);
     }
+
+    /**
+     * 根据条件获取所有的
+     *
+     * @param conditionBean
+     * @param page
+     * @param pageSize
+     * @return
+     */
+    public Page<ActivityInfoVo> getPageByCondition(ActivityConditionBean conditionBean, int page, int pageSize) {
+        Page<ActivityInfoVo> result = new Page<>();
+        result.setPageSize(pageSize);
+        result.setPageNum(page);
+        Page<ActivityInfo> activityInfoPage = activityInfoService.getPageByCondition(conditionBean, page, pageSize);
+        if (activityInfoPage == null || CollectionUtils.isEmpty(activityInfoPage.getDataList())) {
+            return result;
+        }
+        buildActivityWithUserInfo(result, activityInfoPage);
+        return result;
+    }
+
+    private void buildActivityWithUserInfo(Page<ActivityInfoVo> result, Page<ActivityInfo> activityInfoPage) {
+        List<ActivityInfo> activityInfoList = activityInfoPage.getDataList();
+        List<ActivityInfoVo> activityInfoVos = new ArrayList<>(activityInfoList.size());
+        List<Integer> oriUserIds = new ArrayList<>(activityInfoList.size());
+        for (ActivityInfo activityInfo : activityInfoList) {
+            oriUserIds.add(activityInfo.getOriUserId());
+        }
+        //获取用户信息
+        Map<Integer, UserInfo> userInfoMap = userInfoService.getMapByIdList(oriUserIds);
+        for (ActivityInfo activityInfo : activityInfoList) {
+            ActivityInfoVo infoVo = new ActivityInfoVoBuilder(activityInfo).buildBase().getInfoVo();
+            buildAvatarUrl(infoVo, userInfoMap);
+            activityInfoVos.add(infoVo);
+        }
+
+        result.setDataList(activityInfoVos);
+    }
+
+
 }

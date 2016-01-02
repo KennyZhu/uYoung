@@ -1,8 +1,8 @@
 package com.uyoung.web.controller;
 
+import com.uyoung.core.api.bean.ActivityConditionBean;
 import com.uyoung.core.api.enums.ActivityStatusEnum;
 import com.uyoung.core.api.model.ActivityInfo;
-import com.uyoung.core.api.model.ActivitySignUp;
 import com.uyoung.core.api.service.ActivityInfoService;
 import com.uyoung.core.base.bean.Page;
 import com.uyoung.web.bean.BaseResult;
@@ -60,6 +60,30 @@ public class ActivityController extends BaseController {
             return JsonUtil.getJsonString(baseResult);
         } catch (Exception e) {
             LOGGER.error("#Get page by status error.uid is :" + uid + " status is " + status + " Cause:", e);
+            return buildExceptionJson();
+        }
+    }
+
+    /**
+     * 批量获取活动
+     *
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    @RequestMapping(value = "/activity/getPageByStatus")
+    @ResponseBody
+    public String getPageByCondition(Integer pageNum, Integer pageSize, ActivityConditionBean conditionBean) {
+        if (pageNum == null || pageSize == null || conditionBean == null) {
+            return buildInvalidParamJson();
+        }
+        try {
+            Page<ActivityInfoVo> infoPage = activityInfoHandler.getPageByCondition(conditionBean, pageNum, pageSize);
+            BaseResult baseResult = new BaseResult(ResultCodeEnum.SUCCESS.getCode(), ResultCodeEnum.SUCCESS.getDesc());
+            baseResult.setResultData(infoPage);
+            return JsonUtil.getJsonString(baseResult);
+        } catch (Exception e) {
+            LOGGER.error("#Get page by status error.Condition is :" + conditionBean + " Cause:", e);
             return buildExceptionJson();
         }
     }

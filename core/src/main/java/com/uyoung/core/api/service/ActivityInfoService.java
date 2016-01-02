@@ -1,5 +1,6 @@
 package com.uyoung.core.api.service;
 
+import com.uyoung.core.api.bean.ActivityConditionBean;
 import com.uyoung.core.api.enums.ActivityStatusEnum;
 import com.uyoung.core.api.model.ActivityInfo;
 import com.uyoung.core.base.bean.Page;
@@ -23,6 +24,16 @@ public interface ActivityInfoService {
      * @return
      */
     public Page<ActivityInfo> getPageByStatus(int pageNum, int pageSize, ActivityStatusEnum statusEnum, Integer oriUid);
+
+    /**
+     * 根据条件查询活动信息
+     *
+     * @param conditionBean
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    public Page<ActivityInfo> getPageByCondition(ActivityConditionBean conditionBean, int pageNum, int pageSize);
 
     /**
      * 获取详情

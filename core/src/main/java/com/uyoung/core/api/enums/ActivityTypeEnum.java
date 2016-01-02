@@ -3,7 +3,7 @@ package com.uyoung.core.api.enums;
 import java.util.stream.Stream;
 
 /**
- * Desc:
+ * Desc:活动类型
  * <p/>Date: 2015-10-14
  * <br/>Time: 16:51
  * <br/>User: ylzhu

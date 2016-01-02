@@ -184,5 +184,29 @@
         </foreach>
     </select>
 
-
+    <select id="getPageByCondition" parameterType="com.uyoung.core.api.bean.ActivityConditionBean"
+            resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_activity_info
+        where 1 = 1
+        <if test="condition.activityType != null">
+            and activity_type = #{condition.activityType,jdbcType=INTEGER}
+        </if>
+        <if test="condition.status != null">
+            AND status = #{condition.status,jdbcType=INTEGER}
+        </if>
+        <if test="condition.freeType != null">
+            AND free_type = #{condition.freeType,jdbcType=INTEGER}
+        </if>
+        <if test="condition.creatorUid != null">
+            AND ori_user_id = #{condition.creatorUid,jdbcType=INTEGER}
+        </if>
+        <if test="condition.sortColumn != null">
+            order by ${condition.sortColumn}
+        </if>
+        <if test="condition.sort != null">
+            ${condition.sort}
+        </if>
+    </select>
 </mapper>

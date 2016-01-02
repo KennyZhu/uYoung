@@ -1,7 +1,10 @@
 package com.uyoung.core.api.service;
 
 import com.uyoung.core.api.BaseTest;
+import com.uyoung.core.api.anno.parse.SortParser;
+import com.uyoung.core.api.bean.ActivityConditionBean;
 import com.uyoung.core.api.enums.ActivityStatusEnum;
+import com.uyoung.core.api.enums.SortEnum;
 import com.uyoung.core.api.model.ActivityInfo;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +23,17 @@ public class ActivityInfoServiceTest extends BaseTest {
     @Test
     public void getPageByStatus() {
         ActivityStatusEnum statusEnum = ActivityStatusEnum.ACTIVE;
-        List<ActivityInfo> activityInfoList = service.getPageByStatus(1, 10, statusEnum, null).getDataList();
-        System.out.println("######" + activityInfoList.get(0).toString());
+        ActivityConditionBean conditionBean = new ActivityConditionBean();
+        conditionBean.setStatus(ActivityStatusEnum.ACTIVE.getStatus());
+        conditionBean.setBeginTimeSort(1);
+        conditionBean.setSort(SortEnum.DESC.getValue());
+        conditionBean.setSortColumn(SortParser.parser(conditionBean));
+
+        LOGGER.info("#####" + conditionBean.toString());
+        List<ActivityInfo> activityInfoList = service.getPageByCondition(conditionBean, 1, 10).getDataList();
+        for (ActivityInfo activityInfo : activityInfoList) {
+            System.out.println("######" + activityInfo.toString());
+        }
     }
 
     @Test

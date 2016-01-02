@@ -1,5 +1,6 @@
 package com.uyoung.core.api.dao.impl;
 
+import com.uyoung.core.api.bean.ActivityConditionBean;
 import com.uyoung.core.api.dao.ActivityInfoDao;
 import com.uyoung.core.api.model.ActivityInfo;
 import com.uyoung.core.base.bean.Page;
@@ -60,5 +61,12 @@ public class ActivityInfoDaoImpl extends BaseDao<ActivityInfo> implements Activi
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("idList", idList);
         return selectList("getListByIdList", paramMap);
+    }
+
+    @Override
+    public Page<ActivityInfo> getPageByCondition(ActivityConditionBean conditionBean, int offset, int limit) {
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("condition", conditionBean);
+        return selectPage("getPageByCondition", paramMap, new RowBounds(offset, limit));
     }
 }
