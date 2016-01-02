@@ -72,7 +72,7 @@ public class ActivityController extends BaseController {
      * @param pageSize
      * @return
      */
-    @RequestMapping(value = "/activity/getPageByStatus")
+    @RequestMapping(value = "/activity/getPageByCondition")
     @ResponseBody
     public String getPageByCondition(Integer pageNum, Integer pageSize, ActivityConditionBean conditionBean) {
         if (pageNum == null || pageSize == null || conditionBean == null) {
