@@ -57,4 +57,12 @@ public class AlbumInfoDaoImpl extends BaseDao<AlbumInfo> implements AlbumInfoDao
     public int decLikeCount(Integer id) {
         return update("decLikeCount", id);
     }
+
+    @Override
+    public int updateFirstPhotoUrl(Integer id, String firstUrl) {
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("id", id);
+        paramMap.put("firstPhotoUrl", firstUrl);
+        return update("updateFirstPhotoUrl", paramMap);
+    }
 }

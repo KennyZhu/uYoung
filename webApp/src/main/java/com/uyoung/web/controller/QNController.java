@@ -3,6 +3,7 @@ package com.uyoung.web.controller;
 import com.uyoung.core.api.service.SignService;
 import com.uyoung.core.third.qiniu.QiNiuStoreFactory;
 import com.uyoung.core.third.qiniu.QiNiuConstant;
+import com.uyoung.web.controller.base.BaseController;
 import com.uyoung.web.vo.QNCommonVo;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;

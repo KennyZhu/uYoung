@@ -2,6 +2,7 @@ package com.uyoung.web.controller;
 
 import com.uyoung.core.api.model.PhotoLike;
 import com.uyoung.core.api.service.PhotoLikeService;
+import com.uyoung.web.controller.base.BaseController;
 import com.uyoung.web.handler.PhotoLikeHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

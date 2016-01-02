@@ -18,4 +18,8 @@ public interface AlbumInfoDao {
     int incLikeCount(Integer id);
 
     int decLikeCount(Integer id);
+
+    int updateFirstPhotoUrl(Integer id, String firstUrl);
+
+
 }

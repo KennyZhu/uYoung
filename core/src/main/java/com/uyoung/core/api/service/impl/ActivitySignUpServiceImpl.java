@@ -2,15 +2,15 @@ package com.uyoung.core.api.service.impl;
 
 import com.uyoung.core.api.dao.ActivitySignUpDao;
 import com.uyoung.core.api.enums.ActivitySignUpStatusEnum;
-import com.uyoung.core.api.enums.ActivityStatusEnum;
 import com.uyoung.core.api.model.ActivitySignUp;
 import com.uyoung.core.api.service.ActivitySignUpService;
-import org.apache.commons.collections.CollectionUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -20,6 +20,7 @@ import java.util.List;
  */
 @Service("activitySignUpService")
 public class ActivitySignUpServiceImpl implements ActivitySignUpService {
+    private static final Logger LOGGER = LoggerFactory.getLogger(ActivitySignUpServiceImpl.class);
     @Autowired
     private ActivitySignUpDao activitySignUpDao;
 
@@ -53,31 +54,12 @@ public class ActivitySignUpServiceImpl implements ActivitySignUpService {
     }
 
     @Override
-    public int cancel(Integer aid, Integer uid) {
+    public boolean cancel(Integer uid, Integer aid) {
         if (aid == null || uid == null) {
-            return 0;
+            LOGGER.error("Invalid param.");
+            return false;
         }
-        return activitySignUpDao.updateStatusByUidAid(uid, aid, ActivitySignUpStatusEnum.CANCEL.getStatus());
-    }
-
-    @Override
-    public int updateActivityStatusByAid(Integer aid, ActivityStatusEnum activityStatusEnum) {
-        if (aid == null || activityStatusEnum == null) {
-            return 0;
-        }
-        return activitySignUpDao.updateActivityStatusByAid(aid, activityStatusEnum.getStatus());
-    }
-
-    @Override
-    public List<ActivitySignUp> getListByUidActivityStatusList(Integer uid, List<ActivityStatusEnum> activityStatusEnums) {
-        if (uid == null || CollectionUtils.isEmpty(activityStatusEnums)) {
-            return Collections.EMPTY_LIST;
-        }
-        List<Integer> statusList = new ArrayList<>();
-        for (ActivityStatusEnum statusEnum : activityStatusEnums) {
-            statusList.add(statusEnum.getStatus());
-        }
-        return activitySignUpDao.getListByUidActivityStatusList(uid, statusList);
+        return activitySignUpDao.deleteByUidAid(uid, aid) == 1;
     }
 
     @Override
@@ -86,5 +68,13 @@ public class ActivitySignUpServiceImpl implements ActivitySignUpService {
             return null;
         }
         return activitySignUpDao.getByAidUid(aid, uid);
+    }
+
+    @Override
+    public List<ActivitySignUp> getListByUidBeginTime(Integer uid, Date beginTime) {
+        if (uid == null || beginTime == null) {
+            return Collections.emptyList();
+        }
+        return activitySignUpDao.getListByUidBeginTime(uid, beginTime);
     }
 }

@@ -68,17 +68,14 @@ public class AlbumInfoHandler {
     }
 
     /**
+     * 删除相册
+     *
      * @param id
      */
-    public void deleteById(Integer id) {
-        if (id == null) {
+    public void deleteById(Integer uid, Integer id) throws Exception {
+        if (id == null || uid == null) {
             return;
         }
-        AlbumInfo albumInfo = albumInfoService.getById(id);
-        if (albumInfo == null) {
-            return;
-        }
-
         albumInfoService.deleteById(id);
         List<PhotoInfo> photoInfos = photoInfoService.getListByAlbumId(id);
         if (CollectionUtils.isNotEmpty(photoInfos)) {

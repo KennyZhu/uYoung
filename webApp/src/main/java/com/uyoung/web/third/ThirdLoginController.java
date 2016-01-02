@@ -5,7 +5,7 @@ import com.uyoung.core.api.model.UserInfo;
 import com.uyoung.core.api.service.ThirdUserService;
 import com.uyoung.core.api.service.UserInfoService;
 import com.uyoung.core.third.enums.ThirdPlatformEnum;
-import com.uyoung.web.controller.BaseController;
+import com.uyoung.web.controller.base.BaseController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

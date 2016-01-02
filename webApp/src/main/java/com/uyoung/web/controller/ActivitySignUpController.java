@@ -4,6 +4,7 @@ import com.uyoung.core.api.enums.ActivitySignUpStatusEnum;
 import com.uyoung.core.api.exception.BusinessException;
 import com.uyoung.core.api.model.ActivitySignUp;
 import com.uyoung.core.api.service.ActivitySignUpService;
+import com.uyoung.web.controller.base.BaseController;
 import com.uyoung.web.enums.ResultCodeEnum;
 import com.uyoung.web.handler.ActivitySignUpHandler;
 import org.slf4j.Logger;
@@ -44,6 +45,7 @@ public class ActivitySignUpController extends BaseController {
             boolean result = handler.signUp(uid, activityId);
             if (!result) {
                 LOGGER.error("#SignUp failed.Uid is " + uid + " activityId is " + activityId);
+                return buildFailJson();
             }
         } catch (BusinessException busE) {
             LOGGER.error("#SignUp activity error.Cause:", busE);
@@ -68,10 +70,12 @@ public class ActivitySignUpController extends BaseController {
         if (uid == null || activityId == null) {
             return buildInvalidParamJson();
         }
-
         try {
-            signUpService.cancel(uid, activityId);
-
+            boolean result = signUpService.cancel(uid, activityId);
+            if (!result) {
+                LOGGER.error("#Cancel failed.aid is " + activityId + " uid is " + uid);
+                return buildFailJson();
+            }
         } catch (Exception e) {
             LOGGER.error("#Cancel aid:" + activityId + " uid:" + uid + " error.Cause:", e);
             return buildExceptionJson();

@@ -1,5 +1,7 @@
 package com.uyoung.web.util;
 
+import com.uyoung.core.api.constant.CommonConstant;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -10,10 +12,10 @@ import java.util.Date;
  * Date: 15/10/12
  * Desc:
  */
-public final class DataUtil {
+public final class DateUtil {
     public static final String YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd HH:mm:ss";
 
-    private DataUtil() {
+    private DateUtil() {
     }
 
     public static int getDay(Date date) {
@@ -30,6 +32,17 @@ public final class DataUtil {
             month = 0;
         }
         return month;
+    }
+
+    /**
+     * 获取指定时间后的日期
+     *
+     * @param time
+     * @return
+     */
+    public static Date getDate(long time) {
+        long current = System.currentTimeMillis();
+        return new Date(current + time);
     }
 
     public static int getWeek(Date date) {
@@ -82,9 +95,12 @@ public final class DataUtil {
     }
 
     public static void main(String[] args) {
-        Date date = new Date();
-        SimpleDateFormat formatter = new SimpleDateFormat(YYYY_MM_DD_HH_MM_SS);
-        formatter.format(date);
-        System.out.println(formatter.format(date));
+//        Date date = new Date();
+//        SimpleDateFormat formatter = new SimpleDateFormat(YYYY_MM_DD_HH_MM_SS);
+//        formatter.format(date);
+//        System.out.println(formatter.format(date));
+
+
+        System.out.println(getDate(CommonConstant.MAX_ACTIVITY_TIME_INTERVAL));
     }
 }
