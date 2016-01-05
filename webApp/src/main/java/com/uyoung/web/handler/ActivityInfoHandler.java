@@ -179,7 +179,7 @@ public class ActivityInfoHandler {
         result.setPageNum(page);
         Page<ActivityInfo> activityInfoPage = activityInfoService.getPageByCondition(conditionBean, page, pageSize);
         if (activityInfoPage == null || CollectionUtils.isEmpty(activityInfoPage.getDataList())) {
-            LOGGER.warn("#Get pageByCondition return empty.");
+            LOGGER.warn("#Get pageByCondition return empty.ConditionBean is " + conditionBean + " page is " + page + " pageSize is " + pageSize);
             return result;
         }
         buildActivityWithUserInfo(result, activityInfoPage);
