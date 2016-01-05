@@ -80,6 +80,7 @@ public class ActivityController extends BaseController {
         }
         try {
             Page<ActivityInfoVo> infoPage = activityInfoHandler.getPageByCondition(conditionBean, pageNum, pageSize);
+            LOGGER.info("Info page is " + infoPage);
             BaseResult baseResult = new BaseResult(ResultCodeEnum.SUCCESS.getCode(), ResultCodeEnum.SUCCESS.getDesc());
             baseResult.setResultData(infoPage);
             return JsonUtil.getJsonString(baseResult);

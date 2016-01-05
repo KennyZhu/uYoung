@@ -22,15 +22,14 @@ public class ActivityInfoServiceTest extends BaseTest {
 
     @Test
     public void getPageByStatus() {
-        ActivityStatusEnum statusEnum = ActivityStatusEnum.ACTIVE;
         ActivityConditionBean conditionBean = new ActivityConditionBean();
         conditionBean.setStatus(ActivityStatusEnum.ACTIVE.getStatus());
-        conditionBean.setBeginTimeSort(1);
-        conditionBean.setSort(SortEnum.DESC.getValue());
+        conditionBean.setCreateTimeSort(1);
+        conditionBean.setSort(SortEnum.ASC.getValue());
         conditionBean.setSortColumn(SortParser.parser(conditionBean));
 
         LOGGER.info("#####" + conditionBean.toString());
-        List<ActivityInfo> activityInfoList = service.getPageByCondition(conditionBean, 1, 10).getDataList();
+        List<ActivityInfo> activityInfoList = service.getPageByCondition(conditionBean, 1, 15).getDataList();
         for (ActivityInfo activityInfo : activityInfoList) {
             System.out.println("######" + activityInfo.toString());
         }
