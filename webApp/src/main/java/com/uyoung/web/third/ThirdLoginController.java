@@ -33,7 +33,7 @@ public class ThirdLoginController extends BaseController {
     @RequestMapping(value = "/third/login", method = RequestMethod.POST)
     @ResponseBody
     public String login(ThirdUser thirdUser) {
-        if (thirdUser == null) {
+        if (thirdUser == null || ThirdPlatformEnum.getByCode(thirdUser.getUserType()) == null) {
             return buildInvalidParamJson();
         }
         try {
@@ -42,6 +42,7 @@ public class ThirdLoginController extends BaseController {
             if (currentThirdUser != null) {
                 return buildSuccessJson(currentThirdUser.getUid());
             }
+            LOGGER.info("#New User:" + thirdUser.toString());
             UserInfo userInfo = buildUserInfoByThirdUser(thirdUser);
             userInfoService.add(userInfo);
             int uid = userInfo.getId();
