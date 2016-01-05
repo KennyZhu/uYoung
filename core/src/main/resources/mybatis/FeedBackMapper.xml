@@ -21,10 +21,10 @@
                 id,
             </if>
             <if test="email != null">
-                cn_name,
+                email,
             </if>
             <if test="content != null">
-                en_name,
+                content,
             </if>
             create_time,
             update_time,
