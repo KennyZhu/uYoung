@@ -75,7 +75,7 @@ public class ActivityController extends BaseController {
     @RequestMapping(value = "/activity/getPageByCondition")
     @ResponseBody
     public String getPageByCondition(Integer pageNum, Integer pageSize, ActivityConditionBean conditionBean) {
-        if (pageNum == null || pageSize == null || conditionBean == null) {
+        if (pageNum == null || pageSize == null) {
             return buildInvalidParamJson();
         }
         try {

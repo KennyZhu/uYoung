@@ -50,7 +50,7 @@ public class ActivityInfoServiceImpl implements ActivityInfoService {
     @Override
     public Page<ActivityInfo> getPageByCondition(ActivityConditionBean conditionBean, int pageNum, int pageSize) {
         if (conditionBean == null) {
-            return buildEmptyPage(pageNum, pageSize);
+            conditionBean = new ActivityConditionBean();
         }
         conditionBean.setSortColumn(SortParser.parser(conditionBean));
         int offset = pageSize * (pageNum - 1) + 1;
