@@ -196,8 +196,8 @@
         <if test="condition.status != null">
             AND status = #{condition.status,jdbcType=INTEGER}
         </if>
-        <if test="condition.freeType != null">
-            AND free_type = #{condition.freeType,jdbcType=INTEGER}
+        <if test="condition.feeType != null">
+            AND fee_type = #{condition.feeType,jdbcType=INTEGER}
         </if>
         <if test="condition.creatorUid != null">
             AND ori_user_id = #{condition.creatorUid,jdbcType=INTEGER}

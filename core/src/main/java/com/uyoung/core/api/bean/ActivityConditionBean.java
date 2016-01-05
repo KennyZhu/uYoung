@@ -16,7 +16,7 @@ public class ActivityConditionBean extends SortCondition {
     /**
      * 收费类型
      */
-    private Integer freeType;
+    private Integer feeType;
     /**
      * 活动状态
      */
@@ -44,12 +44,12 @@ public class ActivityConditionBean extends SortCondition {
         this.activityType = activityType;
     }
 
-    public Integer getFreeType() {
-        return freeType;
+    public Integer getFeeType() {
+        return feeType;
     }
 
-    public void setFreeType(Integer freeType) {
-        this.freeType = freeType;
+    public void setFeeType(Integer feeType) {
+        this.feeType = feeType;
     }
 
     public Integer getStatus() {
@@ -88,7 +88,7 @@ public class ActivityConditionBean extends SortCondition {
     public String toString() {
         return "ActivityConditionBean{" +
                 "activityType=" + activityType +
-                ", freeType=" + freeType +
+                ", feeType=" + feeType +
                 ", status=" + status +
                 ", creatorUid=" + creatorUid +
                 ", createTimeSort=" + createTimeSort +
