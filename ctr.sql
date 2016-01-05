@@ -242,6 +242,23 @@ CREATE TABLE tb_dict_city (
   DEFAULT CHARSET = UTF8;
 
 
+/*- 问题反馈表 -*/
+DROP TABLE tb_feedback;
+CREATE TABLE tb_feedback (
+  id          INT(4) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  email       VARCHAR(30)        NOT NULL
+  COMMENT '邮箱',
+  content     BLOB               NOT NULL
+  COMMENT '内容',
+  create_time TIMESTAMP          NULL
+  COMMENT '创建时间',
+  update_time TIMESTAMP          NULL     DEFAULT current_timestamp ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间'
+)
+  ENGINE = MyISAM
+  AUTO_INCREMENT = 0
+  DEFAULT CHARSET = UTF8;
+
+
 
 
 

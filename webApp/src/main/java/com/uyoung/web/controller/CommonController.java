@@ -1,6 +1,8 @@
 package com.uyoung.web.controller;
 
+import com.uyoung.core.api.model.FeedBack;
 import com.uyoung.core.api.service.DictCityService;
+import com.uyoung.core.api.service.FeedBackService;
 import com.uyoung.core.api.service.SignService;
 import com.uyoung.web.controller.base.BaseController;
 import org.apache.commons.lang.StringUtils;
@@ -28,6 +30,9 @@ public class CommonController extends BaseController {
 
     @Autowired
     private DictCityService dictCityService;
+
+    @Autowired
+    private FeedBackService feedBackService;
 
     @RequestMapping(value = "/common/cities", method = RequestMethod.POST)
     @ResponseBody
@@ -57,4 +62,21 @@ public class CommonController extends BaseController {
     public String getAuditStatus(String version) {
         return buildSuccessJson();
     }
+
+
+    @RequestMapping(value = "/common/feedBack")
+    @ResponseBody
+    public String feedBack(FeedBack feedBack) {
+        if (feedBack == null) {
+            buildInvalidParamJson();
+        }
+        try {
+            feedBackService.insert(feedBack);
+        } catch (Exception e) {
+            LOGGER.error("#Get City Dict error.Cause:", e);
+            return buildExceptionJson();
+        }
+        return buildSuccessJson();
+    }
+
 }
