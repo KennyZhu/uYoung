@@ -64,7 +64,7 @@ public class CommonController extends BaseController {
     }
 
 
-    @RequestMapping(value = "/common/feedBack")
+    @RequestMapping(value = "/common/feedBack", method = RequestMethod.POST)
     @ResponseBody
     public String feedBack(FeedBack feedBack) {
         if (feedBack == null) {

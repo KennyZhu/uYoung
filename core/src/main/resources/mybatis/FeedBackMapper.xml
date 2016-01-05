@@ -15,7 +15,7 @@
         <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
             SELECT LAST_INSERT_ID() AS id
         </selectKey>
-        insert into tb_dict_city
+        insert into tb_feedback
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
                 id,
