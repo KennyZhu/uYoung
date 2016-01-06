@@ -3,7 +3,6 @@ package com.uyoung.web.controller;
 import com.uyoung.core.api.model.UserInfo;
 import com.uyoung.core.api.service.UserInfoService;
 import com.uyoung.web.controller.base.BaseController;
-import com.uyoung.web.util.JsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,11 +24,15 @@ public class RegController extends BaseController {
         if (userInfo == null) {
             return buildInvalidParamJson();
         }
-        int result = userInfoService.add(userInfo);
-        if (result == 1) {
-            return JsonUtil.getJsonString(buildSuccessJson());
-        } else {
-            return JsonUtil.getJsonString(buildExceptionJson());
+        try {
+            int result = userInfoService.add(userInfo);
+            if (result == 1) {
+                return buildSuccessJson();
+            } else {
+                return buildFailJson();
+            }
+        } catch (Exception e) {
+            return buildExceptionJson();
         }
     }
 }
