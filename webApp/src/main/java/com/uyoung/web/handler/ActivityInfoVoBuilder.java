@@ -43,6 +43,7 @@ public class ActivityInfoVoBuilder {
         infoVo.setTitle(activityInfo.getTitle());
         infoVo.setNeedNum(activityInfo.getNeedNum());
         infoVo.setLocal(activityInfo.getAddress());
+        infoVo.setStatus(activityInfo.getStatus());
         ActivityTypeEnum activityTypeEnum = ActivityTypeEnum.getByType(activityInfo.getActivityType());
         if (activityTypeEnum != null) {
             infoVo.setActivityTypeDesc(activityTypeEnum.getDesc());

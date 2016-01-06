@@ -23,6 +23,7 @@ public class ActivityInfoVo {
     private String oriUserAvatarUrl;
     private String local;
     private String statusDesc;
+    private int status;
     private int feeType;
     private List<SignUpUserVo> signUpUserList;
 
@@ -181,5 +182,39 @@ public class ActivityInfoVo {
 
     public void setSignUpUserList(List<SignUpUserVo> signUpUserList) {
         this.signUpUserList = signUpUserList;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "ActivityInfoVo{" +
+                "activityTypeDesc='" + activityTypeDesc + '\'' +
+                ", id=" + id +
+                ", oriUserId=" + oriUserId +
+                ", oriUserNickName='" + oriUserNickName + '\'' +
+                ", title='" + title + '\'' +
+                ", needNum=" + needNum +
+                ", day=" + day +
+                ", mon=" + mon +
+                ", weekDesc='" + weekDesc + '\'' +
+                ", fromTime='" + fromTime + '\'' +
+                ", toTime='" + toTime + '\'' +
+                ", address='" + address + '\'' +
+                ", oriUserAvatarUrl='" + oriUserAvatarUrl + '\'' +
+                ", local='" + local + '\'' +
+                ", statusDesc='" + statusDesc + '\'' +
+                ", status=" + status +
+                ", feeType=" + feeType +
+                ", signUpUserList=" + signUpUserList +
+                ", description='" + description + '\'' +
+                ", realNum=" + realNum +
+                '}';
     }
 }
