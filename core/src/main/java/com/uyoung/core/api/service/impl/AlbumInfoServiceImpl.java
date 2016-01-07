@@ -83,6 +83,7 @@ public class AlbumInfoServiceImpl implements AlbumInfoService {
     @Override
     public boolean incLikeCount(Integer id) {
         if (id == null) {
+            LOGGER.error("#Invalid param.");
             return false;
         }
         return albumInfoDao.incLikeCount(id) == 1;

@@ -16,6 +16,7 @@ public class PhotoIncLikeCountTask extends AbsPhotoTask {
 
     @Override
     protected boolean exec() {
+        LOGGER.info("#Begin to incLikeCount albumId is " + photoInfo.getAlbumId());
         return albumInfoService.incLikeCount(photoInfo.getAlbumId());
     }
 }

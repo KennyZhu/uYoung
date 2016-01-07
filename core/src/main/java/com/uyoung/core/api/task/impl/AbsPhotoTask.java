@@ -6,6 +6,8 @@ import com.uyoung.core.api.service.AlbumInfoService;
 import com.uyoung.core.api.service.PhotoInfoService;
 import com.uyoung.core.api.task.AbstractTask;
 import com.uyoung.core.base.util.SpringContextHolder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Desc:
@@ -24,6 +26,8 @@ abstract class AbsPhotoTask extends AbstractTask {
     protected PhotoInfoService photoInfoService = SpringContextHolder.getBean("photoInfoService");
 
     protected AlbumInfoService albumInfoService = SpringContextHolder.getBean("albumInfoService");
+
+    protected static final Logger LOGGER = LoggerFactory.getLogger(AbsPhotoTask.class);
 
 
     protected AlbumInfo getAlbumByPhotoId() {
