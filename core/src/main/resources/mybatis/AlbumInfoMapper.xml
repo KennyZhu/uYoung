@@ -32,7 +32,7 @@
         from tb_album_info
         where create_user_id = #{cuid,jdbcType=INTEGER}
     </select>
-    <select id="getAllAlbumCount" resultType="java.lang.Integer">
+    <select id="getAllAlbumCount" resultMap="BaseResultMap">
         SELECT
         <include refid="Count_Column_List"/>
         FROM tb_album_info
