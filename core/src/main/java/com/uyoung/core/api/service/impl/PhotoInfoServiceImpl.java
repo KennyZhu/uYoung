@@ -70,7 +70,7 @@ public class PhotoInfoServiceImpl implements PhotoInfoService {
     }
 
     @Override
-    public synchronized int incLikeCount(Integer photoId) {
+    public int incLikeCount(Integer photoId) {
         if (photoId == null) {
             return 0;
         }
@@ -78,7 +78,7 @@ public class PhotoInfoServiceImpl implements PhotoInfoService {
     }
 
     @Override
-    public synchronized boolean decLikeCount(Integer photoId) {
+    public boolean decLikeCount(Integer photoId) {
         if (photoId == null) {
             return false;
         }
@@ -90,7 +90,7 @@ public class PhotoInfoServiceImpl implements PhotoInfoService {
     }
 
     @Override
-    public synchronized boolean incViewCount(Integer photoId) {
+    public boolean incViewCount(Integer photoId) {
         if (photoId == null) {
             return false;
         }
