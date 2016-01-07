@@ -77,6 +77,14 @@ public interface AlbumInfoService {
      */
     boolean decLikeCount(Integer id);
 
+    /**
+     * 增加点赞数
+     *
+     * @param id
+     * @return
+     */
+    boolean incViewCount(Integer id);
+
 
     /**
      * 更新封面照片URL

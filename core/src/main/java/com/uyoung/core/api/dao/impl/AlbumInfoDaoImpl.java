@@ -65,6 +65,11 @@ public class AlbumInfoDaoImpl extends BaseDao<AlbumInfo> implements AlbumInfoDao
     }
 
     @Override
+    public int incViewCount(Integer id) {
+        return update("incViewCount", id);
+    }
+
+    @Override
     public int updateFirstPhotoUrl(Integer id, String firstUrl) {
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("id", id);

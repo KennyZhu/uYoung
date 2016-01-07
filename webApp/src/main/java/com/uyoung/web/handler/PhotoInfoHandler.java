@@ -48,7 +48,7 @@ public class PhotoInfoHandler {
         String baseUrl = QiNiuConstant.getUrl(photoInfo.getPhotoUrl());
         resultVo.setDownLoadUrl(QiNiuStoreFactory.getInstance().getPrivateDownLoadUrl(baseUrl));
         resultVo.setExifUrl(QiNiuStoreFactory.getInstance().getPrivateExifUrl(baseUrl));
-        taskFactory.addTask(new PhotoViewCountTask(id));
+        taskFactory.addTask(new PhotoViewCountTask(photoInfo));
         return resultVo;
     }
 

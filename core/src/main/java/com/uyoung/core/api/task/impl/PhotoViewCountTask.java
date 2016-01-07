@@ -1,7 +1,8 @@
 package com.uyoung.core.api.task.impl;
 
+import com.uyoung.core.api.model.PhotoInfo;
+import com.uyoung.core.api.service.AlbumInfoService;
 import com.uyoung.core.api.service.PhotoInfoService;
-import com.uyoung.core.api.task.AbstractTask;
 import com.uyoung.core.base.util.SpringContextHolder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,23 +13,25 @@ import org.slf4j.LoggerFactory;
  * <br/>Time: 16:34
  * <br/>User: ylzhu
  */
-public class PhotoViewCountTask extends AbstractTask {
+public class PhotoViewCountTask extends AbsPhotoTask {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PhotoDeleteTask.class);
-    private Integer photoId;
 
     private PhotoInfoService photoInfoService = SpringContextHolder.getBean("photoInfoService");
 
-    public PhotoViewCountTask(Integer photoId) {
-        this.photoId = photoId;
+    protected AlbumInfoService albumInfoService = SpringContextHolder.getBean("albumInfoService");
+
+    public PhotoViewCountTask(PhotoInfo photoInfo) {
+        super(photoInfo);
     }
 
     @Override
     protected boolean exec() {
         try {
-            return photoInfoService.incViewCount(photoId);
+            albumInfoService.incViewCount(photoInfo.getAlbumId());
+            return photoInfoService.incViewCount(photoInfo.getId());
         } catch (Exception e) {
-            LOGGER.error("#Inc Photo View Count error.PhotoId is " + photoId + " Cause:", e);
+            LOGGER.error("#Inc Photo View Count error.Photo is " + photoInfo + " Cause:", e);
         }
         return false;
     }
