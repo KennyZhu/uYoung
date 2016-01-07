@@ -41,9 +41,7 @@
 
     <bean id="albumPhotoCountTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="albumPhotoCountJobDetail"/>
-        <property name="cronExpression">
-            <value>0 0/2 * * * ?</value>
-        </property>
+        <property name="cronExpression" value="0 0/2 * * * ?"/>
     </bean>
     <bean id="albumPhotoCountJob" class="com.uyoung.core.api.schedule.job.AlbumPhotoCountJob"/>
     <bean id="albumPhotoCountJobDetail"
