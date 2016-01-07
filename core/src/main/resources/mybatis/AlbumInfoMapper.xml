@@ -28,13 +28,13 @@
         select
         <include refid="Base_Column_List"/>
         from tb_album_info
-        where activity_id = #{activityId,jdbcType=INTEGER}
+        where id = #{activityId,jdbcType=INTEGER}
     </select>
     <select id="getListByActivityId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
         <include refid="Activity_Column_List"/>
         from tb_album_info
-        where id = #{id,jdbcType=INTEGER}
+        where activity_id = #{id,jdbcType=INTEGER}
     </select>
     <select id="getPageByCreateUserId" resultMap="BaseResultMap" parameterType="java.util.Map">
         select
