@@ -31,6 +31,11 @@
         from tb_photo_info
         where id = #{id,jdbcType=INTEGER}
     </select>
+    <select id="getTotalCountByAlbumId" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+        SELECT count(1)
+        FROM tb_photo_info
+        WHERE album_id = #{albumId,jdbcType=INTEGER}
+    </select>
     <delete id="deleteById" parameterType="java.lang.Integer">
         DELETE FROM tb_photo_info
         WHERE id = #{id,jdbcType=INTEGER}

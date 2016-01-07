@@ -3,6 +3,8 @@ package com.uyoung.core.api.dao;
 import com.uyoung.core.api.model.AlbumInfo;
 import com.uyoung.core.base.bean.Page;
 
+import java.util.List;
+
 public interface AlbumInfoDao {
 
     int deleteById(Integer id);
@@ -20,6 +22,10 @@ public interface AlbumInfoDao {
     int decLikeCount(Integer id);
 
     int updateFirstPhotoUrl(Integer id, String firstUrl);
+
+    int updateTotalPhotoCount(Integer id, int totalCount);
+
+    List<AlbumInfo> getAllAlbumCount();
 
 
 }

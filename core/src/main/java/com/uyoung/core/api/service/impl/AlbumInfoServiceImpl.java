@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * User: KennyZhu
@@ -95,5 +96,18 @@ public class AlbumInfoServiceImpl implements AlbumInfoService {
             return false;
         }
         return albumInfoDao.updateFirstPhotoUrl(id, firstPhotoUrl) == 1;
+    }
+
+    @Override
+    public List<AlbumInfo> getAllAlbumCount() {
+        return albumInfoDao.getAllAlbumCount();
+    }
+
+    @Override
+    public boolean updateTotalPhotoCount(Integer id, int totalCount) {
+        if (id == null || totalCount == 0) {
+            return false;
+        }
+        return albumInfoDao.updateTotalPhotoCount(id, totalCount) == 1;
     }
 }

@@ -24,6 +24,14 @@ public interface PhotoInfoService {
     public PhotoInfo getById(Integer id);
 
     /**
+     * 获取相册下照片总数
+     *
+     * @param albumId
+     * @return
+     */
+    int getTotalCountByAlbumId(Integer albumId);
+
+    /**
      * @param photoInfo
      * @return
      */

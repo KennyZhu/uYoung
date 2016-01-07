@@ -30,6 +30,11 @@ public class PhotoInfoDaoImpl extends BaseDao<PhotoInfo> implements PhotoInfoDao
     }
 
     @Override
+    public int getTotalCountByAlbumId(Integer albumId) {
+        return (Integer) select("getTotalCountByAlbumId", albumId);
+    }
+
+    @Override
     public int updateById(PhotoInfo record) {
         return update("updateById", record);
     }

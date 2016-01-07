@@ -27,7 +27,7 @@ public abstract class BaseDao<T> {
         return selectOne(statement, null);
     }
 
-    protected T selectOne(String statement, Object parameter) {
+    protected Object select(String statement, Object parameter) {
         String operationId = statement.substring(statement.lastIndexOf(".") + 1);
         if (!operationId.equals("get")) {
             List<T> list = selectList(statement, parameter, RowBounds.DEFAULT);
@@ -41,7 +41,11 @@ public abstract class BaseDao<T> {
         }
     }
 
-    protected List<T> selectList(String statement) {
+    protected T selectOne(String statement, Object parameter) {
+        return (T) select(statement, parameter);
+    }
+
+    protected List selectList(String statement) {
         return selectList(statement, null);
     }
 

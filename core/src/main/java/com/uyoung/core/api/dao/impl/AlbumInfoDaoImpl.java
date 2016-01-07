@@ -8,6 +8,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -64,5 +65,18 @@ public class AlbumInfoDaoImpl extends BaseDao<AlbumInfo> implements AlbumInfoDao
         paramMap.put("id", id);
         paramMap.put("firstPhotoUrl", firstUrl);
         return update("updateFirstPhotoUrl", paramMap);
+    }
+
+    @Override
+    public List<AlbumInfo> getAllAlbumCount() {
+        return selectList("getAllAlbumCount");
+    }
+
+    @Override
+    public int updateTotalPhotoCount(Integer id, int totalCount) {
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("id", id);
+        paramMap.put("totalCount", totalCount);
+        return update("updateTotalPhotoCount", paramMap);
     }
 }

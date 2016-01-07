@@ -37,6 +37,15 @@ public class PhotoInfoServiceImpl implements PhotoInfoService {
     }
 
     @Override
+    public int getTotalCountByAlbumId(Integer albumId) {
+        if (albumId == null) {
+            return 0;
+        }
+        return photoInfoDao.getTotalCountByAlbumId(albumId);
+
+    }
+
+    @Override
     public int updateById(PhotoInfo photoInfo) {
         if (photoInfo == null) {
             return 0;

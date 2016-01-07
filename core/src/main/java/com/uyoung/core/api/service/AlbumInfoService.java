@@ -3,6 +3,8 @@ package com.uyoung.core.api.service;
 import com.uyoung.core.api.model.AlbumInfo;
 import com.uyoung.core.base.bean.Page;
 
+import java.util.List;
+
 /**
  * User: KennyZhu
  * Date: 15/9/20
@@ -76,4 +78,12 @@ public interface AlbumInfoService {
      * @return
      */
     boolean updateFirstPhotoUrl(Integer id, String firstPhotoUrl);
+
+
+    boolean updateTotalPhotoCount(Integer id, int totalCount);
+
+    /**
+     * @return
+     */
+    List<AlbumInfo> getAllAlbumCount();
 }
