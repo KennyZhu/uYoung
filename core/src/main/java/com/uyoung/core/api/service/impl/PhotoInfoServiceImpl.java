@@ -78,22 +78,22 @@ public class PhotoInfoServiceImpl implements PhotoInfoService {
     }
 
     @Override
-    public synchronized int decLikeCount(Integer photoId) {
+    public synchronized boolean decLikeCount(Integer photoId) {
         if (photoId == null) {
-            return 0;
+            return false;
         }
         PhotoInfo photoInfo = photoInfoDao.getById(photoId);
         if (photoInfo != null && photoInfo.getLikeCount() > 0) {
-            return photoInfoDao.decLikeCount(photoId);
+            return photoInfoDao.decLikeCount(photoId) == 1;
         }
-        return 0;
+        return false;
     }
 
     @Override
-    public synchronized int incViewCount(Integer photoId) {
+    public synchronized boolean incViewCount(Integer photoId) {
         if (photoId == null) {
-            return 0;
+            return false;
         }
-        return photoInfoDao.incViewCount(photoId);
+        return photoInfoDao.incViewCount(photoId) == 1;
     }
 }

@@ -60,7 +60,7 @@ public interface PhotoInfoService {
      * @param photoId
      * @return
      */
-    public int decLikeCount(Integer photoId);
+    public boolean decLikeCount(Integer photoId);
 
     /**
      * 浏览数增加
@@ -68,6 +68,6 @@ public interface PhotoInfoService {
      * @param photoId
      * @return
      */
-    public int incViewCount(Integer photoId);
+    public boolean incViewCount(Integer photoId);
 
 }

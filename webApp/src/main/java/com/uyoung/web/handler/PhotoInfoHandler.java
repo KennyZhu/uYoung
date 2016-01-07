@@ -4,6 +4,7 @@ import com.uyoung.core.api.model.PhotoInfo;
 import com.uyoung.core.api.service.PhotoInfoService;
 import com.uyoung.core.api.task.TaskFactory;
 import com.uyoung.core.api.task.impl.PhotoDeleteTask;
+import com.uyoung.core.api.task.impl.PhotoViewCountTask;
 import com.uyoung.core.third.qiniu.QiNiuConstant;
 import com.uyoung.core.third.qiniu.QiNiuStoreFactory;
 import com.uyoung.web.vo.PhotoInfoUrlVo;
@@ -47,6 +48,7 @@ public class PhotoInfoHandler {
         String baseUrl = QiNiuConstant.getUrl(photoInfo.getPhotoUrl());
         resultVo.setDownLoadUrl(QiNiuStoreFactory.getInstance().getPrivateDownLoadUrl(baseUrl));
         resultVo.setExifUrl(QiNiuStoreFactory.getInstance().getPrivateExifUrl(baseUrl));
+        taskFactory.addTask(new PhotoViewCountTask(id));
         return resultVo;
     }
 

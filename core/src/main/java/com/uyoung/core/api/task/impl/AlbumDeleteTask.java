@@ -1,6 +1,6 @@
 package com.uyoung.core.api.task.impl;
 
-import com.uyoung.core.api.task.Task;
+import com.uyoung.core.api.task.AbstractTask;
 import com.uyoung.core.third.qiniu.QiNiuStoreFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +13,7 @@ import java.util.List;
  * <br/>Time: 18:44
  * <br/>User: ylzhu
  */
-public class AlbumDeleteTask implements Task {
+public class AlbumDeleteTask extends AbstractTask {
     private static final Logger LOGGER = LoggerFactory.getLogger(AlbumDeleteTask.class);
 
     /**
@@ -26,7 +26,7 @@ public class AlbumDeleteTask implements Task {
     }
 
     @Override
-    public Boolean call() throws Exception {
+    protected boolean exec() {
         try {
             return batchDelFromQiNiu();
         } catch (Exception e) {
