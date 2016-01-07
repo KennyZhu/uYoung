@@ -16,7 +16,7 @@ public class PhotoDecLikeCountTask extends AbsPhotoTask {
 
     @Override
     public boolean exec() {
-
+        photoInfoService.decLikeCount(photoInfo.getId());
         return albumInfoService.decLikeCount(photoInfo.getAlbumId());
     }
 }
