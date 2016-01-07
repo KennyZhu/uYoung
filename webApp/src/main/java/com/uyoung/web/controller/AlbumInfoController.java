@@ -8,6 +8,7 @@ import com.uyoung.web.controller.base.AlbumBaseController;
 import com.uyoung.web.enums.ResultCodeEnum;
 import com.uyoung.web.handler.AlbumInfoBuilder;
 import com.uyoung.web.handler.AlbumInfoHandler;
+import com.uyoung.web.vo.AlbumActivityVo;
 import com.uyoung.web.vo.AlbumDetailVo;
 import com.uyoung.web.vo.AlbumInfoVo;
 import org.apache.commons.collections.CollectionUtils;
@@ -19,6 +20,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 /**
  * Desc:相册信息
@@ -63,6 +66,27 @@ public class AlbumInfoController extends AlbumBaseController {
         }
 
         return buildEmptyPageJson(page, pageSize);
+    }
+
+    /**
+     * 获取用户创建的相册
+     *
+     * @param activityId
+     * @return
+     */
+    @RequestMapping(value = "/album/getByAid")
+    @ResponseBody
+    public String getByActivityId(Integer activityId) {
+        if (activityId == null) {
+            return buildInvalidParamJson();
+        }
+        try {
+            List<AlbumActivityVo> vos = handler.getAlbumActivityByActivityId(activityId);
+            return buildSuccessJson(vos);
+        } catch (Exception e) {
+            LOGGER.error("#Get Album List by aid :" + activityId + " error.Cause:", e);
+            return buildExceptionJson();
+        }
     }
 
     /**

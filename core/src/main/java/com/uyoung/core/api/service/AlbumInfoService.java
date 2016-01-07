@@ -25,6 +25,14 @@ public interface AlbumInfoService {
      */
     public AlbumInfo getById(Integer id);
 
+    /**
+     * 根据活动ID获取
+     *
+     * @param activityId
+     * @return
+     */
+    List<AlbumInfo> getListByActivityId(Integer activityId);
+
 
     /**
      * 更新信息
@@ -79,7 +87,13 @@ public interface AlbumInfoService {
      */
     boolean updateFirstPhotoUrl(Integer id, String firstPhotoUrl);
 
-
+    /**
+     * 更新照片数
+     *
+     * @param id
+     * @param totalCount
+     * @return
+     */
     boolean updateTotalPhotoCount(Integer id, int totalCount);
 
     /**

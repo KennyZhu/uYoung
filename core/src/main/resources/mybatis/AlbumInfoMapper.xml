@@ -20,9 +20,18 @@
     <sql id="Count_Column_List">
         id, total_like_count, total_photo_count
     </sql>
+    <sql id="Activity_Column_List">
+        id, activity_id, create_user_id, first_photo_url, total_like_count, total_photo_count, create_time
+    </sql>
     <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_List"/>
+        from tb_album_info
+        where activity_id = #{activityId,jdbcType=INTEGER}
+    </select>
+    <select id="getListByActivityId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Activity_Column_List"/>
         from tb_album_info
         where id = #{id,jdbcType=INTEGER}
     </select>

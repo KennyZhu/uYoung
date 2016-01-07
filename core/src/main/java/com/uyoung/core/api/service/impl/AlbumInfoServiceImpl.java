@@ -46,6 +46,15 @@ public class AlbumInfoServiceImpl implements AlbumInfoService {
     }
 
     @Override
+    public List<AlbumInfo> getListByActivityId(Integer activityId) {
+        if (activityId == null) {
+            return null;
+        }
+        return albumInfoDao.getListByActivityId(activityId);
+
+    }
+
+    @Override
     public int updateById(AlbumInfo albumInfo) {
         if (albumInfo == null || albumInfo.getId() == null) {
             LOGGER.error("#Invalid param.");

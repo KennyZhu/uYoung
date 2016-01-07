@@ -13,6 +13,8 @@ public interface AlbumInfoDao {
 
     AlbumInfo getById(Integer id);
 
+    List<AlbumInfo> getListByActivityId(Integer activityId);
+
     int updateById(AlbumInfo record);
 
     Page<AlbumInfo> getPageByCreateUserId(Integer cuid, Integer page, Integer pageSize);

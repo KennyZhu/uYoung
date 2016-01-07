@@ -34,6 +34,11 @@ public class AlbumInfoDaoImpl extends BaseDao<AlbumInfo> implements AlbumInfoDao
     }
 
     @Override
+    public List<AlbumInfo> getListByActivityId(Integer activityId) {
+        return selectList("getListByActivityId", activityId);
+    }
+
+    @Override
     public int updateById(AlbumInfo record) {
         return update("updateById", record);
     }

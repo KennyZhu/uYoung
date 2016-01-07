@@ -8,13 +8,18 @@ import com.uyoung.core.api.service.PhotoInfoService;
 import com.uyoung.core.api.service.UserInfoService;
 import com.uyoung.core.api.task.TaskFactory;
 import com.uyoung.core.api.task.impl.AlbumDeleteTask;
+import com.uyoung.web.vo.AlbumActivityVo;
 import com.uyoung.web.vo.AlbumDetailVo;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * User: KennyZhu
@@ -65,6 +70,49 @@ public class AlbumInfoHandler {
             detailVo.setPhotoInfoList(photoInfos);
         }
         return detailVo;
+    }
+
+    /**
+     * 根据活动获取相册信息
+     *
+     * @param activityId
+     * @return
+     */
+    public List<AlbumActivityVo> getAlbumActivityByActivityId(Integer activityId) {
+        if (activityId == null) {
+            return Collections.emptyList();
+        }
+
+        List<AlbumInfo> albumInfos = albumInfoService.getListByActivityId(activityId);
+        if (CollectionUtils.isEmpty(albumInfos)) {
+            return Collections.emptyList();
+        }
+        List<Integer> oriUserIds = new ArrayList<>(albumInfos.size());
+        for (AlbumInfo albumInfo : albumInfos) {
+            oriUserIds.add(albumInfo.getCreateUserId());
+        }
+        Map<Integer, UserInfo> userInfoMap = userInfoService.getMapByIdList(oriUserIds);
+        List<AlbumActivityVo> result = new ArrayList<>(albumInfos.size());
+        SimpleDateFormat sdf = new SimpleDateFormat("MM-dd");
+        String today = sdf.format(new Date());
+        for (AlbumInfo albumInfo : albumInfos) {
+            AlbumActivityVo vo = new AlbumActivityVo();
+            vo.setActivityId(activityId);
+            vo.setAlbumId(albumInfo.getId());
+            String createTime = sdf.format(albumInfo.getCreateTime());
+            vo.setCreateTime(today.equals(createTime) ? "today" : createTime);
+            vo.setFirstPhotoUrl(albumInfo.getFirstPhotoUrl());
+            UserInfo userInfo = userInfoMap.get(albumInfo.getCreateUserId());
+            if (userInfo != null) {
+                vo.setOriUrl(userInfo.getAvatarUrl());
+            }
+            vo.setTotalLikeCount(albumInfo.getTotalLikeCount());
+            vo.setTotalPhotoCount(albumInfo.getTotalPhotoCount());
+
+            result.add(vo);
+        }
+
+        return result;
     }
 
     /**
