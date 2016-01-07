@@ -14,21 +14,9 @@ import org.slf4j.LoggerFactory;
 public class PhotoDeleteTask extends AbsPhotoTask {
     private static final Logger LOGGER = LoggerFactory.getLogger(PhotoDeleteTask.class);
 
-    private PhotoInfo photoInfo;
 
     public PhotoDeleteTask(PhotoInfo photoInfo) {
-        this.photoInfo = photoInfo;
-    }
-
-    @Override
-    public Boolean call() throws Exception {
-        try {
-            return delFromQiNiu();
-
-        } catch (Exception e) {
-            LOGGER.error("#Execute photo delete error.Key is " + photoInfo.getPhotoUrl() + " Cause:", e);
-        }
-        return false;
+        super(photoInfo);
     }
 
     /**
@@ -36,7 +24,8 @@ public class PhotoDeleteTask extends AbsPhotoTask {
      *
      * @return
      */
-    private boolean delFromQiNiu() {
+    @Override
+    protected boolean exec() {
         LOGGER.info("#Begin to del photo from qiniu Key is " + photoInfo);
         return QiNiuStoreFactory.getInstance().del(photoInfo.getPhotoUrl());
     }

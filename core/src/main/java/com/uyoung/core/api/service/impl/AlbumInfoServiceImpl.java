@@ -73,19 +73,19 @@ public class AlbumInfoServiceImpl implements AlbumInfoService {
     }
 
     @Override
-    public int decLikeCount(Integer id) {
+    public boolean decLikeCount(Integer id) {
         if (id == null) {
-            return 0;
+            return false;
         }
-        return albumInfoDao.decLikeCount(id);
+        return albumInfoDao.decLikeCount(id) == 1;
     }
 
     @Override
-    public int incLikeCount(Integer id) {
+    public boolean incLikeCount(Integer id) {
         if (id == null) {
-            return 0;
+            return false;
         }
-        return albumInfoDao.incLikeCount(id);
+        return albumInfoDao.incLikeCount(id) == 1;
     }
 
     @Override

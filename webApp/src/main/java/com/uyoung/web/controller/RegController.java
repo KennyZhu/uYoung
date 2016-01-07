@@ -27,7 +27,7 @@ public class RegController extends BaseController {
         }
         int result = userInfoService.add(userInfo);
         if (result == 1) {
-            return JsonUtil.getJsonString(buildSuccessJson());
+            return buildSuccessJson();
         } else {
             return JsonUtil.getJsonString(buildExceptionJson());
         }

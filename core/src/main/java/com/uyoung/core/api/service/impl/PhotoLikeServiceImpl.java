@@ -18,11 +18,11 @@ public class PhotoLikeServiceImpl implements PhotoLikeService {
     private PhotoLikeDao photoLikeDao;
 
     @Override
-    public int add(PhotoLike photoLike) {
+    public boolean add(PhotoLike photoLike) {
         if (photoLike == null) {
-            return 0;
+            return false;
         }
-        return photoLikeDao.insert(photoLike);
+        return photoLikeDao.insert(photoLike) == 1;
     }
 
     @Override
@@ -36,11 +36,11 @@ public class PhotoLikeServiceImpl implements PhotoLikeService {
     }
 
     @Override
-    public int delete(Integer uid, Integer photoId) {
+    public boolean delete(Integer uid, Integer photoId) {
         if (uid == null || photoId == null) {
-            return 0;
+            return false;
         }
-        return photoLikeDao.deleteByUidPhotoId(uid, photoId);
+        return photoLikeDao.deleteByUidPhotoId(uid, photoId) == 1;
     }
 
     @Override

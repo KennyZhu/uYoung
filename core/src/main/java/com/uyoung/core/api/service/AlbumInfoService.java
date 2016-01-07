@@ -23,6 +23,7 @@ public interface AlbumInfoService {
      */
     public AlbumInfo getById(Integer id);
 
+
     /**
      * 更新信息
      *
@@ -56,7 +57,7 @@ public interface AlbumInfoService {
      * @param id
      * @return
      */
-    int incLikeCount(Integer id);
+    boolean incLikeCount(Integer id);
 
     /**
      * 取消点赞数
@@ -64,7 +65,7 @@ public interface AlbumInfoService {
      * @param id
      * @return
      */
-    int decLikeCount(Integer id);
+    boolean decLikeCount(Integer id);
 
 
     /**

@@ -9,9 +9,9 @@ import com.uyoung.core.api.model.PhotoLike;
  */
 public interface PhotoLikeService {
 
-    public int add(PhotoLike photoLike);
+    public boolean add(PhotoLike photoLike);
 
-    public int delete(Integer uid, Integer photoId);
+    public boolean delete(Integer uid, Integer photoId);
 
     public PhotoLike getById(int id);
 
