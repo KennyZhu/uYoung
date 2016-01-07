@@ -9,8 +9,8 @@ package com.uyoung.web.vo;
 public class AlbumInfoVo {
     private Integer id;
     private String albumName;
-    private Long totalLikeCount;
-    private Integer totalPhotoCount;
+    private long totalLikeCount;
+    private long totalPhotoCount;
     private String firstPhotoUrl;
     private String createTime;
 
@@ -54,11 +54,11 @@ public class AlbumInfoVo {
         this.totalLikeCount = totalLikeCount;
     }
 
-    public Integer getTotalPhotoCount() {
+    public long getTotalPhotoCount() {
         return totalPhotoCount;
     }
 
-    public void setTotalPhotoCount(Integer totalPhotoCount) {
+    public void setTotalPhotoCount(long totalPhotoCount) {
         this.totalPhotoCount = totalPhotoCount;
     }
 }
