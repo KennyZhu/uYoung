@@ -25,7 +25,12 @@ public class AlbumInfo {
     /**
      * 总的照片数
      */
-    private Integer totalPhotoCount;
+    private long totalPhotoCount;
+
+    /**
+     * 总的浏览数
+     */
+    private long totalViewCount;
     /**
      * 活动ID
      */
@@ -115,19 +120,26 @@ public class AlbumInfo {
         this.totalLikeCount = totalLikeCount;
     }
 
-    public Integer getTotalPhotoCount() {
+    public long getTotalPhotoCount() {
         return totalPhotoCount;
     }
 
-    public void setTotalPhotoCount(Integer totalPhotoCount) {
+    public void setTotalPhotoCount(long totalPhotoCount) {
         this.totalPhotoCount = totalPhotoCount;
+    }
+
+    public long getTotalViewCount() {
+        return totalViewCount;
+    }
+
+    public void setTotalViewCount(long totalViewCount) {
+        this.totalViewCount = totalViewCount;
     }
 
     @Override
     public String toString() {
         return "AlbumInfo{" +
-                "activityId=" + activityId +
-                ", id=" + id +
+                "id=" + id +
                 ", title='" + title + '\'' +
                 ", createUserId=" + createUserId +
                 ", albumName='" + albumName + '\'' +
@@ -135,6 +147,8 @@ public class AlbumInfo {
                 ", firstPhotoUrl='" + firstPhotoUrl + '\'' +
                 ", totalLikeCount=" + totalLikeCount +
                 ", totalPhotoCount=" + totalPhotoCount +
+                ", totalViewCount=" + totalViewCount +
+                ", activityId=" + activityId +
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +
                 '}';

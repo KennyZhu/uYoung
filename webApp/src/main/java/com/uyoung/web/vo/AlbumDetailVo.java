@@ -24,7 +24,7 @@ public class AlbumDetailVo {
 
     private Date createTime;
 
-    private int photoNum;
+    private long photoNum;
 
     private List<PhotoInfo> photoInfoList;
 
@@ -68,11 +68,11 @@ public class AlbumDetailVo {
         this.createTime = createTime;
     }
 
-    public int getPhotoNum() {
+    public long getPhotoNum() {
         return photoNum;
     }
 
-    public void setPhotoNum(int photoNum) {
+    public void setPhotoNum(long photoNum) {
         this.photoNum = photoNum;
     }
 

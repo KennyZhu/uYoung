@@ -11,17 +11,18 @@
         <result column="activity_id" property="activityId" jdbcType="INTEGER"/>
         <result column="total_like_count" property="totalLikeCount" jdbcType="INTEGER"/>
         <result column="total_photo_count" property="totalPhotoCount" jdbcType="INTEGER"/>
+        <result column="total_view_count" property="totalViewCount" jdbcType="INTEGER"/>
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, title, create_user_id, album_name, album_url, first_photo_url, activity_id, total_like_count, total_photo_count, create_time, update_time
+        id, title, create_user_id, album_name, album_url, first_photo_url, activity_id, total_like_count,total_view_count, total_photo_count, create_time, update_time
     </sql>
     <sql id="Count_Column_List">
         id, total_like_count, total_photo_count
     </sql>
     <sql id="Activity_Column_List">
-        id, activity_id, create_user_id, first_photo_url, total_like_count, total_photo_count, create_time
+        id, activity_id, create_user_id, first_photo_url, total_like_count,total_view_count, total_photo_count, create_time
     </sql>
     <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select

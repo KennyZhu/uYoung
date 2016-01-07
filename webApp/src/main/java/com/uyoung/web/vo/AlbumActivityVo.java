@@ -15,9 +15,9 @@ public class AlbumActivityVo {
 
     private String firstPhotoUrl;
 
-    private int totalPhotoCount;
+    private long totalPhotoCount;
 
-    private int totalViewCount;
+    private long totalViewCount;
 
     private long totalLikeCount;
 
@@ -64,19 +64,19 @@ public class AlbumActivityVo {
         this.totalLikeCount = totalLikeCount;
     }
 
-    public int getTotalPhotoCount() {
+    public long getTotalPhotoCount() {
         return totalPhotoCount;
     }
 
-    public void setTotalPhotoCount(int totalPhotoCount) {
+    public void setTotalPhotoCount(long totalPhotoCount) {
         this.totalPhotoCount = totalPhotoCount;
     }
 
-    public int getTotalViewCount() {
+    public long getTotalViewCount() {
         return totalViewCount;
     }
 
-    public void setTotalViewCount(int totalViewCount) {
+    public void setTotalViewCount(long totalViewCount) {
         this.totalViewCount = totalViewCount;
     }
 
