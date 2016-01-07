@@ -49,4 +49,12 @@
         <property name="targetObject" ref="albumPhotoCountJob"/>
         <property name="targetMethod" value="run"/>
     </bean>
+    <bean id="quartzScheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="autoStartup" value="false"/>
+        <property name="triggers">
+            <list>
+                <ref bean="albumPhotoCountTrigger"/>
+            </list>
+        </property>
+    </bean>
 </beans>
