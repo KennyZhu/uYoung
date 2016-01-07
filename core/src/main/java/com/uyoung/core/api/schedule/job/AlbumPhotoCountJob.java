@@ -23,9 +23,9 @@ public class AlbumPhotoCountJob extends AbstractBaseJob {
             List<AlbumInfo> albumInfos = albumInfoService.getAllAlbumCount();
             for (AlbumInfo albumInfo : albumInfos) {
                 int totalCount = photoInfoService.getTotalCountByAlbumId(albumInfo.getId());
-                if (totalCount != 0 || totalCount != albumInfo.getTotalPhotoCount()) {
+                if (totalCount != 0 && totalCount != albumInfo.getTotalPhotoCount()) {
                     boolean result = albumInfoService.updateTotalPhotoCount(albumInfo.getId(), totalCount);
-                    LOGGER.info("#Begin to update album total photo count from" + albumInfo.getTotalPhotoCount() + " to " + totalCount + " return " + result);
+                    LOGGER.info("#Begin to update album total photo count from " + albumInfo.getTotalPhotoCount() + " to " + totalCount + " return " + result);
                 }
             }
         } catch (Exception e) {
