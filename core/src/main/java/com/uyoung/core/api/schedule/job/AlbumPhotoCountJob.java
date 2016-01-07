@@ -18,7 +18,6 @@ public class AlbumPhotoCountJob extends AbstractBaseJob {
 
     @Override
     public void run() {
-        LOGGER.info("#Begin to run album photo count job.");
         try {
             List<AlbumInfo> albumInfos = albumInfoService.getAllAlbumCount();
             for (AlbumInfo albumInfo : albumInfos) {
