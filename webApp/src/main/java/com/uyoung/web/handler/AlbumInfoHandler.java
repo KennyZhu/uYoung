@@ -11,15 +11,13 @@ import com.uyoung.core.api.task.impl.AlbumDeleteTask;
 import com.uyoung.web.vo.AlbumActivityVo;
 import com.uyoung.web.vo.AlbumDetailVo;
 import org.apache.commons.collections.CollectionUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * User: KennyZhu
@@ -28,6 +26,7 @@ import java.util.Map;
  */
 @Service
 public class AlbumInfoHandler {
+    private static final Logger LOGGER = LoggerFactory.getLogger(AlbumInfoHandler.class);
     @Autowired
     private AlbumInfoService albumInfoService;
     @Autowired
@@ -45,15 +44,18 @@ public class AlbumInfoHandler {
      */
     public AlbumDetailVo getAlbumDetailById(Integer id) {
         if (id == null) {
+            LOGGER.error("Invalid param.");
             return null;
         }
 
         AlbumInfo info = albumInfoService.getById(id);
         if (info == null) {
+            LOGGER.error("#Get albumInfo by id :" + id + " return null.");
             return null;
         }
         UserInfo userInfo = userInfoService.getById(info.getCreateUserId());
         if (userInfo == null) {
+            LOGGER.error("#Get userInfo by userId:" + info.getCreateUserId() + " return null.");
             return null;
         }
         AlbumDetailVo detailVo = new AlbumDetailVo();

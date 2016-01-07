@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -40,6 +41,7 @@ public class AlbumInfoServiceImpl implements AlbumInfoService {
     @Override
     public AlbumInfo getById(Integer id) {
         if (id == null) {
+            LOGGER.error("Invalid param.");
             return null;
         }
         return albumInfoDao.getById(id);
@@ -48,7 +50,8 @@ public class AlbumInfoServiceImpl implements AlbumInfoService {
     @Override
     public List<AlbumInfo> getListByActivityId(Integer activityId) {
         if (activityId == null) {
-            return null;
+            LOGGER.error("Invalid param.");
+            return Collections.emptyList();
         }
         return albumInfoDao.getListByActivityId(activityId);
 
