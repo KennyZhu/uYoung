@@ -259,6 +259,25 @@ CREATE TABLE tb_feedback (
   DEFAULT CHARSET = UTF8;
 
 
+/*- 问题反馈表 -*/
+DROP TABLE tb_client_version;
+CREATE TABLE tb_client_version (
+  id          INT(4) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  version     VARCHAR(10)        NOT NULL
+  COMMENT '版本',
+  type        VARCHAR(10)        NOT NULL
+  COMMENT '客户端类型:iphone android',
+  status      TINYINT            NOT NULL DEFAULT '0'
+  COMMENT '状态',
+  create_time TIMESTAMP          NULL
+  COMMENT '创建时间',
+  update_time TIMESTAMP          NULL     DEFAULT current_timestamp ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间'
+)
+  ENGINE = MyISAM
+  AUTO_INCREMENT = 0
+  DEFAULT CHARSET = UTF8;
+
+
 
 
 
