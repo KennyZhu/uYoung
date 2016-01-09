@@ -64,9 +64,13 @@ public class CommonController extends BaseController {
      * @param version
      * @return
      */
-    @RequestMapping(value = "/common/audit")
+    @RequestMapping(value = "/common/clientAudit")
     @ResponseBody
     public String getAuditStatus(String version, String sign) {
+        if (StringUtils.isBlank(version)) {
+            return buildInvalidParamJson();
+        }
+
         ClientVersion clientVersion = clientVersionService.getByVersion(version);
         if (clientVersion == null) {
             return buildFailJson("No client version found");
