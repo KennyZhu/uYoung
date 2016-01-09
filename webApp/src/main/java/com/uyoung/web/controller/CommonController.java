@@ -1,6 +1,9 @@
 package com.uyoung.web.controller;
 
+import com.uyoung.core.api.enums.ClientStatus;
+import com.uyoung.core.api.model.ClientVersion;
 import com.uyoung.core.api.model.FeedBack;
+import com.uyoung.core.api.service.ClientVersionService;
 import com.uyoung.core.api.service.DictCityService;
 import com.uyoung.core.api.service.FeedBackService;
 import com.uyoung.core.api.service.SignService;
@@ -34,6 +37,10 @@ public class CommonController extends BaseController {
     @Autowired
     private FeedBackService feedBackService;
 
+    @Autowired
+    private ClientVersionService clientVersionService;
+
+
     @RequestMapping(value = "/common/cities", method = RequestMethod.POST)
     @ResponseBody
     public String getCityDict(long timestamp, String deviceId, String sign) {
@@ -59,8 +66,16 @@ public class CommonController extends BaseController {
      */
     @RequestMapping(value = "/common/audit")
     @ResponseBody
-    public String getAuditStatus(String version) {
-        return buildSuccessJson();
+    public String getAuditStatus(String version, String sign) {
+        ClientVersion clientVersion = clientVersionService.getByVersion(version);
+        if (clientVersion == null) {
+            return buildFailJson("No client version found");
+        }
+        if (ClientStatus.AUDITED == ClientStatus.getByStatus(clientVersion.getStatus())) {
+            return buildSuccessJson(true);
+        }
+        return buildSuccessJson(false);
+
     }
 
 
