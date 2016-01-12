@@ -5,6 +5,8 @@ import com.uyoung.core.api.model.UserInfo;
 import com.uyoung.core.api.service.UserInfoService;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,16 +22,18 @@ import java.util.Map;
  */
 @Service("userInfoService")
 public class UserInfoServiceImpl implements UserInfoService {
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserInfoServiceImpl.class);
     @Autowired
     private UserInfoDao userInfoDao;
 
     @Override
     public boolean login(String email, String password) {
         if (StringUtils.isBlank(email) || StringUtils.isBlank(password)) {
+            LOGGER.error("Invalid param");
             return false;
         }
-        UserInfo userInfoo = userInfoDao.getByEmailPassword(email, password);
-        return userInfoo != null;
+        UserInfo userInfo = userInfoDao.getByEmailPassword(email, password);
+        return userInfo != null;
     }
 
 

@@ -1,7 +1,5 @@
 package com.uyoung.core.api.model;
 
-import com.uyoung.core.base.util.JsonUtil;
-
 import java.util.Date;
 
 /**
@@ -80,11 +78,7 @@ public class Login {
     }
 
     public String getBaseToString() {
-        Login login = new Login();
-        login.setAccountId(this.accountId);
-        login.setLoginHash(this.loginHash);
-        login.setLoginToken(this.loginToken);
-        return JsonUtil.getJsonString(login);
+        return "accountId=" + accountId + "&loginToken=" + loginToken + "&loginHash=" + loginHash;
 
     }
 

@@ -14,11 +14,8 @@ import java.io.UnsupportedEncodingException;
  * 加密拦截器
  */
 public class EncryptionInterceptor extends HandlerInterceptorAdapter {
-    private final byte[] ecodeStr =
-            {(byte) 0xef, 0x2b, (byte) 0xcc, (byte) 0xdc, (byte) 0x9b, 0x3b, (byte) 0xf7, 0x2a, 0x68, (byte) 0xad, (byte) 0xeb,
-                    0x72, (byte) 0xe3, 0x78, 0x2f, 0x5e, 0x7, 0x77, (byte) 0xd5, (byte) 0xc1, 0x7d, 0x40, 0x66, (byte) 0xb8};
     private final String APIVER = "apiVer";
-    private final String DATA = "data";
+    private final String DATA = "code";
     private final String STAMP = "stamp";
     private static final Logger LOGGER = LoggerFactory.getLogger(EncryptionInterceptor.class);
 
@@ -27,27 +24,19 @@ public class EncryptionInterceptor extends HandlerInterceptorAdapter {
         String apiVer = request.getParameter(APIVER);
         String data = request.getParameter(DATA);
         String stamp = request.getParameter(STAMP);
-        if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("apiVer=" + apiVer + " data=" + data + " stamp=" + stamp);
-        }
         if (StringUtils.isBlank(data) || StringUtils.isBlank(stamp)) {
-            LOGGER.info("加密接口没有传入密文,data" + data + " stamp=" + stamp);
+            LOGGER.info("加密接口没有传入密文,code=" + data + " stamp=" + stamp);
             return false;
         }
-        byte[] miyao = EncryptUtil.genCroptyKey(ecodeStr, stamp);
+        byte[] miyao = EncryptUtil.genCroptyKey(stamp);
         byte[] base = EncryptUtil.getFromBASE64(data);
-
         byte[] decodeBytes = EncryptUtil.decryptMode(miyao, base);
 
         String decodeStr = new String(decodeBytes, "utf-8");
-        if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("after url decode decodeStr=" + decodeStr);
-        }
         try {
             setParamIntoAction(decodeStr, request);
-            request.setAttribute("clientStamp", stamp);
         } catch (Exception e) {
-            LOGGER.info("加密拦截器设置value错误+decodeStr=" + decodeStr);
+            LOGGER.error("加密拦截器设置value错误+decodeStr=" + decodeStr);
             return false;
         }
         return true;

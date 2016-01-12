@@ -2,6 +2,7 @@ package com.uyoung.core.api.constant;
 
 import com.uyoung.core.api.model.Login;
 import com.uyoung.core.api.service.LoginService;
+import com.uyoung.core.base.util.EncryptUtil;
 import com.uyoung.core.base.util.JsonUtil;
 import com.uyoung.core.base.util.MD5Util;
 import com.uyoung.core.base.util.SpringContextHolder;
@@ -63,6 +64,18 @@ public final class LoginUtil {
     }
 
     /**
+     * 加密Code
+     *
+     * @param accountId
+     * @return
+     */
+    public static String getEncryptCode(String accountId) {
+        String source = updateLogin(accountId).getBaseToString();
+        return EncryptUtil.encryptCode(source, String.valueOf(System.currentTimeMillis()));
+    }
+
+
+    /**
      * 增加Cookie
      *
      * @param response
@@ -70,7 +83,7 @@ public final class LoginUtil {
      * @return
      */
     public static boolean addLoginCookie(HttpServletResponse response, String accountId) {
-        Cookie accountIdCookie = new Cookie(LoginConstant.COOKIE_LOGIN_ACCOUNT, updateLogin(accountId).getBaseToString());
+        Cookie accountIdCookie = new Cookie(LoginConstant.LOGIN_ACCOUNT_KEY, updateLogin(accountId).getBaseToString());
         accountIdCookie.setDomain(LoginConstant.COOKIE_DOMAIN);
         accountIdCookie.setMaxAge(LoginConstant.MAX_LOGIN_SECONDS);
         response.addCookie(accountIdCookie);
@@ -84,7 +97,7 @@ public final class LoginUtil {
      * @return
      */
     public static boolean checkLogin(HttpServletRequest request) {
-        Login login = getLoginCookie(request);
+        Login login = getLoginFromCookie(request);
         return checkLogin(login);
     }
 
@@ -107,7 +120,7 @@ public final class LoginUtil {
      * @param request
      * @return
      */
-    public static Login getLoginCookie(HttpServletRequest request) {
+    public static Login getLoginFromCookie(HttpServletRequest request) {
         Cookie[] cookies = request.getCookies();
         for (Cookie cookie : cookies) {
             if (LoginConstant.COOKIE_LOGIN_KEY.equals(cookie.getName())) {
@@ -115,6 +128,23 @@ public final class LoginUtil {
             }
         }
         return null;
+    }
+
+    /**
+     * 参数中获取
+     *
+     * @param request
+     * @return
+     */
+    public static Login getLoginFromParam(HttpServletRequest request) {
+        String accountId = (String) request.getAttribute(LoginConstant.LOGIN_ACCOUNT_KEY);
+        String hash = (String) request.getAttribute(LoginConstant.LOGIN_HASH_KEY);
+        String token = (String) request.getAttribute(LoginConstant.LOGIN_TOKEN_KEY);
+        Login login = new Login();
+        login.setAccountId(accountId);
+        login.setLoginHash(hash);
+        login.setLoginToken(token);
+        return login;
     }
 
     public static void main(String[] args) {

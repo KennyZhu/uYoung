@@ -1,5 +1,6 @@
 package com.uyoung.web.controller;
 
+import com.uyoung.core.api.constant.LoginUtil;
 import com.uyoung.core.api.service.UserInfoService;
 import com.uyoung.web.controller.base.LoginBaseController;
 import com.uyoung.web.enums.ResultCodeEnum;
@@ -36,9 +37,10 @@ public class LoginController extends LoginBaseController {
         try {
             boolean isLogin = userInfoService.login(accountId, password);
             if (isLogin) {
-                login(response, accountId);
-                return buildSuccessJson();
+                String code = LoginUtil.getEncryptCode(accountId);
+                return buildSuccessJson(code);
             }
+            LOGGER.warn("#Not login accountId is " + accountId + " password  is " + password);
             return buildFailJson(ResultCodeEnum.NOT_LOGIN.getDesc());
 
         } catch (Exception e) {

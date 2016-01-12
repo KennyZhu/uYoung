@@ -13,16 +13,16 @@ public final class LoginConstant {
     /**
      *
      */
-    public static final String COOKIE_LOGIN_ACCOUNT = "accountId";
+    public static final String LOGIN_ACCOUNT_KEY = "accountId";
     /**
      *
      */
-    public static final String COOKIE_LOGIN_HASH = "login_hash";
+    public static final String LOGIN_HASH_KEY = "login_hash";
 
     /**
      *
      */
-    public static final String COOKIE_LOGIN_TOKEN = "login_token";
+    public static final String LOGIN_TOKEN_KEY = "login_token";
 
     public static final String COOKIE_LOGIN_KEY = "login_info";
 

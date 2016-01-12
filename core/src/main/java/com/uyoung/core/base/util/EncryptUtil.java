@@ -16,13 +16,34 @@ public final class EncryptUtil {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(EncryptUtil.class);
     private static final String ALGORITHM = "DESede"; //定义加密算法,可用 DES,DESede,Blowfish
-    private static final byte[] ECODE_STR =
+    private static final byte[] ENCODE_STR =
             {(byte) 0xef, 0x2b, (byte) 0xcc, (byte) 0xdc, (byte) 0x9b, 0x3b, (byte) 0xf7, 0x2a, 0x68, (byte) 0xad,
                     (byte) 0xeb, 0x72, (byte) 0xe3, 0x78, 0x2f, 0x5e, 0x7, 0x77, (byte) 0xd5, (byte) 0xc1, 0x7d, 0x40, 0x66,
-                    (byte) 0xb8};
+                    (byte) 0xb8};//解密秘钥
 
-    //keybyte为加密密钥，长度为24字节
-    //src为被加密的数据缓冲区（源）
+    /**
+     * 加密算法
+     *
+     * @param source
+     * @param stmp
+     * @return
+     */
+    public static String encryptCode(String source, String stmp) {
+        if (StringUtils.isBlank(source) || StringUtils.isBlank(stmp)) {
+            return null;
+        }
+        byte[] encodeKeys = EncryptUtil.genCroptyKey(ENCODE_STR, stmp);
+        return new String(encryptMode(encodeKeys, source.getBytes()));
+
+    }
+
+    /**
+     * 加密算法
+     *
+     * @param keybyte 为加密密钥，长度为24字节
+     * @param src     为被加密的数据缓冲区（源）
+     * @return
+     */
     public static byte[] encryptMode(byte[] keybyte, byte[] src) {
         try {
             //生成密钥
@@ -41,8 +62,11 @@ public final class EncryptUtil {
         return null;
     }
 
-    //keybyte为加密密钥，长度为24字节
-    //src为加密后的缓冲区
+    /**
+     * @param keybyte keybyte为加密密钥，长度为24字节
+     * @param src     src为加密后的缓冲区
+     * @return
+     */
     public static byte[] decryptMode(byte[] keybyte, byte[] src) {
         try {
             //生成密钥
@@ -59,6 +83,16 @@ public final class EncryptUtil {
             e3.printStackTrace();
         }
         return null;
+    }
+
+    /**
+     * 生成秘钥
+     *
+     * @param randomStrB
+     * @return
+     */
+    public static byte[] genCroptyKey(String randomStrB) {
+        return genCroptyKey(ENCODE_STR, randomStrB);
     }
 
     /*
@@ -141,7 +175,7 @@ public final class EncryptUtil {
     public static String restructParam(String oraStr) {
 
         try {
-            byte[] keys = EncryptUtil.ECODE_STR;
+            byte[] keys = EncryptUtil.ENCODE_STR;
             if (StringUtils.isNotBlank(oraStr)) {
 
                 String stampStr = EncryptUtil.RndString(10, null);
