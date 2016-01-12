@@ -5,7 +5,7 @@ import com.uyoung.core.api.model.UserInfo;
 import com.uyoung.core.api.service.ThirdUserService;
 import com.uyoung.core.api.service.UserInfoService;
 import com.uyoung.core.third.enums.ThirdPlatformEnum;
-import com.uyoung.web.controller.base.BaseController;
+import com.uyoung.web.controller.base.LoginBaseController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,13 +14,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletResponse;
+
 /**
  * User: KennyZhu
  * Date: 15/10/31
  * Desc:
  */
 @Controller
-public class ThirdLoginController extends BaseController {
+public class ThirdLoginController extends LoginBaseController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ThirdLoginController.class);
 
@@ -32,7 +34,7 @@ public class ThirdLoginController extends BaseController {
 
     @RequestMapping(value = "/third/login", method = RequestMethod.POST)
     @ResponseBody
-    public String login(ThirdUser thirdUser) {
+    public String login(ThirdUser thirdUser, HttpServletResponse response) {
         if (thirdUser == null || ThirdPlatformEnum.getByCode(thirdUser.getUserType()) == null) {
             return buildInvalidParamJson();
         }
@@ -48,6 +50,7 @@ public class ThirdLoginController extends BaseController {
             int uid = userInfo.getId();
             thirdUser.setUid(uid);
             thirdUserService.add(thirdUser);
+            login(response, userInfo.getEmail());
             return buildSuccessJson(uid);
         } catch (Exception e) {
             LOGGER.error("#Third login error!ThirdUser is " + thirdUser.toString() + "Cause:", e);

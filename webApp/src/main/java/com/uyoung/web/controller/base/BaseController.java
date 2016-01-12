@@ -1,10 +1,17 @@
 package com.uyoung.web.controller.base;
 
+import com.uyoung.core.api.constant.LoginUtil;
 import com.uyoung.core.api.model.UserInfo;
+import com.uyoung.core.api.service.UserInfoService;
 import com.uyoung.core.base.bean.Page;
 import com.uyoung.web.bean.BaseResult;
 import com.uyoung.web.enums.ResultCodeEnum;
 import com.uyoung.web.util.JsonUtil;
+import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Desc:Base Controller
@@ -12,7 +19,11 @@ import com.uyoung.web.util.JsonUtil;
  * <br/>Time: 16:42
  * <br/>User: ylzhu
  */
+@Controller
 public class BaseController {
+
+    @Autowired
+    private UserInfoService userInfoService;
 
     /**
      * @param resultData
@@ -90,17 +101,12 @@ public class BaseController {
      *
      * @return
      */
-    protected UserInfo getCurrentLoginUser() {
-        return null;
-    }
-
-    /**
-     * 获取当前登录用户ID
-     *
-     * @return
-     */
-    protected Integer getCurrentLoginUid() {
-        return null;
+    protected UserInfo getCurrentLoginUser(HttpServletRequest request) {
+        String email = (String) request.getAttribute("accountId");
+        if (StringUtils.isBlank(email)) {
+            return null;
+        }
+        return userInfoService.getByEmail(email);
     }
 
     /**
@@ -108,7 +114,7 @@ public class BaseController {
      *
      * @return
      */
-    protected boolean checkLogin() {
-        return true;
+    protected boolean checkLogin(HttpServletRequest request) {
+        return LoginUtil.checkLogin(request);
     }
 }

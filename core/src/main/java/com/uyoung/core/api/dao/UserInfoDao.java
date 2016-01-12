@@ -13,4 +13,6 @@ public interface UserInfoDao {
     int updateById(UserInfo record);
 
     List<UserInfo> getAvatarListByUserIdList(List<Integer> userIds);
+
+    UserInfo getByEmail(String email);
 }

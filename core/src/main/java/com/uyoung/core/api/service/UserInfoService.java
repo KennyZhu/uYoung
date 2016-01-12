@@ -24,6 +24,12 @@ public interface UserInfoService {
     public UserInfo getById(Integer uid);
 
     /**
+     * @param email
+     * @return
+     */
+    public UserInfo getByEmail(String email);
+
+    /**
      * @param userInfo
      * @return
      */

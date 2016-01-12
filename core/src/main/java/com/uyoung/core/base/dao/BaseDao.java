@@ -94,4 +94,8 @@ public abstract class BaseDao<T> {
         return sqlSessionTemplate.delete(getNameSpace() + statement, parameter);
     }
 
+    public int insert(T obj) {
+        return insert("insert", obj);
+    }
+
 }

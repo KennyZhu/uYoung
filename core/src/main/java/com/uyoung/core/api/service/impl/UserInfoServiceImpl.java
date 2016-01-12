@@ -4,6 +4,7 @@ import com.uyoung.core.api.dao.UserInfoDao;
 import com.uyoung.core.api.model.UserInfo;
 import com.uyoung.core.api.service.UserInfoService;
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,6 +37,14 @@ public class UserInfoServiceImpl implements UserInfoService {
             return null;
         }
         return userInfoDao.getById(userId);
+    }
+
+    @Override
+    public UserInfo getByEmail(String email) {
+        if (StringUtils.isBlank(email)) {
+            return null;
+        }
+        return userInfoDao.getByEmail(email);
     }
 
     @Override

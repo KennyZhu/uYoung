@@ -37,4 +37,9 @@ public class UserInfoDaoImpl extends BaseDao<UserInfo> implements UserInfoDao {
         params.put("userIds", userIds);
         return selectList("getAvatarListByUserIdList", params);
     }
+
+    @Override
+    public UserInfo getByEmail(String email) {
+        return selectOne("getByEmail", email);
+    }
 }
