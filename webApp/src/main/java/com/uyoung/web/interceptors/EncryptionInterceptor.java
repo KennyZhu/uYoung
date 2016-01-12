@@ -15,7 +15,7 @@ import java.io.UnsupportedEncodingException;
  */
 public class EncryptionInterceptor extends HandlerInterceptorAdapter {
     private final String APIVER = "apiVer";
-    private final String DATA = "code";
+    private final String DATA = "sessionId";
     private final String STAMP = "stamp";
     private static final Logger LOGGER = LoggerFactory.getLogger(EncryptionInterceptor.class);
 

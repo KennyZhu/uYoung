@@ -34,6 +34,15 @@ public class BaseController {
     }
 
     /**
+     * @param result
+     * @return
+     */
+    protected String buildSuccessJson(BaseResult result) {
+        return JsonUtil.getJsonString(result);
+
+    }
+
+    /**
      * @return
      */
     protected String buildSuccessJson() {

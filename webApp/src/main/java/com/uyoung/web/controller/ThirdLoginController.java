@@ -1,10 +1,13 @@
 package com.uyoung.web.controller;
 
+import com.uyoung.core.api.constant.LoginUtil;
 import com.uyoung.core.api.model.ThirdUser;
 import com.uyoung.core.api.model.UserInfo;
 import com.uyoung.core.api.service.ThirdUserService;
 import com.uyoung.core.api.service.UserInfoService;
+import com.uyoung.core.third.ThirdUtil;
 import com.uyoung.core.third.enums.ThirdPlatformEnum;
+import com.uyoung.web.bean.LoginResult;
 import com.uyoung.web.controller.base.LoginBaseController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,7 +45,8 @@ public class ThirdLoginController extends LoginBaseController {
             //已经登录过
             ThirdUser currentThirdUser = thirdUserService.getByThirdUid(thirdUser.getThirdUid(), ThirdPlatformEnum.getByCode(thirdUser.getUserType()));
             if (currentThirdUser != null) {
-                return buildSuccessJson(currentThirdUser.getUid());
+                String accountId = ThirdUtil.getEmail(currentThirdUser.getThirdUid(), currentThirdUser.getUserType());
+                return buildSuccessJson(new LoginResult(currentThirdUser.getUid(), LoginUtil.getSessionId(accountId)));
             }
             LOGGER.info("#New User:" + thirdUser.toString());
             UserInfo userInfo = buildUserInfoByThirdUser(thirdUser);
@@ -65,6 +69,7 @@ public class ThirdLoginController extends LoginBaseController {
         userInfo.setPassword(thirdUser.getThirdUid());
         userInfo.setUserType(thirdUser.getUserType());
         userInfo.setGender(thirdUser.getGender());
+        userInfo.setEmail(ThirdUtil.getEmail(thirdUser.getThirdUid(), thirdUser.getUserType()));
         return userInfo;
     }
 }

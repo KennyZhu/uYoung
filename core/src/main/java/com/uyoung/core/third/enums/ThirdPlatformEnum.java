@@ -30,4 +30,8 @@ public enum ThirdPlatformEnum {
     public static ThirdPlatformEnum getByCode(int code) {
         return Stream.of(ThirdPlatformEnum.values()).filter(thirdPlatformEnum -> thirdPlatformEnum.getCode() == code).findFirst().orElse(null);
     }
+
+    public String getEmailSuffix() {
+        return "@" + this.desc + ".com";
+    }
 }

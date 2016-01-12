@@ -69,7 +69,7 @@ public final class LoginUtil {
      * @param accountId
      * @return
      */
-    public static String getEncryptCode(String accountId) {
+    public static String getSessionId(String accountId) {
         String source = updateLogin(accountId).getBaseToString();
         return EncryptUtil.encryptCode(source, String.valueOf(System.currentTimeMillis()));
     }

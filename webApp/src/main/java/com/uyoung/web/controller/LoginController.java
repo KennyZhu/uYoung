@@ -37,7 +37,7 @@ public class LoginController extends LoginBaseController {
         try {
             boolean isLogin = userInfoService.login(accountId, password);
             if (isLogin) {
-                String code = LoginUtil.getEncryptCode(accountId);
+                String code = LoginUtil.getSessionId(accountId);
                 return buildSuccessJson(code);
             }
             LOGGER.warn("#Not login accountId is " + accountId + " password  is " + password);

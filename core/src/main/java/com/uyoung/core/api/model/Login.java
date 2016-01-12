@@ -11,6 +11,10 @@ public class Login {
     private Integer id;
 
     /**
+     * 用户ID
+     */
+    private Integer uid;
+    /**
      * 用户名称
      */
     private String accountId;
@@ -80,6 +84,14 @@ public class Login {
     public String getBaseToString() {
         return "accountId=" + accountId + "&loginToken=" + loginToken + "&loginHash=" + loginHash;
 
+    }
+
+    public Integer getUid() {
+        return uid;
+    }
+
+    public void setUid(Integer uid) {
+        this.uid = uid;
     }
 
     @Override
