@@ -10,8 +10,10 @@ import java.util.Date;
 public class ClientVersion {
     private Integer id;
     private String version;
-    private String type;
+    private String clientType;
     private Integer status;
+    private Integer isUpdate;
+    private String updateContent;
     private Date createTime;
     private Date updateTime;
 
@@ -31,12 +33,28 @@ public class ClientVersion {
         this.version = version;
     }
 
-    public String getType() {
-        return type;
+    public String getUpdateContent() {
+        return updateContent;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setUpdateContent(String updateContent) {
+        this.updateContent = updateContent;
+    }
+
+    public Integer getIsUpdate() {
+        return isUpdate;
+    }
+
+    public void setIsUpdate(Integer isUpdate) {
+        this.isUpdate = isUpdate;
+    }
+
+    public String getClientType() {
+        return clientType;
+    }
+
+    public void setClientType(String clientType) {
+        this.clientType = clientType;
     }
 
     public Integer getStatus() {
@@ -68,8 +86,10 @@ public class ClientVersion {
         return "ClientVersion{" +
                 "id=" + id +
                 ", version='" + version + '\'' +
-                ", type='" + type + '\'' +
+                ", clientType='" + clientType + '\'' +
                 ", status=" + status +
+                ", isUpdate=" + isUpdate +
+                ", updateContent='" + updateContent + '\'' +
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +
                 '}';
