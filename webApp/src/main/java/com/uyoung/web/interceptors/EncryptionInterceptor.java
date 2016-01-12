@@ -25,7 +25,9 @@ public class EncryptionInterceptor extends HandlerInterceptorAdapter {
         String data = request.getParameter(DATA);
         String stamp = request.getParameter(STAMP);
         if (StringUtils.isBlank(data) || StringUtils.isBlank(stamp)) {
-            LOGGER.info("加密接口没有传入密文,code=" + data + " stamp=" + stamp);
+            String msg = "加密接口没有传入密文,sessionId=" + data + " stamp=" + stamp;
+            LOGGER.error(msg);
+            response.sendRedirect("/common/error?msg=" + msg);
             return false;
         }
         byte[] miyao = EncryptUtil.genCroptyKey(stamp);
@@ -36,7 +38,9 @@ public class EncryptionInterceptor extends HandlerInterceptorAdapter {
         try {
             setParamIntoAction(decodeStr, request);
         } catch (Exception e) {
-            LOGGER.error("加密拦截器设置value错误+decodeStr=" + decodeStr);
+            String msg = "加密拦截器设置value错误+decodeStr=" + decodeStr;
+            LOGGER.error(msg);
+            response.sendRedirect("/common/error?msg=" + msg);
             return false;
         }
         return true;

@@ -58,6 +58,13 @@ public class CommonController extends BaseController {
         }
     }
 
+    @RequestMapping(value = "/common/error")
+    @ResponseBody
+    public String invalidParam(String msg) {
+        return buildFailJson(msg);
+
+    }
+
     /**
      * 判断版本审核状态
      *
