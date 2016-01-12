@@ -27,6 +27,7 @@
         <include refid="Base_Column_List"/>
         from
         <include refid="Table_Name"/>
+        where status = 1
         order by version desc limit 1;
     </select>
     <insert id="insert" parameterType="com.uyoung.core.api.model.ClientVersion">
