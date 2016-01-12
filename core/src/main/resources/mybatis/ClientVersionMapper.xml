@@ -4,13 +4,15 @@
     <resultMap id="BaseResultMap" type="com.uyoung.core.api.model.ClientVersion">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="version" property="version" jdbcType="VARCHAR"/>
-        <result column="type" property="type" jdbcType="VARCHAR"/>
+        <result column="client_type" property="clientType" jdbcType="TINYINT"/>
         <result column="status" property="status" jdbcType="TINYINT"/>
+        <result column="is_update" property="isUpdate" jdbcType="TINYINT"/>
+        <result column="update_content" property="updateContent" jdbcType="VARCHAR"/>
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, version, status, type, create_time, update_time
+        id, version, status, client_type, is_update,update_content,create_time, update_time
     </sql>
     <sql id="Table_Name">
         tb_client_version
@@ -43,11 +45,17 @@
             <if test="version != null">
                 version,
             </if>
-            <if test="type != null">
-                type,
+            <if test="clientType != null">
+                client_type,
             </if>
             <if test="status != null">
                 status,
+            </if>
+            <if test="updateContent != null">
+                update_content,
+            </if>
+            <if test="isUpdate != null">
+                is_update,
             </if>
             create_time,
             update_time,
@@ -59,11 +67,17 @@
             <if test="version != null">
                 #{version,jdbcType=VARCHAR},
             </if>
-            <if test="type != null">
-                #{type,jdbcType=VARCHAR},
+            <if test="clientType != null">
+                #{clientType,jdbcType=TINYINT},
             </if>
             <if test="status != null">
                 #{status,jdbcType=TINYINT},
+            </if>
+            <if test="updateContent != null">
+                #{updateContent,jdbcType=VARCHAR},
+            </if>
+            <if test="isUpdate != null">
+                #{isUpdate,jdbcType=TINYINT},
             </if>
             now(),now()
         </trim>

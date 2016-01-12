@@ -258,7 +258,7 @@ CREATE TABLE tb_feedback (
   AUTO_INCREMENT = 0
   DEFAULT CHARSET = UTF8;
 
-/*- 问题反馈表 -*/
+/*- 登录表 -*/
 DROP TABLE tb_login;
 CREATE TABLE tb_login (
   id          INT(4) PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -277,19 +277,23 @@ CREATE TABLE tb_login (
   DEFAULT CHARSET = UTF8;
 
 
-/*- 问题反馈表 -*/
+/*- 客户端版本 -*/
 DROP TABLE tb_client_version;
 CREATE TABLE tb_client_version (
-  id          INT(4) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  version     VARCHAR(10)        NOT NULL
+  id             INT(4) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  version        VARCHAR(10)        NOT NULL
   COMMENT '版本',
-  type        VARCHAR(10)        NOT NULL
-  COMMENT '客户端类型:iphone android',
-  status      TINYINT            NOT NULL DEFAULT '0'
+  client_type    TINYINT(1)         NOT NULL
+  COMMENT '客户端类型:1:iphone 2:android',
+  status         TINYINT(1)         NOT NULL DEFAULT '0'
   COMMENT '状态',
-  create_time TIMESTAMP          NULL
+  is_update      TINYINT(1)         NOT NULL DEFAULT '0'
+  COMMENT '是否强制更新',
+  update_content VARCHAR(500)                DEFAULT NULL
+  COMMENT '更新信息',
+  create_time    TIMESTAMP          NULL
   COMMENT '创建时间',
-  update_time TIMESTAMP          NULL     DEFAULT current_timestamp ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间'
+  update_time    TIMESTAMP          NULL     DEFAULT current_timestamp ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间'
 )
   ENGINE = MyISAM
   AUTO_INCREMENT = 0
