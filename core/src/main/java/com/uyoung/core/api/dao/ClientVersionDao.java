@@ -12,4 +12,6 @@ public interface ClientVersionDao {
     int insert(ClientVersion version);
 
     ClientVersion getByVersion(String version);
+
+    ClientVersion getLastVersion();
 }

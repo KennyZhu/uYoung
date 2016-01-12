@@ -21,4 +21,9 @@ public class ClientVersionDaoImpl extends BaseDao<ClientVersion> implements Clie
     public ClientVersion getByVersion(String version) {
         return selectOne("getByVersion", version);
     }
+
+    @Override
+    public ClientVersion getLastVersion() {
+        return selectOne("getLastVersion");
+    }
 }

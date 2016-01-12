@@ -89,6 +89,17 @@ public class CommonController extends BaseController {
 
     }
 
+    @RequestMapping(value = "/common/getLastClient")
+    @ResponseBody
+    public String getLastAuditClient() {
+        try {
+            ClientVersion clientVersion = clientVersionService.getLastVersion();
+            return buildSuccessJson(clientVersion);
+        } catch (Exception e) {
+            return buildExceptionJson();
+        }
+    }
+
 
     @RequestMapping(value = "/common/feedBack", method = RequestMethod.POST)
     @ResponseBody

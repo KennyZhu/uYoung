@@ -30,7 +30,7 @@ public class BaseController {
      * @return
      */
     protected String buildSuccessJson(Object resultData) {
-        return JsonUtil.getJsonString(new BaseResult(resultData));
+        return buildSuccessJson(new BaseResult(resultData));
     }
 
     /**

@@ -18,14 +18,23 @@
     <select id="getByVersion" resultMap="BaseResultMap" parameterType="java.lang.String">
         select
         <include refid="Base_Column_List"/>
-        from <include refid="Table_Name"/>
+        from
+        <include refid="Table_Name"/>
         where version = #{version,jdbcType=VARCHAR}
+    </select>
+    <select id="getLastVersion" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="Table_Name"/>
+        order by version desc limit 1;
     </select>
     <insert id="insert" parameterType="com.uyoung.core.api.model.ClientVersion">
         <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
             SELECT LAST_INSERT_ID() AS id
         </selectKey>
-        insert into <include refid="Table_Name"/>
+        insert into
+        <include refid="Table_Name"/>
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
                 id,

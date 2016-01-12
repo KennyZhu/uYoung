@@ -11,4 +11,6 @@ public interface ClientVersionService {
     boolean add(ClientVersion version);
 
     ClientVersion getByVersion(String version);
+
+    ClientVersion getLastVersion();
 }

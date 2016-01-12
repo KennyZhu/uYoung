@@ -33,4 +33,9 @@ public class ClientVersionServiceImpl implements ClientVersionService {
         }
         return versionDao.getByVersion(version);
     }
+
+    @Override
+    public ClientVersion getLastVersion() {
+        return null;
+    }
 }
