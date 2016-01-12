@@ -23,5 +23,14 @@
         </mvc:message-converters>
     </mvc:annotation-driven>
 
+    <bean id="loginInterceptor" class="com.uyoung.web.interceptors.LoginInterceptor"/>
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/login"/>
+            <ref bean="loginInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
 
 </beans>
