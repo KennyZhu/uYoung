@@ -15,4 +15,6 @@ public interface UserInfoDao {
     List<UserInfo> getAvatarListByUserIdList(List<Integer> userIds);
 
     UserInfo getByEmail(String email);
+
+    UserInfo getByEmailPassword(String email, String password);
 }

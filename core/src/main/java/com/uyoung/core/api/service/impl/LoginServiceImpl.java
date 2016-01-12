@@ -33,4 +33,27 @@ public class LoginServiceImpl implements LoginService {
         }
         return loginDao.insert(login) == 1;
     }
+
+    @Override
+    public boolean update(Login login) {
+        if (login == null || StringUtils.isBlank(login.getAccountId())) {
+            return false;
+        }
+        return loginDao.update(login) == 1;
+    }
+
+    @Override
+    public boolean addOrUpdate(Login login) {
+        if (login == null || StringUtils.isBlank(login.getAccountId())) {
+            return false;
+        }
+        Login record = getByAccountId(login.getAccountId());
+        if (record == null) {
+            return add(login);
+        } else {
+            record.setLoginHash(login.getLoginHash());
+            record.setLoginToken(login.getLoginToken());
+            return update(login);
+        }
+    }
 }

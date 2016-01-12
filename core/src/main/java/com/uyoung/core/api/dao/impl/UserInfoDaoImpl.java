@@ -42,4 +42,12 @@ public class UserInfoDaoImpl extends BaseDao<UserInfo> implements UserInfoDao {
     public UserInfo getByEmail(String email) {
         return selectOne("getByEmail", email);
     }
+
+    @Override
+    public UserInfo getByEmailPassword(String email, String password) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("email", email);
+        params.put("password", params);
+        return selectOne("getByEmailPassword", params);
+    }
 }

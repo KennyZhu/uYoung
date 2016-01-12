@@ -12,4 +12,8 @@ public interface LoginService {
     boolean add(Login login);
 
     Login getByAccountId(String accountId);
+
+    boolean update(Login login);
+
+    boolean addOrUpdate(Login login);
 }

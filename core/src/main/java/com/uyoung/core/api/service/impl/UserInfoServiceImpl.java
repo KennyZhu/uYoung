@@ -24,6 +24,16 @@ public class UserInfoServiceImpl implements UserInfoService {
     private UserInfoDao userInfoDao;
 
     @Override
+    public boolean login(String email, String password) {
+        if (StringUtils.isBlank(email) || StringUtils.isBlank(password)) {
+            return false;
+        }
+        UserInfo userInfoo = userInfoDao.getByEmailPassword(email, password);
+        return userInfoo != null;
+    }
+
+
+    @Override
     public int add(UserInfo userInfo) {
         if (userInfo == null) {
             return 0;

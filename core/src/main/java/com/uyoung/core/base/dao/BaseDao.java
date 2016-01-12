@@ -98,4 +98,9 @@ public abstract class BaseDao<T> {
         return insert("insert", obj);
     }
 
+
+    public int update(T obj) {
+        return update("update", obj);
+    }
+
 }

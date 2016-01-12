@@ -21,7 +21,7 @@ public class LoginBaseController extends BaseController {
 
     protected void login(HttpServletResponse response, String accountId) {
         LoginUtil.addLoginCookie(response, accountId);
-        Login login = LoginUtil.getLoginCookieByAccountId(accountId);
+        Login login = LoginUtil.updateLogin(accountId);
         loginService.add(login);
     }
 }

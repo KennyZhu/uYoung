@@ -1,7 +1,7 @@
 package com.uyoung.web;
 
 import com.uyoung.core.api.model.ThirdUser;
-import com.uyoung.web.third.ThirdLoginController;
+import com.uyoung.web.controller.ThirdLoginController;
 import org.junit.Test;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;

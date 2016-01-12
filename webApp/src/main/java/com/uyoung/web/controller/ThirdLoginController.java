@@ -1,4 +1,4 @@
-package com.uyoung.web.third;
+package com.uyoung.web.controller;
 
 import com.uyoung.core.api.model.ThirdUser;
 import com.uyoung.core.api.model.UserInfo;

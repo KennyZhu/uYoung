@@ -20,7 +20,6 @@ import java.util.Random;
 public final class LoginUtil {
     private static LoginService loginService = SpringContextHolder.getBean("loginService");
 
-
     /**
      * @param accountId
      * @return
@@ -54,12 +53,13 @@ public final class LoginUtil {
      * @param accountId
      * @return
      */
-    public static Login getLoginCookieByAccountId(String accountId) {
-        Login loginCookie = new Login();
-        loginCookie.setAccountId(accountId);
-        loginCookie.setLoginHash(getLoginHash(accountId));
-        loginCookie.setLoginToken(getLoginToken(accountId));
-        return loginCookie;
+    public static Login updateLogin(String accountId) {
+        Login login = new Login();
+        login.setAccountId(accountId);
+        login.setLoginHash(getLoginHash(accountId));
+        login.setLoginToken(getLoginToken(accountId));
+        loginService.addOrUpdate(login);
+        return login;
     }
 
     /**
@@ -70,7 +70,7 @@ public final class LoginUtil {
      * @return
      */
     public static boolean addLoginCookie(HttpServletResponse response, String accountId) {
-        Cookie accountIdCookie = new Cookie(LoginConstant.COOKIE_LOGIN_ACCOUNT, getLoginCookieByAccountId(accountId).getBaseToString());
+        Cookie accountIdCookie = new Cookie(LoginConstant.COOKIE_LOGIN_ACCOUNT, updateLogin(accountId).getBaseToString());
         accountIdCookie.setDomain(LoginConstant.COOKIE_DOMAIN);
         accountIdCookie.setMaxAge(LoginConstant.MAX_LOGIN_SECONDS);
         response.addCookie(accountIdCookie);

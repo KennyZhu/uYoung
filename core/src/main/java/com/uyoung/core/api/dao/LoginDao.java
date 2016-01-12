@@ -13,5 +13,6 @@ public interface LoginDao {
 
     Login getByAccountId(String accountId);
 
+    int update(Login login);
 
 }

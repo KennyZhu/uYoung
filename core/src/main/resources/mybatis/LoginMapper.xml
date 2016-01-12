@@ -22,19 +22,17 @@
         <include refid="Base_Table_Name"/>
         where account_id = #{accountId,jdbcType=VARCHAR}
     </select>
-    <update id="updateByCnName" parameterType="com.uyoung.core.api.model.DictCity">
+    <update id="update" parameterType="com.uyoung.core.api.model.Login">
         update
         <include refid="Base_Table_Name"/>
         <set>
-            <if test="accountId != null">
-                account_id = #{accountId,jdbcType=VARCHAR},
-            </if>
             <if test="loginHash != null">
                 login_hash = #{loginHash,jdbcType=VARCHAR},
             </if>
             <if test="loginToken != null">
                 login_token = #{loginToken,jdbcType=VARCHAR},
             </if>
+            update_time = now();
         </set>
         where account_id =#{accountId,jdbcType=VARCHAR}
     </update>
@@ -42,7 +40,8 @@
         <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
             SELECT LAST_INSERT_ID() AS id
         </selectKey>
-        insert into tb_dict_city
+        insert into
+        <include refid="Base_Table_Name"/>
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
                 id,

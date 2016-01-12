@@ -19,5 +19,4 @@ public class LoginDaoImpl extends BaseDao<Login> implements LoginDao {
         return selectOne("getByAccountId", accountId);
     }
 
-
 }

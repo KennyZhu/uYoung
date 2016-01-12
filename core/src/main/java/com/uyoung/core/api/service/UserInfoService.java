@@ -11,6 +11,16 @@ import java.util.Map;
  * Desc:用户信息
  */
 public interface UserInfoService {
+
+    /**
+     * 登录
+     *
+     * @param email
+     * @param password
+     * @return
+     */
+    public boolean login(String email, String password);
+
     /**
      * @param userInfo
      * @return
