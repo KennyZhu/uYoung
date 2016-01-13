@@ -29,18 +29,18 @@ public class LoginController extends LoginBaseController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
-    public String login(String accountId, String password, HttpServletRequest request, HttpServletResponse response) {
+    public String login(String email, String password, HttpServletRequest request, HttpServletResponse response) {
 
-        if (StringUtils.isBlank(accountId) || StringUtils.isBlank(password)) {
+        if (StringUtils.isBlank(email) || StringUtils.isBlank(password)) {
             return buildInvalidParamJson();
         }
         try {
-            boolean isLogin = userInfoService.login(accountId, password);
+            boolean isLogin = userInfoService.login(email, password);
             if (isLogin) {
-                String code = LoginUtil.getSessionId(accountId);
+                String code = LoginUtil.getSessionId(email);
                 return buildSuccessJson(code);
             }
-            LOGGER.warn("#Not login accountId is " + accountId + " password  is " + password);
+            LOGGER.warn("#Not login email is " + email + " password  is " + password);
             return buildFailJson(ResultCodeEnum.NOT_LOGIN.getDesc());
 
         } catch (Exception e) {
