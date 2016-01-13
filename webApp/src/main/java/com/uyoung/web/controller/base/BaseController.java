@@ -38,9 +38,8 @@ public class BaseController {
      * @return
      */
     protected String buildSuccessJson(BaseResult result) {
-        result = (result == null ? new BaseResult() : result);
+        result = (result == null ? new BaseResult(null) : result);
         return JsonUtil.getJsonString(result);
-
     }
 
     /**

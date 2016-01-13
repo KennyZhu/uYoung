@@ -3,6 +3,8 @@ package com.uyoung.web.controller;
 import com.uyoung.core.api.model.UserInfo;
 import com.uyoung.core.api.service.UserInfoService;
 import com.uyoung.web.controller.base.BaseController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 public class RegController extends BaseController {
+    private static final Logger LOGGER = LoggerFactory.getLogger(RegController.class);
 
     @Autowired
     private UserInfoService userInfoService;
@@ -34,6 +37,7 @@ public class RegController extends BaseController {
                 return buildFailJson();
             }
         } catch (Exception e) {
+            LOGGER.error("#Reg error.Cause:", e);
             return buildExceptionJson();
         }
     }
