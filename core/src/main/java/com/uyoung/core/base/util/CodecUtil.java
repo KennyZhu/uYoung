@@ -145,7 +145,7 @@ public final class CodecUtil {
         while (!BigInteger.ZERO.equals(d)) {
             m = d.mod(MODULUS);
             d = d.divide(MODULUS);
-            sb.insert(0, (char) ALPHABET[m.intValue()]);
+            sb.insert(0, ALPHABET[m.intValue()]);
         }
         return sb.toString();
     }

@@ -25,7 +25,7 @@ public final class LoginUtil {
      * @param accountId
      * @return
      */
-    public static final String getLoginHash(String accountId) {
+    public static String getLoginHash(String accountId) {
         String source = accountId + LoginConstant.HASH_KEY + getRandomInt();
         return MD5Util.get(source, CommonConstant.DEFAULT_ENCODE);
     }
@@ -34,7 +34,7 @@ public final class LoginUtil {
      * @param accountId
      * @return
      */
-    public static final String getLoginToken(String accountId) {
+    public static String getLoginToken(String accountId) {
         String source = accountId + LoginConstant.TOKEN_KEY + getRandomInt();
         return MD5Util.get(source, CommonConstant.DEFAULT_ENCODE);
     }
@@ -109,10 +109,7 @@ public final class LoginUtil {
             return false;
         }
         Login record = loginService.getByAccountId(login.getAccountId());
-        if (login.getLoginHash().equals(record.getLoginHash()) && login.getLoginToken().equals(record.getLoginToken())) {
-            return true;
-        }
-        return false;
+        return login.getLoginHash().equals(record.getLoginHash()) && login.getLoginToken().equals(record.getLoginToken());
 
     }
 

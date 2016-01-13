@@ -113,10 +113,9 @@ public final class QiNiuStoreFactory {
             ops = batchDel(ops, key);
         }
 
-
         try {
             Response r = bucketManager.batch(ops);
-            BatchStatus[] bs = r.jsonToObject(BatchStatus[].class);
+            r.jsonToObject(BatchStatus[].class);
             return true;
 
         } catch (QiniuException e) {

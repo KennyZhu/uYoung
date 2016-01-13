@@ -23,7 +23,7 @@ public final class UrlEncodeUtil {
      * @param bcd
      * @return
      */
-    public static final String bytesToHexStr(byte[] bcd) {
+    public static String bytesToHexStr(byte[] bcd) {
         StringBuffer s = new StringBuffer(bcd.length * 2);
 
         for (int i = 0; i < bcd.length; i++) {
@@ -40,7 +40,7 @@ public final class UrlEncodeUtil {
      * @param source
      * @return
      */
-    public static final byte[] hexStrToBytes(String source) {
+    public static byte[] hexStrToBytes(String source) {
         byte[] bytes;
 
         bytes = new byte[source.length() / 2];

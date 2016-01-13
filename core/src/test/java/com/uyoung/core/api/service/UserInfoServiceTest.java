@@ -26,7 +26,7 @@ public class UserInfoServiceTest extends BaseTest {
 
     @Test
     public void getByIdList() {
-        List<Integer> ids = Arrays.asList(new Integer[]{1, 2});
+        List<Integer> ids = Arrays.asList(1, 2);
         LOGGER.info("##" + userInfoService.getListByIdList(ids));
     }
 

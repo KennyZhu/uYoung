@@ -19,10 +19,7 @@ public class SignServiceImpl implements SignService {
         if (StringUtils.isBlank(deviceId) || StringUtils.isBlank(sign)) {
             return false;
         }
-        if (sign.equals(getQNTokenSign(timestamp, deviceId))) {
-            return true;
-        }
-        return false;
+        return sign.equals(getQNTokenSign(timestamp, deviceId));
     }
 
     private String getQNTokenSign(long timestamp, String deviceId) {

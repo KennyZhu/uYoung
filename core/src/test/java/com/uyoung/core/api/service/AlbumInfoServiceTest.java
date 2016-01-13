@@ -5,8 +5,6 @@ import com.uyoung.core.api.model.AlbumInfo;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Date;
-
 /**
  * Desc:
  * <p/>Date: 2015-10-20
