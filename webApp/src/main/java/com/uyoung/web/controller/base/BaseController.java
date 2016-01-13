@@ -38,6 +38,7 @@ public class BaseController {
      * @return
      */
     protected String buildSuccessJson(BaseResult result) {
+        result = (result == null ? new BaseResult() : result);
         return JsonUtil.getJsonString(result);
 
     }

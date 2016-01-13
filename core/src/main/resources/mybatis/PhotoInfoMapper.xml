@@ -68,7 +68,6 @@
             <if test="albumId != null">
                 album_id,
             </if>
-
             <if test="exifCamera != null">
                 exif_camera,
             </if>
