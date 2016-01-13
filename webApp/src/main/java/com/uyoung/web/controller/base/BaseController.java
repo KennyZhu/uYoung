@@ -55,7 +55,7 @@ public class BaseController {
      * @return
      */
     protected String buildInvalidParamJson() {
-        return JsonUtil.getJsonString(new BaseResult(ResultCodeEnum.INVALID_PARAM.getCode(), ResultCodeEnum.INVALID_PARAM.getDesc()));
+        return JsonUtil.getJsonString(new BaseResult(ResultCodeEnum.INVALID_PARAM));
     }
 
     /**
@@ -64,7 +64,7 @@ public class BaseController {
      * @return
      */
     protected String buildExceptionJson() {
-        return JsonUtil.getJsonString(new BaseResult(ResultCodeEnum.EXCEPTION.getCode(), ResultCodeEnum.EXCEPTION.getDesc()));
+        return JsonUtil.getJsonString(new BaseResult(ResultCodeEnum.EXCEPTION));
     }
 
     /**
@@ -85,6 +85,14 @@ public class BaseController {
     }
 
     /**
+     * @param resultCodeEnum
+     * @return
+     */
+    protected String buildFailJson(ResultCodeEnum resultCodeEnum) {
+        return JsonUtil.getJsonString(new BaseResult(resultCodeEnum));
+    }
+
+    /**
      * 空结果
      *
      * @param page
@@ -100,7 +108,7 @@ public class BaseController {
             result.setPageNum(page);
         }
         BaseResult
-                baeResult = new BaseResult(ResultCodeEnum.SUCCESS.getCode(), ResultCodeEnum.SUCCESS.getDesc());
+                baeResult = new BaseResult(ResultCodeEnum.SUCCESS);
         baeResult.setResultData(result);
         return JsonUtil.getJsonString(baeResult);
     }

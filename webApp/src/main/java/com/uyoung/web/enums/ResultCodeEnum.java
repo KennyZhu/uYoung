@@ -49,7 +49,12 @@ public enum ResultCodeEnum {
     /**
      * 没有找到相册
      */
-    ALBUM_NOT_FOUND(-106, "没有找到相册");
+    ALBUM_NOT_FOUND(-106, "没有找到相册"),
+
+    /**
+     * 邮箱已经存在
+     */
+    USER_EMAIL_EXIST(-107, "邮箱已经存在");
     private final int code;
     private final String desc;
 

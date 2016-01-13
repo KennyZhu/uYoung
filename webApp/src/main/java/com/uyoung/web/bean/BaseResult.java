@@ -17,6 +17,13 @@ public class BaseResult {
         this.resultDesc = resultDesc;
     }
 
+    public BaseResult(ResultCodeEnum resultCodeEnum) {
+        if (resultCodeEnum != null) {
+            this.result = resultCodeEnum.getCode();
+            this.resultDesc = resultCodeEnum.getDesc();
+        }
+    }
+
     public BaseResult(Object resultData) {
         this.result = ResultCodeEnum.SUCCESS.getCode();
         this.resultDesc = ResultCodeEnum.SUCCESS.getDesc();

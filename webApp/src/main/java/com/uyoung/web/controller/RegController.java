@@ -3,6 +3,8 @@ package com.uyoung.web.controller;
 import com.uyoung.core.api.model.UserInfo;
 import com.uyoung.core.api.service.UserInfoService;
 import com.uyoung.web.controller.base.BaseController;
+import com.uyoung.web.enums.ResultCodeEnum;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,10 +28,15 @@ public class RegController extends BaseController {
     @RequestMapping(value = "/reg/reg", method = RequestMethod.POST)
     @ResponseBody
     public String reg(UserInfo userInfo) {
-        if (userInfo == null) {
+        if (userInfo == null || StringUtils.isBlank(userInfo.getEmail())) {
             return buildInvalidParamJson();
         }
         try {
+            UserInfo record = userInfoService.getByEmail(userInfo.getEmail());
+            if (record != null) {
+                LOGGER.warn("#Email:" + userInfo.getEmail() + " exist.");
+                return buildFailJson(ResultCodeEnum.USER_EMAIL_EXIST);
+            }
             int result = userInfoService.add(userInfo);
             if (result == 1) {
                 return buildSuccessJson();
