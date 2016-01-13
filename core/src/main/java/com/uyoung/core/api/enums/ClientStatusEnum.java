@@ -7,7 +7,7 @@ import java.util.stream.Stream;
  * Date: 16/1/9
  * Desc:
  */
-public enum ClientStatus {
+public enum ClientStatusEnum {
 
     AUDITED(1),
 
@@ -17,12 +17,12 @@ public enum ClientStatus {
     private int status;
 
 
-    private ClientStatus(int status) {
+    private ClientStatusEnum(int status) {
         this.status = status;
     }
 
-    public static ClientStatus getByStatus(int status) {
-        return Stream.of(ClientStatus.values()).filter(clientStatus -> clientStatus.getStatus() == status).findFirst().orElse(null);
+    public static ClientStatusEnum getByStatus(int status) {
+        return Stream.of(ClientStatusEnum.values()).filter(clientStatus -> clientStatus.getStatus() == status).findFirst().orElse(null);
     }
 
     public int getStatus() {

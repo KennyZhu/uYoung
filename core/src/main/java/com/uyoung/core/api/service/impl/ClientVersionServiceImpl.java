@@ -1,6 +1,7 @@
 package com.uyoung.core.api.service.impl;
 
 import com.uyoung.core.api.dao.ClientVersionDao;
+import com.uyoung.core.api.enums.ClientTypeEnum;
 import com.uyoung.core.api.model.ClientVersion;
 import com.uyoung.core.api.service.ClientVersionService;
 import org.apache.commons.lang.StringUtils;
@@ -35,7 +36,10 @@ public class ClientVersionServiceImpl implements ClientVersionService {
     }
 
     @Override
-    public ClientVersion getLastVersion() {
-        return null;
+    public ClientVersion getLastVersion(ClientTypeEnum clientTypeEnum) {
+        if (clientTypeEnum == null) {
+            return null;
+        }
+        return versionDao.getLastVersion(clientTypeEnum.getType());
     }
 }

@@ -13,5 +13,5 @@ public interface ClientVersionDao {
 
     ClientVersion getByVersion(String version);
 
-    ClientVersion getLastVersion();
+    ClientVersion getLastVersion(int clientType);
 }

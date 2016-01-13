@@ -1,5 +1,6 @@
 package com.uyoung.core.api.service;
 
+import com.uyoung.core.api.enums.ClientTypeEnum;
 import com.uyoung.core.api.model.ClientVersion;
 
 /**
@@ -12,5 +13,5 @@ public interface ClientVersionService {
 
     ClientVersion getByVersion(String version);
 
-    ClientVersion getLastVersion();
+    ClientVersion getLastVersion(ClientTypeEnum clientTypeEnum);
 }

@@ -1,6 +1,7 @@
 package com.uyoung.web.controller;
 
-import com.uyoung.core.api.enums.ClientStatus;
+import com.uyoung.core.api.enums.ClientStatusEnum;
+import com.uyoung.core.api.enums.ClientTypeEnum;
 import com.uyoung.core.api.model.ClientVersion;
 import com.uyoung.core.api.model.FeedBack;
 import com.uyoung.core.api.service.ClientVersionService;
@@ -82,17 +83,26 @@ public class CommonController extends BaseController {
         if (clientVersion == null) {
             return buildFailJson("No client version found");
         }
-        if (ClientStatus.AUDITED == ClientStatus.getByStatus(clientVersion.getStatus())) {
+        if (ClientStatusEnum.AUDITED == ClientStatusEnum.getByStatus(clientVersion.getStatus())) {
             return buildSuccessJson(true);
         }
         return buildSuccessJson(false);
 
     }
 
+    /**
+     * 获取最新的审核通过的版本
+     *
+     * @return
+     */
     @RequestMapping(value = "/common/getLastClient")
     @ResponseBody
-    public String getLastAuditClient() {
+    public String getLastAuditClient(Integer type) {
+        if (type == null || ClientTypeEnum.getByType(type) == null) {
+            return buildInvalidParamJson();
+        }
         try {
+            ClientTypeEnum clientTypeEnum = ClientTypeEnum.getByType(type);
             ClientVersion clientVersion = clientVersionService.getLastVersion();
             return buildSuccessJson(clientVersion);
         } catch (Exception e) {
