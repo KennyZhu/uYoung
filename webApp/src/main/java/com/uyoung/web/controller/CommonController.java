@@ -103,7 +103,7 @@ public class CommonController extends BaseController {
         }
         try {
             ClientTypeEnum clientTypeEnum = ClientTypeEnum.getByType(type);
-            ClientVersion clientVersion = clientVersionService.getLastVersion();
+            ClientVersion clientVersion = clientVersionService.getLastVersion(clientTypeEnum);
             return buildSuccessJson(clientVersion);
         } catch (Exception e) {
             return buildExceptionJson();
