@@ -33,6 +33,7 @@ public class UserInfoServiceImpl implements UserInfoService {
             return false;
         }
         UserInfo userInfo = userInfoDao.getByEmailPassword(email, password);
+        LOGGER.info("#Get userInfo by email:" + email + " password:" + password + " return " + userInfo);
         return userInfo != null;
     }
 

@@ -20,9 +20,9 @@
         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, real_name, nick_name, password, email, gender, avatar_url, phone, address, company,
-    position, equipment, style,user_type, create_time, update_time
-  </sql>
+        id, real_name, nick_name, password, email, gender, avatar_url, phone, address, company,
+        position, equipment, style, user_type, create_time, update_time
+    </sql>
     <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_List"/>
@@ -39,7 +39,8 @@
         select
         <include refid="Base_Column_List"/>
         from tb_user_info
-        where email = #{email,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR}
+        where email = #{email,jdbcType=VARCHAR}
+        and password = #{password,jdbcType=VARCHAR}
     </select>
     <select id="getAvatarListByUserIdList" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
