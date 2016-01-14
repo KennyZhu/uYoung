@@ -16,7 +16,12 @@ import org.springframework.stereotype.Service;
 import org.xml.sax.InputSource;
 
 import java.io.StringReader;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Desc:
@@ -24,7 +29,7 @@ import java.util.*;
  * <br/>Time: 12:02
  * <br/>User: ylzhu
  */
-@Service
+@Service("dictCityService")
 public class DictCityServiceImpl implements DictCityService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DictCityServiceImpl.class);

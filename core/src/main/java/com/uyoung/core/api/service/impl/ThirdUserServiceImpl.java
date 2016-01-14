@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
  * Date: 15/10/31
  * Desc:
  */
-@Service
+@Service("thirdUserService")
 public class ThirdUserServiceImpl implements ThirdUserService {
     private static final Logger LOGGER = LoggerFactory.getLogger(ThirdUserServiceImpl.class);
     @Autowired

@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * <br/>Time: 10:44
  * <br/>User: ylzhu
  */
-@Service
+@Service("feedBackService")
 public class FeedBackServiceImpl implements FeedBackService {
 
     @Autowired

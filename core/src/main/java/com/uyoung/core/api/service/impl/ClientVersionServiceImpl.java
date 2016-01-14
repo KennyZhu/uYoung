@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
  * Date: 16/1/8
  * Desc:
  */
-@Service
+@Service("clientVersionService")
 public class ClientVersionServiceImpl implements ClientVersionService {
 
     @Autowired

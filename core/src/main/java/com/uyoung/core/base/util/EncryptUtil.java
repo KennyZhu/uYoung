@@ -25,14 +25,14 @@ public final class EncryptUtil {
      * 加密算法
      *
      * @param source
-     * @param stmp
+     * @param timestamp
      * @return
      */
-    public static String encryptCode(String source, String stmp) {
-        if (StringUtils.isBlank(source) || StringUtils.isBlank(stmp)) {
+    public static String encryptCode(String source, String timestamp) {
+        if (StringUtils.isBlank(source) || StringUtils.isBlank(timestamp)) {
             return null;
         }
-        byte[] encodeKeys = EncryptUtil.genCroptyKey(ENCODE_STR, stmp);
+        byte[] encodeKeys = EncryptUtil.genCroptyKey(ENCODE_STR, timestamp);
         return new String(encryptMode(encodeKeys, source.getBytes()));
 
     }
@@ -40,18 +40,18 @@ public final class EncryptUtil {
     /**
      * 加密算法
      *
-     * @param keybyte 为加密密钥，长度为24字节
-     * @param src     为被加密的数据缓冲区（源）
+     * @param keyByte    为加密密钥，长度为24字节
+     * @param sourceByte 为被加密的数据缓冲区（源）
      * @return
      */
-    public static byte[] encryptMode(byte[] keybyte, byte[] src) {
+    public static byte[] encryptMode(byte[] keyByte, byte[] sourceByte) {
         try {
             //生成密钥
-            SecretKey deskey = new SecretKeySpec(keybyte, ALGORITHM);
+            SecretKey deskey = new SecretKeySpec(keyByte, ALGORITHM);
             //加密
             Cipher c1 = Cipher.getInstance(ALGORITHM);
             c1.init(Cipher.ENCRYPT_MODE, deskey);
-            return c1.doFinal(src);//在单一方面的加密或解密
+            return c1.doFinal(sourceByte);//在单一方面的加密或解密
         } catch (java.security.NoSuchAlgorithmException e1) {
             e1.printStackTrace();
         } catch (javax.crypto.NoSuchPaddingException e2) {
@@ -63,18 +63,20 @@ public final class EncryptUtil {
     }
 
     /**
-     * @param keybyte keybyte为加密密钥，长度为24字节
-     * @param src     src为加密后的缓冲区
+     * 解密算法
+     *
+     * @param miyao   为加密密钥，长度为24字节
+     * @param srcByte src为加密后的缓冲区
      * @return
      */
-    public static byte[] decryptMode(byte[] keybyte, byte[] src) {
+    public static byte[] decryptMode(byte[] miyao, byte[] srcByte) {
         try {
             //生成密钥
-            SecretKey deskey = new SecretKeySpec(keybyte, ALGORITHM);
+            SecretKey deskey = new SecretKeySpec(miyao, ALGORITHM);
             //解密
             Cipher c1 = Cipher.getInstance(ALGORITHM + "/ECB/PKCS5Padding");
             c1.init(Cipher.DECRYPT_MODE, deskey);
-            return c1.doFinal(src);
+            return c1.doFinal(srcByte);
         } catch (java.security.NoSuchAlgorithmException e1) {
             e1.printStackTrace();
         } catch (javax.crypto.NoSuchPaddingException e2) {
@@ -98,7 +100,7 @@ public final class EncryptUtil {
     /*
      *生成密钥 encodeKeyA.length=24
      */
-    public static byte[] genCroptyKey(byte[] encodeKeyA, String randomStrB) {
+    private static byte[] genCroptyKey(byte[] encodeKeyA, String randomStrB) {
         if (encodeKeyA == null) {
             return null;
         }
@@ -227,28 +229,30 @@ public final class EncryptUtil {
         return strRandom;
     }
 
-    public static void test() throws UnsupportedEncodingException {
+
+    public static void main(String[] args) {
         //apiVer=1.1&data=&stamp=4658813633344
-        final byte[] ecodeStr =
-                {(byte) 0xef, 0x2b, (byte) 0xcc, (byte) 0xdc, (byte) 0x9b, 0x3b, (byte) 0xf7, 0x2a, 0x68, (byte) 0xad,
-                        (byte) 0xeb, 0x72, (byte) 0xe3, 0x78, 0x2f, 0x5e, 0x7, 0x77, (byte) 0xd5, (byte) 0xc1, 0x7d, 0x40,
-                        0x66, (byte) 0xb8};
-        String stamp = "4658813633344";
-        byte[] miyao = EncryptUtil.genCroptyKey(ecodeStr, stamp);
-        String szSrc = "userName=bjtestsf%40163.com&sessionId=85A9E20FB6E92CBF2A293688F6EA5817";
-        System.out.println("加密前的字符串:" + szSrc);
-        byte[] encoded = encryptMode(miyao, szSrc.getBytes());
-        System.out.println("加密后的字符串:" + new String(encoded));
-        String baseStr = EncryptUtil.getBASE64(encoded);
-        System.out.println("base64加密后的字符串:" + baseStr);
-        System.out.println("---------hhh-----------------");
+        try {
+            String stamp = "4658813633344";
+            byte[] miyao = EncryptUtil.genCroptyKey(ENCODE_STR, stamp);
+            String szSrc = "userName=bjtestsf%40163.com&sessionId=85A9E20FB6E92CBF2A293688F6EA5817";
+            System.out.println("加密前的字符串:" + szSrc);
+            byte[] encoded = encryptMode(miyao, szSrc.getBytes());
+            System.out.println("加密后的字符串:" + new String(encoded));
+            String baseStr = EncryptUtil.getBASE64(encoded);
+            System.out.println("base64加密后的字符串:" + baseStr);
+            System.out.println("---------hhh-----------------");
 
-        byte[] base = EncryptUtil
-                .getFromBASE64("xAPRtRAkGMYl9ibjVtzOxvXnf1i3FtIzZucEKu0M27BhCLyKJlYoE40DUFcc4LRWpes94f2w7xnaeUaRF8vwJstXHSrlIjJ8");
+            String deCode = "xAPRtRAkGMYl9ibjVtzOxvXnf1i3FtIzZucEKu0M27BhCLyKJlYoE40DUFcc4LRWpes94f2w7xnaeUaRF8vwJstXHSrlIjJ8";
+            byte[] base = EncryptUtil
+                    .getFromBASE64(baseStr);
 
-        byte[] decodeBytes = EncryptUtil.decryptMode(miyao, base);
+            byte[] decodeBytes = EncryptUtil.decryptMode(miyao, base);
 
-        String decodeStr = new String(decodeBytes, "utf-8");
-        System.out.println("base64解密后的字符串:" + decodeStr);
+            String decodeStr = new String(decodeBytes, "utf-8");
+            System.out.println("base64解密后的字符串:" + decodeStr);
+        } catch (Exception e) {
+
+        }
     }
 }
