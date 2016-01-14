@@ -27,14 +27,12 @@ public class UserInfoServiceImpl implements UserInfoService {
     private UserInfoDao userInfoDao;
 
     @Override
-    public boolean login(String email, String password) {
+    public UserInfo login(String email, String password) {
         if (StringUtils.isBlank(email) || StringUtils.isBlank(password)) {
             LOGGER.error("Invalid param");
-            return false;
+            return null;
         }
-        UserInfo userInfo = userInfoDao.getByEmailPassword(email, password);
-        LOGGER.info("#Get userInfo by email:" + email + " password:" + password + " return " + userInfo);
-        return userInfo != null;
+        return userInfoDao.getByEmailPassword(email, password);
     }
 
 

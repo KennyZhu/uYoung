@@ -7,8 +7,8 @@ import com.uyoung.core.api.service.ThirdUserService;
 import com.uyoung.core.api.service.UserInfoService;
 import com.uyoung.core.third.ThirdUtil;
 import com.uyoung.core.third.enums.ThirdPlatformEnum;
-import com.uyoung.web.bean.LoginResult;
 import com.uyoung.web.controller.base.LoginBaseController;
+import com.uyoung.web.vo.LoginResultVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +46,7 @@ public class ThirdLoginController extends LoginBaseController {
             ThirdUser currentThirdUser = thirdUserService.getByThirdUid(thirdUser.getThirdUid(), ThirdPlatformEnum.getByCode(thirdUser.getUserType()));
             if (currentThirdUser != null) {
                 String accountId = ThirdUtil.getEmail(currentThirdUser.getThirdUid(), currentThirdUser.getUserType());
-                return buildSuccessJson(new LoginResult(currentThirdUser.getUid(), LoginUtil.getSessionId(accountId)));
+                return buildSuccessJson(new LoginResultVo(currentThirdUser.getUid(), LoginUtil.getSessionId(accountId)));
             }
             LOGGER.info("#New User:" + thirdUser.toString());
             UserInfo userInfo = buildUserInfoByThirdUser(thirdUser);

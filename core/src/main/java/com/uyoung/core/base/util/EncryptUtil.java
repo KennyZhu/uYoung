@@ -33,7 +33,7 @@ public final class EncryptUtil {
             return null;
         }
         byte[] encodeKeys = EncryptUtil.genCroptyKey(ENCODE_STR, timestamp);
-        return new String(encryptMode(encodeKeys, source.getBytes()));
+        return getBASE64(encryptMode(encodeKeys, source.getBytes()));
 
     }
 

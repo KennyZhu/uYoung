@@ -19,7 +19,7 @@ public interface UserInfoService {
      * @param password
      * @return
      */
-    public boolean login(String email, String password);
+    public UserInfo login(String email, String password);
 
     /**
      * @param userInfo
