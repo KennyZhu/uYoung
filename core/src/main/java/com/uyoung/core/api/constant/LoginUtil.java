@@ -7,6 +7,8 @@ import com.uyoung.core.base.util.JsonUtil;
 import com.uyoung.core.base.util.MD5Util;
 import com.uyoung.core.base.util.SpringContextHolder;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +22,7 @@ import java.util.Random;
  */
 public final class LoginUtil {
     private static LoginService loginService = SpringContextHolder.getBean("loginService");
+    private static final Logger LOGGER = LoggerFactory.getLogger(LoginUtil.class);
 
     /**
      * @param accountId
@@ -59,6 +62,7 @@ public final class LoginUtil {
         login.setAccountId(accountId);
         login.setLoginHash(getLoginHash(accountId));
         login.setLoginToken(getLoginToken(accountId));
+        LOGGER.info("#Update login:" + login.toString());
         loginService.addOrUpdate(login);
         return login;
     }

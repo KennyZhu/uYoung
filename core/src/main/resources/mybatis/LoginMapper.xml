@@ -10,7 +10,7 @@
         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id,account_id, login_hash, login_token, create_time, update_time
+        id, account_id, login_hash, login_token, create_time, update_time
     </sql>
     <sql id="Base_Table_Name">
         tb_login
@@ -32,7 +32,7 @@
             <if test="loginToken != null">
                 login_token = #{loginToken,jdbcType=VARCHAR},
             </if>
-            update_time = now();
+            update_time = now()
         </set>
         where account_id =#{accountId,jdbcType=VARCHAR}
     </update>

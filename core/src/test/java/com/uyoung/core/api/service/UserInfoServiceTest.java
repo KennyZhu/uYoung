@@ -38,4 +38,8 @@ public class UserInfoServiceTest extends BaseTest {
         userInfo.setAvatarUrl("http://www.163.com");
         LOGGER.info("####" + userInfoService.updateById(userInfo));
     }
+
+    public void login(){
+        String email="";
+    }
 }

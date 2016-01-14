@@ -39,6 +39,7 @@ public class LoginServiceImpl implements LoginService {
         if (login == null || StringUtils.isBlank(login.getAccountId())) {
             return false;
         }
+
         return loginDao.update(login) == 1;
     }
 
