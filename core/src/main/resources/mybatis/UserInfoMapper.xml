@@ -5,7 +5,7 @@
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="real_name" property="realName" jdbcType="VARCHAR"/>
         <result column="nick_name" property="nickName" jdbcType="VARCHAR"/>
-        <result column="password" property="password" jdbcType="VARCHAR"/>
+        <result column="passwd" property="password" jdbcType="VARCHAR"/>
         <result column="email" property="email" jdbcType="VARCHAR"/>
         <result column="gender" property="gender" jdbcType="TINYINT"/>
         <result column="avatar_url" property="avatarUrl" jdbcType="VARCHAR"/>
@@ -20,7 +20,7 @@
         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, real_name, nick_name, password, email, gender, avatar_url, phone, address, company,
+        id, real_name, nick_name, passwd, email, gender, avatar_url, phone, address, company,
         position, equipment, style, user_type, create_time, update_time
     </sql>
     <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
@@ -36,13 +36,13 @@
         where email = #{email,jdbcType=VARCHAR}
     </select>
     <select id="getByEmailPassword" resultMap="BaseResultMap" parameterType="java.util.Map">
-    <![CDATA[
+
         select
         <include refid="Base_Column_List"/>
         from tb_user_info
         where email = #{email,jdbcType=VARCHAR}
-        and password = #{password,jdbcType=VARCHAR}
-    </select>]]>
+        and passwd = #{passwd,jdbcType=VARCHAR}
+    </select>
     <select id="getAvatarListByUserIdList" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_List"/>
@@ -67,8 +67,8 @@
             <if test="nickName != null">
                 nick_name,
             </if>
-            <if test="password != null">
-                password,
+            <if test="passwd != null">
+                passwd,
             </if>
             <if test="email != null">
                 email,
@@ -114,8 +114,8 @@
             <if test="nickName != null">
                 #{nickName,jdbcType=VARCHAR},
             </if>
-            <if test="password != null">
-                #{password,jdbcType=VARCHAR},
+            <if test="passwd != null">
+                #{passwd,jdbcType=VARCHAR},
             </if>
             <if test="email != null">
                 #{email,jdbcType=VARCHAR},
@@ -160,8 +160,8 @@
             <if test="nickName != null">
                 nick_name = #{nickName,jdbcType=VARCHAR},
             </if>
-            <if test="password != null">
-                password = #{password,jdbcType=VARCHAR},
+            <if test="passwd != null">
+                passwd = #{passwd,jdbcType=VARCHAR},
             </if>
             <if test="email != null">
                 email = #{email,jdbcType=VARCHAR},
