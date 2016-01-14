@@ -33,6 +33,5 @@ public class ThirdLoginControllerTest extends BaseControllerTest {
         thirdUser.setGender(1);
         thirdUser.setThirdUid("12348971");
         thirdUser.setUserType(1);
-        System.out.println("####" + controller.login(thirdUser));
     }
 }
