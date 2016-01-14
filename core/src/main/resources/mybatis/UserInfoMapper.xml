@@ -36,12 +36,13 @@
         where email = #{email,jdbcType=VARCHAR}
     </select>
     <select id="getByEmailPassword" resultMap="BaseResultMap" parameterType="java.util.Map">
+    <![CDATA[
         select
         <include refid="Base_Column_List"/>
         from tb_user_info
         where email = #{email,jdbcType=VARCHAR}
         and password = #{password,jdbcType=VARCHAR}
-    </select>
+    </select>]]>
     <select id="getAvatarListByUserIdList" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_List"/>

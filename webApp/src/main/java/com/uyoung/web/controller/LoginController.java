@@ -35,6 +35,7 @@ public class LoginController extends LoginBaseController {
             return buildInvalidParamJson();
         }
         try {
+            LOGGER.info("#Login email is " + email + " password is " + password);
             boolean isLogin = userInfoService.login(email, password);
             if (isLogin) {
                 String code = LoginUtil.getSessionId(email);
