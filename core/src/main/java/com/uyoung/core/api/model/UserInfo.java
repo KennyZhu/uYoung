@@ -10,7 +10,7 @@ public class UserInfo {
 
     private String nickName;
 
-    private String password;
+    private String passwd;
 
     private String email;
 
@@ -75,13 +75,13 @@ public class UserInfo {
     }
 
 
-    public String getPassword() {
-        return password;
+    public String getPasswd() {
+        return passwd;
     }
 
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPasswd(String passwd) {
+        this.passwd = passwd;
     }
 
 
@@ -202,7 +202,7 @@ public class UserInfo {
                 ", id=" + id +
                 ", realName='" + realName + '\'' +
                 ", nickName='" + nickName + '\'' +
-                ", password='" + password + '\'' +
+                ", passwd='" + passwd + '\'' +
                 ", email='" + email + '\'' +
                 ", gender=" + gender +
                 ", avatarUrl='" + avatarUrl + '\'' +

@@ -4,7 +4,7 @@ CREATE TABLE tb_user_info (
   real_name   VARCHAR(10) COMMENT '真实姓名',
   nick_name   VARCHAR(10)        NOT NULL
   COMMENT '昵称',
-  password    VARCHAR(50)        NOT NULL
+  passwd    VARCHAR(50)        NOT NULL
   COMMENT '密码',
   email       VARCHAR(50)                 DEFAULT NULL
   COMMENT 'Email',

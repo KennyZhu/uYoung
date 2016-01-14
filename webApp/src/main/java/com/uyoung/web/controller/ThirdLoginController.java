@@ -66,7 +66,7 @@ public class ThirdLoginController extends LoginBaseController {
         UserInfo userInfo = new UserInfo();
         userInfo.setNickName(thirdUser.getNickName());
         userInfo.setAvatarUrl(thirdUser.getAvatarUrl());
-        userInfo.setPassword(thirdUser.getThirdUid());
+        userInfo.setPasswd(thirdUser.getThirdUid());
         userInfo.setUserType(thirdUser.getUserType());
         userInfo.setGender(thirdUser.getGender());
         userInfo.setEmail(ThirdUtil.getEmail(thirdUser.getThirdUid(), thirdUser.getUserType()));
