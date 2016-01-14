@@ -114,13 +114,13 @@ public class CommonController extends BaseController {
     @RequestMapping(value = "/common/feedBack", method = RequestMethod.POST)
     @ResponseBody
     public String feedBack(FeedBack feedBack) {
-        if (feedBack == null) {
+        if (feedBack == null || StringUtils.isBlank(feedBack.getEmail()) || StringUtils.isBlank(feedBack.getContent())) {
             buildInvalidParamJson();
         }
         try {
             feedBackService.insert(feedBack);
         } catch (Exception e) {
-            LOGGER.error("#Get City Dict error.Cause:", e);
+            LOGGER.error("#Add feedBack error.Cause:", e);
             return buildExceptionJson();
         }
         return buildSuccessJson();
