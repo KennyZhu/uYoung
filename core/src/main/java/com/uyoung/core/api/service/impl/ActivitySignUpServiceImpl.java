@@ -39,7 +39,8 @@ public class ActivitySignUpServiceImpl implements ActivitySignUpService {
 
     @Override
     public int updateStatusByUidAid(Integer uid, Integer aid, ActivitySignUpStatusEnum statusEnum) {
-        if (uid == null || aid == null) {
+        if (uid == null || aid == null || statusEnum == null) {
+            LOGGER.error("Invalid param.");
             return 0;
         }
         return activitySignUpDao.updateStatusByUidAid(uid, aid, statusEnum.getStatus());
