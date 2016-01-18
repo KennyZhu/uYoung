@@ -8,9 +8,13 @@ public interface PhotoInfoDao {
 
     int deleteById(Integer id);
 
+    int deleteByIdList(List<Integer> idList);
+
     int insert(PhotoInfo record);
 
     PhotoInfo getById(Integer id);
+
+    List<String> getPhotoUrlListByIdList(List<Integer> idList);
 
     int getTotalCountByAlbumId(Integer albumId);
 

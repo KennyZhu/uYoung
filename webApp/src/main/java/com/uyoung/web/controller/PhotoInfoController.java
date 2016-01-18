@@ -4,6 +4,7 @@ import com.uyoung.core.api.model.PhotoInfo;
 import com.uyoung.core.api.service.PhotoInfoService;
 import com.uyoung.web.controller.base.BaseController;
 import com.uyoung.web.handler.PhotoInfoHandler;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,15 +88,15 @@ public class PhotoInfoController extends BaseController {
 
     @RequestMapping(value = "/photo/deleteById")
     @ResponseBody
-    public String deleteById(Integer id) {
-        if (id == null) {
+    public String deleteById(String ids) {
+        if (StringUtils.isBlank(ids)) {
             return buildInvalidParamJson();
         }
         try {
-            handler.deleteById(id);
+            handler.delete(ids);
             return buildSuccessJson();
         } catch (Exception e) {
-            LOGGER.error("#Delete Photo error.Id:" + id + " Cause:", e);
+            LOGGER.error("#Delete Photo error.Id:" + ids + " Cause:", e);
             return buildExceptionJson();
         }
     }

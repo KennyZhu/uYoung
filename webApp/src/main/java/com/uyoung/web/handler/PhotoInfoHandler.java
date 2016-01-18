@@ -3,15 +3,21 @@ package com.uyoung.web.handler;
 import com.uyoung.core.api.model.PhotoInfo;
 import com.uyoung.core.api.service.PhotoInfoService;
 import com.uyoung.core.api.task.TaskFactory;
-import com.uyoung.core.api.task.impl.PhotoDeleteTask;
+import com.uyoung.core.api.task.impl.AlbumDeleteTask;
 import com.uyoung.core.api.task.impl.PhotoViewCountTask;
 import com.uyoung.core.third.qiniu.QiNiuConstant;
 import com.uyoung.core.third.qiniu.QiNiuStoreFactory;
 import com.uyoung.web.vo.PhotoInfoUrlVo;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Desc:
@@ -52,15 +58,29 @@ public class PhotoInfoHandler {
         return resultVo;
     }
 
-    public void deleteById(Integer id) {
-        if (id == null) {
+    /**
+     * 删除照片
+     *
+     * @param ids
+     */
+    public void delete(String ids) {
+        if (StringUtils.isBlank(ids)) {
             return;
         }
-        PhotoInfo photoInfo = photoInfoService.getById(id);
-        if (photoInfo == null) {
+        List<String> idStrList = Arrays.asList(ids.split(","));
+        if (CollectionUtils.isEmpty(idStrList)) {
             return;
         }
-        photoInfoService.deleteById(id);
-        taskFactory.addTask(new PhotoDeleteTask(photoInfo));
+
+        List<Integer> idList = new ArrayList<>(idStrList.size());
+        for (String idStr : idStrList) {
+            idList.add(Integer.parseInt(idStr));
+        }
+        List<String> photoUrls = photoInfoService.getPhotoUrlListByIdList(idList);
+        if (CollectionUtils.isEmpty(photoUrls)) {
+            return;
+        }
+        photoInfoService.deleteByIdList(idList);
+        taskFactory.addTask(new AlbumDeleteTask(photoUrls));
     }
 }

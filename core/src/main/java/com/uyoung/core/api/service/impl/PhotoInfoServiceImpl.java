@@ -3,6 +3,7 @@ package com.uyoung.core.api.service.impl;
 import com.uyoung.core.api.dao.PhotoInfoDao;
 import com.uyoung.core.api.model.PhotoInfo;
 import com.uyoung.core.api.service.PhotoInfoService;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,6 +37,15 @@ public class PhotoInfoServiceImpl implements PhotoInfoService {
         return photoInfoDao.getById(id);
     }
 
+
+    @Override
+    public List<String> getPhotoUrlListByIdList(List<Integer> idList) {
+        if (CollectionUtils.isEmpty(idList)) {
+            return Collections.emptyList();
+        }
+        return photoInfoDao.getPhotoUrlListByIdList(idList);
+    }
+
     @Override
     public int getTotalCountByAlbumId(Integer albumId) {
         if (albumId == null) {
@@ -59,6 +69,14 @@ public class PhotoInfoServiceImpl implements PhotoInfoService {
             return 0;
         }
         return photoInfoDao.deleteById(id);
+    }
+
+    @Override
+    public int deleteByIdList(List<Integer> idList) {
+        if (CollectionUtils.isEmpty(idList)) {
+            return 0;
+        }
+        return photoInfoDao.deleteByIdList(idList);
     }
 
     @Override

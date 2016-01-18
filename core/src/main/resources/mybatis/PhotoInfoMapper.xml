@@ -31,6 +31,15 @@
         from tb_photo_info
         where id = #{id,jdbcType=INTEGER}
     </select>
+    <select id="getPhotoUrlListByIdList" resultType="java.lang.String" parameterType="java.util.List">
+        select
+        photo_url
+        from tb_photo_info
+        where id in
+        <foreach collection="idList" open="(" separator="," close=")" index="id" item="id">
+            #{id,jdbcType=INTEGER}
+        </foreach>
+    </select>
     <select id="getTotalCountByAlbumId" resultType="java.lang.Integer" parameterType="java.lang.Integer">
         SELECT count(1)
         FROM tb_photo_info
@@ -39,6 +48,13 @@
     <delete id="deleteById" parameterType="java.lang.Integer">
         DELETE FROM tb_photo_info
         WHERE id = #{id,jdbcType=INTEGER}
+    </delete>
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        DELETE FROM tb_photo_info
+        WHERE id in
+        <foreach collection="idList" open="(" separator="," close=")" index="id" item="id">
+            #{id,jdbcType=INTEGER}
+        </foreach>
     </delete>
     <delete id="deleteByAlbumId" parameterType="java.lang.Integer">
         DELETE FROM tb_photo_info

@@ -24,6 +24,12 @@ public interface PhotoInfoService {
     public PhotoInfo getById(Integer id);
 
     /**
+     * @param idList
+     * @return
+     */
+    List<String> getPhotoUrlListByIdList(List<Integer> idList);
+
+    /**
      * 获取相册下照片总数
      *
      * @param albumId
@@ -44,6 +50,14 @@ public interface PhotoInfoService {
     public int deleteById(Integer id);
 
     /**
+     * 批量删除
+     *
+     * @param idList
+     * @return
+     */
+    public int deleteByIdList(List<Integer> idList);
+
+    /**
      * 根据相册ID获取所有的照片
      *
      * @param albumId
@@ -52,6 +66,10 @@ public interface PhotoInfoService {
     public List<PhotoInfo> getListByAlbumId(Integer albumId);
 
 
+    /**
+     * @param albumId
+     * @return
+     */
     public int deleteByAlbumId(Integer albumId);
 
     /**

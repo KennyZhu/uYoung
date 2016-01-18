@@ -5,7 +5,9 @@ import com.uyoung.core.api.model.PhotoInfo;
 import com.uyoung.core.base.dao.BaseDao;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * User: KennyZhu
@@ -27,6 +29,20 @@ public class PhotoInfoDaoImpl extends BaseDao<PhotoInfo> implements PhotoInfoDao
     @Override
     public PhotoInfo getById(Integer id) {
         return selectOne("getById", id);
+    }
+
+    @Override
+    public List<String> getPhotoUrlListByIdList(List<Integer> idList) {
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("idList", idList);
+        return selectList("getPhotoUrlListByIdList");
+    }
+
+    @Override
+    public int deleteByIdList(List<Integer> idList) {
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("idList", idList);
+        return delete("deleteByIdList");
     }
 
     @Override
