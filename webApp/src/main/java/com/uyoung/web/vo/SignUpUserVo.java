@@ -8,6 +8,10 @@ package com.uyoung.web.vo;
  */
 public class SignUpUserVo {
     private Integer uid;
+    /**
+     * 是否签到
+     */
+    private boolean isConfirm;
     private String avatar;
     private String nickName;
 
@@ -33,5 +37,13 @@ public class SignUpUserVo {
 
     public void setUid(Integer uid) {
         this.uid = uid;
+    }
+
+    public boolean isConfirm() {
+        return isConfirm;
+    }
+
+    public void setIsConfirm(boolean confirm) {
+        isConfirm = confirm;
     }
 }

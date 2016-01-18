@@ -11,7 +11,13 @@ public class AlbumActivityVo {
 
     private Integer albumId;
 
+    /**
+     * 创建者ID
+     */
+    private Integer oriUid;
+
     private String oriUrl;
+
 
     private String firstPhotoUrl;
 
@@ -89,12 +95,20 @@ public class AlbumActivityVo {
         this.activityId = activityId;
     }
 
+    public Integer getOriUid() {
+        return oriUid;
+    }
+
+    public void setOriUid(Integer oriUid) {
+        this.oriUid = oriUid;
+    }
 
     @Override
     public String toString() {
         return "AlbumActivityVo{" +
                 "activityId=" + activityId +
                 ", albumId=" + albumId +
+                ", oriUid=" + oriUid +
                 ", oriUrl='" + oriUrl + '\'' +
                 ", firstPhotoUrl='" + firstPhotoUrl + '\'' +
                 ", totalPhotoCount=" + totalPhotoCount +
