@@ -17,7 +17,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 /**
  * User: KennyZhu
@@ -107,6 +111,7 @@ public class AlbumInfoHandler {
             UserInfo userInfo = userInfoMap.get(albumInfo.getCreateUserId());
             if (userInfo != null) {
                 vo.setOriUrl(userInfo.getAvatarUrl());
+                vo.setOriUid(userInfo.getId());
             }
             vo.setTotalLikeCount(albumInfo.getTotalLikeCount());
             vo.setTotalPhotoCount(albumInfo.getTotalPhotoCount());
