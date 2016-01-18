@@ -49,7 +49,7 @@
         DELETE FROM tb_photo_info
         WHERE id = #{id,jdbcType=INTEGER}
     </delete>
-    <delete id="deleteById" parameterType="java.lang.Integer">
+    <delete id="deleteByIdList" parameterType="java.lang.Integer">
         DELETE FROM tb_photo_info
         WHERE id in
         <foreach collection="idList" open="(" separator="," close=")" index="id" item="id">
