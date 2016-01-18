@@ -35,14 +35,14 @@ public class PhotoInfoDaoImpl extends BaseDao<PhotoInfo> implements PhotoInfoDao
     public List<String> getPhotoUrlListByIdList(List<Integer> idList) {
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("idList", idList);
-        return selectList("getPhotoUrlListByIdList");
+        return selectList("getPhotoUrlListByIdList", paramMap);
     }
 
     @Override
     public int deleteByIdList(List<Integer> idList) {
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("idList", idList);
-        return delete("deleteByIdList");
+        return delete("deleteByIdList", paramMap);
     }
 
     @Override

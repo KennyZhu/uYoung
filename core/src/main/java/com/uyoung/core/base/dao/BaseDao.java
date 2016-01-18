@@ -49,11 +49,11 @@ public abstract class BaseDao<T> {
         return selectList(statement, null);
     }
 
-    protected List<T> selectList(String statement, Object parameter) {
+    protected List selectList(String statement, Object parameter) {
         return selectList(statement, parameter, RowBounds.DEFAULT);
     }
 
-    protected List<T> selectList(String statement, Object parameter, RowBounds rowBounds) {
+    protected List selectList(String statement, Object parameter, RowBounds rowBounds) {
         return sqlSessionTemplate.selectList(getNameSpace() + statement, parameter, rowBounds);
     }
 

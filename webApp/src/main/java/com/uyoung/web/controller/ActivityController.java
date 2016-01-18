@@ -5,11 +5,8 @@ import com.uyoung.core.api.enums.ActivityStatusEnum;
 import com.uyoung.core.api.model.ActivityInfo;
 import com.uyoung.core.api.service.ActivityInfoService;
 import com.uyoung.core.base.bean.Page;
-import com.uyoung.web.bean.BaseResult;
 import com.uyoung.web.controller.base.BaseController;
-import com.uyoung.web.enums.ResultCodeEnum;
 import com.uyoung.web.handler.ActivityInfoHandler;
-import com.uyoung.web.util.JsonUtil;
 import com.uyoung.web.vo.ActivityInfoVo;
 import com.uyoung.web.vo.ActivityStatusVo;
 import com.uyoung.web.vo.ActivityTypeVo;
@@ -56,9 +53,7 @@ public class ActivityController extends BaseController {
         }
         try {
             Page<ActivityInfoVo> infoPage = activityInfoHandler.getPageByStatus(pageNum, pageSize, ActivityStatusEnum.getByStatus(status), uid);
-            BaseResult baseResult = new BaseResult(ResultCodeEnum.SUCCESS.getCode(), ResultCodeEnum.SUCCESS.getDesc());
-            baseResult.setResultData(infoPage);
-            return JsonUtil.getJsonString(baseResult);
+            return buildSuccessJson(infoPage);
         } catch (Exception e) {
             LOGGER.error("#Get page by status error.uid is :" + uid + " status is " + status + " Cause:", e);
             return buildExceptionJson();
@@ -80,9 +75,7 @@ public class ActivityController extends BaseController {
         }
         try {
             Page<ActivityInfoVo> infoPage = activityInfoHandler.getPageByCondition(conditionBean, pageNum, pageSize);
-            BaseResult baseResult = new BaseResult(ResultCodeEnum.SUCCESS.getCode(), ResultCodeEnum.SUCCESS.getDesc());
-            baseResult.setResultData(infoPage);
-            return JsonUtil.getJsonString(baseResult);
+            return buildSuccessJson(infoPage);
         } catch (Exception e) {
             LOGGER.error("#Get page by status error.Condition is :" + conditionBean + " Cause:", e);
             return buildExceptionJson();
@@ -99,13 +92,15 @@ public class ActivityController extends BaseController {
     @ResponseBody
     public String getById(Integer id) {
         if (id == null) {
-            return JsonUtil.getJsonString(new BaseResult(ResultCodeEnum.INVALID_PARAM.getCode(), ResultCodeEnum.INVALID_PARAM.getDesc()));
-
+            return buildInvalidParamJson();
         }
-        ActivityInfoVo infoVo = activityInfoHandler.getActivityInfoById(id);
-        BaseResult baseResult = new BaseResult(ResultCodeEnum.SUCCESS.getCode(), ResultCodeEnum.SUCCESS.getDesc());
-        baseResult.setResultData(infoVo);
-        return JsonUtil.getJsonString(baseResult);
+        try {
+            ActivityInfoVo infoVo = activityInfoHandler.getActivityInfoById(id);
+            return buildSuccessJson(infoVo);
+        } catch (Exception e) {
+            LOGGER.error("#Get activity by id :" + id + " return error.Cause:", e);
+            return buildExceptionJson();
+        }
     }
 
     /**
@@ -160,10 +155,8 @@ public class ActivityController extends BaseController {
     @ResponseBody
     public String getTypes() {
         try {
-            BaseResult baseResult = new BaseResult(ResultCodeEnum.SUCCESS.getCode(), ResultCodeEnum.SUCCESS.getDesc());
             List<ActivityTypeVo> activityTypeVos = activityInfoHandler.getAllActivityTypes();
-            baseResult.setResultData(activityTypeVos);
-            return JsonUtil.getJsonString(baseResult);
+            return buildSuccessJson(activityTypeVos);
         } catch (Exception e) {
             LOGGER.error("#Add activity types error!Cause:", e);
             return buildExceptionJson();
@@ -179,10 +172,8 @@ public class ActivityController extends BaseController {
     @ResponseBody
     public String getStatuses() {
         try {
-            BaseResult baseResult = new BaseResult(ResultCodeEnum.SUCCESS.getCode(), ResultCodeEnum.SUCCESS.getDesc());
             List<ActivityStatusVo> activityStatusVos = activityInfoHandler.getAllActivityStatus();
-            baseResult.setResultData(activityStatusVos);
-            return JsonUtil.getJsonString(baseResult);
+            return buildSuccessJson(activityStatusVos);
         } catch (Exception e) {
             LOGGER.error("#Add activity status error!Cause:", e);
             return buildExceptionJson();

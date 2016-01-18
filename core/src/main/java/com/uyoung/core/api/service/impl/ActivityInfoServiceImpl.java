@@ -127,7 +127,7 @@ public class ActivityInfoServiceImpl implements ActivityInfoService {
     @Override
     public List<ActivityInfo> getListByIdList(List<Integer> idList) {
         if (CollectionUtils.isEmpty(idList)) {
-            return Collections.EMPTY_LIST;
+            return Collections.emptyList();
         }
         return activityInfoDao.getListByIdList(idList);
     }

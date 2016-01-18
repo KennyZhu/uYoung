@@ -18,7 +18,7 @@ import java.util.concurrent.BlockingQueue;
 public class TaskFactory {
     private static final Logger LOGGER = LoggerFactory.getLogger(TaskFactory.class);
 
-    private BlockingQueue<Task> blockingQueue = new ArrayBlockingQueue<Task>(100);
+    private BlockingQueue<Task> blockingQueue = new ArrayBlockingQueue<>(100);
     private TaskScheduler taskScheduler;
     private TaskExecutor taskExecutor;
 
