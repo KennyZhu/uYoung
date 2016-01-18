@@ -114,7 +114,7 @@ public class ActivityInfoHandler {
                 signUpUserVo.setAvatar(userInfoMap.get(signUp.getUserId()).getAvatarUrl());
                 signUpUserVo.setNickName(userInfo.getNickName());
                 signUpUserVo.setUid(userInfo.getId());
-                signUpUserVo.setIsConfirm(ActivitySignUpStatusEnum.CONFIRM.equals(signUp.getStatus()));
+                signUpUserVo.setIsConfirm(ActivitySignUpStatusEnum.CONFIRM.getStatus() == signUp.getStatus());
                 result.add(signUpUserVo);
             }
         }

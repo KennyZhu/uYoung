@@ -38,8 +38,8 @@ public class ActivitySignUpServiceTest extends BaseTest {
 
     @Test
     public void updateStatus() {
-        Integer uid = null;
-        Integer aid = null;
+        Integer uid = 23;
+        Integer aid = 53;
         LOGGER.info("Update :" + service.updateStatusByUidAid(uid, aid, ActivitySignUpStatusEnum.CONFIRM));
     }
 }
