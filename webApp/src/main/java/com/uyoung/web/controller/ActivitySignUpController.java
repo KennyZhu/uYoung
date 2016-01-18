@@ -95,7 +95,11 @@ public class ActivitySignUpController extends BaseController {
             return buildInvalidParamJson();
         }
         try {
-            signUpService.updateStatusByUidAid(uid, activityId, ActivitySignUpStatusEnum.CONFIRM);
+            int result = signUpService.updateStatusByUidAid(uid, activityId, ActivitySignUpStatusEnum.CONFIRM);
+            if (result == 0) {
+                LOGGER.error("#Update status by uid:" + uid + " activityId:" + activityId + " return 0.");
+            }
+
         } catch (Exception e) {
             LOGGER.error("#Confirm signUp aid:" + activityId + " uid:" + uid);
             return buildExceptionJson();

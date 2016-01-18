@@ -1,6 +1,7 @@
 package com.uyoung.core.api.service;
 
 import com.uyoung.core.api.BaseTest;
+import com.uyoung.core.api.enums.ActivitySignUpStatusEnum;
 import com.uyoung.core.api.model.ActivitySignUp;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,5 +34,12 @@ public class ActivitySignUpServiceTest extends BaseTest {
         signUp1.setStatus(1);
         signUp1.setUserId(1);
         service.add(signUp);
+    }
+
+    @Test
+    public void updateStatus() {
+        Integer uid = null;
+        Integer aid = null;
+        LOGGER.info("Update :" + service.updateStatusByUidAid(uid, aid, ActivitySignUpStatusEnum.CONFIRM));
     }
 }
