@@ -9,10 +9,25 @@ import java.util.Date;
  */
 public class ClientVersion {
     private Integer id;
+    /**
+     * 版本号
+     */
     private String version;
+    /**
+     * 客户端类型
+     */
     private String clientType;
+    /**
+     * 审核状态
+     */
     private Integer status;
+    /**
+     * 是否需要强制更新
+     */
     private Integer isUpdate;
+    /**
+     * 更新内容
+     */
     private String updateContent;
     private Date createTime;
     private Date updateTime;

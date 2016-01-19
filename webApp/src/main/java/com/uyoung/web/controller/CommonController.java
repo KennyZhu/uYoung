@@ -97,12 +97,12 @@ public class CommonController extends BaseController {
      */
     @RequestMapping(value = "/common/getLastClient")
     @ResponseBody
-    public String getLastAuditClient(Integer type) {
-        if (type == null || ClientTypeEnum.getByType(type) == null) {
+    public String getLastAuditClient(Integer clientType) {
+        if (clientType == null || ClientTypeEnum.getByType(clientType) == null) {
             return buildInvalidParamJson();
         }
         try {
-            ClientTypeEnum clientTypeEnum = ClientTypeEnum.getByType(type);
+            ClientTypeEnum clientTypeEnum = ClientTypeEnum.getByType(clientType);
             ClientVersion clientVersion = clientVersionService.getLastVersion(clientTypeEnum);
             return buildSuccessJson(clientVersion);
         } catch (Exception e) {
