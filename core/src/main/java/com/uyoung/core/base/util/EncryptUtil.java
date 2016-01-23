@@ -126,6 +126,7 @@ public final class EncryptUtil {
             demension = demension - clen;
 
         }
+        System.out.println("######" + getBASE64(B));
         byte[] result = new byte[24];
         for (int i = 0; i < alen; i++) { //0 ^  1 |  2 &
 
@@ -173,6 +174,7 @@ public final class EncryptUtil {
      * @param oraStr
      * @return
      */
+
     public static String restructParam(String oraStr) {
 
         try {
@@ -232,17 +234,17 @@ public final class EncryptUtil {
     public static void main(String[] args) {
         //apiVer=1.1&data=&stamp=4658813633344
         try {
-            String stamp = "4658813633344";
+//            String stamp = "4658813633344";
+            String stamp = "1453535906";
             byte[] miyao = EncryptUtil.genCroptyKey(ENCODE_STR, stamp);
-            String szSrc = "userName=bjtestsf%40163.com&sessionId=85A9E20FB6E92CBF2A293688F6EA5817";
-            System.out.println("加密前的字符串:" + szSrc);
-            byte[] encoded = encryptMode(miyao, szSrc.getBytes());
-            System.out.println("加密后的字符串:" + new String(encoded));
-            String baseStr = EncryptUtil.getBASE64(encoded);
-            System.out.println("base64加密后的字符串:" + baseStr);
+
+            String decode = "++LtkwfwgV6HL6aYw4hlh7MjaWKORg8S";
+            System.out.println("#Encode is " + decode);
+            String baseStr = decode;
+            System.out.println("base64加密后的字符串:" + baseStr + "  miyao is " + EncryptUtil.getBASE64(miyao));
             System.out.println("---------hhh-----------------");
 
-            String deCode = "xAPRtRAkGMYl9ibjVtzOxvXnf1i3FtIzZucEKu0M27BhCLyKJlYoE40DUFcc4LRWpes94f2w7xnaeUaRF8vwJstXHSrlIjJ8";
+//            String deCode = "xAPRtRAkGMYl9ibjVtzOxvXnf1i3FtIzZucEKu0M27BhCLyKJlYoE40DUFcc4LRWpes94f2w7xnaeUaRF8vwJstXHSrlIjJ8";
             byte[] base = EncryptUtil
                     .getFromBASE64(baseStr);
 
