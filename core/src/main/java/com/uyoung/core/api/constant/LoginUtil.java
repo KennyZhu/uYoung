@@ -1,11 +1,9 @@
 package com.uyoung.core.api.constant;
 
+import com.uyoung.core.api.bean.BaseParamBean;
 import com.uyoung.core.api.model.Login;
 import com.uyoung.core.api.service.LoginService;
-import com.uyoung.core.base.util.EncryptUtil;
-import com.uyoung.core.base.util.JsonUtil;
-import com.uyoung.core.base.util.MD5Util;
-import com.uyoung.core.base.util.SpringContextHolder;
+import com.uyoung.core.base.util.*;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -75,7 +74,7 @@ public final class LoginUtil {
      */
     public static String getSessionId(String accountId) {
         String source = updateLogin(accountId).getBaseToString();
-        return EncryptUtil.encryptCode(source, String.valueOf(System.currentTimeMillis()));
+        return EncryptUtil.getBASE64(source.getBytes());
     }
 
 
@@ -138,14 +137,22 @@ public final class LoginUtil {
      * @return
      */
     public static Login getLoginFromParam(HttpServletRequest request) {
-        String accountId = (String) request.getAttribute(LoginConstant.LOGIN_ACCOUNT_KEY);
-        String hash = (String) request.getAttribute(LoginConstant.LOGIN_HASH_KEY);
-        String token = (String) request.getAttribute(LoginConstant.LOGIN_TOKEN_KEY);
-        Login login = new Login();
-        login.setAccountId(accountId);
-        login.setLoginHash(hash);
-        login.setLoginToken(token);
-        return login;
+        BaseParamBean paramBean = (BaseParamBean) request.getAttribute(CommonConstant.PARAM_BEAN);
+        if (paramBean != null) {
+            String sessionId = paramBean.getSessionId();
+            if (StringUtils.isNotBlank(sessionId)) {
+
+                String sessionIdStr = new String(EncryptUtil.getFromBASE64(sessionId));
+                Map<String, String> paramMap = DataUtil.parseParamStr(sessionIdStr);
+                Login login = new Login();
+                login.setAccountId(paramMap.get("accountId"));
+                login.setLoginHash(paramMap.get("loginToken"));
+                login.setLoginToken(paramMap.get("loginHash"));
+                return login;
+
+            }
+        }
+        return null;
     }
 
     public static void main(String[] args) {

@@ -142,7 +142,6 @@ public final class EncryptUtil {
             }
 
         }
-
         return result;
     }
 
