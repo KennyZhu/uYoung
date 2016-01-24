@@ -12,16 +12,6 @@ public class BaseParamBean {
     private String apiVer;
 
     /**
-     * 客户端类型 see {@link com.uyoung.core.api.enums.ClientTypeEnum}
-     */
-    private int clientType;
-
-    /**
-     * sessionId
-     */
-    private String sessionId;
-
-    /**
      * 加密参数
      */
     private String data;
@@ -37,22 +27,6 @@ public class BaseParamBean {
 
     public void setApiVer(String apiVer) {
         this.apiVer = apiVer;
-    }
-
-    public int getClientType() {
-        return clientType;
-    }
-
-    public void setClientType(int clientType) {
-        this.clientType = clientType;
-    }
-
-    public String getSessionId() {
-        return sessionId;
-    }
-
-    public void setSessionId(String sessionId) {
-        this.sessionId = sessionId;
     }
 
     public String getData() {

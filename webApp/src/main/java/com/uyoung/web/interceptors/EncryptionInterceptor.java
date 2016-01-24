@@ -21,12 +21,10 @@ public class EncryptionInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String apiVer = request.getParameter(CommonConstant.PARAM_API_VER);
-        String sessionId = request.getParameter(CommonConstant.PARAM_SESSION_ID);
         String data = request.getParameter(CommonConstant.PARAM_DATA);
-        String clientType = request.getParameter(CommonConstant.PARAM_CLIENT_TYPE);
         String stamp = request.getParameter(CommonConstant.PARAM_STAMP);
-        if (StringUtils.isBlank(sessionId) || StringUtils.isBlank(stamp)) {
-            String msg = "加密接口没有传入密文,sessionId=" + sessionId + " stamp=" + stamp;
+        if (StringUtils.isBlank(data) || StringUtils.isBlank(stamp)) {
+            String msg = "加密接口没有传入密文,data=" + data + " stamp=" + stamp;
             LOGGER.error(msg);
             response.sendRedirect("/common/error?msg=" + msg);
             return false;
@@ -41,9 +39,7 @@ public class EncryptionInterceptor extends HandlerInterceptorAdapter {
             setParamIntoAction(decodeStr, request);
             BaseParamBean paramBean = new BaseParamBean();
             paramBean.setApiVer(apiVer);
-            paramBean.setClientType(Integer.parseInt(clientType));
             paramBean.setData(data);
-            paramBean.setSessionId(sessionId);
             paramBean.setStamp(stamp);
             request.setAttribute(CommonConstant.PARAM_BEAN, paramBean);
 

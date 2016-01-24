@@ -235,10 +235,10 @@ public final class EncryptUtil {
         //apiVer=1.1&data=&stamp=4658813633344
         try {
 //            String stamp = "4658813633344";
-            String stamp = "1453535906";
+            String stamp = "1453536007";
             byte[] miyao = EncryptUtil.genCroptyKey(ENCODE_STR, stamp);
 
-            String decode = "++LtkwfwgV6HL6aYw4hlh7MjaWKORg8S";
+            String decode = "G7fVJKt+qmZLnK8N4R867lOyLGsOURtI";
             System.out.println("#Encode is " + decode);
             String baseStr = decode;
             System.out.println("base64加密后的字符串:" + baseStr + "  miyao is " + EncryptUtil.getBASE64(miyao));
