@@ -1,9 +1,12 @@
 package com.uyoung.core.api.constant;
 
-import com.uyoung.core.api.bean.BaseParamBean;
 import com.uyoung.core.api.model.Login;
 import com.uyoung.core.api.service.LoginService;
-import com.uyoung.core.base.util.*;
+import com.uyoung.core.base.util.DataUtil;
+import com.uyoung.core.base.util.EncryptUtil;
+import com.uyoung.core.base.util.JsonUtil;
+import com.uyoung.core.base.util.MD5Util;
+import com.uyoung.core.base.util.SpringContextHolder;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -137,19 +140,15 @@ public final class LoginUtil {
      * @return
      */
     public static Login getLoginFromParam(HttpServletRequest request) {
-        BaseParamBean paramBean = (BaseParamBean) request.getAttribute(CommonConstant.PARAM_BEAN);
-        if (paramBean != null) {
-            String sessionId = paramBean.getSessionId();
-            if (StringUtils.isNotBlank(sessionId)) {
-                String sessionIdStr = new String(EncryptUtil.getFromBASE64(sessionId));
-                Map<String, String> paramMap = DataUtil.parseParamStr(sessionIdStr);
-                Login login = new Login();
-                login.setAccountId(paramMap.get("accountId"));
-                login.setLoginHash(paramMap.get("loginToken"));
-                login.setLoginToken(paramMap.get("loginHash"));
-                return login;
-
-            }
+        String sessionId = (String) request.getAttribute(CommonConstant.PARAM_SESSION_ID);
+        if (StringUtils.isNotBlank(sessionId)) {
+            String sessionIdStr = new String(EncryptUtil.getFromBASE64(sessionId));
+            Map<String, String> paramMap = DataUtil.parseParamStr(sessionIdStr);
+            Login login = new Login();
+            login.setAccountId(paramMap.get("accountId"));
+            login.setLoginHash(paramMap.get("loginToken"));
+            login.setLoginToken(paramMap.get("loginHash"));
+            return login;
         }
         return null;
     }

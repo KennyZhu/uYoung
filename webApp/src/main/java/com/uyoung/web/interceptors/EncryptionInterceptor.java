@@ -1,8 +1,6 @@
 package com.uyoung.web.interceptors;
 
-import com.uyoung.core.api.bean.BaseParamBean;
 import com.uyoung.core.api.constant.CommonConstant;
-import com.uyoung.core.base.util.DataUtil;
 import com.uyoung.core.base.util.EncryptUtil;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -12,7 +10,6 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
-import java.util.Map;
 
 /**
  * 加密拦截器
@@ -51,17 +48,13 @@ public class EncryptionInterceptor extends HandlerInterceptorAdapter {
 
     private void setParamIntoAction(String decodeStr, HttpServletRequest request) throws UnsupportedEncodingException {
         if (StringUtils.isNotBlank(decodeStr)) {
-            Map<String, String> paramMap = DataUtil.parseParamStr(decodeStr);
-            BaseParamBean paramBean = new BaseParamBean();
-            paramBean.setApiVer(paramMap.get(CommonConstant.PARAM_API_VER));
-            paramBean.setStamp(paramMap.get(CommonConstant.PARAM_STAMP));
-            paramBean.setSessionId(paramMap.get(CommonConstant.PARAM_SESSION_ID));
-            paramBean.setClientType(paramMap.get(CommonConstant.PARAM_CLIENT_TYPE));
-            request.setAttribute(CommonConstant.PARAM_BEAN, paramBean);
-
+            String[] params = decodeStr.split("\\&");
             //验证参数是否符合规定的字符串
-            for (Map.Entry<String, String> entry : paramMap.entrySet()) {
-                request.setAttribute(entry.getKey(), java.net.URLDecoder.decode(entry.getValue(), "UTF-8"));
+            for (String str : params) {
+                String[] _pairs = str.split("\\=");
+                if (_pairs.length == 2) {
+                    request.setAttribute(_pairs[0], java.net.URLDecoder.decode(_pairs[1], "UTF-8"));
+                }
             }
 
         } else {
