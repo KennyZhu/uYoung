@@ -4,6 +4,7 @@ import com.uyoung.core.api.anno.Sort;
 import com.uyoung.core.api.bean.ActivityConditionBean;
 import com.uyoung.core.api.enums.ActivityStatusEnum;
 import com.uyoung.core.api.enums.SortEnum;
+import com.uyoung.core.base.util.UrlEncodeUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -59,6 +60,14 @@ public class SortParser {
         conditionBean.setSort(SortEnum.DESC.getValue());
         conditionBean.setSortColumn(SortParser.parser(conditionBean));
         System.out.println("Condition is " + conditionBean.toString());
+
+
+        String str = "http://baidu.comname=caipiao.163.com";
+        str = UrlEncodeUtil.encodeUrl(str, "UTF-8");
+        str = str.split("\\?")[0];
+        System.out.println(str);
+        System.out.println(str.endsWith(".163.com"));
+
     }
 
 }

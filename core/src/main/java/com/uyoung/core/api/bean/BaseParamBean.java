@@ -6,10 +6,6 @@ package com.uyoung.core.api.bean;
  * Desc:
  */
 public class BaseParamBean {
-    /**
-     * 客户端版本
-     */
-    private String apiVer;
 
     /**
      * 加密参数
@@ -20,14 +16,6 @@ public class BaseParamBean {
      * 时间戳
      */
     private String stamp;
-
-    public String getApiVer() {
-        return apiVer;
-    }
-
-    public void setApiVer(String apiVer) {
-        this.apiVer = apiVer;
-    }
 
     public String getData() {
         return data;

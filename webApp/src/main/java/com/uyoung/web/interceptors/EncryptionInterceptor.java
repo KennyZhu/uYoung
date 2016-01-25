@@ -20,7 +20,6 @@ public class EncryptionInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        String apiVer = request.getParameter(CommonConstant.PARAM_API_VER);
         String data = request.getParameter(CommonConstant.PARAM_DATA);
         String stamp = request.getParameter(CommonConstant.PARAM_STAMP);
         if (StringUtils.isBlank(data) || StringUtils.isBlank(stamp)) {
@@ -38,7 +37,6 @@ public class EncryptionInterceptor extends HandlerInterceptorAdapter {
         try {
             setParamIntoAction(decodeStr, request);
             BaseParamBean paramBean = new BaseParamBean();
-            paramBean.setApiVer(apiVer);
             paramBean.setData(data);
             paramBean.setStamp(stamp);
             request.setAttribute(CommonConstant.PARAM_BEAN, paramBean);
