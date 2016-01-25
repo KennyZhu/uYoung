@@ -25,21 +25,19 @@
 
     <bean id="loginInterceptor" class="com.uyoung.web.interceptors.LoginInterceptor"/>
     <bean id="encryptInterceptor" class="com.uyoung.web.interceptors.EncryptionInterceptor"/>
-    <!--
-        <mvc:interceptors>
-            <mvc:interceptor>
-                <mvc:mapping path="/**"/>
-                <mvc:mapping path="/**"/>
-                <mvc:exclude-mapping path="/login"/>
-                <ref bean="encryptInterceptor"/>
-            </mvc:interceptor>
-            <mvc:interceptor>
-                <mvc:mapping path="/**"/>
-                <mvc:exclude-mapping path="/login"/>
-                <ref bean="loginInterceptor"/>
-            </mvc:interceptor>
-        </mvc:interceptors>
-        -->
+
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <mvc:mapping path="/**"/>
+            <ref bean="encryptInterceptor"/>
+        </mvc:interceptor>
+        <!--<mvc:interceptor>-->
+        <!--<mvc:mapping path="/**"/>-->
+        <!--<mvc:exclude-mapping path="/login"/>-->
+        <!--<ref bean="loginInterceptor"/>-->
+        <!--</mvc:interceptor>-->
+    </mvc:interceptors>
 
 
 </beans>

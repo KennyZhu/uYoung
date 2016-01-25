@@ -31,11 +31,13 @@ public class EncryptionInterceptor extends HandlerInterceptorAdapter {
             return false;
         }
 
+
         byte[] miyao = EncryptUtil.genCroptyKey(stamp);
         byte[] base = EncryptUtil.getFromBASE64(data);
         byte[] decodeBytes = EncryptUtil.decryptMode(miyao, base);
-
         String decodeStr = new String(decodeBytes, "utf-8");
+
+        LOGGER.info("#Data is " + data + " stamp is " + stamp + " decode is " + decodeStr);
         try {
             setParamIntoAction(decodeStr, request);
         } catch (Exception e) {
