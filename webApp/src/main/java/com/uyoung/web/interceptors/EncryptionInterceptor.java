@@ -58,6 +58,12 @@ public class EncryptionInterceptor extends HandlerInterceptorAdapter {
             paramBean.setSessionId(paramMap.get(CommonConstant.PARAM_SESSION_ID));
             paramBean.setClientType(paramMap.get(CommonConstant.PARAM_CLIENT_TYPE));
             request.setAttribute(CommonConstant.PARAM_BEAN, paramBean);
+
+            //验证参数是否符合规定的字符串
+            for (Map.Entry<String, String> entry : paramMap.entrySet()) {
+                request.setAttribute(entry.getKey(), java.net.URLDecoder.decode(entry.getValue(), "UTF-8"));
+            }
+
         } else {
             LOGGER.error("no param intercept decodeStr=" + decodeStr);
         }
