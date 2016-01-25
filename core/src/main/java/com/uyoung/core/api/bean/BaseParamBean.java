@@ -6,6 +6,19 @@ package com.uyoung.core.api.bean;
  * Desc:
  */
 public class BaseParamBean {
+    /**
+     * 客户端类型
+     */
+    private String clientType;
+
+    /**
+     * SessionId
+     */
+    private String sessionId;
+    /**
+     * 客户端版本
+     */
+    private String apiVer;
 
     /**
      * 加密参数
@@ -16,6 +29,14 @@ public class BaseParamBean {
      * 时间戳
      */
     private String stamp;
+
+    public String getApiVer() {
+        return apiVer;
+    }
+
+    public void setApiVer(String apiVer) {
+        this.apiVer = apiVer;
+    }
 
     public String getData() {
         return data;
@@ -31,5 +52,32 @@ public class BaseParamBean {
 
     public void setStamp(String stamp) {
         this.stamp = stamp;
+    }
+
+    public String getClientType() {
+        return clientType;
+    }
+
+    public void setClientType(String clientType) {
+        this.clientType = clientType;
+    }
+
+    public String getSessionId() {
+        return sessionId;
+    }
+
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
+    }
+
+    @Override
+    public String toString() {
+        return "BaseParamBean{" +
+                "apiVer='" + apiVer + '\'' +
+                ", clientType='" + clientType + '\'' +
+                ", sessionId='" + sessionId + '\'' +
+                ", data='" + data + '\'' +
+                ", stamp='" + stamp + '\'' +
+                '}';
     }
 }

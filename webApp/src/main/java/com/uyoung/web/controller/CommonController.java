@@ -7,7 +7,6 @@ import com.uyoung.core.api.model.FeedBack;
 import com.uyoung.core.api.service.ClientVersionService;
 import com.uyoung.core.api.service.DictCityService;
 import com.uyoung.core.api.service.FeedBackService;
-import com.uyoung.core.api.service.SignService;
 import com.uyoung.web.controller.base.BaseController;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -30,9 +29,6 @@ public class CommonController extends BaseController {
     private static final Logger LOGGER = LoggerFactory.getLogger(CommonController.class);
 
     @Autowired
-    private SignService signService;
-
-    @Autowired
     private DictCityService dictCityService;
 
     @Autowired
@@ -44,11 +40,8 @@ public class CommonController extends BaseController {
 
     @RequestMapping(value = "/common/cities", method = RequestMethod.POST)
     @ResponseBody
-    public String getCityDict(long timestamp, String deviceId, String sign) {
-        if (StringUtils.isBlank(deviceId) || StringUtils.isBlank(sign)) {
-            return buildInvalidParamJson();
-        }
-        if (!signService.checkQNTokenSign(timestamp, deviceId, sign)) {
+    public String getCityDict(String deviceId) {
+        if (StringUtils.isBlank(deviceId)) {
             return buildInvalidParamJson();
         }
         try {

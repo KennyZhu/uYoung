@@ -141,7 +141,6 @@ public final class LoginUtil {
         if (paramBean != null) {
             String sessionId = paramBean.getSessionId();
             if (StringUtils.isNotBlank(sessionId)) {
-
                 String sessionIdStr = new String(EncryptUtil.getFromBASE64(sessionId));
                 Map<String, String> paramMap = DataUtil.parseParamStr(sessionIdStr);
                 Login login = new Login();

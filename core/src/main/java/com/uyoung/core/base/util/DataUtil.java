@@ -1,11 +1,11 @@
 package com.uyoung.core.base.util;
 
 import com.uyoung.core.api.constant.CommonConstant;
-import org.apache.commons.collections.map.HashedMap;
 import org.apache.commons.lang.StringUtils;
 
 import java.net.URLDecoder;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -28,9 +28,7 @@ public final class DataUtil {
         if (StringUtils.isBlank(paramStr)) {
             return Collections.emptyMap();
         }
-        Map<String, String> result = new HashedMap();
-
-
+        Map<String, String> result = new HashMap<>();
         try {
             String[] params = paramStr.split("\\&");
             //验证参数是否符合规定的字符串
