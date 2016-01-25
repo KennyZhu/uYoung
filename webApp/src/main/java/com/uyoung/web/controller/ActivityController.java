@@ -74,6 +74,7 @@ public class ActivityController extends BaseController {
             return buildInvalidParamJson();
         }
         try {
+            LOGGER.info("#Begin to get activity by condition " + conditionBean);
             Page<ActivityInfoVo> infoPage = activityInfoHandler.getPageByCondition(conditionBean, pageNum, pageSize);
             return buildSuccessJson(infoPage);
         } catch (Exception e) {
