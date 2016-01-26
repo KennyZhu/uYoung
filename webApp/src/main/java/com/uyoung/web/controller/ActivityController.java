@@ -5,7 +5,6 @@ import com.uyoung.core.api.enums.ActivityStatusEnum;
 import com.uyoung.core.api.model.ActivityInfo;
 import com.uyoung.core.api.service.ActivityInfoService;
 import com.uyoung.core.base.bean.Page;
-import com.uyoung.core.base.spring.RequestAttribute;
 import com.uyoung.web.controller.base.BaseController;
 import com.uyoung.web.handler.ActivityInfoHandler;
 import com.uyoung.web.vo.ActivityInfoVo;
@@ -70,7 +69,7 @@ public class ActivityController extends BaseController {
      */
     @RequestMapping(value = "/activity/getPageByCondition")
     @ResponseBody
-    public String getPageByCondition(@RequestAttribute("pageNum") Integer pageNum, @RequestAttribute("pageSize") Integer pageSize, @RequestAttribute("conditionBean") ActivityConditionBean conditionBean) {
+    public String getPageByCondition(Integer pageNum, Integer pageSize, ActivityConditionBean conditionBean) {
         LOGGER.info("#Begin to get page by condition");
         if (pageNum == null || pageSize == null) {
             return buildInvalidParamJson();

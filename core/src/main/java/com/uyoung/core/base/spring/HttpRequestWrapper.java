@@ -12,13 +12,19 @@ import java.util.Map;
  * <br/>User: ylzhu
  */
 public class HttpRequestWrapper extends HttpServletRequestWrapper {
-    private Map<String, Object> paramMap = new HashMap<>(super.getParameterMap());
+    private Map<String, String> paramMap = new HashMap<>(super.getParameterMap());
 
     public HttpRequestWrapper(HttpServletRequest request) {
         super(request);
     }
 
-    public void addParam(String key, Object obj) {
-        this.paramMap.put(key, obj);
+    @Override
+    public String[] getParameterValues(String name) {
+        String value = paramMap.get(name);
+        return new String[]{value};
+    }
+
+    public void addParam(String key, String value) {
+        this.paramMap.put(key, value);
     }
 }
