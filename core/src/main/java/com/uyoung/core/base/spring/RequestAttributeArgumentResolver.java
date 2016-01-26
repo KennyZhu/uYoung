@@ -29,8 +29,11 @@ public class RequestAttributeArgumentResolver implements HandlerMethodArgumentRe
             if (RequestAttribute.class.isInstance(paramAnn)) {
                 RequestAttribute reqAttr = (RequestAttribute) paramAnn;
                 HttpServletRequest httpRequest = (HttpServletRequest) nativeWebRequest.getNativeRequest();
+                Object obj = httpRequest.getAttribute(reqAttr.value());
                 LOGGER.info("#Resolve Argument:" + reqAttr.value());
-                return httpRequest.getAttribute(reqAttr.value());
+                if (obj != null) {
+                    return httpRequest.getAttribute(reqAttr.value());
+                }
             }
         }
 
