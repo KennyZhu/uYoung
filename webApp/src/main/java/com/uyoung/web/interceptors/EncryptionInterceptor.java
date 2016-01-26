@@ -1,6 +1,7 @@
 package com.uyoung.web.interceptors;
 
 import com.uyoung.core.api.constant.CommonConstant;
+import com.uyoung.core.base.spring.HttpRequestWrapper;
 import com.uyoung.core.base.util.EncryptUtil;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -53,7 +54,7 @@ public class EncryptionInterceptor extends HandlerInterceptorAdapter {
             for (String str : params) {
                 String[] _pairs = str.split("\\=");
                 if (_pairs.length == 2) {
-                    request.setAttribute(_pairs[0], java.net.URLDecoder.decode(_pairs[1], "UTF-8"));
+                    ((HttpRequestWrapper) request).addParam(_pairs[0], java.net.URLDecoder.decode(_pairs[1], "UTF-8"));
                 }
             }
 
