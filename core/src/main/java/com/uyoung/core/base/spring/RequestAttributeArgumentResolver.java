@@ -1,5 +1,7 @@
 package com.uyoung.core.base.spring;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.MethodParameter;
 import org.springframework.web.bind.support.WebArgumentResolver;
 import org.springframework.web.bind.support.WebDataBinderFactory;
@@ -17,20 +19,18 @@ import java.lang.annotation.Annotation;
  * <br/>User: ylzhu
  */
 public class RequestAttributeArgumentResolver implements HandlerMethodArgumentResolver {
+    private static final Logger LOGGER = LoggerFactory.getLogger(RequestAttributeArgumentResolver.class);
 
     @Override
     public Object resolveArgument(MethodParameter methodParameter, ModelAndViewContainer modelAndViewContainer, NativeWebRequest nativeWebRequest, WebDataBinderFactory webDataBinderFactory) throws Exception {
+        LOGGER.info("#Begin to resolve Argument.");
         Annotation[] paramAnns = methodParameter.getParameterAnnotations();
-
         for (Annotation paramAnn : paramAnns) {
             if (RequestAttribute.class.isInstance(paramAnn)) {
                 RequestAttribute reqAttr = (RequestAttribute) paramAnn;
                 HttpServletRequest httpRequest = (HttpServletRequest) nativeWebRequest.getNativeRequest();
-                Object result = httpRequest.getAttribute(reqAttr.value());
-                /**
-                 * result 校验是否为null
-                 　　*/
-                return result;
+                LOGGER.info("#Resolve Argument:" + reqAttr.value());
+                return httpRequest.getAttribute(reqAttr.value());
             }
         }
 
