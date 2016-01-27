@@ -75,11 +75,13 @@ public class PhotoInfoController extends BaseController {
     @RequestMapping(value = "/photo/downloadUrl")
     @ResponseBody
     public String downLoadUrl(HttpServletRequest request) {
-        Integer id = (Integer) request.getAttribute("id");
-        if (id == null) {
-            return buildInvalidParamJson();
-        }
+
         try {
+            String idStr = (String) request.getAttribute("id");
+            if (StringUtils.isBlank(idStr)) {
+                return buildInvalidParamJson();
+            }
+            Integer id = Integer.parseInt((idStr));
             return buildSuccessJson(handler.getUrlVo(id));
         } catch (Exception e) {
             LOGGER.error("#Update Photo error.Cause:", e);
