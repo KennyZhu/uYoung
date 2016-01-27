@@ -2,8 +2,12 @@ package com.uyoung.core.base.spring;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
+import java.util.Collections;
+import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Desc:
@@ -35,5 +39,17 @@ public class HttpRequestWrapper extends HttpServletRequestWrapper {
             return null;
         }
         return values[0];
+    }
+
+    @Override
+    public Enumeration getParameterNames() {
+
+        Set<String> paramNames = new LinkedHashSet<String>();
+        Enumeration<String> paramEnum = super.getParameterNames();
+        while (paramEnum.hasMoreElements()) {
+            paramNames.add(paramEnum.nextElement());
+        }
+        paramNames.addAll(paramMap.keySet());
+        return Collections.enumeration(paramNames);
     }
 }
