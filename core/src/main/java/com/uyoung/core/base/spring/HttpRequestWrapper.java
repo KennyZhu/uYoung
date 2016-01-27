@@ -16,6 +16,7 @@ public class HttpRequestWrapper extends HttpServletRequestWrapper {
 
     public HttpRequestWrapper(HttpServletRequest request) {
         super(request);
+        this.paramMap.putAll(request.getParameterMap());
     }
 
     @Override
@@ -25,5 +26,14 @@ public class HttpRequestWrapper extends HttpServletRequestWrapper {
 
     public void addParam(String key, String value) {
         this.paramMap.put(key, new String[]{value});
+    }
+
+    @Override
+    public String getParameter(String name) {//重写getParameter，代表参数从当前类中的map获取
+        String[] values = paramMap.get(name);
+        if (values == null || values.length == 0) {
+            return null;
+        }
+        return values[0];
     }
 }
