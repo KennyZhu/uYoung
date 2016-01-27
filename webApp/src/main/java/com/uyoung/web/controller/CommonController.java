@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
- * Desc:通用功能
+ * Desc:通用功能 所有功能不需要登录
  * <p/>Date: 2015-11-17
  * <br/>Time: 17:20
  * <br/>User: ylzhu
@@ -54,7 +54,7 @@ public class CommonController extends BaseController {
 
     @RequestMapping(value = "/common/error")
     @ResponseBody
-    public String invalidParam(String msg) {
+    public String invalidParam(String msg, Integer errorCode) {
         return buildFailJson(msg);
 
     }
