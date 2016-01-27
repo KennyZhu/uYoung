@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -135,17 +136,20 @@ public class AlbumInfoController extends AlbumBaseController {
     /**
      * 删除相册
      *
-     * @param id
-     * @param uid
      * @return
      */
     @RequestMapping(value = "/album/deleteById", method = RequestMethod.POST)
     @ResponseBody
-    public String deleteById(Integer id, Integer uid) {
-        if (id == null || uid == null) {
-            return buildInvalidParamJson();
-        }
+    public String deleteById(HttpServletRequest request) {
+        Integer id = null;
+        Integer uid = null;
         try {
+            id = (Integer) request.getAttribute("id");
+            uid = (Integer) request.getAttribute("uid");
+
+            if (id == null || uid == null) {
+                return buildInvalidParamJson();
+            }
 //            checkUser(id);
             handler.deleteById(uid, id);
         } catch (BusinessException busE) {

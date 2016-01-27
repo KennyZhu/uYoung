@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * Desc:
  * <p/>Date: 2015-11-18
@@ -25,7 +27,9 @@ public class QNController extends BaseController {
 
     @RequestMapping(value = "/qn/qnUpToken", method = RequestMethod.POST)
     @ResponseBody
-    public String getQNUpToken(String deviceId, String key) {
+    public String getQNUpToken(HttpServletRequest request) {
+        String deviceId = (String) request.getAttribute("deviceId");
+        String key = (String) request.getAttribute("key");
         if (StringUtils.isBlank(deviceId)) {
             return buildInvalidParamJson();
         }

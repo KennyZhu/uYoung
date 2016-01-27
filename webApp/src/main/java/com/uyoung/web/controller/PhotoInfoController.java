@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * Desc:照片信息
  * <p/>Date: 2015-11-10
@@ -68,13 +70,12 @@ public class PhotoInfoController extends BaseController {
     /**
      * 照片下载接口
      *
-     * @param id
      * @return
      */
     @RequestMapping(value = "/photo/downloadUrl")
     @ResponseBody
-    public String downLoadUrl(Integer id) {
-
+    public String downLoadUrl(HttpServletRequest request) {
+        Integer id = (Integer) request.getAttribute("id");
         if (id == null) {
             return buildInvalidParamJson();
         }
@@ -88,7 +89,8 @@ public class PhotoInfoController extends BaseController {
 
     @RequestMapping(value = "/photo/deleteById")
     @ResponseBody
-    public String deleteById(String ids) {
+    public String deleteById(HttpServletRequest request) {
+        String ids = (String) request.getAttribute("ids");
         if (StringUtils.isBlank(ids)) {
             return buildInvalidParamJson();
         }

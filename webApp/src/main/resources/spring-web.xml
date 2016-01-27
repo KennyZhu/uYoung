@@ -44,8 +44,10 @@
 
     <mvc:interceptors>
         <mvc:interceptor>
-            <mvc:mapping path="/**"/>
-            <mvc:exclude-mapping path="/common/error"/>
+            <mvc:mapping path="/qn/*"/>
+            <mvc:mapping path="/photo/downloadUrl"/>
+            <mvc:mapping path="/photo/deleteById"/>
+            <mvc:mapping path="/album/deleteById"/>
             <ref bean="encryptInterceptor"/>
         </mvc:interceptor>
         <mvc:interceptor>
