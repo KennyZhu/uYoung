@@ -148,7 +148,10 @@ public final class LoginUtil {
             login.setAccountId(paramMap.get("accountId"));
             login.setLoginHash(paramMap.get("loginToken"));
             login.setLoginToken(paramMap.get("loginHash"));
+            LOGGER.info("#Login info is " + login.toString());
             return login;
+        } else {
+            LOGGER.warn("#Session id is null.");
         }
         return null;
     }
