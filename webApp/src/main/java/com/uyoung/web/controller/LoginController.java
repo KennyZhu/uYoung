@@ -5,7 +5,6 @@ import com.uyoung.core.api.model.UserInfo;
 import com.uyoung.core.api.service.UserInfoService;
 import com.uyoung.web.controller.base.LoginBaseController;
 import com.uyoung.web.enums.ResultCodeEnum;
-import com.uyoung.web.vo.LoginResultVo;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,8 +39,8 @@ public class LoginController extends LoginBaseController {
             LOGGER.info("#Login email is " + email + " password is " + password);
             UserInfo userInfo = userInfoService.login(email, password);
             if (userInfo != null) {
-                LoginResultVo resultVo = new LoginResultVo(userInfo.getId(), LoginUtil.getSessionId(email));
-                return buildSuccessJson(resultVo);
+                LoginUtil.addLoginCookie(response, email);
+                return buildSuccessJson(userInfo.getId());
             }
             LOGGER.warn("#Not login email is " + email + " password  is " + password);
             return buildFailJson(ResultCodeEnum.NOT_LOGIN.getDesc());
