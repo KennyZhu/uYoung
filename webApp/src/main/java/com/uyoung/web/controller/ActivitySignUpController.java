@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -35,7 +36,7 @@ public class ActivitySignUpController extends BaseController {
      *
      * @return
      */
-    @RequestMapping(value = "/activity/signUp")
+    @RequestMapping(value = "/activity/signUp", method = RequestMethod.POST)
     @ResponseBody
     public String signUp(Integer uid, Integer activityId) {
         if (uid == null || activityId == null) {
@@ -64,7 +65,7 @@ public class ActivitySignUpController extends BaseController {
      * @param activityId
      * @return
      */
-    @RequestMapping(value = "/activity/calSignUp")
+    @RequestMapping(value = "/activity/calSignUp", method = RequestMethod.POST)
     @ResponseBody
     public String calSignUp(Integer uid, Integer activityId) {
         if (uid == null || activityId == null) {
@@ -88,7 +89,7 @@ public class ActivitySignUpController extends BaseController {
      *
      * @return
      */
-    @RequestMapping(value = "/activity/conSignUp")
+    @RequestMapping(value = "/activity/conSignUp", method = RequestMethod.POST)
     @ResponseBody
     public String confirmSignUp(Integer uid, Integer activityId) {
         if (uid == null || activityId == null) {
