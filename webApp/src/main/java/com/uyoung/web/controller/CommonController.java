@@ -8,6 +8,7 @@ import com.uyoung.core.api.service.ClientVersionService;
 import com.uyoung.core.api.service.DictCityService;
 import com.uyoung.core.api.service.FeedBackService;
 import com.uyoung.web.controller.base.BaseController;
+import com.uyoung.web.enums.ResultCodeEnum;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,6 +56,9 @@ public class CommonController extends BaseController {
     @RequestMapping(value = "/common/error")
     @ResponseBody
     public String invalidParam(String msg, Integer errorCode) {
+        if (ResultCodeEnum.NOT_LOGIN.getCode() == errorCode) {
+            return buildFailJson(ResultCodeEnum.NOT_LOGIN);
+        }
         return buildFailJson(msg);
 
     }

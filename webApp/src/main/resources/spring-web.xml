@@ -50,14 +50,22 @@
             <mvc:mapping path="/album/deleteById"/>
             <ref bean="encryptInterceptor"/>
         </mvc:interceptor>
-        <!--<mvc:interceptor>-->
-        <!--<mvc:mapping path="/**"/>-->
-        <!--<mvc:exclude-mapping path="/login"/>-->
-        <!--<mvc:exclude-mapping path="/third/login"/>-->
-        <!--<mvc:exclude-mapping path="/reg/reg"/>-->
-        <!--<mvc:exclude-mapping path="/common/*"/>-->
-        <!--<ref bean="loginInterceptor"/>-->
-        <!--</mvc:interceptor>-->
+        <mvc:interceptor>
+            <mvc:mapping path="/activity/cal"/>
+            <mvc:mapping path="/activity/add"/>
+            <mvc:mapping path="/photo/add"/>
+            <mvc:mapping path="/photo/updateById"/>
+            <mvc:mapping path="/photo/deleteById"/>
+            <mvc:mapping path="/album/add"/>
+            <mvc:mapping path="/album/updateById"/>
+            <mvc:mapping path="/album/deleteById"/>
+            <mvc:mapping path="/album/updateFirstUrl"/>
+            <mvc:mapping path="/activity/signUp"/>
+            <mvc:mapping path="/activity/calSignUp"/>
+            <mvc:mapping path="/activity/conSignUp"/>
+            <mvc:mapping path="/photoLike/like"/>
+            <ref bean="loginInterceptor"/>
+        </mvc:interceptor>
     </mvc:interceptors>
 
 

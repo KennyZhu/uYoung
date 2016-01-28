@@ -2,6 +2,7 @@ package com.uyoung.web.interceptors;
 
 import com.uyoung.core.api.constant.LoginUtil;
 import com.uyoung.core.api.model.Login;
+import com.uyoung.web.enums.ResultCodeEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.ModelAndView;
@@ -32,6 +33,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
             }
         }
         LOGGER.warn("#No login found.");
+        response.sendRedirect("/common/error?errorCode=" + ResultCodeEnum.NOT_LOGIN.getCode());
         return false;
     }
 
