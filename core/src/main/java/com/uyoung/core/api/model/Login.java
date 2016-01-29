@@ -17,7 +17,7 @@ public class Login {
     /**
      * 用户名称
      */
-    private String accountId;
+    private String email;
 
     /**
      * 一个Session中有效
@@ -33,12 +33,12 @@ public class Login {
 
     private Date updateTime;
 
-    public String getAccountId() {
-        return accountId;
+    public String getEmail() {
+        return email;
     }
 
-    public void setAccountId(String accountId) {
-        this.accountId = accountId;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getLoginToken() {
@@ -82,7 +82,7 @@ public class Login {
     }
 
     public String getBaseToString() {
-        return "accountId=" + accountId + "&loginToken=" + loginToken + "&loginHash=" + loginHash;
+        return "uid=" + uid + "&email=" + email + "&loginToken=" + loginToken + "&loginHash=" + loginHash;
 
     }
 
@@ -98,7 +98,7 @@ public class Login {
     public String toString() {
         return "Login{" +
                 "id=" + id +
-                ", accountId='" + accountId + '\'' +
+                ", email='" + email + '\'' +
                 ", loginToken='" + loginToken + '\'' +
                 ", loginHash='" + loginHash + '\'' +
                 ", createTime=" + createTime +

@@ -33,15 +33,6 @@ public final class CommonConstant {
      */
     public static final Integer[] CITIES = new Integer[]{382, 412, 357, 314, 359, 270, 170, 32};
 
-    /**
-     * 客户端版本
-     */
-    public static final String PARAM_API_VER = "apiVer";
-
-    /**
-     * 客户端类型
-     */
-    public static final String PARAM_CLIENT_TYPE = "clientType";
 
     /**
      * 加密数据
@@ -60,8 +51,4 @@ public final class CommonConstant {
     public static final String PARAM_SESSION_ID = "sessionId";
 
 
-    /**
-     * 基本参数
-     */
-    public static final String PARAM_BEAN = "baseParam";
 }

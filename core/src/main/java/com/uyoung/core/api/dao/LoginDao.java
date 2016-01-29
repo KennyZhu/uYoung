@@ -11,7 +11,7 @@ public interface LoginDao {
 
     int insert(Login login);
 
-    Login getByAccountId(String accountId);
+    Login getByUid(Integer uid);
 
     int update(Login login);
 

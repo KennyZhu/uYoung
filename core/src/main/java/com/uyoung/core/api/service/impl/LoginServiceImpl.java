@@ -19,11 +19,11 @@ public class LoginServiceImpl implements LoginService {
     private LoginDao loginDao;
 
     @Override
-    public Login getByAccountId(String accountId) {
-        if (StringUtils.isBlank(accountId)) {
+    public Login getByUid(Integer uid) {
+        if (uid == null) {
             return null;
         }
-        return loginDao.getByAccountId(accountId);
+        return loginDao.getByUid(uid);
     }
 
     @Override
@@ -36,7 +36,7 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public boolean update(Login login) {
-        if (login == null || StringUtils.isBlank(login.getAccountId())) {
+        if (login == null || StringUtils.isBlank(login.getEmail())) {
             return false;
         }
 
@@ -45,10 +45,10 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public boolean addOrUpdate(Login login) {
-        if (login == null || StringUtils.isBlank(login.getAccountId())) {
+        if (login == null || login.getUid() != null) {
             return false;
         }
-        Login record = getByAccountId(login.getAccountId());
+        Login record = getByUid(login.getUid());
         if (record == null) {
             return add(login);
         } else {

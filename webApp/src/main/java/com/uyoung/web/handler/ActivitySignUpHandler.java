@@ -7,8 +7,10 @@ import com.uyoung.core.api.model.ActivityInfo;
 import com.uyoung.core.api.model.ActivitySignUp;
 import com.uyoung.core.api.service.ActivityInfoService;
 import com.uyoung.core.api.service.ActivitySignUpService;
+import com.uyoung.core.base.bean.Page;
 import com.uyoung.web.enums.ResultCodeEnum;
 import com.uyoung.web.util.DateUtil;
+import com.uyoung.web.vo.ActivityInfoVo;
 import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Desc:
@@ -33,6 +36,10 @@ public class ActivitySignUpHandler {
 
     @Autowired
     private ActivityInfoService activityInfoService;
+
+    @Autowired
+    private ActivityInfoHandler infoHandler;
+
 
     /**
      * 报名
@@ -80,5 +87,41 @@ public class ActivitySignUpHandler {
         activitySignUp.setActivityStatus(activityInfo.getStatus());
         int result = signUpService.add(activitySignUp);
         return result == 1;
+    }
+
+    /**
+     * 获取我报名的活动列表
+     *
+     * @param uid
+     * @param page
+     * @param pageSize
+     * @return
+     */
+    public Page<ActivityInfoVo> getMySignUpActInfos(Integer uid, int page, int pageSize) {
+        Page<ActivityInfoVo> result = new Page<>();
+        result.setPageSize(pageSize);
+        result.setPageNum(page);
+        Page<ActivitySignUp> signUpPage = signUpService.getPageByUid(uid, page, pageSize);
+        if (signUpPage == null || CollectionUtils.isEmpty(signUpPage.getDataList())) {
+            return result;
+        }
+        List<ActivitySignUp> dataList = signUpPage.getDataList();
+        List<Integer> activityIdList = new ArrayList<>(dataList.size());
+
+        for (ActivitySignUp signUp : dataList) {
+            activityIdList.add(signUp.getActivityId());
+        }
+
+        List<ActivityInfo> activityInfos = activityInfoService.getListByIdList(activityIdList);
+        if (CollectionUtils.isEmpty(activityInfos)) {
+            return result;
+        }
+        Map<Integer, ActivityInfoVo> activityInfoVoMap = infoHandler.convertToVoMap(activityInfos);
+        List<ActivityInfoVo> resultData = new ArrayList<>(dataList.size());
+        dataList.stream().forEach(signData -> {
+            resultData.add(activityInfoVoMap.get(signData.getActivityId()));
+        });
+        result.setDataList(resultData);
+        return result;
     }
 }

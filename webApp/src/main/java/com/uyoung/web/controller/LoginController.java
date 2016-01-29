@@ -39,7 +39,9 @@ public class LoginController extends LoginBaseController {
             LOGGER.info("#Login email is " + email + " password is " + password);
             UserInfo userInfo = userInfoService.login(email, password);
             if (userInfo != null) {
-                LoginUtil.addLoginCookie(response, email);
+
+                boolean result = LoginUtil.addLoginCookie(response, userInfo);
+                LOGGER.info("#User :" + userInfo.getId() + " login.");
                 return buildSuccessJson(userInfo.getId());
             }
             LOGGER.warn("#Not login email is " + email + " password  is " + password);

@@ -8,6 +8,8 @@ import com.uyoung.web.bean.BaseResult;
 import com.uyoung.web.enums.ResultCodeEnum;
 import com.uyoung.web.util.JsonUtil;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -21,6 +23,8 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Controller
 public class BaseController {
+    private static final Logger LOGGER = LoggerFactory.getLogger(BaseController.class);
+
 
     @Autowired
     private UserInfoService userInfoService;
@@ -85,6 +89,15 @@ public class BaseController {
     }
 
     /**
+     * 未登录
+     *
+     * @return
+     */
+    protected String buildNoLogin() {
+        return JsonUtil.getJsonString(new BaseResult(ResultCodeEnum.NOT_LOGIN));
+    }
+
+    /**
      * @param resultCodeEnum
      * @return
      */
@@ -124,6 +137,21 @@ public class BaseController {
             return null;
         }
         return userInfoService.getByEmail(email);
+    }
+
+    /**
+     * 获取登录用户UID
+     *
+     * @param request
+     * @return
+     */
+    protected Integer getCurrentUid(HttpServletRequest request) {
+        try {
+            return Integer.parseInt((String) request.getAttribute("uid"));
+        } catch (Exception e) {
+            LOGGER.error("#Get current uid error.Cause:", e);
+            return null;
+        }
     }
 
     /**

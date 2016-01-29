@@ -64,6 +64,7 @@
             <mvc:mapping path="/activity/calSignUp"/>
             <mvc:mapping path="/activity/conSignUp"/>
             <mvc:mapping path="/photoLike/like"/>
+            <mvc:mapping path="/userInfo/updateById"/>
             <ref bean="loginInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>

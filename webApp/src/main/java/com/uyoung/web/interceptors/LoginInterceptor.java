@@ -28,7 +28,8 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
             LOGGER.info("#Get Cookie return " + login.toString());
             boolean result = LoginUtil.checkLogin(login);
             if (result) {
-                request.setAttribute("accountId", login.getAccountId());
+                request.setAttribute("accountId", login.getEmail());
+                request.setAttribute("uid", login.getUid());
                 return true;
             }
         }

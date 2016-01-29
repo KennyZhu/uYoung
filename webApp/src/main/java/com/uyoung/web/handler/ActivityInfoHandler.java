@@ -25,6 +25,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * User: KennyZhu
@@ -61,7 +63,7 @@ public class ActivityInfoHandler {
         if (activityInfoPage == null || CollectionUtils.isEmpty(activityInfoPage.getDataList())) {
             return result;
         }
-        buildActivityWithUserInfo(result, activityInfoPage);
+        result.setDataList(convertToVoList(activityInfoPage.getDataList()));
         return result;
     }
 
@@ -183,27 +185,39 @@ public class ActivityInfoHandler {
             LOGGER.warn("#Get pageByCondition return empty.ConditionBean is " + conditionBean + " page is " + page + " pageSize is " + pageSize);
             return result;
         }
-        buildActivityWithUserInfo(result, activityInfoPage);
+        result.setDataList(convertToVoList(activityInfoPage.getDataList()));
         return result;
     }
 
-    private void buildActivityWithUserInfo(Page<ActivityInfoVo> result, Page<ActivityInfo> activityInfoPage) {
-        List<ActivityInfo> activityInfoList = activityInfoPage.getDataList();
-        List<ActivityInfoVo> activityInfoVos = new ArrayList<>(activityInfoList.size());
-        List<Integer> oriUserIds = new ArrayList<>(activityInfoList.size());
-        for (ActivityInfo activityInfo : activityInfoList) {
-            oriUserIds.add(activityInfo.getOriUserId());
+    public List<ActivityInfoVo> convertToVoList(List<ActivityInfo> infoList) {
+        if (CollectionUtils.isEmpty(infoList)) {
+            return Collections.emptyList();
         }
+        Set<Integer> oriUserIds = infoList.stream().map(activityInfo -> activityInfo.getOriUserId()).collect(Collectors.toSet());
+        List<ActivityInfoVo> activityInfoVos = new ArrayList<>(infoList.size());
         //获取用户信息
-        Map<Integer, UserInfo> userInfoMap = userInfoService.getMapByIdList(oriUserIds);
-        for (ActivityInfo activityInfo : activityInfoList) {
+        Map<Integer, UserInfo> userInfoMap = userInfoService.getMapByIdList(new ArrayList<>(oriUserIds));
+        for (ActivityInfo activityInfo : infoList) {
             ActivityInfoVo infoVo = new ActivityInfoVoBuilder(activityInfo).buildBase().getInfoVo();
             buildAvatarUrl(infoVo, userInfoMap);
             activityInfoVos.add(infoVo);
         }
-
-        result.setDataList(activityInfoVos);
+        return activityInfoVos;
     }
 
+    /**
+     * @param infoList
+     * @return
+     */
+    public Map<Integer, ActivityInfoVo> convertToVoMap(List<ActivityInfo> infoList) {
+        if (CollectionUtils.isEmpty(infoList)) {
+            return Collections.emptyMap();
+        }
+        List<ActivityInfoVo> infoVoList = convertToVoList(infoList);
 
+        if (CollectionUtils.isEmpty(infoVoList)) {
+            return Collections.emptyMap();
+        }
+        return infoVoList.stream().collect(Collectors.toMap(ActivityInfoVo::getId, activityInfoVo -> activityInfoVo));
+    }
 }

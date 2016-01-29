@@ -1,6 +1,7 @@
 package com.uyoung.core.api.constant;
 
 import com.uyoung.core.api.model.Login;
+import com.uyoung.core.api.model.UserInfo;
 import com.uyoung.core.api.service.LoginService;
 import com.uyoung.core.base.util.DataUtil;
 import com.uyoung.core.base.util.EncryptUtil;
@@ -27,20 +28,20 @@ public final class LoginUtil {
     private static final Logger LOGGER = LoggerFactory.getLogger(LoginUtil.class);
 
     /**
-     * @param accountId
+     * @param email
      * @return
      */
-    public static String getLoginHash(String accountId) {
-        String source = accountId + LoginConstant.HASH_KEY + getRandomInt();
+    public static String getLoginHash(String email) {
+        String source = email + LoginConstant.HASH_KEY + getRandomInt();
         return MD5Util.get(source, CommonConstant.DEFAULT_ENCODE);
     }
 
     /**
-     * @param accountId
+     * @param email
      * @return
      */
-    public static String getLoginToken(String accountId) {
-        String source = accountId + LoginConstant.TOKEN_KEY + getRandomInt();
+    public static String getLoginToken(String email) {
+        String source = email + LoginConstant.TOKEN_KEY + getRandomInt();
         return MD5Util.get(source, CommonConstant.DEFAULT_ENCODE);
     }
 
@@ -56,14 +57,15 @@ public final class LoginUtil {
     /**
      * 获取LoginCookie
      *
-     * @param accountId
+     * @param email
      * @return
      */
-    public static Login updateLogin(String accountId) {
+    public static Login updateLogin(String email, Integer uid) {
         Login login = new Login();
-        login.setAccountId(accountId);
-        login.setLoginHash(getLoginHash(accountId));
-        login.setLoginToken(getLoginToken(accountId));
+        login.setEmail(email);
+        login.setUid(uid);
+        login.setLoginHash(getLoginHash(email));
+        login.setLoginToken(getLoginToken(email));
         LOGGER.info("#Update login:" + login.toString());
         loginService.addOrUpdate(login);
         return login;
@@ -72,11 +74,11 @@ public final class LoginUtil {
     /**
      * 加密Code
      *
-     * @param accountId
+     * @param userInfo
      * @return
      */
-    public static String getSessionId(String accountId) {
-        String source = updateLogin(accountId).getBaseToString();
+    public static String getSessionId(UserInfo userInfo) {
+        String source = updateLogin(userInfo.getEmail(), userInfo.getId()).getBaseToString();
         return EncryptUtil.getBASE64(source.getBytes());
     }
 
@@ -85,14 +87,14 @@ public final class LoginUtil {
      * 增加Cookie
      *
      * @param response
-     * @param accountId
+     * @param userInfo
      * @return
      */
-    public static boolean addLoginCookie(HttpServletResponse response, String accountId) {
-        Cookie accountIdCookie = new Cookie(LoginConstant.LOGIN_ACCOUNT_KEY, getSessionId(accountId));
-        accountIdCookie.setDomain(LoginConstant.COOKIE_DOMAIN);
-        accountIdCookie.setMaxAge(LoginConstant.MAX_LOGIN_SECONDS);
-        response.addCookie(accountIdCookie);
+    public static boolean addLoginCookie(HttpServletResponse response, UserInfo userInfo) {
+        Cookie emailCookie = new Cookie(LoginConstant.LOGIN_ACCOUNT_KEY, getSessionId(userInfo));
+        emailCookie.setDomain(LoginConstant.COOKIE_DOMAIN);
+        emailCookie.setMaxAge(LoginConstant.MAX_LOGIN_SECONDS);
+        response.addCookie(emailCookie);
         return true;
     }
 
@@ -111,10 +113,13 @@ public final class LoginUtil {
         if (login == null) {
             return false;
         }
-        if (StringUtils.isBlank(login.getAccountId()) || StringUtils.isBlank(login.getLoginHash()) || StringUtils.isBlank(login.getLoginToken())) {
+        if (login.getUid() != null || StringUtils.isBlank(login.getLoginHash()) || StringUtils.isBlank(login.getLoginToken())) {
             return false;
         }
-        Login record = loginService.getByAccountId(login.getAccountId());
+        Login record = loginService.getByUid(login.getUid());
+        if (record == null) {
+            return false;
+        }
         return login.getLoginHash().equals(record.getLoginHash()) && login.getLoginToken().equals(record.getLoginToken());
 
     }
@@ -145,7 +150,8 @@ public final class LoginUtil {
             String sessionIdStr = new String(EncryptUtil.getFromBASE64(sessionId));
             Map<String, String> paramMap = DataUtil.parseParamStr(sessionIdStr);
             Login login = new Login();
-            login.setAccountId(paramMap.get("accountId"));
+            login.setUid(Integer.parseInt(paramMap.get("uid")));
+            login.setEmail(paramMap.get("email"));
             login.setLoginHash(paramMap.get("loginToken"));
             login.setLoginToken(paramMap.get("loginHash"));
             LOGGER.info("#Login info is " + login.toString());

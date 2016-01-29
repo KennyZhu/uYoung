@@ -17,6 +17,9 @@ import org.springframework.stereotype.Service;
 import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * User: KennyZhu
@@ -130,5 +133,18 @@ public class ActivityInfoServiceImpl implements ActivityInfoService {
             return Collections.emptyList();
         }
         return activityInfoDao.getListByIdList(idList);
+    }
+
+    @Override
+    public Map<Integer, ActivityInfo> getMapByIdList(List<Integer> idList) {
+        if (CollectionUtils.isEmpty(idList)) {
+            return Collections.emptyMap();
+        }
+        List<ActivityInfo> dataList = getListByIdList(idList);
+        if (CollectionUtils.isEmpty(dataList)) {
+            return Collections.emptyMap();
+        }
+        Stream<ActivityInfo> stream = dataList.stream();
+        return stream.collect(Collectors.toMap(ActivityInfo::getId, activityInfo -> activityInfo));
     }
 }

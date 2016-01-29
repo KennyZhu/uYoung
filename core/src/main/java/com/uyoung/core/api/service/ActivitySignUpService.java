@@ -2,6 +2,7 @@ package com.uyoung.core.api.service;
 
 import com.uyoung.core.api.enums.ActivitySignUpStatusEnum;
 import com.uyoung.core.api.model.ActivitySignUp;
+import com.uyoung.core.base.bean.Page;
 
 import java.util.Date;
 import java.util.List;
@@ -66,8 +67,18 @@ public interface ActivitySignUpService {
      * 获取指定时间内的所有报名信息
      *
      * @param uid
-     * @param beginTime
+     * @param beginTime 如果不传，获取所有的报名信息
      * @return
      */
     List<ActivitySignUp> getListByUidBeginTime(Integer uid, Date beginTime);
+
+    /**
+     * 获取用户报名的所有信息
+     *
+     * @param uid
+     * @param page
+     * @param pageSize
+     * @return
+     */
+    Page<ActivitySignUp> getPageByUid(Integer uid, int page, int pageSize);
 }

@@ -4,6 +4,7 @@ import com.uyoung.core.api.dao.ActivitySignUpDao;
 import com.uyoung.core.api.enums.ActivitySignUpStatusEnum;
 import com.uyoung.core.api.model.ActivitySignUp;
 import com.uyoung.core.api.service.ActivitySignUpService;
+import com.uyoung.core.base.bean.Page;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,5 +78,21 @@ public class ActivitySignUpServiceImpl implements ActivitySignUpService {
             return Collections.emptyList();
         }
         return activitySignUpDao.getListByUidBeginTime(uid, beginTime);
+    }
+
+    @Override
+    public Page<ActivitySignUp> getPageByUid(Integer uid, int page, int pageSize) {
+        if (uid == null) {
+            return buildEmptyPage(page, pageSize);
+        }
+        int offset = pageSize * (page - 1) + 1;
+        return activitySignUpDao.getPageByUid(uid, offset, pageSize);
+    }
+
+    private Page<ActivitySignUp> buildEmptyPage(int pageNum, int pageSize) {
+        Page<ActivitySignUp> result = new Page<>();
+        result.setPageNum(pageNum);
+        result.setPageSize(pageSize);
+        return result;
     }
 }
