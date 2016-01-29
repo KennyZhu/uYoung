@@ -45,8 +45,8 @@ public class ThirdLoginController extends LoginBaseController {
             //已经登录过
             ThirdUser currentThirdUser = thirdUserService.getByThirdUid(thirdUser.getThirdUid(), ThirdPlatformEnum.getByCode(thirdUser.getUserType()));
             if (currentThirdUser != null) {
-                String accountId = ThirdUtil.getEmail(currentThirdUser.getThirdUid(), currentThirdUser.getUserType());
-                return buildSuccessJson(new LoginResultVo(currentThirdUser.getUid(), LoginUtil.getSessionId(accountId)));
+                String email = ThirdUtil.getEmail(currentThirdUser.getThirdUid(), currentThirdUser.getUserType());
+                return buildSuccessJson(new LoginResultVo(currentThirdUser.getUid(), LoginUtil.getSessionId(email, currentThirdUser.getUid())));
             }
             LOGGER.info("#New User:" + thirdUser.toString());
             UserInfo userInfo = buildUserInfoByThirdUser(thirdUser);
@@ -54,7 +54,7 @@ public class ThirdLoginController extends LoginBaseController {
             int uid = userInfo.getId();
             thirdUser.setUid(uid);
             thirdUserService.add(thirdUser);
-            login(response, userInfo.getEmail());
+            login(response, userInfo.getEmail(), userInfo.getId());
             return buildSuccessJson(uid);
         } catch (Exception e) {
             LOGGER.error("#Third login error!ThirdUser is " + thirdUser.toString() + "Cause:", e);

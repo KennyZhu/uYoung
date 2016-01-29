@@ -1,7 +1,6 @@
 package com.uyoung.core.api.constant;
 
 import com.uyoung.core.api.model.Login;
-import com.uyoung.core.api.model.UserInfo;
 import com.uyoung.core.api.service.LoginService;
 import com.uyoung.core.base.util.DataUtil;
 import com.uyoung.core.base.util.EncryptUtil;
@@ -74,11 +73,11 @@ public final class LoginUtil {
     /**
      * 加密Code
      *
-     * @param userInfo
+     * @param email
      * @return
      */
-    public static String getSessionId(UserInfo userInfo) {
-        String source = updateLogin(userInfo.getEmail(), userInfo.getId()).getBaseToString();
+    public static String getSessionId(String email, Integer uid) {
+        String source = updateLogin(email, uid).getBaseToString();
         return EncryptUtil.getBASE64(source.getBytes());
     }
 
@@ -87,11 +86,11 @@ public final class LoginUtil {
      * 增加Cookie
      *
      * @param response
-     * @param userInfo
+     * @param email
      * @return
      */
-    public static boolean addLoginCookie(HttpServletResponse response, UserInfo userInfo) {
-        Cookie emailCookie = new Cookie(LoginConstant.LOGIN_ACCOUNT_KEY, getSessionId(userInfo));
+    public static boolean addLoginCookie(HttpServletResponse response, String email, Integer uid) {
+        Cookie emailCookie = new Cookie(LoginConstant.LOGIN_ACCOUNT_KEY, getSessionId(email, uid));
         emailCookie.setDomain(LoginConstant.COOKIE_DOMAIN);
         emailCookie.setMaxAge(LoginConstant.MAX_LOGIN_SECONDS);
         response.addCookie(emailCookie);

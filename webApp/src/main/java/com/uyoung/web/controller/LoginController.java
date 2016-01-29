@@ -1,6 +1,5 @@
 package com.uyoung.web.controller;
 
-import com.uyoung.core.api.constant.LoginUtil;
 import com.uyoung.core.api.model.UserInfo;
 import com.uyoung.core.api.service.UserInfoService;
 import com.uyoung.web.controller.base.LoginBaseController;
@@ -36,12 +35,9 @@ public class LoginController extends LoginBaseController {
             return buildInvalidParamJson();
         }
         try {
-            LOGGER.info("#Login email is " + email + " password is " + password);
             UserInfo userInfo = userInfoService.login(email, password);
             if (userInfo != null) {
-
-                boolean result = LoginUtil.addLoginCookie(response, userInfo);
-                LOGGER.info("#User :" + userInfo.getId() + " login.");
+                login(response, userInfo.getEmail(), userInfo.getId());
                 return buildSuccessJson(userInfo.getId());
             }
             LOGGER.warn("#Not login email is " + email + " password  is " + password);
