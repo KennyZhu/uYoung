@@ -18,6 +18,8 @@ public class ActivityInfo {
 
     private Date endTime;
 
+    private Integer cityId;
+
     private String address;
 
     private Integer needNum;
@@ -169,6 +171,14 @@ public class ActivityInfo {
         this.updateTime = updateTime;
     }
 
+    public Integer getCityId() {
+        return cityId;
+    }
+
+    public void setCityId(Integer cityId) {
+        this.cityId = cityId;
+    }
+
     public static void main(String[] args) {
         try {
             badMethod();
@@ -193,7 +203,10 @@ public class ActivityInfo {
                 ", title='" + title + '\'' +
                 ", oriUserId=" + oriUserId +
                 ", beginTime=" + beginTime +
+                ", strBeginTime='" + strBeginTime + '\'' +
+                ", strEndTime='" + strEndTime + '\'' +
                 ", endTime=" + endTime +
+                ", cityId=" + cityId +
                 ", address='" + address + '\'' +
                 ", needNum=" + needNum +
                 ", realNum=" + realNum +

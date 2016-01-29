@@ -27,6 +27,11 @@ public class ActivityConditionBean extends SortCondition {
     private Integer creatorUid;
 
     /**
+     * 城市ID
+     */
+    private Integer cityId;
+
+    /**
      * 排序字段
      */
     @Sort(column = "create_time")
@@ -84,6 +89,14 @@ public class ActivityConditionBean extends SortCondition {
         this.beginTimeSort = beginTimeSort;
     }
 
+    public Integer getCityId() {
+        return cityId;
+    }
+
+    public void setCityId(Integer cityId) {
+        this.cityId = cityId;
+    }
+
     @Override
     public String toString() {
         return "ActivityConditionBean{" +
@@ -91,9 +104,8 @@ public class ActivityConditionBean extends SortCondition {
                 ", feeType=" + feeType +
                 ", status=" + status +
                 ", creatorUid=" + creatorUid +
+                ", cityId=" + cityId +
                 ", createTimeSort=" + createTimeSort +
-                ", sort=" + sort +
-                ", sortColumn=" + sortColumn +
                 ", beginTimeSort=" + beginTimeSort +
                 '}';
     }
