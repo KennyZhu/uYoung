@@ -130,15 +130,15 @@ public class ActivitySignUpController extends BaseController {
         }
     }
 
-    @RequestMapping(value = "/activity/signup/my")
+    @RequestMapping(value = "/activity/signUp/my")
     @ResponseBody
-    public String myActivity(HttpServletRequest request, Integer page, Integer pageSize) {
+    public String myActivity(HttpServletRequest request, Integer pageNum, Integer pageSize) {
         try {
             Integer uid = getCurrentUid(request);
             if (uid == null) {
                 return buildNoLogin();
             }
-            return buildSuccessJson(handler.getMySignUpActInfos(uid, page, pageSize));
+            return buildSuccessJson(handler.getMySignUpActInfos(uid, pageNum, pageSize));
         } catch (Exception e) {
             LOGGER.error("#Add activity status error!Cause:", e);
             return buildExceptionJson();
