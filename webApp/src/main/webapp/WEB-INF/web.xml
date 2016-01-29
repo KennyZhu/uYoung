@@ -29,6 +29,8 @@
             <param-name>contextConfigLocation</param-name>
             <param-value>classpath*:web-servlet.xml</param-value>
         </init-param>
+        <!-- 配置该Servlet随应用启动时候启动 -->
+        <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
         <servlet-name>dispatch</servlet-name>
