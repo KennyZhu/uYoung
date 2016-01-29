@@ -39,23 +39,5 @@
         <constructor-arg index="0" ref="sqlSessionFactory"/>
     </bean>
 
-    <!-- 定时任务 -->
-    <bean id="albumPhotoCountTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
-        <property name="jobDetail" ref="albumPhotoCountJobDetail"/>
-        <property name="cronExpression" value="0 0/10 * * * ?"/>
-    </bean>
-    <bean id="albumPhotoCountJob" class="com.uyoung.core.api.schedule.job.AlbumPhotoCountJob"/>
-    <bean id="albumPhotoCountJobDetail"
-          class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
-        <property name="targetObject" ref="albumPhotoCountJob"/>
-        <property name="targetMethod" value="run"/>
-    </bean>
-    <bean id="quartzScheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
-        <property name="autoStartup" value="false"/>
-        <property name="triggers">
-            <list>
-                <ref bean="albumPhotoCountTrigger"/>
-            </list>
-        </property>
-    </bean>
+
 </beans>
