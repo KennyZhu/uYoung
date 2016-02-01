@@ -103,6 +103,7 @@ public class ActivitySignUpHandler {
         result.setPageNum(page);
         Page<ActivitySignUp> signUpPage = signUpService.getPageByUid(uid, page, pageSize);
         if (signUpPage == null || CollectionUtils.isEmpty(signUpPage.getDataList())) {
+            LOGGER.info("#Get sign up page data return  null.Uid is " + uid);
             return result;
         }
         List<ActivitySignUp> dataList = signUpPage.getDataList();
@@ -114,6 +115,7 @@ public class ActivitySignUpHandler {
 
         List<ActivityInfo> activityInfos = activityInfoService.getListByIdList(activityIdList);
         if (CollectionUtils.isEmpty(activityInfos)) {
+            LOGGER.info("#Can not found any activityInfo.uid is " + uid);
             return result;
         }
         Map<Integer, ActivityInfoVo> activityInfoVoMap = infoHandler.convertToVoMap(activityInfos);
@@ -122,6 +124,7 @@ public class ActivitySignUpHandler {
             resultData.add(activityInfoVoMap.get(signData.getActivityId()));
         });
         result.setDataList(resultData);
+        LOGGER.info("#Get my sigin up act infos by uid :" + uid + " return " + result.toString());
         return result;
     }
 }
