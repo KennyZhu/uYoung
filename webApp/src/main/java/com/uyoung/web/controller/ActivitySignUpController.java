@@ -132,11 +132,10 @@ public class ActivitySignUpController extends BaseController {
 
     @RequestMapping(value = "/activity/signUp/my")
     @ResponseBody
-    public String myActivity(HttpServletRequest request, Integer pageNum, Integer pageSize) {
+    public String myActivity(HttpServletRequest request, Integer pageNum, Integer pageSize, Integer uid) {
         try {
-            Integer uid = getCurrentUid(request);
             if (uid == null) {
-                return buildNoLogin();
+                return buildInvalidParamJson();
             }
             return buildSuccessJson(handler.getMySignUpActInfos(uid, pageNum, pageSize));
         } catch (Exception e) {
