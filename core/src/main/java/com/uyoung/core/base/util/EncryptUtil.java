@@ -149,7 +149,7 @@ public final class EncryptUtil {
     public static String getBASE64(byte[] b) {
         String s = null;
         if (b != null) {
-            s = new sun.misc.BASE64Encoder().encode(b);
+            s = new sun.misc.BASE64Encoder().encode(b).replaceAll("\r|\n", "");
         }
         return s;
     }
