@@ -91,7 +91,7 @@
         where user_id = #{uid,jdbcType=INTEGER}
         and create_time > #{beginTime}
     </select>
-    <select id="getActivityIdPageByUid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <select id="getPageByUid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from tb_activity_signup
