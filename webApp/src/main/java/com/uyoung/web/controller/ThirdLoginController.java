@@ -1,6 +1,5 @@
 package com.uyoung.web.controller;
 
-import com.uyoung.core.api.constant.LoginUtil;
 import com.uyoung.core.api.model.ThirdUser;
 import com.uyoung.core.api.model.UserInfo;
 import com.uyoung.core.api.service.ThirdUserService;
@@ -8,7 +7,6 @@ import com.uyoung.core.api.service.UserInfoService;
 import com.uyoung.core.third.ThirdUtil;
 import com.uyoung.core.third.enums.ThirdPlatformEnum;
 import com.uyoung.web.controller.base.LoginBaseController;
-import com.uyoung.web.vo.LoginResultVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,19 +41,22 @@ public class ThirdLoginController extends LoginBaseController {
         }
         try {
             //已经登录过
+            String email = null;
+            Integer id = null;
             ThirdUser currentThirdUser = thirdUserService.getByThirdUid(thirdUser.getThirdUid(), ThirdPlatformEnum.getByCode(thirdUser.getUserType()));
             if (currentThirdUser != null) {
-                String email = ThirdUtil.getEmail(currentThirdUser.getThirdUid(), currentThirdUser.getUserType());
-                return buildSuccessJson(new LoginResultVo(currentThirdUser.getUid(), LoginUtil.getSessionId(email, currentThirdUser.getUid())));
+                email = ThirdUtil.getEmail(currentThirdUser.getThirdUid(), currentThirdUser.getUserType());
+                id = currentThirdUser.getUid();
+            } else {
+                LOGGER.info("#New User:" + thirdUser.toString());
+                UserInfo userInfo = buildUserInfoByThirdUser(thirdUser);
+                userInfoService.add(userInfo);
+                thirdUser.setUid(userInfo.getId());
+                thirdUserService.add(thirdUser);
+                email = ThirdUtil.getEmail(thirdUser.getThirdUid(), thirdUser.getUserType());
             }
-            LOGGER.info("#New User:" + thirdUser.toString());
-            UserInfo userInfo = buildUserInfoByThirdUser(thirdUser);
-            userInfoService.add(userInfo);
-            int uid = userInfo.getId();
-            thirdUser.setUid(uid);
-            thirdUserService.add(thirdUser);
-            login(response, userInfo.getEmail(), userInfo.getId());
-            return buildSuccessJson(uid);
+            login(response, email, id);
+            return buildSuccessJson(id);
         } catch (Exception e) {
             LOGGER.error("#Third login error!ThirdUser is " + thirdUser.toString() + "Cause:", e);
             return buildExceptionJson();
