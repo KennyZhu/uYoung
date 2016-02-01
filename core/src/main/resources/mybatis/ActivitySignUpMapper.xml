@@ -97,6 +97,5 @@
         from tb_activity_signup
         where user_id = #{uid,jdbcType=INTEGER}
         order by create_time desc
-
     </select>
 </mapper>
