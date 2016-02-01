@@ -16,9 +16,10 @@ public class ActivitySignUpServiceTest extends BaseTest {
     @Autowired
     private ActivitySignUpService service;
 
+
     @Test
     public void getPageByUid() {
-        LOGGER.info("####" + service.getListByActivityId(1));
+        LOGGER.info("####" + service.getPageByUid(8, 1, 10));
     }
 
     @Test

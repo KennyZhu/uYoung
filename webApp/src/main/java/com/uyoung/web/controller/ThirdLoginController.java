@@ -54,8 +54,13 @@ public class ThirdLoginController extends LoginBaseController {
                 thirdUser.setUid(userInfo.getId());
                 thirdUserService.add(thirdUser);
                 email = ThirdUtil.getEmail(thirdUser.getThirdUid(), thirdUser.getUserType());
+                id = userInfo.getId();
             }
-            login(response, email, id);
+
+            LOGGER.info("#Login email is " + email + " id is " + id);
+            if (!login(response, email, id)) {
+                return buildFailJson();
+            }
             return buildSuccessJson(id);
         } catch (Exception e) {
             LOGGER.error("#Third login error!ThirdUser is " + thirdUser.toString() + "Cause:", e);

@@ -3,6 +3,7 @@ package com.uyoung.web.controller.base;
 import com.uyoung.core.api.constant.LoginUtil;
 import com.uyoung.core.api.model.Login;
 import com.uyoung.core.api.service.LoginService;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,13 +24,19 @@ public class LoginBaseController extends BaseController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(LoginBaseController.class);
 
-    protected void login(HttpServletResponse response, String email, Integer uid) {
+    protected boolean login(HttpServletResponse response, String email, Integer uid) {
+        if (response == null || StringUtils.isBlank(email) || uid == null) {
+            return false;
+        }
         try {
             LoginUtil.addLoginCookie(response, email, uid);
             Login login = LoginUtil.updateLogin(email, uid);
             loginService.add(login);
+            return true;
         } catch (Exception e) {
             LOGGER.error("#Login error.Cause:", e);
         }
+
+        return false;
     }
 }
