@@ -90,7 +90,9 @@ public final class LoginUtil {
      * @return
      */
     public static boolean addLoginCookie(HttpServletResponse response, String email, Integer uid) {
-        Cookie emailCookie = new Cookie(LoginConstant.LOGIN_ACCOUNT_KEY, getSessionId(email, uid));
+        String sessionId = getSessionId(email, uid);
+        LOGGER.info("#Add loginCookie sessionId is " + sessionId);
+        Cookie emailCookie = new Cookie(LoginConstant.COOKIE_LOGIN_KEY, sessionId);
         emailCookie.setDomain(LoginConstant.COOKIE_DOMAIN);
         emailCookie.setMaxAge(LoginConstant.MAX_LOGIN_SECONDS);
         response.addCookie(emailCookie);
