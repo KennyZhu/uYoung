@@ -97,11 +97,12 @@ public class Login {
     @Override
     public String toString() {
         return "Login{" +
-                "id=" + id +
+                "createTime=" + createTime +
+                ", id=" + id +
+                ", uid=" + uid +
                 ", email='" + email + '\'' +
                 ", loginToken='" + loginToken + '\'' +
                 ", loginHash='" + loginHash + '\'' +
-                ", createTime=" + createTime +
                 ", updateTime=" + updateTime +
                 '}';
     }
