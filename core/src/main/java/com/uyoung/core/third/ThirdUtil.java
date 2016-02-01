@@ -2,6 +2,8 @@ package com.uyoung.core.third;
 
 import com.uyoung.core.third.enums.ThirdPlatformEnum;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * User: KennyZhu
@@ -9,6 +11,7 @@ import org.apache.commons.lang.StringUtils;
  * Desc:
  */
 public final class ThirdUtil {
+    private static final Logger LOGGER = LoggerFactory.getLogger(ThirdUtil.class);
 
     /**
      * @param thirdUid
@@ -17,6 +20,7 @@ public final class ThirdUtil {
      */
     public static String getEmail(String thirdUid, ThirdPlatformEnum platformEnum) {
         if (StringUtils.isBlank(thirdUid) || platformEnum == null) {
+            LOGGER.error("#Invalid param.");
             return null;
         }
         return thirdUid + platformEnum.getEmailSuffix();
@@ -33,6 +37,7 @@ public final class ThirdUtil {
         }
         ThirdPlatformEnum platformEnum = ThirdPlatformEnum.getByCode(userType);
         if (platformEnum == null) {
+            LOGGER.warn("#Get platformEnum by userType :" + userType + " return null.");
             return null;
         }
         return getEmail(thirdUid, platformEnum);

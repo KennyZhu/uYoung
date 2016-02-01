@@ -47,6 +47,7 @@ public class ThirdLoginController extends LoginBaseController {
             if (currentThirdUser != null) {
                 email = ThirdUtil.getEmail(currentThirdUser.getThirdUid(), currentThirdUser.getUserType());
                 id = currentThirdUser.getUid();
+                LOGGER.info("#Get third email by uid " + currentThirdUser.getThirdUid() + "  userType: " + currentThirdUser.getUserType() + " return " + email);
             } else {
                 LOGGER.info("#New User:" + thirdUser.toString());
                 UserInfo userInfo = buildUserInfoByThirdUser(thirdUser);
