@@ -39,6 +39,6 @@ public final class LoginConstant {
     /**
      * cookie Domain
      */
-    public static final String COOKIE_DOMAIN = "uyoung";
+    public static final String COOKIE_DOMAIN = "182.92.237.31";
 
 }
