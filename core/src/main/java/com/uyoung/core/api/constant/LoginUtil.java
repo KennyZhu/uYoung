@@ -114,7 +114,7 @@ public final class LoginUtil {
         if (login == null) {
             return false;
         }
-        if (login.getUid() != null || StringUtils.isBlank(login.getLoginHash()) || StringUtils.isBlank(login.getLoginToken())) {
+        if (login.getUid() == null || StringUtils.isBlank(login.getLoginHash()) || StringUtils.isBlank(login.getLoginToken())) {
             return false;
         }
         Login record = loginService.getByUid(login.getUid());
