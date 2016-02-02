@@ -10,19 +10,16 @@ public final class LoginConstant {
      * 最大登录时间
      */
     public static final int MAX_LOGIN_SECONDS = 30 * 24 * 60 * 60;
-    /**
-     *
-     */
-    public static final String LOGIN_ACCOUNT_KEY = "accountId";
-    /**
-     *
-     */
-    public static final String LOGIN_HASH_KEY = "login_hash";
 
     /**
      *
      */
-    public static final String LOGIN_TOKEN_KEY = "login_token";
+    public static final String LOGIN_HASH_KEY = "loginHash";
+
+    /**
+     *
+     */
+    public static final String LOGIN_TOKEN_KEY = "loginToken";
 
     public static final String COOKIE_LOGIN_KEY = "login_info";
 

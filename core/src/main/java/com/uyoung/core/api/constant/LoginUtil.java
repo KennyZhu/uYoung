@@ -4,7 +4,6 @@ import com.uyoung.core.api.model.Login;
 import com.uyoung.core.api.service.LoginService;
 import com.uyoung.core.base.util.DataUtil;
 import com.uyoung.core.base.util.EncryptUtil;
-import com.uyoung.core.base.util.JsonUtil;
 import com.uyoung.core.base.util.MD5Util;
 import com.uyoung.core.base.util.SpringContextHolder;
 import org.apache.commons.lang.StringUtils;
@@ -16,6 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 import java.util.Random;
+
+import static com.uyoung.core.base.util.DataUtil.parseParamStr;
 
 /**
  * User: KennyZhu
@@ -134,10 +135,27 @@ public final class LoginUtil {
         Cookie[] cookies = request.getCookies();
         for (Cookie cookie : cookies) {
             if (LoginConstant.COOKIE_LOGIN_KEY.equals(cookie.getName())) {
-                return (Login) JsonUtil.parse(cookie.getValue(), Login.class);
+                return getFromSessionId(new String(EncryptUtil.getFromBASE64(cookie.getValue())));
             }
         }
         return null;
+    }
+
+    /**
+     * @param sessionId
+     * @return
+     */
+    public static Login getFromSessionId(String sessionId) {
+        Map<String, String> dataMap = DataUtil.parseParamStr(sessionId);
+        if (dataMap == null || dataMap.size() == 0) {
+            return null;
+        }
+        Login login = new Login();
+        login.setUid(Integer.parseInt(dataMap.get("uid")));
+        login.setEmail(dataMap.get("email"));
+        login.setLoginHash(dataMap.get(LoginConstant.LOGIN_HASH_KEY));
+        login.setLoginToken(dataMap.get(LoginConstant.LOGIN_TOKEN_KEY));
+        return login;
     }
 
     /**
@@ -150,7 +168,7 @@ public final class LoginUtil {
         String sessionId = (String) request.getAttribute(CommonConstant.PARAM_SESSION_ID);
         if (StringUtils.isNotBlank(sessionId)) {
             String sessionIdStr = new String(EncryptUtil.getFromBASE64(sessionId));
-            Map<String, String> paramMap = DataUtil.parseParamStr(sessionIdStr);
+            Map<String, String> paramMap = parseParamStr(sessionIdStr);
             Login login = new Login();
             login.setUid(Integer.parseInt(paramMap.get("uid")));
             login.setEmail(paramMap.get("email"));
