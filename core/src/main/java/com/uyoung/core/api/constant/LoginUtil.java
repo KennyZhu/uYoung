@@ -16,8 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 import java.util.Random;
 
-import static com.uyoung.core.base.util.DataUtil.parseParamStr;
-
 /**
  * User: KennyZhu
  * Date: 16/1/12
@@ -156,30 +154,6 @@ public final class LoginUtil {
         login.setLoginHash(dataMap.get(LoginConstant.LOGIN_HASH_KEY));
         login.setLoginToken(dataMap.get(LoginConstant.LOGIN_TOKEN_KEY));
         return login;
-    }
-
-    /**
-     * 参数中获取
-     *
-     * @param request
-     * @return
-     */
-    public static Login getLoginFromParam(HttpServletRequest request) {
-        String sessionId = (String) request.getAttribute(CommonConstant.PARAM_SESSION_ID);
-        if (StringUtils.isNotBlank(sessionId)) {
-            String sessionIdStr = new String(EncryptUtil.getFromBASE64(sessionId));
-            Map<String, String> paramMap = parseParamStr(sessionIdStr);
-            Login login = new Login();
-            login.setUid(Integer.parseInt(paramMap.get("uid")));
-            login.setEmail(paramMap.get("email"));
-            login.setLoginHash(paramMap.get("loginToken"));
-            login.setLoginToken(paramMap.get("loginHash"));
-            LOGGER.info("#Login info is " + login.toString());
-            return login;
-        } else {
-            LOGGER.warn("#Session id is null.");
-        }
-        return null;
     }
 
     public static void main(String[] args) {

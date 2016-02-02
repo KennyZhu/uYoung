@@ -23,7 +23,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
-        Login login = LoginUtil.getLoginFromParam(request);
+        Login login = LoginUtil.getLoginFromCookie(request);
         if (login != null) {
             LOGGER.info("#Get Cookie return " + login.toString());
             boolean result = LoginUtil.checkLogin(login);
