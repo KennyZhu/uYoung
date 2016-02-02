@@ -45,7 +45,7 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public boolean addOrUpdate(Login login) {
-        if (login == null || login.getUid() != null) {
+        if (login == null || login.getUid() == null) {
             return false;
         }
         Login record = getByUid(login.getUid());
