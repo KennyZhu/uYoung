@@ -22,5 +22,5 @@ public interface ActivitySignUpDao {
 
     int deleteByUidAid(Integer uid, Integer aid);
 
-    Page<ActivitySignUp> getPageByUid(int offset, int limit, Integer uid);
+    Page<ActivitySignUp> getPageByUid(Integer uid, int offset, int limit);
 }

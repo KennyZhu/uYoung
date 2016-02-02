@@ -30,7 +30,7 @@
 
     <!-- 根logger的设置-->
     <root>
-        <priority value="info"/>
+        <priority value="debug"/>
         <appender-ref ref="logConsole"/>
         <appender-ref ref="logFile"/>
     </root>

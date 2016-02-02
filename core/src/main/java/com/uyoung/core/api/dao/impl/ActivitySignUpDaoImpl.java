@@ -69,7 +69,7 @@ public class ActivitySignUpDaoImpl extends BaseDao<ActivitySignUp> implements Ac
     }
 
     @Override
-    public Page<ActivitySignUp> getPageByUid(int offset, int limit, Integer uid) {
+    public Page<ActivitySignUp> getPageByUid(Integer uid, int offset, int limit) {
         Map<String, Integer> paramMap = new HashMap<>();
         paramMap.put("uid", uid);
         return selectPage("getPageByUid", paramMap, new RowBounds(offset, limit));

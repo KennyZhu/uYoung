@@ -6,6 +6,8 @@ import com.uyoung.core.api.model.ActivitySignUp;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
+
 /**
  * Desc:
  * <p/>Date: 2015-10-20
@@ -19,7 +21,10 @@ public class ActivitySignUpServiceTest extends BaseTest {
 
     @Test
     public void getPageByUid() {
-        LOGGER.info("####" + service.getPageByUid(8, 1, 10));
+        List<ActivitySignUp> dataList = service.getPageByUid(8, 1, 10).getDataList();
+        for (ActivitySignUp activitySignUp : dataList) {
+            System.out.println(activitySignUp.toString());
+        }
     }
 
     @Test
