@@ -95,6 +95,7 @@ public final class LoginUtil {
         Cookie emailCookie = new Cookie(LoginConstant.COOKIE_LOGIN_KEY, sessionId);
         emailCookie.setDomain(LoginConstant.COOKIE_DOMAIN);
         emailCookie.setMaxAge(LoginConstant.MAX_LOGIN_SECONDS);
+        emailCookie.setPath("/");
         response.addCookie(emailCookie);
         return true;
     }
