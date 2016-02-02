@@ -112,16 +112,20 @@ public final class LoginUtil {
 
     public static boolean checkLogin(Login login) {
         if (login == null) {
+            LOGGER.error("#Login is null.");
             return false;
         }
         if (login.getUid() == null || StringUtils.isBlank(login.getLoginHash()) || StringUtils.isBlank(login.getLoginToken())) {
+            LOGGER.error("#Invalid param.");
             return false;
         }
         Login record = loginService.getByUid(login.getUid());
         if (record == null) {
+            LOGGER.error("#Get login by uid :" + login.getUid() + " return null.");
             return false;
         }
-        return login.getLoginHash().equals(record.getLoginHash()) && login.getLoginToken().equals(record.getLoginToken());
+        LOGGER.info("#Login is " + login.toString() + " record is " + record.toString());
+        return (login.getLoginHash().equals(record.getLoginHash())) && (login.getLoginToken().equals(record.getLoginToken()));
 
     }
 
