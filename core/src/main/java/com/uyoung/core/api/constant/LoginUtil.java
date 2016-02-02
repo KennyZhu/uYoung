@@ -72,11 +72,11 @@ public final class LoginUtil {
     /**
      * 加密Code
      *
-     * @param email
+     * @param login
      * @return
      */
-    public static String getSessionId(String email, Integer uid) {
-        String source = updateLogin(email, uid).getBaseToString();
+    public static String getSessionId(Login login) {
+        String source = login.getBaseToString();
         return EncryptUtil.getBASE64(source.getBytes());
     }
 
@@ -85,11 +85,11 @@ public final class LoginUtil {
      * 增加Cookie
      *
      * @param response
-     * @param email
+     * @param login
      * @return
      */
-    public static boolean addLoginCookie(HttpServletResponse response, String email, Integer uid) {
-        String sessionId = getSessionId(email, uid);
+    public static boolean addLoginCookie(HttpServletResponse response, Login login) {
+        String sessionId = getSessionId(login);
         LOGGER.info("#Add loginCookie sessionId is " + sessionId);
         Cookie emailCookie = new Cookie(LoginConstant.COOKIE_LOGIN_KEY, sessionId);
         emailCookie.setDomain(LoginConstant.COOKIE_DOMAIN);

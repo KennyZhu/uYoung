@@ -29,8 +29,8 @@ public class LoginBaseController extends BaseController {
             return false;
         }
         try {
-            LoginUtil.addLoginCookie(response, email, uid);
             Login login = LoginUtil.updateLogin(email, uid);
+            LoginUtil.addLoginCookie(response, login);
             loginService.addOrUpdate(login);
             return true;
         } catch (Exception e) {
