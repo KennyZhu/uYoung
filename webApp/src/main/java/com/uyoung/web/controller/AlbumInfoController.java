@@ -141,20 +141,14 @@ public class AlbumInfoController extends AlbumBaseController {
     @RequestMapping(value = "/album/deleteById", method = RequestMethod.POST)
     @ResponseBody
     public String deleteById(HttpServletRequest request) {
-        Integer id = null;
-        Integer uid = null;
         try {
-            String idStr = (String) request.getAttribute("id");
-            String uidStr = (String) request.getAttribute("uid");
-            if (StringUtils.isBlank(idStr) || StringUtils.isBlank(uidStr)) {
+            Integer id = (Integer) request.getAttribute("id");
+            Integer uid = (Integer) request.getAttribute("uid");
+            if (id == null || uid == null) {
                 return buildInvalidParamJson();
             }
-            id = Integer.parseInt(idStr);
-            uid = Integer.parseInt(uidStr);
-//            checkUser(id);
             handler.deleteById(uid, id);
         } catch (BusinessException busE) {
-            LOGGER.error("#Delete album error.Uid is " + uid + " id is " + id + "Cause:", busE);
             return buildFailJson(ResultCodeEnum.getByCode(Integer.valueOf(busE.getMessage())).getDesc());
         } catch
                 (Exception e) {
