@@ -134,6 +134,10 @@ public final class LoginUtil {
      * @return
      */
     public static Login getLoginFromCookie(HttpServletRequest request) {
+        if (request == null) {
+            LOGGER.warn("Invalid param.Request is null.");
+            return null;
+        }
         Cookie[] cookies = request.getCookies();
         for (Cookie cookie : cookies) {
             if (LoginConstant.COOKIE_LOGIN_KEY.equals(cookie.getName())) {
