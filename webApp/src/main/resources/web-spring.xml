@@ -25,6 +25,11 @@
     <bean id="loginInterceptor" class="com.uyoung.web.interceptors.LoginInterceptor"/>
     <bean id="encryptInterceptor" class="com.uyoung.web.interceptors.EncryptionInterceptor"/>
 
+    <bean id="viewResolver"
+          class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+        <property name="contentType" value="text/html;charset=UTF-8"></property>
+        <property name="suffix" value=".ftl" />
+    </bean>
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/qn/*"/>
