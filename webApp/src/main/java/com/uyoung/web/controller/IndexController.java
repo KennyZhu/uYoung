@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class IndexController extends BaseController {
 
-    @RequestMapping(value = "index.html")
+    @RequestMapping(value = "/index.html")
     public String index() {
         return "index.html";
     }
