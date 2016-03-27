@@ -22,7 +22,7 @@
         </div>
         <div class="dwn">
         
-                <img src="WEB-INF/images/show_img.png" alt="">
+                <img src="images/show_img.png" alt="">
               
             <!--<div class="col">
                 <img src="images/0180.png" alt="">
