@@ -144,17 +144,15 @@ public class AlbumInfoController extends AlbumBaseController {
         Integer id = null;
         Integer uid = null;
         try {
-            String idStr = (String) request.getAttribute("id");
-            String uidStr = (String) request.getAttribute("uid");
+            String idStr = String.valueOf(request.getAttribute("id"));
+            String uidStr = String.valueOf(request.getAttribute("uid"));
             if (StringUtils.isBlank(idStr) || StringUtils.isBlank(uidStr)) {
                 return buildInvalidParamJson();
             }
             id = Integer.parseInt(idStr);
             uid = Integer.parseInt(uidStr);
-//            checkUser(id);
             handler.deleteById(uid, id);
         } catch (BusinessException busE) {
-            LOGGER.error("#Delete album error.Uid is " + uid + " id is " + id + "Cause:", busE);
             return buildFailJson(ResultCodeEnum.getByCode(Integer.valueOf(busE.getMessage())).getDesc());
         } catch
                 (Exception e) {

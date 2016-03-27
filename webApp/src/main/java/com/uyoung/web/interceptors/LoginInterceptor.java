@@ -23,17 +23,23 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
-        Login login = LoginUtil.getLoginFromParam(request);
-        if (login != null) {
-            LOGGER.info("#Get Cookie return " + login.toString());
-            boolean result = LoginUtil.checkLogin(login);
-            if (result) {
-                request.setAttribute("accountId", login.getAccountId());
-                return true;
+        try {
+            Login login = LoginUtil.getLoginFromCookie(request);
+            if (login != null) {
+                LOGGER.info("#Get Cookie return " + login.toString());
+                boolean result = LoginUtil.checkLogin(login);
+                if (result) {
+                    request.setAttribute("accountId", login.getEmail());
+                    request.setAttribute("uid", login.getUid());
+                    return true;
+                }
             }
+            LOGGER.warn("#No login found.");
+            response.sendRedirect("/common/error?errorCode=" + ResultCodeEnum.NOT_LOGIN.getCode());
+            return false;
+        } catch (Exception e) {
+            LOGGER.error("#Login check error.Cause:", e);
         }
-        LOGGER.warn("#No login found.");
-        response.sendRedirect("/common/error?errorCode=" + ResultCodeEnum.NOT_LOGIN.getCode());
         return false;
     }
 

@@ -6,6 +6,7 @@ import com.uyoung.core.api.model.ActivityInfo;
 import com.uyoung.core.base.bean.Page;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * User: KennyZhu
@@ -90,6 +91,15 @@ public interface ActivityInfoService {
      * @return
      */
     public List<ActivityInfo> getListByIdList(List<Integer> idList);
+
+
+    /**
+     * 批量获取活动信息
+     *
+     * @param idList
+     * @return
+     */
+    public Map<Integer, ActivityInfo> getMapByIdList(List<Integer> idList);
 
 
 }

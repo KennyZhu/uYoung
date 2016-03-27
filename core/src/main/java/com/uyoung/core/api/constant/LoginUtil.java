@@ -4,7 +4,6 @@ import com.uyoung.core.api.model.Login;
 import com.uyoung.core.api.service.LoginService;
 import com.uyoung.core.base.util.DataUtil;
 import com.uyoung.core.base.util.EncryptUtil;
-import com.uyoung.core.base.util.JsonUtil;
 import com.uyoung.core.base.util.MD5Util;
 import com.uyoung.core.base.util.SpringContextHolder;
 import org.apache.commons.lang.StringUtils;
@@ -27,20 +26,20 @@ public final class LoginUtil {
     private static final Logger LOGGER = LoggerFactory.getLogger(LoginUtil.class);
 
     /**
-     * @param accountId
+     * @param email
      * @return
      */
-    public static String getLoginHash(String accountId) {
-        String source = accountId + LoginConstant.HASH_KEY + getRandomInt();
+    public static String getLoginHash(String email) {
+        String source = email + LoginConstant.HASH_KEY + getRandomInt();
         return MD5Util.get(source, CommonConstant.DEFAULT_ENCODE);
     }
 
     /**
-     * @param accountId
+     * @param email
      * @return
      */
-    public static String getLoginToken(String accountId) {
-        String source = accountId + LoginConstant.TOKEN_KEY + getRandomInt();
+    public static String getLoginToken(String email) {
+        String source = email + LoginConstant.TOKEN_KEY + getRandomInt();
         return MD5Util.get(source, CommonConstant.DEFAULT_ENCODE);
     }
 
@@ -56,14 +55,15 @@ public final class LoginUtil {
     /**
      * 获取LoginCookie
      *
-     * @param accountId
+     * @param email
      * @return
      */
-    public static Login updateLogin(String accountId) {
+    public static Login updateLogin(String email, Integer uid) {
         Login login = new Login();
-        login.setAccountId(accountId);
-        login.setLoginHash(getLoginHash(accountId));
-        login.setLoginToken(getLoginToken(accountId));
+        login.setEmail(email);
+        login.setUid(uid);
+        login.setLoginHash(getLoginHash(email));
+        login.setLoginToken(getLoginToken(email));
         LOGGER.info("#Update login:" + login.toString());
         loginService.addOrUpdate(login);
         return login;
@@ -72,11 +72,11 @@ public final class LoginUtil {
     /**
      * 加密Code
      *
-     * @param accountId
+     * @param login
      * @return
      */
-    public static String getSessionId(String accountId) {
-        String source = updateLogin(accountId).getBaseToString();
+    public static String getSessionId(Login login) {
+        String source = login.getBaseToString();
         return EncryptUtil.getBASE64(source.getBytes());
     }
 
@@ -85,14 +85,17 @@ public final class LoginUtil {
      * 增加Cookie
      *
      * @param response
-     * @param accountId
+     * @param login
      * @return
      */
-    public static boolean addLoginCookie(HttpServletResponse response, String accountId) {
-        Cookie accountIdCookie = new Cookie(LoginConstant.LOGIN_ACCOUNT_KEY, getSessionId(accountId));
-        accountIdCookie.setDomain(LoginConstant.COOKIE_DOMAIN);
-        accountIdCookie.setMaxAge(LoginConstant.MAX_LOGIN_SECONDS);
-        response.addCookie(accountIdCookie);
+    public static boolean addLoginCookie(HttpServletResponse response, Login login) {
+        String sessionId = getSessionId(login);
+        LOGGER.info("#Add loginCookie sessionId is " + sessionId);
+        Cookie emailCookie = new Cookie(LoginConstant.COOKIE_LOGIN_KEY, sessionId);
+        emailCookie.setDomain(LoginConstant.COOKIE_DOMAIN);
+        emailCookie.setMaxAge(LoginConstant.MAX_LOGIN_SECONDS);
+        emailCookie.setPath("/");
+        response.addCookie(emailCookie);
         return true;
     }
 
@@ -109,13 +112,20 @@ public final class LoginUtil {
 
     public static boolean checkLogin(Login login) {
         if (login == null) {
+            LOGGER.error("#Login is null.");
             return false;
         }
-        if (StringUtils.isBlank(login.getAccountId()) || StringUtils.isBlank(login.getLoginHash()) || StringUtils.isBlank(login.getLoginToken())) {
+        if (login.getUid() == null || StringUtils.isBlank(login.getLoginHash()) || StringUtils.isBlank(login.getLoginToken())) {
+            LOGGER.error("#Invalid param.");
             return false;
         }
-        Login record = loginService.getByAccountId(login.getAccountId());
-        return login.getLoginHash().equals(record.getLoginHash()) && login.getLoginToken().equals(record.getLoginToken());
+        Login record = loginService.getByUid(login.getUid());
+        if (record == null) {
+            LOGGER.error("#Get login by uid :" + login.getUid() + " return null.");
+            return false;
+        }
+        LOGGER.info("#Login is " + login.toString() + " record is " + record.toString());
+        return (login.getLoginHash().equals(record.getLoginHash())) && (login.getLoginToken().equals(record.getLoginToken()));
 
     }
 
@@ -124,36 +134,34 @@ public final class LoginUtil {
      * @return
      */
     public static Login getLoginFromCookie(HttpServletRequest request) {
+        if (request == null) {
+            LOGGER.warn("Invalid param.Request is null.");
+            return null;
+        }
         Cookie[] cookies = request.getCookies();
         for (Cookie cookie : cookies) {
             if (LoginConstant.COOKIE_LOGIN_KEY.equals(cookie.getName())) {
-                return (Login) JsonUtil.parse(cookie.getValue(), Login.class);
+                return getFromSessionId(new String(EncryptUtil.getFromBASE64(cookie.getValue())));
             }
         }
         return null;
     }
 
     /**
-     * 参数中获取
-     *
-     * @param request
+     * @param sessionId
      * @return
      */
-    public static Login getLoginFromParam(HttpServletRequest request) {
-        String sessionId = (String) request.getAttribute(CommonConstant.PARAM_SESSION_ID);
-        if (StringUtils.isNotBlank(sessionId)) {
-            String sessionIdStr = new String(EncryptUtil.getFromBASE64(sessionId));
-            Map<String, String> paramMap = DataUtil.parseParamStr(sessionIdStr);
-            Login login = new Login();
-            login.setAccountId(paramMap.get("accountId"));
-            login.setLoginHash(paramMap.get("loginToken"));
-            login.setLoginToken(paramMap.get("loginHash"));
-            LOGGER.info("#Login info is " + login.toString());
-            return login;
-        } else {
-            LOGGER.warn("#Session id is null.");
+    public static Login getFromSessionId(String sessionId) {
+        Map<String, String> dataMap = DataUtil.parseParamStr(sessionId);
+        if (dataMap == null || dataMap.size() == 0) {
+            return null;
         }
-        return null;
+        Login login = new Login();
+        login.setUid(Integer.parseInt(dataMap.get("uid")));
+        login.setEmail(dataMap.get("email"));
+        login.setLoginHash(dataMap.get(LoginConstant.LOGIN_HASH_KEY));
+        login.setLoginToken(dataMap.get(LoginConstant.LOGIN_TOKEN_KEY));
+        return login;
     }
 
     public static void main(String[] args) {

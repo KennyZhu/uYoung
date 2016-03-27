@@ -1,6 +1,7 @@
 package com.uyoung.core.api.dao;
 
 import com.uyoung.core.api.model.ActivitySignUp;
+import com.uyoung.core.base.bean.Page;
 
 import java.util.Date;
 import java.util.List;
@@ -20,4 +21,6 @@ public interface ActivitySignUpDao {
     ActivitySignUp getByAidUid(Integer aid, Integer uid);
 
     int deleteByUidAid(Integer uid, Integer aid);
+
+    Page<ActivitySignUp> getPageByUid(Integer uid, int offset, int limit);
 }

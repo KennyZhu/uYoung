@@ -11,7 +11,7 @@
         <result column="nick_name" property="nickName" jdbcType="VARCHAR"/>
         <result column="gender" property="gender" jdbcType="TINYINT"/>
         <result column="avatar_url" property="avatarUrl" jdbcType="VARCHAR"/>
-        <result column="userType" property="user_type" jdbcType="TINYINT"/>
+        <result column="user_type" property="userType" jdbcType="TINYINT"/>
         <result column="refresh_time" property="refreshTime" jdbcType="TIMESTAMP"/>
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>

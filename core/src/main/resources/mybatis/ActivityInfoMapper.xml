@@ -7,6 +7,7 @@
         <result column="ori_user_id" property="oriUserId" jdbcType="INTEGER"/>
         <result column="begin_time" property="beginTime" jdbcType="TIMESTAMP"/>
         <result column="end_time" property="endTime" jdbcType="TIMESTAMP"/>
+        <result column="city_id" property="cityId" jdbcType="VARCHAR"/>
         <result column="address" property="address" jdbcType="VARCHAR"/>
         <result column="need_num" property="needNum" jdbcType="INTEGER"/>
         <result column="real_num" property="realNum" jdbcType="INTEGER"/>
@@ -19,7 +20,7 @@
     </resultMap>
     <sql id="Base_Column_List">
         id, title, ori_user_id, begin_time, end_time, address, need_num, real_num, activity_type,
-        fee_type, description, `status`, create_time, update_time
+        fee_type, description, `status`, city_id, create_time, update_time
     </sql>
 
     <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
@@ -52,6 +53,9 @@
             </if>
             <if test="endTime != null">
                 end_time,
+            </if>
+            <if test="cityId != null">
+                city_id,
             </if>
             <if test="address != null">
                 address,
@@ -93,6 +97,9 @@
             <if test="endTime != null">
                 #{endTime,jdbcType=TIMESTAMP},
             </if>
+            <if test="cityId != null">
+                #{cityId,jdbcType=INTEGER},
+            </if>
             <if test="address != null">
                 #{address,jdbcType=VARCHAR},
             </if>
@@ -131,6 +138,9 @@
             </if>
             <if test="endTime != null">
                 end_time = #{endTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="cityId != null">
+                city_id = #{cityId,jdbcType=INTEGER},
             </if>
             <if test="address != null">
                 address = #{address,jdbcType=VARCHAR},
@@ -201,6 +211,9 @@
         </if>
         <if test="condition.creatorUid != null">
             AND ori_user_id = #{condition.creatorUid,jdbcType=INTEGER}
+        </if>
+        <if test="condition.cityId != null">
+            AND city_id = #{condition.cityId,jdbcType=INTEGER}
         </if>
         <if test="condition.sortColumn != null">
             order by ${condition.sortColumn}

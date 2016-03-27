@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * Desc:
  * <p/>Date: 2015-11-16
@@ -124,6 +126,20 @@ public class ActivitySignUpController extends BaseController {
             return buildSuccessJson(activitySignUp);
         } catch (Exception e) {
             LOGGER.error("#Confirm signUp aid:" + activityId + " uid:" + uid);
+            return buildExceptionJson();
+        }
+    }
+
+    @RequestMapping(value = "/activity/signUp/my")
+    @ResponseBody
+    public String myActivity(HttpServletRequest request, Integer pageNum, Integer pageSize, Integer uid) {
+        try {
+            if (uid == null) {
+                return buildInvalidParamJson();
+            }
+            return buildSuccessJson(handler.getMySignUpActInfos(uid, pageNum, pageSize));
+        } catch (Exception e) {
+            LOGGER.error("#Add activity status error!Cause:", e);
             return buildExceptionJson();
         }
     }

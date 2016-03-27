@@ -15,8 +15,8 @@ public class LoginDaoImpl extends BaseDao<Login> implements LoginDao {
 
 
     @Override
-    public Login getByAccountId(String accountId) {
-        return selectOne("getByAccountId", accountId);
+    public Login getByUid(Integer uid) {
+        return selectOne("getByUid", uid);
     }
 
 }

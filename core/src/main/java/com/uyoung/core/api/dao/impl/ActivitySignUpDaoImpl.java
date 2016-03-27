@@ -2,7 +2,9 @@ package com.uyoung.core.api.dao.impl;
 
 import com.uyoung.core.api.dao.ActivitySignUpDao;
 import com.uyoung.core.api.model.ActivitySignUp;
+import com.uyoung.core.base.bean.Page;
 import com.uyoung.core.base.dao.BaseDao;
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;
@@ -64,5 +66,12 @@ public class ActivitySignUpDaoImpl extends BaseDao<ActivitySignUp> implements Ac
         paraMap.put("uid", uid);
         paraMap.put("aid", aid);
         return delete("deleteByUidAid", paraMap);
+    }
+
+    @Override
+    public Page<ActivitySignUp> getPageByUid(Integer uid, int offset, int limit) {
+        Map<String, Integer> paramMap = new HashMap<>();
+        paramMap.put("uid", uid);
+        return selectPage("getPageByUid", paramMap, new RowBounds(offset, limit));
     }
 }
