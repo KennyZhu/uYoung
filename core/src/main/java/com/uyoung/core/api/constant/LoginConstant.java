@@ -21,6 +21,9 @@ public final class LoginConstant {
      */
     public static final String LOGIN_TOKEN_KEY = "loginToken";
 
+    /**
+     *
+     */
     public static final String COOKIE_LOGIN_KEY = "login_info";
 
     /**
@@ -36,6 +39,6 @@ public final class LoginConstant {
     /**
      * cookie Domain
      */
-    public static final String COOKIE_DOMAIN = "182.92.237.31";
+    public static final String COOKIE_DOMAIN = ".youngcommon.com";
 
 }

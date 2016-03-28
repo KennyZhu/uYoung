@@ -139,9 +139,11 @@ public final class LoginUtil {
             return null;
         }
         Cookie[] cookies = request.getCookies();
-        for (Cookie cookie : cookies) {
-            if (LoginConstant.COOKIE_LOGIN_KEY.equals(cookie.getName())) {
-                return getFromSessionId(new String(EncryptUtil.getFromBASE64(cookie.getValue())));
+        if(cookies!=null) {
+            for (Cookie cookie : cookies) {
+                if (LoginConstant.COOKIE_LOGIN_KEY.equals(cookie.getName())) {
+                    return getFromSessionId(new String(EncryptUtil.getFromBASE64(cookie.getValue())));
+                }
             }
         }
         return null;
