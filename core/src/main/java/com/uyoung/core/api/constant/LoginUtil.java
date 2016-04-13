@@ -139,14 +139,12 @@ public final class LoginUtil {
             return null;
         }
         Cookie[] cookies = request.getCookies();
-        if (cookies != null) {
+        if(cookies!=null) {
             for (Cookie cookie : cookies) {
                 if (LoginConstant.COOKIE_LOGIN_KEY.equals(cookie.getName())) {
                     return getFromSessionId(new String(EncryptUtil.getFromBASE64(cookie.getValue())));
                 }
             }
-        } else {
-            LOGGER.error("#No login cookie found.");
         }
         return null;
     }

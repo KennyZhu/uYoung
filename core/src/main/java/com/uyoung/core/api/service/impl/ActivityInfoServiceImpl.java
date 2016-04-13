@@ -74,7 +74,7 @@ public class ActivityInfoServiceImpl implements ActivityInfoService {
             if (StringUtils.isNotBlank(activityInfo.getStrEndTime())) {
                 activityInfo.setEndTime(simpleDateFormat.parse(activityInfo.getStrEndTime()));
             }
-            activityInfo.setStatus(ActivityStatusEnum.ACTIVE.getStatus());
+          //  activityInfo.setStatus(ActivityStatusEnum.ACTIVE.getStatus());
         } catch (Exception e) {
 
         }

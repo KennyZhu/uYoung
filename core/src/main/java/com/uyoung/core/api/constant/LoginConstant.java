@@ -21,6 +21,9 @@ public final class LoginConstant {
      */
     public static final String LOGIN_TOKEN_KEY = "loginToken";
 
+    /**
+     *
+     */
     public static final String COOKIE_LOGIN_KEY = "login_info";
 
     /**

@@ -8,6 +8,8 @@ package com.uyoung.core.api.constant;
  */
 public final class CommonConstant {
 
+    private  static final String DOMAIN = "http://www.youngcommon.com/";
+
     /**
      * 用户默认头像URL
      */

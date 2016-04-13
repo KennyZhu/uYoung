@@ -22,7 +22,7 @@ public final class QiNiuConstant {
     /**
      * 域名
      */
-    public static final String URL_PREFIX = "http://7xnzko.com1.z0.glb.clouddn.com/";
+    public static final String URL_PREFIX = "http://mobile-img.youngcommon.com/";
 
     /**
      * 获取照片URL
