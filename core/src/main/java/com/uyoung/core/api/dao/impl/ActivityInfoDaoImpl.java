@@ -72,6 +72,8 @@ public class ActivityInfoDaoImpl extends BaseDao<ActivityInfo> implements Activi
 
     @Override
     public List<ActivityInfo> getListByStatusList(List<Integer> statusList) {
-        return selectList("getListByStatusList", statusList);
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("statusList", statusList);
+        return selectList("getListByStatusList", paramMap);
     }
 }
