@@ -23,4 +23,6 @@ public interface ActivityInfoDao {
     Page<ActivityInfo> getPageByCondition(ActivityConditionBean conditionBean, int offset, int limit);
 
     List<ActivityInfo> getListByIdList(List<Integer> idList);
+
+    List<ActivityInfo> getListByStatusList(List<Integer> statusList);
 }

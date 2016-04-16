@@ -1,7 +1,12 @@
 package com.uyoung.core.api.schedule;
 
 import com.uyoung.core.api.enums.ActivityScheduleTypeEnum;
+import com.uyoung.core.api.enums.ActivityStatusEnum;
 import com.uyoung.core.api.model.ActivityInfo;
+import com.uyoung.core.api.service.ActivityInfoService;
+import com.uyoung.core.base.util.SpringContextHolder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.Delayed;
 import java.util.concurrent.TimeUnit;
@@ -11,8 +16,9 @@ import java.util.concurrent.TimeUnit;
  * Date: 16/4/6
  * Desc:
  */
-public class ActivityScheduleTask implements Delayed {
+public class ActivityScheduleTask implements Delayed, Runnable {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(ActivityScheduleTask.class);
     private ActivityScheduleTypeEnum activityScheduleType;
     private ActivityInfo activityInfo;
 
@@ -51,6 +57,25 @@ public class ActivityScheduleTask implements Delayed {
         return 0;
     }
 
+    @Override
+    public void run() {
+        try {
+            ActivityInfoService activityInfoService = SpringContextHolder.getBean("activityInfoService");
+            if (ActivityScheduleTypeEnum.BEGIN == activityScheduleType) {
+                activityInfo.setStatus(ActivityStatusEnum.ACTIVE.getStatus());
+                activityInfoService.updateById(activityInfo);
+                ActivityTaskScheduler scheduler = SpringContextHolder.getBean("activityTaskScheduler");
+                scheduler.add(new ActivityScheduleTask(activityInfo, ActivityScheduleTypeEnum.END));
+            } else if (ActivityScheduleTypeEnum.END == activityScheduleType) {
+                activityInfo.setStatus(ActivityStatusEnum.COMPLETE.getStatus());
+                activityInfoService.updateById(activityInfo);
+            }
+
+        } catch (Exception e) {
+            LOGGER.error("#Run taks error.Cause:", e);
+        }
+    }
+
     public ActivityScheduleTypeEnum getActivityScheduleType() {
         return activityScheduleType;
     }
@@ -65,5 +90,13 @@ public class ActivityScheduleTask implements Delayed {
 
     public void setActivityInfo(ActivityInfo activityInfo) {
         this.activityInfo = activityInfo;
+    }
+
+    @Override
+    public String toString() {
+        return "ActivityScheduleTask{" +
+                "activityScheduleType=" + activityScheduleType +
+                ", activityInfo=" + activityInfo.toString() +
+                '}';
     }
 }

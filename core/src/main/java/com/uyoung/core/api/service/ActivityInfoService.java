@@ -3,6 +3,7 @@ package com.uyoung.core.api.service;
 import com.uyoung.core.api.bean.ActivityConditionBean;
 import com.uyoung.core.api.enums.ActivityStatusEnum;
 import com.uyoung.core.api.model.ActivityInfo;
+import com.uyoung.core.api.schedule.ActivityScheduleTask;
 import com.uyoung.core.base.bean.Page;
 
 import java.util.List;
@@ -100,6 +101,21 @@ public interface ActivityInfoService {
      * @return
      */
     public Map<Integer, ActivityInfo> getMapByIdList(List<Integer> idList);
+
+
+    /**
+     * 批量获取指定状态的数据
+     *
+     * @return
+     */
+    public List<ActivityInfo> getAllActivityInfoByStatus(List<ActivityStatusEnum> statusList);
+
+
+    /**
+     * @param activityInfos
+     * @return
+     */
+    public List<ActivityScheduleTask> wrapActivityScheduleTask(List<ActivityInfo> activityInfos);
 
 
 }

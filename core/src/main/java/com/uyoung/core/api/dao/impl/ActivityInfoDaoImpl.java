@@ -69,4 +69,9 @@ public class ActivityInfoDaoImpl extends BaseDao<ActivityInfo> implements Activi
         paramMap.put("condition", conditionBean);
         return selectPage("getPageByCondition", paramMap, new RowBounds(offset, limit));
     }
+
+    @Override
+    public List<ActivityInfo> getListByStatusList(List<Integer> statusList) {
+        return selectList("getListByStatusList", statusList);
+    }
 }

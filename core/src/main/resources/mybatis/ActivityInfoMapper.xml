@@ -194,6 +194,16 @@
         </foreach>
     </select>
 
+    <select id="getListByStatusList" parameterType="java.util.ArrayList" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        from tb_activity_info
+        where status in
+        <foreach collection="statusList" index="status" item="status" open="(" separator="," close=")">
+            #{status,jdbcType=INTEGER}
+        </foreach>
+    </select>
+
     <select id="getPageByCondition" parameterType="com.uyoung.core.api.bean.ActivityConditionBean"
             resultMap="BaseResultMap">
         select

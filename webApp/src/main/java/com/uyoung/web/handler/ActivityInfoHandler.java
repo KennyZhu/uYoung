@@ -1,12 +1,15 @@
 package com.uyoung.web.handler;
 
 import com.uyoung.core.api.bean.ActivityConditionBean;
+import com.uyoung.core.api.enums.ActivityScheduleTypeEnum;
 import com.uyoung.core.api.enums.ActivitySignUpStatusEnum;
 import com.uyoung.core.api.enums.ActivityStatusEnum;
 import com.uyoung.core.api.enums.ActivityTypeEnum;
 import com.uyoung.core.api.model.ActivityInfo;
 import com.uyoung.core.api.model.ActivitySignUp;
 import com.uyoung.core.api.model.UserInfo;
+import com.uyoung.core.api.schedule.ActivityScheduleTask;
+import com.uyoung.core.api.schedule.ActivityTaskScheduler;
 import com.uyoung.core.api.service.ActivityInfoService;
 import com.uyoung.core.api.service.ActivitySignUpService;
 import com.uyoung.core.api.service.UserInfoService;
@@ -21,11 +24,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -45,6 +44,9 @@ public class ActivityInfoHandler {
 
     @Autowired
     private ActivitySignUpService signUpService;
+
+    @Autowired
+    private ActivityTaskScheduler schedule;
 
     /**
      * 批量获取活动信息
@@ -166,6 +168,11 @@ public class ActivityInfoHandler {
         activitySignUp.setUserId(activityInfo.getOriUserId());
         activitySignUp.setStatus(ActivitySignUpStatusEnum.SUCCESS.getStatus());
         signUpService.add(activitySignUp);
+        try {
+            schedule.add(new ActivityScheduleTask(activityInfo, ActivityScheduleTypeEnum.BEGIN));
+        } catch (Exception e) {
+            LOGGER.error("#Add to scheduler error.Task is " + activityInfo.toString());
+        }
     }
 
     /**
