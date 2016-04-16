@@ -33,7 +33,13 @@ public class ActivityTaskScheduler {
     public void init() {
         queue = new DelayQueue<>();
         initAllTask();
-        run();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                runTask();
+            }
+        });
+
 
     }
 
@@ -55,7 +61,7 @@ public class ActivityTaskScheduler {
         }
     }
 
-    public void run() {
+    public void runTask() {
         while (true) {
             try {
                 ActivityScheduleTask task = queue.take();
