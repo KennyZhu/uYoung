@@ -1,6 +1,7 @@
 package com.uyoung.core.api.constant;
 
 import com.uyoung.core.api.model.Login;
+import com.uyoung.core.api.mq.KafkaProducerFactory;
 import com.uyoung.core.api.service.LoginService;
 import com.uyoung.core.base.util.DataUtil;
 import com.uyoung.core.base.util.EncryptUtil;
@@ -91,6 +92,8 @@ public final class LoginUtil {
     public static boolean addLoginCookie(HttpServletResponse response, Login login) {
         String sessionId = getSessionId(login);
         LOGGER.info("#Add loginCookie sessionId is " + sessionId);
+        KafkaProducerFactory.getInstance().sendMsg("default", "addLoginCookie");
+        LOGGER.info("#Add loginCookie sessionId is " + sessionId + " end.");
         Cookie emailCookie = new Cookie(LoginConstant.COOKIE_LOGIN_KEY, sessionId);
         emailCookie.setDomain(LoginConstant.COOKIE_DOMAIN);
         emailCookie.setMaxAge(LoginConstant.MAX_LOGIN_SECONDS);
@@ -139,7 +142,7 @@ public final class LoginUtil {
             return null;
         }
         Cookie[] cookies = request.getCookies();
-        if(cookies!=null) {
+        if (cookies != null) {
             for (Cookie cookie : cookies) {
                 if (LoginConstant.COOKIE_LOGIN_KEY.equals(cookie.getName())) {
                     return getFromSessionId(new String(EncryptUtil.getFromBASE64(cookie.getValue())));
