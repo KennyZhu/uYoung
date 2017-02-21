@@ -2,6 +2,7 @@ package com.uyoung.web.handler;
 
 import com.uyoung.core.api.model.PhotoInfo;
 import com.uyoung.core.api.model.PhotoLike;
+import com.uyoung.core.api.mq.KafkaProducerFactory;
 import com.uyoung.core.api.service.PhotoInfoService;
 import com.uyoung.core.api.service.PhotoLikeService;
 import com.uyoung.core.api.task.TaskFactory;
@@ -58,6 +59,8 @@ public class PhotoLikeHandler {
                 taskFactory.addTask(new PhotoIncLikeCountTask(photoInfo));
             }
         } else {
+            LOGGER.info("#Begin to sendMsg.");
+            KafkaProducerFactory.getInstance().sendMsg("default", "#uid:" + uid + " photoId:" + photoId + " like.");
             if (photoLikeService.delete(uid, photoId)) {
                 taskFactory.addTask(new PhotoDecLikeCountTask(photoInfo));
             }
