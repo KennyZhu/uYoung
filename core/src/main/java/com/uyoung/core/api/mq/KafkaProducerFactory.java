@@ -2,6 +2,7 @@ package com.uyoung.core.api.mq;
 
 //import com.uyoung.core.api.constant.KafkaConstant;
 
+import com.uyoung.core.api.constant.KafkaConstant;
 import kafka.javaapi.producer.Producer;
 import kafka.producer.KeyedMessage;
 import kafka.producer.ProducerConfig;
@@ -9,6 +10,7 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.FileInputStream;
 import java.util.Properties;
 
 /**
@@ -36,7 +38,7 @@ public class KafkaProducerFactory {
         return instance;
     }
 
-    public void init() {
+    private void init() {
         if (isInit) {
             LOGGER.info("#Kafka config inited.");
             return;
@@ -44,9 +46,9 @@ public class KafkaProducerFactory {
         LOGGER.info("#Begin to init kafka config.");
         Properties properties = new Properties();
         try {
-//            String filePath = KafkaProducerFactory.class.getClassLoader().getResource(KafkaConstant.CONFIG_DIR).getPath();
-//            filePath = filePath + "/" + CONFIG_NAME;
-//            properties.load(new FileInputStream(filePath));
+            String filePath = KafkaProducerFactory.class.getClassLoader().getResource(KafkaConstant.CONFIG_DIR).getPath();
+            filePath = filePath + "/" + CONFIG_NAME;
+            properties.load(new FileInputStream(filePath));
         } catch (Exception e) {
             LOGGER.error("create kafka producer error!use default setting!", e);
             return;
