@@ -1,5 +1,6 @@
 package com.uyoung.web.controller.base;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.uyoung.core.api.constant.LoginUtil;
 import com.uyoung.core.api.model.Login;
 import com.uyoung.core.api.service.LoginService;
@@ -30,6 +31,7 @@ public class LoginBaseController extends BaseController {
         }
         try {
             Login login = LoginUtil.updateLogin(email, uid);
+            test(email);
             LoginUtil.addLoginCookie(response, login);
             loginService.addOrUpdate(login);
             return true;
@@ -38,5 +40,16 @@ public class LoginBaseController extends BaseController {
         }
 
         return false;
+    }
+
+    @HystrixCommand(fallbackMethod = "test2")
+    public void test(String email) {
+        throw new RuntimeException("Error");
+
+    }
+
+    @HystrixCommand
+    public void test2(String email) {
+        LOGGER.info("#Exception deal.");
     }
 }

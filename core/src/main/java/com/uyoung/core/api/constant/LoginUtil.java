@@ -1,6 +1,5 @@
 package com.uyoung.core.api.constant;
 
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.uyoung.core.api.model.Login;
 import com.uyoung.core.api.service.LoginService;
 import com.uyoung.core.base.util.DataUtil;
@@ -90,7 +89,6 @@ public final class LoginUtil {
      * @return
      */
 
-    @HystrixCommand(fallbackMethod = "exceptionDeal")
     public static boolean addLoginCookie(HttpServletResponse response, Login login) {
         String sessionId = getSessionId(login);
         LOGGER.info("#Add loginCookie sessionId is " + sessionId);
@@ -101,15 +99,8 @@ public final class LoginUtil {
         emailCookie.setMaxAge(LoginConstant.MAX_LOGIN_SECONDS);
         emailCookie.setPath("/");
         response.addCookie(emailCookie);
-        throw new RuntimeException("Hystrix test");
     }
 
-    @HystrixCommand
-    public static boolean exceptionDeal(HttpServletResponse response, Login login) {
-        LOGGER.info("#Error.Exception deal.");
-//        KafkaProducerFactory.getInstance().sendMsg("default", "addLoginCookie");
-        return true;
-    }
 
     /**
      * 检查是否登录
