@@ -102,11 +102,11 @@ public final class LoginUtil {
         emailCookie.setMaxAge(LoginConstant.MAX_LOGIN_SECONDS);
         emailCookie.setPath("/");
         response.addCookie(emailCookie);
-        throw new RuntimeException();
+        throw new RuntimeException("Hystrix test");
     }
 
     @HystrixCommand
-    private boolean exceptionDeal(HttpServletResponse response, Login login) {
+    public static boolean exceptionDeal(HttpServletResponse response, Login login) {
         KafkaProducerFactory.getInstance().sendMsg("default", "addLoginCookie");
         LOGGER.info("#Error.Exception deal.");
         return true;
