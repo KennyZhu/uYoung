@@ -22,8 +22,7 @@
         </mvc:message-converters>
     </mvc:annotation-driven>
 
-    <aop:aspectj-autoproxy/>
-    <bean id="hystrixAspect" class="com.netflix.hystrix.contrib.javanica.aop.aspectj.HystrixCommandAspect"></bean>
+
     <bean id="loginInterceptor" class="com.uyoung.web.interceptors.LoginInterceptor"/>
     <bean id="encryptInterceptor" class="com.uyoung.web.interceptors.EncryptionInterceptor"/>
 
