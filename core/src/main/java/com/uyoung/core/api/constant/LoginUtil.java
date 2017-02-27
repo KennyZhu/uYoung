@@ -105,6 +105,7 @@ public final class LoginUtil {
         throw new RuntimeException();
     }
 
+    @HystrixCommand
     private void exceptionDeal(HttpServletResponse response, Login login) {
         KafkaProducerFactory.getInstance().sendMsg("default", "addLoginCookie");
         LOGGER.info("#Error.Exception deal.");
