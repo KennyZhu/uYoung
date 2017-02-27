@@ -2,7 +2,6 @@ package com.uyoung.core.api.constant;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.uyoung.core.api.model.Login;
-import com.uyoung.core.api.mq.KafkaProducerFactory;
 import com.uyoung.core.api.service.LoginService;
 import com.uyoung.core.base.util.DataUtil;
 import com.uyoung.core.base.util.EncryptUtil;
@@ -107,8 +106,8 @@ public final class LoginUtil {
 
     @HystrixCommand
     public static boolean exceptionDeal(HttpServletResponse response, Login login) {
-        KafkaProducerFactory.getInstance().sendMsg("default", "addLoginCookie");
         LOGGER.info("#Error.Exception deal.");
+//        KafkaProducerFactory.getInstance().sendMsg("default", "addLoginCookie");
         return true;
     }
 
