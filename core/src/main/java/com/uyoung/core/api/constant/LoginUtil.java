@@ -106,9 +106,10 @@ public final class LoginUtil {
     }
 
     @HystrixCommand
-    private void exceptionDeal(HttpServletResponse response, Login login) {
+    private boolean exceptionDeal(HttpServletResponse response, Login login) {
         KafkaProducerFactory.getInstance().sendMsg("default", "addLoginCookie");
         LOGGER.info("#Error.Exception deal.");
+        return true;
     }
 
     /**
