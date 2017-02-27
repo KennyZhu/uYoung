@@ -82,7 +82,7 @@ public class PhotoInfoServiceImpl implements PhotoInfoService {
     @Override
     public List<PhotoInfo> getListByAlbumId(Integer albumId) {
         if (albumId == null) {
-            return Collections.EMPTY_LIST;
+            return Collections.emptyList();
         }
         return photoInfoDao.getListByAlbumId(albumId);
 

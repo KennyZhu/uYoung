@@ -88,6 +88,11 @@
     </build>
     <dependencies>
         <dependency>
+            <groupId>com.netflix.hystrix</groupId>
+            <artifactId>hystrix-javanica</artifactId>
+            <version>1.5.9</version>
+        </dependency>
+        <dependency>
             <groupId>com.uyoung</groupId>
             <artifactId>uyoung-core</artifactId>
             <version>1.0-SNAPSHOT</version>
