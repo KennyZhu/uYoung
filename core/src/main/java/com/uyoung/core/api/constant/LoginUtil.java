@@ -99,6 +99,7 @@ public final class LoginUtil {
         emailCookie.setMaxAge(LoginConstant.MAX_LOGIN_SECONDS);
         emailCookie.setPath("/");
         response.addCookie(emailCookie);
+        return true;
     }
 
 
