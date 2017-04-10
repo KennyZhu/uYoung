@@ -1,6 +1,7 @@
 package com.uyoung.web.controller.base;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.command.AsyncResult;
 import com.uyoung.core.api.constant.LoginUtil;
 import com.uyoung.core.api.model.Login;
 import com.uyoung.core.api.service.LoginService;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.concurrent.Future;
 
 /**
  * User: KennyZhu
@@ -31,7 +33,8 @@ public class LoginBaseController extends BaseController {
         }
         try {
             Login login = LoginUtil.updateLogin(email, uid);
-            test(email);
+            Future future = test(email);
+            future.get();
             LoginUtil.addLoginCookie(response, login);
             loginService.addOrUpdate(login);
             return true;
@@ -43,9 +46,14 @@ public class LoginBaseController extends BaseController {
     }
 
     @HystrixCommand(fallbackMethod = "test2")
-    public void test(String email) {
-        throw new RuntimeException("Error");
+    public Future test(String email) {
 
+        return new AsyncResult() {
+            @Override
+            public Object invoke() {
+                throw new RuntimeException("Error");
+            }
+        };
     }
 
     @HystrixCommand
