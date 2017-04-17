@@ -1,12 +1,9 @@
 package com.uyoung.core.api.mq;
 
-//import com.uyoung.core.api.constant.KafkaConstant;
-
 import com.uyoung.core.api.constant.KafkaConstant;
-import kafka.javaapi.producer.Producer;
-import kafka.producer.KeyedMessage;
-import kafka.producer.ProducerConfig;
 import org.apache.commons.lang.StringUtils;
+import org.apache.kafka.clients.producer.KafkaProducer;
+import org.apache.kafka.clients.producer.ProducerRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,7 +22,7 @@ public class KafkaProducerFactory {
     private static final String DEFAULT_TOPIC = "default";
     private static final String CONFIG_NAME = "kafka.properties";
     private static KafkaProducerFactory instance = new KafkaProducerFactory();
-    private Producer<String, String> producer;
+    private KafkaProducer<String, String> producer;
     private volatile static boolean isInit = false;
 
 
@@ -53,31 +50,20 @@ public class KafkaProducerFactory {
             LOGGER.error("create kafka producer error!use default setting!", e);
             return;
         }
-        ProducerConfig config = new ProducerConfig(properties);
-        producer = new Producer<String, String>(config);
+        producer = new KafkaProducer<>(properties);
+        isInit = true;
     }
 
     /**
-     * @param topic
-     * @param msg
+     * 一个分区内的消息是可以保证顺序的
      */
     public void sendMsg(String topic, String msg) {
-        sendMsg(topic, msg, null);
-    }
-
-    /**
-     * 卡夫卡会根据zone来对消息进行分区。一个分区内的消息是可以保证顺序的
-     */
-    public void sendMsg(String topic, String msg, String zone) {
-        if (StringUtils.isBlank(zone)) {
-            zone = msg;
-        }
         if (StringUtils.isBlank(topic)) {
             topic = DEFAULT_TOPIC;
         }
         if (StringUtils.isNotBlank(msg)) {
-            KeyedMessage<String, String> data = new KeyedMessage<String, String>(topic, zone, msg);
-            producer.send(data);
+            ProducerRecord<String, String> record = new ProducerRecord<>(topic, msg);
+            producer.send(record);
         }
     }
 }
