@@ -24,7 +24,7 @@
     <profiles>
         <profile>
             <id>dev</id>
-            <!-- 默认环境变量 DDD-->
+            <!-- 默认环境变量-->
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
