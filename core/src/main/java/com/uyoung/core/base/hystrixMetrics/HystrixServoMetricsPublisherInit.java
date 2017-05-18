@@ -26,6 +26,11 @@ public class HystrixServoMetricsPublisherInit {
     @PostConstruct
     public void init() {
         LOGGER.info("#Begin to init hystrixServoMetricsPublisher");
+        LOGGER.info("#Begin to init hystrixServoMetricsPublisher");
+        LOGGER.info("#Begin to init hystrixServoMetricsPublisher");
+        LOGGER.info("#Begin to init hystrixServoMetricsPublisher");
+        LOGGER.info("#Begin to init hystrixServoMetricsPublisher");
+
 
         HystrixServoMetricsPublisher hystrixServoMetricsPublisher = HystrixServoMetricsPublisher.getInstance();
         HystrixPlugins.getInstance().registerMetricsPublisher(hystrixServoMetricsPublisher);
