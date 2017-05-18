@@ -36,7 +36,7 @@ public class HystrixServoMetricsPublisherInit {
 //
         PollScheduler.getInstance().start();
         PollRunnable task = new PollRunnable(new MonitorRegistryMetricPoller(), BasicMetricFilter.MATCH_ALL, true, observers);
-        PollScheduler.getInstance().addPoller(task, 5, TimeUnit.SECONDS);
+        PollScheduler.getInstance().addPoller(task, 1000000, TimeUnit.SECONDS);
         LOGGER.info("#End to init hystrixServoMetricsPublisher");
     }
 

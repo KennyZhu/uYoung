@@ -2,6 +2,8 @@ package com.uyoung.core.api.service;
 
 import com.uyoung.core.api.model.Login;
 
+import java.util.concurrent.Future;
+
 /**
  * User: KennyZhu
  * Date: 16/1/12
@@ -16,4 +18,6 @@ public interface LoginService {
     boolean update(Login login);
 
     boolean addOrUpdate(Login login);
+
+    Future<Object> test();
 }

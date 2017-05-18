@@ -4,11 +4,13 @@ import com.uyoung.core.api.constant.KafkaConstant;
 import org.apache.commons.lang.StringUtils;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.kafka.clients.producer.RecordMetadata;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.FileInputStream;
 import java.util.Properties;
+import java.util.concurrent.Future;
 
 /**
  * Desc:
@@ -57,13 +59,14 @@ public class KafkaProducerFactory {
     /**
      * 一个分区内的消息是可以保证顺序的
      */
-    public void sendMsg(String topic, String msg) {
+    public Future<RecordMetadata> sendMsg(String topic, String msg) {
         if (StringUtils.isBlank(topic)) {
             topic = DEFAULT_TOPIC;
         }
         if (StringUtils.isNotBlank(msg)) {
             ProducerRecord<String, String> record = new ProducerRecord<>(topic, msg);
-            producer.send(record);
+            return producer.send(record);
         }
+        return null;
     }
 }

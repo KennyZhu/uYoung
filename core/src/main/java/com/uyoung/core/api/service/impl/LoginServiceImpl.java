@@ -1,11 +1,16 @@
 package com.uyoung.core.api.service.impl;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
+import com.netflix.hystrix.contrib.javanica.command.AsyncResult;
 import com.uyoung.core.api.dao.LoginDao;
 import com.uyoung.core.api.model.Login;
 import com.uyoung.core.api.service.LoginService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.concurrent.Future;
 
 /**
  * User: KennyZhu
@@ -56,5 +61,29 @@ public class LoginServiceImpl implements LoginService {
             record.setLoginToken(login.getLoginToken());
             return update(login);
         }
+    }
+
+    @HystrixCommand(groupKey = "test", commandKey = "test",
+            commandProperties = {
+                    @HystrixProperty(name = "circuitBreaker.enabled", value = "false"),
+                    @HystrixProperty(name = "fallback.enabled", value = "false"),
+                    @HystrixProperty(name = "execution.timeout.enabled", value = "false")
+            },
+            threadPoolProperties = {
+                    @HystrixProperty(name = "coreSize", value = "20"),
+                    @HystrixProperty(name = "maxQueueSize", value = "4000"),
+                    @HystrixProperty(name = "queueSizeRejectionThreshold", value = "4000"),
+            }
+    )
+    @Override
+    public Future<Object> test() {
+        System.out.println("@@This thread is " + Thread.currentThread());
+        return new AsyncResult<Object>() {
+            @Override
+            public Object invoke() {
+                System.out.println("#This thread is " + Thread.currentThread());
+                return null;
+            }
+        };
     }
 }
