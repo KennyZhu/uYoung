@@ -63,6 +63,29 @@ public class LoginServiceImpl implements LoginService {
         }
     }
 
+    @HystrixCommand(groupKey = "test2", commandKey = "test2",
+            commandProperties = {
+                    @HystrixProperty(name = "circuitBreaker.enabled", value = "false"),
+                    @HystrixProperty(name = "fallback.enabled", value = "false"),
+                    @HystrixProperty(name = "execution.timeout.enabled", value = "false")
+            },
+            threadPoolProperties = {
+                    @HystrixProperty(name = "coreSize", value = "20"),
+                    @HystrixProperty(name = "maxQueueSize", value = "4000"),
+                    @HystrixProperty(name = "queueSizeRejectionThreshold", value = "4000"),
+            }
+    )
+    private Future<Object> test22() {
+        System.out.println("@@Test2 This thread is " + Thread.currentThread());
+        return new AsyncResult<Object>() {
+            @Override
+            public Object invoke() {
+                System.out.println("#This thread is " + Thread.currentThread());
+                return null;
+            }
+        };
+    }
+
     @HystrixCommand(groupKey = "test", commandKey = "test",
             commandProperties = {
                     @HystrixProperty(name = "circuitBreaker.enabled", value = "false"),
@@ -77,7 +100,7 @@ public class LoginServiceImpl implements LoginService {
     )
     @Override
     public Future<Object> test() {
-        System.out.println("@@This thread is " + Thread.currentThread());
+        System.out.println("@@Test This thread is " + Thread.currentThread());
         return new AsyncResult<Object>() {
             @Override
             public Object invoke() {
@@ -85,5 +108,9 @@ public class LoginServiceImpl implements LoginService {
                 return null;
             }
         };
+    }
+
+    public void test2() {
+        test22();
     }
 }

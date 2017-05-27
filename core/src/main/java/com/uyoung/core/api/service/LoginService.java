@@ -20,4 +20,6 @@ public interface LoginService {
     boolean addOrUpdate(Login login);
 
     Future<Object> test();
+
+    void test2();
 }
